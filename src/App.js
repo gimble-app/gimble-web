@@ -1,21 +1,53 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
+import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
+import Typography from 'material-ui/Typography';
+import IconButton from 'material-ui/IconButton';
+import MenuIcon from 'material-ui-icons/Menu';
+import AccountCircle from 'material-ui-icons/AccountCircle';
+import { withStyles } from 'material-ui/styles';
+
+const styles = {
+  root: {
+    flexGrow: 1,
+  },
+  flex: {
+    flex: 1,
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20,
+  },
+};
 
 class App extends Component {
   render() {
+    const { classes } = this.props;
+
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div className={classes.root}>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="title" color="inherit" className={classes.flex}>
+              Gimble
+            </Typography>
+              <div>
+                <IconButton
+                  aria-haspopup="true"
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </IconButton>
+              </div>
+          </Toolbar>
+        </AppBar>
       </div>
     );
   }
 }
 
-export default App;
+export default withStyles(styles)(App);

@@ -52,3 +52,6 @@ yarn add --dev <your package name>
 
 ## Coding Standards
 - Tests should be written with the `.test.js` suffix and colocated with their source files.
+
+## Visual design
+We currently use [Material UI](https://material-ui-next.com/).
