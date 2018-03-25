@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import HomeScreen from './home/HomeScreen';
 import { withStyles } from 'material-ui/styles';
 
@@ -8,16 +8,9 @@ const styles = {
   }
 };
 
-class App extends Component {
-  render() {
-    const { classes } = this.props;
-
-    return (
-      <div className={classes.root}>
-        <HomeScreen />
-      </div>
-    );
-  }
-}
+const App = ({ classes }) =>
+  <div className={classes.root}>
+    <HomeScreen />
+  </div>
 
 export default withStyles(styles)(App);
