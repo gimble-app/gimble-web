@@ -4,8 +4,7 @@ node_js:
 install:
   - yarn
   - yarn test
-script:
-  - yarn build
+before_deploy: yarn build
 deploy:
   provider: firebase
   token:
