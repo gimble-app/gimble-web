@@ -4,8 +4,10 @@ node_js:
 install:
   - yarn
   - yarn test
-before_deploy: yarn build
+script:
+  - yarn build
 deploy:
+  skip_cleanup: true
   provider: firebase
   token:
     secure: lQAoLozlWLixTye3pixLJFhDelMocEMd5hbGysLxaHcksO/MJFjtp49vN2U4tPAmEfRs9585In3Hdhf1MbEbjXyu4WcXKge1yGRAj5RUvbfs2wZ7sE/bSUBuMvP84pTDRzKhQXP/TOmX2oBgwI9a7EVQrjkGWNkCD1ACpZtwFsCHMlvayxWVbJaJBjcms8nAbYHTgfpw2BTgY8MCfGCcPBnGuOXHlxOEnywnTjMO2jvtjB0xHnp2h+C88nKfAPfO2Psiq/zkGJGjT+6xvhjUqXjK5wci/koI6mO2X++4Mz2pT06KFaixXNYqB7xGMdPt6vNDCuFIZHQp6K+2P3YB40y0MA2pUh4WvPfbXZnyWQTEGBTdzGpPDAGm1iPH0idJLz+TT4nCnwaAXUVMNZtaQtfgFPiEeDcoPDtvMrMX1yl/SmcZGxp6RNiDNwyYqQedOZgej8bm5aRTmQSA3b8PAlTWL6BKbGEvmIwUtSHWmxYEUY5OCIUSrfD+LlCnxbZ1znLvvdLVhtfRjsgRzCfVThXdxFJTozd5hxKqf2jhboukduZdp62GuIxudYZwqOQDhenSbSfGPbpBS4ftGaxx3hTtnIzM78SHDcUaOqqoyVR0jupocGxsRb8Q/CmESJwl6jx+CIlhRTI6EviW9FTuk9UjceIUGLm4Qw61DaMkjw0=
