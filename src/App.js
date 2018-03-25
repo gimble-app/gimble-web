@@ -9,15 +9,15 @@ import { withStyles } from 'material-ui/styles';
 
 const styles = {
   root: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   flex: {
-    flex: 1,
+    flex: 1
   },
   menuButton: {
     marginLeft: -12,
-    marginRight: 20,
-  },
+    marginRight: 20
+  }
 };
 
 class App extends Component {
@@ -28,20 +28,25 @@ class App extends Component {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+            <IconButton
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="Menu"
+            >
               <MenuIcon />
             </IconButton>
-            <Typography variant="title" color="inherit" className={classes.flex}>
+            <Typography
+              variant="title"
+              color="inherit"
+              className={classes.flex}
+            >
               Gimble
             </Typography>
-              <div>
-                <IconButton
-                  aria-haspopup="true"
-                  color="inherit"
-                >
-                  <AccountCircle />
-                </IconButton>
-              </div>
+            <div>
+              <IconButton aria-haspopup="true" color="inherit">
+                <AccountCircle />
+              </IconButton>
+            </div>
           </Toolbar>
         </AppBar>
       </div>
