@@ -1,5 +1,7 @@
 # Gimble
 
+https://gimble-app.firebaseapp.com/
+
 ## Table of Contents
 
 - [Getting started](#getting-started)
@@ -8,6 +10,7 @@
 - [Deploying the app](#deploying-the-app)
 - [Installing packages](#installing-packages)
 - [Coding standards](#coding-standards)
+- [Visual design](#visual-design)
 
 ## Getting started
 Some of the basics you will need to install:
@@ -35,10 +38,16 @@ We use the built in coverage provided by Jest.
 ## Deploying the app
 `yarn run build`
 
-Builds and optimises for production to the `build` folder.
+Builds for production and puts everything in the `build` folder.
 
-### Deployment pipeline
-We use [Travis](travis-ci.org).
+We use [Firebase hosting](https://firebase.google.com/docs/hosting/). All of the configuration is in firebase.json.
+
+`firebase deploy`
+Manually deploys the site, copying the assets from the build folder.
+Nb. Usually we don't need to run this as it is part of the pipeline.
+
+### Pipeline
+We use [Travis](travis-ci.org). All the configuration is in travis.yml.
 
 ## Installing packages
 ```
