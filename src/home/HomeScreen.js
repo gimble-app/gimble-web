@@ -11,6 +11,9 @@ const styles = theme => ({
   flex: {
     flex: 1
   },
+  welcome: {
+    margin: theme.spacing.unit * 2,
+  },
   fab: {
     margin: theme.spacing.unit,
     position: 'absolute',
@@ -31,6 +34,14 @@ const HomeScreen = ({ classes }) => [
       </Typography>
     </Toolbar>
   </AppBar>,
+  <Typography
+    variant="body1"
+    color="inherit"
+    align="center"
+    className={classes.welcome}
+  >
+    Not much here at the moment. Maybe you should add an event...
+  </Typography>,
   <Button variant="fab" color="primary" aria-label="add" className={classes.fab}>
     <AddIcon />
   </Button>
