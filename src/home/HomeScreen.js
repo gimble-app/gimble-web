@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
@@ -22,7 +22,8 @@ const styles = theme => ({
   },
 });
 
-const HomeScreen = ({ classes }) => [
+const HomeScreen = ({ classes }) =>
+<Fragment>
   <AppBar position="static">
     <Toolbar>
       <Typography
@@ -33,7 +34,7 @@ const HomeScreen = ({ classes }) => [
         Gimble
       </Typography>
     </Toolbar>
-  </AppBar>,
+  </AppBar>
   <Typography
     variant="body1"
     color="inherit"
@@ -41,11 +42,11 @@ const HomeScreen = ({ classes }) => [
     className={classes.welcome}
   >
     Not much here at the moment. Maybe you should add an event...
-  </Typography>,
+  </Typography>
   <Button variant="fab" color="primary" aria-label="add" className={classes.fab}>
     <AddIcon />
   </Button>
-]
+</Fragment>
 
 
 export default withStyles(styles)(HomeScreen);

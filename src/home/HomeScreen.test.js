@@ -1,9 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { mount } from 'enzyme';
 import HomeScreen from './HomeScreen';
+import Typography from 'material-ui/Typography';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<HomeScreen />, div);
-  ReactDOM.unmountComponentAtNode(div);
+it('renders welcome message', () => {
+  const wrapper = mount(<HomeScreen />);
+  expect(wrapper.find(Typography)).toExist();
 });
