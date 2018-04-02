@@ -1,4 +1,9 @@
-import React from 'react';
+import React from 'react'
+import {
+  BrowserRouter as Router,
+  Route,
+} from 'react-router-dom'
+
 import HomeScreen from './home/HomeScreen';
 import { withStyles } from 'material-ui/styles';
 
@@ -9,8 +14,11 @@ const styles = {
 };
 
 const App = ({ classes }) =>
-  <div className={classes.root}>
-    <HomeScreen />
-  </div>
+    <Router>
+      <div className={classes.root}>
+        <Route exact path="/" component={HomeScreen} />
+      </div>
+    </Router>
+
 
 export default withStyles(styles)(App);
