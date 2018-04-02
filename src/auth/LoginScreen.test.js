@@ -1,9 +1,9 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import Typography from 'material-ui/Typography';
-import HomeScreen from './HomeScreen';
+import LoginScreen from './LoginScreen';
 
 it('renders welcome message', () => {
-  const wrapper = mount(<HomeScreen />);
-  expect(wrapper.find(Typography)).toExist();
+  const wrapper = mount(<LoginScreen />);
+  expect(wrapper.find(Typography).text()).toContain("Welcome!");
 });
