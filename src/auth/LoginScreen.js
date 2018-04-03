@@ -1,22 +1,34 @@
 import React from 'react';
-import Typography from 'material-ui/Typography';
-import { withStyles } from 'material-ui/styles';
+import { Redirect } from "react-router-dom";
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import { setAuthCallback, getUiConfig, getFirebaseAuth } from './firebaseProvider';
 
-const styles = theme => ({
-  welcome: {
-    margin: theme.spacing.unit * 2,
+class LoginScreen extends React.Component {
+
+  state = {
+    loggedIn: false
+  };
+
+  componentDidMount() {
+    setAuthCallback(user => {
+      console.log(user)
+        if(user) {
+          this.setState(
+            {loggedIn: true},
+            () => {this.props.onChange(true)}
+          );
+        }
+      });
   }
-});
 
-const LoginScreen = ({ classes }) =>
-  <Typography
-    variant="body1"
-    color="inherit"
-    align="center"
-    className={classes.welcome}
-  >
-    Welcome! You aren't currently logged in to the app.
-  </Typography>
+  render() {
+    return !this.state.loggedIn ?
+      <StyledFirebaseAuth
+        uiConfig={getUiConfig()}
+        firebaseAuth={getFirebaseAuth()}
+      />
+    :  <Redirect to="/" />
+  }
+}
 
-
-export default withStyles(styles)(LoginScreen);
+export default LoginScreen

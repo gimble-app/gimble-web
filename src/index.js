@@ -4,6 +4,6 @@ import 'typeface-roboto';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-
+import 'firebase/auth';
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
