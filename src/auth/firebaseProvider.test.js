@@ -1,4 +1,4 @@
-import { logOut, setAuthCallback } from './firebaseProvider';
+import { logOut } from './firebaseProvider';
 
 const mockOnAuthStateChanged = jest.fn();
 
@@ -15,13 +15,5 @@ describe('logOut', () => {
     const callback = jest.fn();
     await logOut(callback);
     expect(callback).toHaveBeenCalled();
-  })
-})
-
-describe('setAuthCallback', () => {
-  it('calls the callback when everything is successful', async () => {
-    const callback = jest.fn();
-    await setAuthCallback(callback);
-    expect(mockOnAuthStateChanged).toHaveBeenCalledWith(callback);
   })
 })

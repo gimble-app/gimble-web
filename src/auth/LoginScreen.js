@@ -1,33 +1,44 @@
 import React from 'react';
-import { Redirect } from "react-router-dom";
+import firebase from 'firebase';
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import { setAuthCallback, getUiConfig, getFirebaseAuth } from './firebaseProvider';
+import { getFirebaseAuth } from './firebaseProvider';
+import { loginSuccess } from './actions';
 
-class LoginScreen extends React.Component {
+export class LoginScreen extends React.Component {
 
-  state = {
-    loggedIn: false
-  };
-
-  componentDidMount() {
-    setAuthCallback(user => {
-        if(user) {
-          this.setState(
-            {loggedIn: true},
-            () => {this.props.onChange(true)}
-          );
-        }
-      });
+  uiConfig = {
+      signInFlow: 'redirect',
+      signInOptions: [
+        firebase.auth.GoogleAuthProvider.PROVIDER_ID
+      ],
+      callbacks: {
+        signInSuccess: this.props.onLogin
+      }
   }
 
   render() {
-    return !this.state.loggedIn ?
+    return !this.props.isLoggedIn ?
       <StyledFirebaseAuth
-        uiConfig={getUiConfig()}
+        uiConfig={this.uiConfig}
         firebaseAuth={getFirebaseAuth()}
       />
     :  <Redirect to="/" />
   }
 }
 
-export default LoginScreen
+const mapStateToProps = state => ({
+  isLoggedIn: state.isLoggedIn
+})
+ 
+const mapDispatchToProps = dispatch => ({
+  onLogin: () => dispatch(loginSuccess())
+})
+
+const ConnectedLoginScreen = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginScreen)
+
+export default ConnectedLoginScreen;

@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
-import { mount } from 'enzyme';
-import App from './App';
-import LoginScreen from './auth/LoginScreen'
+import { shallow } from 'enzyme';
+import { App } from './App';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 jest.mock('react-firebaseui/StyledFirebaseAuth', () => () => <p></p>);
 
@@ -11,7 +11,7 @@ jest.mock('./auth/firebaseProvider', () => ({
   setAuthCallback: jest.fn()
 }))
 
-it('renders the login screen', () => {
-  const wrapper = mount(<App />);
-  expect(wrapper.find(LoginScreen)).toExist();
+it('renders the router screen', () => {
+  const wrapper = shallow(<App classes={{ root: "" }}/>);
+  expect(wrapper.find(Router)).toExist();
 });

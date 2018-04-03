@@ -1,15 +1,15 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import Typography from 'material-ui/Typography';
-import HomeScreen from './HomeScreen';
-import LogoutScreen from '../auth/LogoutScreen';
+import { HomeScreen } from './HomeScreen';
+import LogoutButton from '../auth/LogoutButton';
 
 it('renders welcome message', () => {
-  const wrapper = mount(<HomeScreen />);
+  const wrapper = shallow(<HomeScreen classes={{flex: ""}} />);
   expect(wrapper.find(Typography)).toExist();
 });
 
-it('renders a logout screen', () => {
-  const wrapper = mount(<HomeScreen />);
-  expect(wrapper.find(LogoutScreen)).toExist();
+it('renders a logout button', () => {
+  const wrapper = shallow(<HomeScreen classes={{flex: ""}} />);
+  expect(wrapper.find(LogoutButton)).toExist();
 });

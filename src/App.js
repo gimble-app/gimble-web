@@ -5,6 +5,7 @@ import {
   Switch
 } from 'react-router-dom';
 import { withStyles } from 'material-ui/styles';
+import { connect } from 'react-redux';
 import HomeScreen from './home/HomeScreen';
 import ProtectedRoute from './auth/ProtectedRoute';
 import LoginScreen from './auth/LoginScreen';
@@ -15,14 +16,11 @@ const styles = {
   }
 };
 
-class App extends React.Component {
-
-  state = {
-    isAuthenticated: false
-  };
+export class App extends React.Component {
 
   render() {
     const { classes } = this.props;
+
     return <Router>
       <div className={classes.root}>
         <Switch>
@@ -30,19 +28,19 @@ class App extends React.Component {
             exact
             path="/"
             component={HomeScreen}
-            isAuthenticated={this.state.isAuthenticated}
+            isAuthenticated={this.props.isLoggedIn}
           />
-          <Route path="/login" component={(props) => <LoginScreen onChange={
-            auth => {
-              this.setState({ isAuthenticated: auth });
-            }
-          } {...props}/>}
-          />
+          <Route path="/login" component={LoginScreen} />
         </Switch>
       </div>
     </Router>
   }
 }
 
-
-export default withStyles(styles)(App);
+const mapStateToProps = state => ({
+  isLoggedIn: state.isLoggedIn
+})
+ 
+export default withStyles(styles)(connect(
+  mapStateToProps
+)(App));
