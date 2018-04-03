@@ -11,7 +11,6 @@ class LoginScreen extends React.Component {
 
   componentDidMount() {
     setAuthCallback(user => {
-      console.log(user)
         if(user) {
           this.setState(
             {loggedIn: true},

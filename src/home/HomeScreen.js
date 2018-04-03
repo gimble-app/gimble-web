@@ -5,6 +5,7 @@ import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import AddIcon from 'material-ui-icons/Add';
 import { withStyles } from 'material-ui/styles';
+import LogoutScreen from '../auth/LogoutScreen';
 
 const styles = theme => ({
   flex: {
@@ -41,6 +42,7 @@ const HomeScreen = ({ classes }) =>
     className={classes.welcome}
   >
     Not much here at the moment. Maybe you should add an event...
+    <LogoutScreen />
   </Typography>
   <Button variant="fab" color="primary" aria-label="add" className={classes.fab}>
     <AddIcon />
