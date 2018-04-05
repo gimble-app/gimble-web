@@ -9,7 +9,7 @@ import { loginSuccess } from './actions';
 export class LoginScreen extends React.Component {
 
   uiConfig = {
-      signInFlow: 'redirect',
+      signInFlow: 'popup',
       signInOptions: [
         firebase.auth.GoogleAuthProvider.PROVIDER_ID
       ],
