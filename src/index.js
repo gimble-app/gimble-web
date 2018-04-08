@@ -4,6 +4,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
+import throttle from 'lodash/throttle';
 import { loadState, saveState } from './storage';
 import rootReducer from './reducers';
 import App from './App';
@@ -17,9 +18,11 @@ const store = createStore(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
-store.subscribe(() => {
+const TIME_BETWEEN_UPDATES = 1000;
+
+store.subscribe(throttle(() => {
   saveState(store.getState())
-})
+}), TIME_BETWEEN_UPDATES);
 
 render(
   <Provider store={store}>
