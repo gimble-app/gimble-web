@@ -3,42 +3,33 @@ import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import { withStyles } from 'material-ui/styles';
-import LogoutButton from '../auth/LogoutButton';
-import AddButton from './AddButton';
+import CancelButton from './CancelButton';
+import SaveButton from './SaveButton';
 
 const styles = theme => ({
   flex: {
     flex: 1
-  },
-  welcome: {
-    margin: theme.spacing.unit * 2,
   }
 });
 
-export const HomeScreen = ({ classes }) =>
+export const EventScreen = ({classes}) =>
 <Fragment>
   <AppBar position="static">
     <Toolbar>
-      <Typography
-        variant="title"
-        color="inherit"
-        className={classes.flex}
-      >
-        Gimble
+      <CancelButton />
+      <Typography variant="title" color="inherit" className={classes.flex}>
+        Title
       </Typography>
+      <SaveButton />
     </Toolbar>
   </AppBar>
   <Typography
     variant="body1"
     color="inherit"
     align="center"
-    className={classes.welcome}
   >
-    Not much here at the moment. Maybe you should add an event...
-    <LogoutButton />
+    This is where an item would be created
   </Typography>
-  <AddButton />
 </Fragment>
 
-
-export default withStyles(styles)(HomeScreen);
+export default withStyles(styles)(EventScreen);
