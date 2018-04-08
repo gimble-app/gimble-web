@@ -3,30 +3,16 @@ import './index.css';
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import throttle from 'lodash/throttle';
-import { loadState, saveState } from './storage';
-import rootReducer from './reducers';
-import App from './App';
+import { PersistGate } from 'redux-persist/integration/react'
 import registerServiceWorker from './registerServiceWorker';
-
-const persistedState = loadState();
-
-const store = createStore(
-  rootReducer,
-  persistedState,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-)
-
-const TIME_BETWEEN_UPDATES = 1000;
-
-store.subscribe(throttle(() => {
-  saveState(store.getState())
-}), TIME_BETWEEN_UPDATES);
+import { store, persistor } from './store';
+import App from './App';
 
 render(
   <Provider store={store}>
-    <App />
+    <PersistGate loading={null} persistor={persistor}>
+      <App />
+    </PersistGate>
   </Provider>,
   document.getElementById('root')
 )
