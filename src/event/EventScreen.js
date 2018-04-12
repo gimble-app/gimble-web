@@ -2,24 +2,16 @@ import React, { Fragment } from 'react';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
-import { withStyles } from 'material-ui/styles';
 import CancelButton from './CancelButton';
 import SaveButton from './SaveButton';
+import ToolbarTitleText from '../common/ToolbarTitleText';
 
-const styles = theme => ({
-  flex: {
-    flex: 1
-  }
-});
-
-export const EventScreen = ({classes}) =>
+export const EventScreen = () =>
 <Fragment>
   <AppBar position="static">
     <Toolbar>
       <CancelButton />
-      <Typography variant="title" color="inherit" className={classes.flex}>
-        Title
-      </Typography>
+      <ToolbarTitleText>Title</ToolbarTitleText>
       <SaveButton />
     </Toolbar>
   </AppBar>
@@ -32,4 +24,4 @@ export const EventScreen = ({classes}) =>
   </Typography>
 </Fragment>
 
-export default withStyles(styles)(EventScreen);
+export default EventScreen;

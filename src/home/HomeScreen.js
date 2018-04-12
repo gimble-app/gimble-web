@@ -5,27 +5,18 @@ import Typography from 'material-ui/Typography';
 import { withStyles } from 'material-ui/styles';
 import LogoutButton from '../auth/LogoutButton';
 import AddButton from './AddButton';
+import ToolbarTitleText from '../common/ToolbarTitleText';
 
 const styles = theme => ({
-  flex: {
-    flex: 1
-  },
   welcome: {
     margin: theme.spacing.unit * 2,
   }
 });
-
 export const HomeScreen = ({ classes }) =>
 <Fragment>
   <AppBar position="static">
     <Toolbar>
-      <Typography
-        variant="title"
-        color="inherit"
-        className={classes.flex}
-      >
-        Gimble
-      </Typography>
+      <ToolbarTitleText>Gimble</ToolbarTitleText>
     </Toolbar>
   </AppBar>
   <Typography
