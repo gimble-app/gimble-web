@@ -10,7 +10,6 @@ export const getFirebaseAuth = () => {
   return firebase.auth();
 }
 
-export const logOut = (callback) => {
-  firebase.auth().signOut()
-    .then(callback);
+export const logOut = () => {
+  return firebase.auth().signOut();
 }

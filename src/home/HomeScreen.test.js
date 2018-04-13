@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Typography from 'material-ui/Typography';
 import { HomeScreen } from './HomeScreen';
-import LogoutButton from '../auth/LogoutButton';
+import ProfileMenu from './ProfileMenu';
 import EventCard from './EventCard';
 import BackgroundMessage from './BackgroundMessage';
 
@@ -19,9 +19,9 @@ it('does not include a background message when there are events', () => {
 });
 
 
-it('renders a logout button', () => {
+it('renders a profile menu option', () => {
   const wrapper = shallow(<HomeScreen events={[]} />);
-  expect(wrapper.find(LogoutButton)).toExist();
+  expect(wrapper.find(ProfileMenu)).toExist();
 });
 
 it('renders an event when one exists', () => {
