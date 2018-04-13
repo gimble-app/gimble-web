@@ -1,9 +1,22 @@
 import { EVENT_SAVED } from './actions';
+import uuid from 'uuid/v4';
 
-const events = (state = [], { data, type }) => {
+const event = (state, { data, type } ) => {
   switch (type) {
     case EVENT_SAVED:
-      return [...state, data];
+      return {
+          id: uuid(),
+          ...data
+      };
+    default:
+      return state;
+  }
+}
+
+const events = (state = [], action) => {
+  switch (action.type) {
+    case EVENT_SAVED:
+      return [...state, event(undefined, action)];
     default:
       return state;
   }

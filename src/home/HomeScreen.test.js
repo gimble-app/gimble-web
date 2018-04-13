@@ -12,7 +12,9 @@ it('includes a background message when there are no events', () => {
 });
 
 it('does not include a background message when there are events', () => {
-  const wrapper = shallow(<HomeScreen events={[{ title: "one event" }]} />);
+  const wrapper = shallow(<HomeScreen events={
+    [{ id: '1', title: 'one event' }]
+  } />);
   expect(wrapper.find(BackgroundMessage)).not.toExist();
 });
 
@@ -23,11 +25,15 @@ it('renders a logout button', () => {
 });
 
 it('renders an event when one exists', () => {
-  const wrapper = shallow(<HomeScreen events={[{ title: "one event" }]} />);
+  const wrapper = shallow(<HomeScreen events={
+    [{ id: '1', title: 'one event' }]
+  } />);
   expect(wrapper.find(EventCard).length).toBe(1);
 });
 
 it('renders all events when more than one exists', () => {
-  const wrapper = shallow(<HomeScreen events={[{ title: "one event" }, { title: "two event" }]} />);
+  const wrapper = shallow(<HomeScreen events={
+    [{ id: '1', title: 'one event' }, { id: '2', title: 'two event' }]
+  } />);
   expect(wrapper.find(EventCard).length).toBe(2);
 });

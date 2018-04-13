@@ -17,7 +17,7 @@ export const HomeScreen = ({ events }) =>
   </AppBar>
   { events.length === 0 ?
     <BackgroundMessage /> :
-    events.map(event => <EventCard key={event.title} title={event.title}/>)
+    events.map(event => <EventCard key={event.id} title={event.title}/>)
   }
   <LogoutButton />
   <AddButton />
