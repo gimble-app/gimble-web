@@ -1,4 +1,5 @@
-import { createStore } from 'redux'
+import thunk from 'redux-thunk';
+import { createStore, applyMiddleware } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'localforage'
 
@@ -9,5 +10,8 @@ const persistConfig = {
   storage,
 }
 
-export const store = createStore(persistReducer(persistConfig, rootReducer));
+export const store = createStore(
+  persistReducer(persistConfig, rootReducer),
+  applyMiddleware(thunk)
+);
 export const persistor = persistStore(store);
