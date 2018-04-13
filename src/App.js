@@ -1,8 +1,9 @@
 import React from 'react'
-import { BrowserRouter as Router } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 import { withStyles } from 'material-ui/styles';
 import { connect } from 'react-redux';
-import Navigation from './Navigation';
+import browserHistory from './navigation/history';
+import Navigation from './navigation/Navigation';
 
 const styles = {
   root: {
@@ -12,7 +13,7 @@ const styles = {
 
 export const App = ({classes, isLoggedIn}) => (
     <div className={classes.root}>
-      <Router>
+      <Router history={browserHistory}>
         <Navigation isLoggedIn={isLoggedIn}/>
       </Router>
     </div>

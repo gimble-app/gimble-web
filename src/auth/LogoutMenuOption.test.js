@@ -15,5 +15,3 @@ it('renders a menu option', () => {
   const wrapper = shallow(<LogoutMenuOption isLoggedIn />);
   expect(wrapper.find(MenuItem)).toExist();
 });
-
-//TODO need a test for the logout flow
