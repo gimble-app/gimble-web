@@ -36,6 +36,7 @@ export class EventForm extends Component {
         value={fieldValues.title}
         onChange={this.handleChange('title')}
         margin="normal"
+        autoFocus
       />
     );
   }
