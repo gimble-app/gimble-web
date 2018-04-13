@@ -1,27 +1,55 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, Component } from 'react';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
+import { connect } from 'react-redux';
 import CancelButton from './CancelButton';
 import SaveButton from './SaveButton';
+import EventForm from './EventForm';
 import ToolbarTitleText from '../common/ToolbarTitleText';
+import { eventSaved } from './actions';
 
-export const EventScreen = () =>
-<Fragment>
-  <AppBar position="static">
-    <Toolbar>
-      <CancelButton />
-      <ToolbarTitleText>Title</ToolbarTitleText>
-      <SaveButton />
-    </Toolbar>
-  </AppBar>
-  <Typography
-    variant="body1"
-    color="inherit"
-    align="center"
-  >
-    This is where an item would be created
-  </Typography>
-</Fragment>
+export class EventScreen extends Component {
 
-export default EventScreen;
+  constructor (props) {
+    super(props);
+    this.state = {
+      fieldValues: {}
+    };
+  }
+
+  onChange = field => {
+    this.setState({
+      fieldValues: {
+        ...this.state.fieldValues, ...field
+      }
+    });
+  };
+
+  render () {
+    const { onSave } = this.props;
+    const { fieldValues } = this.state;
+
+    return (
+      <Fragment>
+        <AppBar position="static">
+          <Toolbar>
+            <CancelButton />
+            <ToolbarTitleText>Title</ToolbarTitleText>
+            <SaveButton onClick={() => onSave(fieldValues)}
+            />
+          </Toolbar>
+        </AppBar>
+        <EventForm
+          fieldValues={fieldValues}
+          onChange={this.onChange}
+        />
+      </Fragment>
+    );
+  }
+}
+
+const mapDispatchToProps = {
+  onSave: eventSaved
+}
+
+export default connect(() => ({}), mapDispatchToProps)(EventScreen);

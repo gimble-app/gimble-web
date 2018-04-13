@@ -2,17 +2,12 @@ import React, { Fragment } from 'react';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
-import { withStyles } from 'material-ui/styles';
+import { connect } from 'react-redux';
 import LogoutButton from '../auth/LogoutButton';
 import AddButton from './AddButton';
 import ToolbarTitleText from '../common/ToolbarTitleText';
 
-const styles = theme => ({
-  welcome: {
-    margin: theme.spacing.unit * 2,
-  }
-});
-export const HomeScreen = ({ classes }) =>
+export const HomeScreen = ({ events }) =>
 <Fragment>
   <AppBar position="static">
     <Toolbar>
@@ -23,13 +18,18 @@ export const HomeScreen = ({ classes }) =>
     variant="body1"
     color="inherit"
     align="center"
-    className={classes.welcome}
   >
-    Not much here at the moment. Maybe you should add an event...
+    Not much here at the moment. Maybe you should add an event.
+    {
+      events.map(event => <section key="event">event placeholder</section>)
+    }
     <LogoutButton />
   </Typography>
   <AddButton />
 </Fragment>
 
+const mapStateToProps = state => ({
+  events: state.events
+});
 
-export default withStyles(styles)(HomeScreen);
+export default connect(mapStateToProps)(HomeScreen);
