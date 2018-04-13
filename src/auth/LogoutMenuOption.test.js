@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Button from 'material-ui/Button';
 import { LogoutMenuOption } from './LogoutMenuOption';
 import { MenuItem } from 'material-ui/Menu';
 
