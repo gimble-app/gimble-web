@@ -3,11 +3,19 @@ import { shallow } from 'enzyme';
 import Typography from 'material-ui/Typography';
 import { HomeScreen } from './HomeScreen';
 import LogoutButton from '../auth/LogoutButton';
+import EventCard from './EventCard';
+import BackgroundMessage from './BackgroundMessage';
 
-it('renders welcome message', () => {
+it('includes a background message when there are no events', () => {
   const wrapper = shallow(<HomeScreen events={[]} />);
-  expect(wrapper.find(Typography)).toExist();
+  expect(wrapper.find(BackgroundMessage)).toExist();
 });
+
+it('does not include a background message when there are events', () => {
+  const wrapper = shallow(<HomeScreen events={[{ title: "one event" }]} />);
+  expect(wrapper.find(BackgroundMessage)).not.toExist();
+});
+
 
 it('renders a logout button', () => {
   const wrapper = shallow(<HomeScreen events={[]} />);
@@ -15,11 +23,11 @@ it('renders a logout button', () => {
 });
 
 it('renders an event when one exists', () => {
-  const wrapper = shallow(<HomeScreen events={["one event"]} />);
-  expect(wrapper.find("section").length).toBe(1);
+  const wrapper = shallow(<HomeScreen events={[{ title: "one event" }]} />);
+  expect(wrapper.find(EventCard).length).toBe(1);
 });
 
 it('renders all events when more than one exists', () => {
-  const wrapper = shallow(<HomeScreen events={["one event", "two event"]} />);
-  expect(wrapper.find("section").length).toBe(2);
+  const wrapper = shallow(<HomeScreen events={[{ title: "one event" }, { title: "two event" }]} />);
+  expect(wrapper.find(EventCard).length).toBe(2);
 });
