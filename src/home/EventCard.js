@@ -1,9 +1,21 @@
 import React from 'react';
-import Card from 'material-ui/Card';
+import { withStyles } from 'material-ui/styles';
+import Card, { CardActions, CardContent } from 'material-ui/Card';
+import Button from 'material-ui/Button';
 
-const EventCard = ({ title }) =>
-  <Card>
-    { title }
+const styles = {
+  card: {
+    margin: 16
+  }
+};
+
+const EventCard = ({ title, classes }) => (
+  <Card className={classes.card}>
+    <CardContent>{title}</CardContent>
+    <CardActions>
+      <Button size="small">Details</Button>
+    </CardActions>
   </Card>
+);
 
-export default EventCard;
+export default withStyles(styles)(EventCard);
