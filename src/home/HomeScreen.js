@@ -3,10 +3,11 @@ import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import { connect } from 'react-redux';
 import ToolbarTitleText from '../common/ToolbarTitleText';
-import EventCard from './EventCard';
 import BackgroundMessage from './BackgroundMessage';
 import ProfileMenu from './ProfileMenu';
 import AddButton from './AddButton';
+import Page from '../common/Page';
+import EventsOverview from './EventsOverview';
 
 export const HomeScreen = ({ events }) =>
 <Fragment>
@@ -16,11 +17,13 @@ export const HomeScreen = ({ events }) =>
       <ProfileMenu />
     </Toolbar>
   </AppBar>
-  { events.length === 0 ?
-    <BackgroundMessage /> :
-    events.map(event => <EventCard key={event.id} title={event.title}/>)
-  }
-  <AddButton />
+  <Page>
+    { events.length === 0 ?
+      <BackgroundMessage /> :
+      <EventsOverview events={events}/>
+    }
+    <AddButton />
+  </Page>
 </Fragment>
 
 const mapStateToProps = state => ({

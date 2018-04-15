@@ -1,16 +1,10 @@
 import React from 'react';
-import { withStyles } from 'material-ui/styles';
-import Card, { CardActions, CardContent } from 'material-ui/Card';
+import { CardActions, CardContent } from 'material-ui/Card';
 import Button from 'material-ui/Button';
+import { Card } from '../common/Cards';
 
-const styles = {
-  card: {
-    margin: 16
-  }
-};
-
-const EventCard = ({ title, classes }) => (
-  <Card className={classes.card}>
+const EventCard = ({ title }) => (
+  <Card>
     <CardContent>{title}</CardContent>
     <CardActions>
       <Button size="small">Details</Button>
@@ -18,4 +12,4 @@ const EventCard = ({ title, classes }) => (
   </Card>
 );
 
-export default withStyles(styles)(EventCard);
+export default EventCard;
