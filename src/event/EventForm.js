@@ -33,7 +33,7 @@ export class EventForm extends Component {
         id="title"
         label="Title"
         className={classes.textField}
-        value={fieldValues.title}
+        defaultValue={fieldValues.title}
         onChange={this.handleChange('title')}
         margin="normal"
         autoFocus

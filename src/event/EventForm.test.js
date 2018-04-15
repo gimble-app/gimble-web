@@ -7,7 +7,7 @@ it('renders a title text field', () => {
   const wrapper = shallow(<EventForm fieldValues={{ title: 'some-value' }} classes={{}} />);
 
   expect(wrapper.find(TextField)).toExist();
-  expect(wrapper.find(TextField).prop('value')).toBe('some-value');
+  expect(wrapper.find(TextField).prop('defaultValue')).toBe('some-value');
   expect(wrapper.find(TextField).prop('label')).toBe('Title');
 });
 
