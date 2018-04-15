@@ -5,7 +5,7 @@ const event = (state, { data, type } ) => {
   switch (type) {
     case EVENT_SAVED:
       return {
-          id: uuid(),
+          id: data.id || uuid(),
           ...data
       };
     default:
@@ -16,7 +16,10 @@ const event = (state, { data, type } ) => {
 const events = (state = [], action) => {
   switch (action.type) {
     case EVENT_SAVED:
-      return [...state, event(undefined, action)];
+      const updated = event(
+        state.find(event => event.id === action.data.id)
+        , action);
+      return [...state.filter(e => e.id !== action.data.id), updated];
     default:
       return state;
   }
