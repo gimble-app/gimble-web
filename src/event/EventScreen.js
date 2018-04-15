@@ -4,9 +4,10 @@ import Toolbar from 'material-ui/Toolbar';
 import { connect } from 'react-redux';
 import CancelButton from './CancelButton';
 import SaveButton from './SaveButton';
+import DeleteButton from './DeleteButton';
 import EventForm from './EventForm';
 import ToolbarTitleText from '../common/ToolbarTitleText';
-import { eventSaved } from './actions';
+import { eventSaved, eventDeleted } from './actions';
 import { selectEventFromId } from './reducers';
 
 export class EventScreen extends Component {
@@ -27,7 +28,7 @@ export class EventScreen extends Component {
   };
 
   render () {
-    const { onSave } = this.props;
+    const { onSave, onDelete } = this.props;
     const { fieldValues } = this.state;
 
     return (
@@ -36,8 +37,10 @@ export class EventScreen extends Component {
           <Toolbar>
             <CancelButton />
             <ToolbarTitleText>Title</ToolbarTitleText>
-            <SaveButton onClick={() => onSave(fieldValues)}
-            />
+            {
+              fieldValues.id && <DeleteButton onClick={() => onDelete(fieldValues.id)} />
+            }
+            <SaveButton onClick={() => onSave(fieldValues)} />
           </Toolbar>
         </AppBar>
         <EventForm
@@ -57,7 +60,8 @@ const mapStateToProps = (state, { match }) => {
 }
 
 const mapDispatchToProps = {
-  onSave: eventSaved
+  onSave: eventSaved,
+  onDelete: eventDeleted
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventScreen);

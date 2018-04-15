@@ -1,4 +1,4 @@
-import { EVENT_SAVED } from './actions';
+import { EVENT_SAVED, EVENT_DELETED } from './actions';
 import uuid from 'uuid/v4';
 
 const event = (state, { data, type } ) => {
@@ -20,6 +20,8 @@ const events = (state = [], action) => {
         state.find(event => event.id === action.data.id)
         , action);
       return [...state.filter(e => e.id !== action.data.id), updated];
+    case EVENT_DELETED:
+      return [...state.filter(e => e.id !== action.data.id)];
     default:
       return state;
   }
