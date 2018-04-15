@@ -1,9 +1,9 @@
 import events, { selectEventFromId } from './reducers';
-import { eventSaved } from './actions';
-
-const eventSavedAction = eventSaved({ id: 'id', title: 'value' });
+import { eventSaved, eventDeleted } from './actions';
 
 describe('events reducer', () => {
+  const eventSavedAction = eventSaved({ id: 'id', title: 'value' });
+
   it('provides an empty array by default', () => {
     const result = events(undefined, {});
     expect(result).toEqual([]);
@@ -30,6 +30,18 @@ describe('events reducer', () => {
       const result = events([{ id: 'id', title: 'old value' }], eventSavedAction);
       expect(result.length).toBe(1);
       expect(result[0].title).toEqual('value');
+    });
+  });
+
+  describe('eventDeleted', () => {
+    const eventRemovedAction = eventDeleted('001');
+
+    it('removes an entry when it exists', () => {
+      const result = events([
+        { id: '001', title: 'value' },
+        { id: '002', title: 'value' },
+      ], eventRemovedAction);
+      expect(result).toEqual([{ id: '002', title: 'value' }]);
     });
   });
 });
