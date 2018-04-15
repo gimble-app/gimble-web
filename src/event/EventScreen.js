@@ -7,13 +7,14 @@ import SaveButton from './SaveButton';
 import EventForm from './EventForm';
 import ToolbarTitleText from '../common/ToolbarTitleText';
 import { eventSaved } from './actions';
+import { selectEventFromId } from './reducers';
 
 export class EventScreen extends Component {
 
   constructor (props) {
     super(props);
     this.state = {
-      fieldValues: {}
+      fieldValues: props.initialState || {}
     };
   }
 
@@ -48,8 +49,15 @@ export class EventScreen extends Component {
   }
 }
 
+const mapStateToProps = (state, { match }) => {
+  const id = match.params.id;
+  return id ? {
+    initialState: selectEventFromId(state, id)
+  } : {}
+}
+
 const mapDispatchToProps = {
   onSave: eventSaved
 }
 
-export default connect(() => ({}), mapDispatchToProps)(EventScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(EventScreen);

@@ -13,10 +13,15 @@ const Navigation = ({ isLoggedIn }) =>
         component={HomeScreen}
         isAuthenticated={true}
       />
-
       <ProtectedRoute
         exact
         path="/event"
+        component={EventScreen}
+        isAuthenticated={true}
+      />
+      <ProtectedRoute
+        exact
+        path="/event/:id"
         component={EventScreen}
         isAuthenticated={true}
       />

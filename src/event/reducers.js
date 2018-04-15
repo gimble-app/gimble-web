@@ -22,4 +22,9 @@ const events = (state = [], action) => {
   }
 }
  
+export const selectEventFromId = (state, id) => {
+  const event = state.events.find(event => event.id === id);
+  return event;
+}
+
 export default events

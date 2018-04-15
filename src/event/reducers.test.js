@@ -1,4 +1,4 @@
-import events from './reducers';
+import events, { selectEventFromId } from './reducers';
 import { eventSaved } from './actions';
 
 const eventSavedAction = eventSaved({ title: 'value' });
@@ -27,3 +27,23 @@ describe('events reducer', () => {
     });
   });
 });
+
+describe('event by id selecter', () => {
+  it('returns an event if it exists for the id', () => {
+    const event = { id: 123, title: 'some-title '};
+    const result = selectEventFromId({ events: [event]}, 123);
+    expect(result).toBe(event);
+  })
+
+  it('returns undefined if no event exists for the id', () => {
+    const event = { id: 900, title: 'some-title '};
+    const result = selectEventFromId({ events: [event]}, 123);
+    expect(result).toBeUndefined();
+  })
+
+  it('returns undefined if the id is undefined', () => {
+    const event = { id: 900, title: 'some-title '};
+    const result = selectEventFromId({ events: [event]});
+    expect(result).toBeUndefined();
+  })
+})
