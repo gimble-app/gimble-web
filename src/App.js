@@ -4,6 +4,7 @@ import { withStyles } from 'material-ui/styles';
 import { connect } from 'react-redux';
 import browserHistory from './navigation/history';
 import Navigation from './navigation/Navigation';
+import { selectIsLoggedIn } from './auth/reducers';
 
 const styles = {
   root: {
@@ -20,7 +21,7 @@ export const App = ({classes, isLoggedIn}) => (
     )
 
 const mapStateToProps = state => ({
-  isLoggedIn: state.isLoggedIn
+  isLoggedIn: selectIsLoggedIn(state)
 })
 
 export default connect(mapStateToProps)(withStyles(styles)(App))

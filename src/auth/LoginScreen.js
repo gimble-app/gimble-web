@@ -9,6 +9,7 @@ import { getFirebaseAuth } from './firebaseProvider';
 import { loginSuccess } from './actions';
 import ToolbarTitleText from '../common/ToolbarTitleText';
 import Page from '../common/Page';
+import { selectIsLoggedIn } from './reducers';
 
 export class LoginScreen extends React.Component {
 
@@ -18,7 +19,7 @@ export class LoginScreen extends React.Component {
         firebase.auth.GoogleAuthProvider.PROVIDER_ID
       ],
       callbacks: {
-        signInSuccess: this.props.onLogin
+        signInSuccessWithAuthResult: auth => this.props.onLogin(auth.user)
       }
   }
 
@@ -44,11 +45,11 @@ export class LoginScreen extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  isLoggedIn: state.isLoggedIn
+  isLoggedIn: selectIsLoggedIn(state)
 })
  
 const mapDispatchToProps = dispatch => ({
-  onLogin: () => dispatch(loginSuccess())
+  onLogin: user => dispatch(loginSuccess(user))
 })
 
 const ConnectedLoginScreen = connect(

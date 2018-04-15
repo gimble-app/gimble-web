@@ -1,12 +1,16 @@
-const isLoggedIn = (state = false, action) => {
+const auth = (state = {}, action) => {
   switch (action.type) {
     case 'LOGIN_SUCCESS':
-      return true;
+      return {
+        uid: action.data.uid
+      }
     case 'LOGOUT_SUCCESS':
-      return false;
+      return {};
     default:
       return state;
   }
 }
  
-export default isLoggedIn
+export default auth
+
+export const selectIsLoggedIn = (state) => state.auth && state.auth.uid;

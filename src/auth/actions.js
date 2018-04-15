@@ -1,8 +1,9 @@
 import { logOut } from './firebaseProvider';
 import browserHistory from '../navigation/history';
 
-export const loginSuccess = () => ({
-  type: 'LOGIN_SUCCESS'
+export const loginSuccess = (user) => ({
+  type: 'LOGIN_SUCCESS',
+  data: user
 })
 
 export const logoutSuccess = () => ({
