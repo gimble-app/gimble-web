@@ -1,12 +1,18 @@
 import React from 'react';
 import Button from 'material-ui/Button';
-import { Link } from "react-router-dom";
+import { InternalLink } from '../common/InternalLinks';
 
-const DeleteButton = ({ onClick }) =>
-  <Link to="/">
-    <Button onClick={onClick} color="inherit" aria-label="delete" variant="flat">
+const DeleteButton = ({ onClick }) => (
+  <InternalLink to="/">
+    <Button
+      onClick={onClick}
+      color="inherit"
+      aria-label="delete"
+      variant="flat"
+    >
       Delete
     </Button>
-  </Link>
+  </InternalLink>
+);
 
 export default DeleteButton;

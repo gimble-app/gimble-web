@@ -1,6 +1,5 @@
 import React from 'react';
 import Button from 'material-ui/Button';
-import { Link } from 'react-router-dom';
 import { InternalLink } from '../common/InternalLinks';
 
 const SaveButton = ({ onClick }) => (
