@@ -9,22 +9,24 @@ import AddButton from './AddButton';
 import Page from '../common/Page';
 import EventsOverview from './EventsOverview';
 
-export const HomeScreen = ({ events }) =>
-<Fragment>
-  <AppBar position="static">
-    <Toolbar>
-      <ToolbarTitleText>Gimble</ToolbarTitleText>
-      <ProfileMenu />
-    </Toolbar>
-  </AppBar>
-  <Page>
-    { events.length === 0 ?
-      <BackgroundMessage /> :
-      <EventsOverview events={events}/>
-    }
-    <AddButton />
-  </Page>
-</Fragment>
+export const HomeScreen = ({ events }) => (
+  <Fragment>
+    <AppBar position="sticky">
+      <Toolbar>
+        <ToolbarTitleText>Gimble</ToolbarTitleText>
+        <ProfileMenu />
+      </Toolbar>
+    </AppBar>
+    <Page>
+      {events.length === 0 ? (
+        <BackgroundMessage />
+      ) : (
+        <EventsOverview events={events} />
+      )}
+      <AddButton />
+    </Page>
+  </Fragment>
+);
 
 const mapStateToProps = state => ({
   events: state.events
