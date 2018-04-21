@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 import auth from './auth/reducers';
 import events from './event/reducers';
- 
+import { firebaseReducer } from 'react-redux-firebase'
+
 export default combineReducers({
   auth,
-  events
+  events,
+  firebase: firebaseReducer
 })
