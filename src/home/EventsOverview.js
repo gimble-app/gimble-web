@@ -4,10 +4,10 @@ import EventCard from './EventCard';
 
 const EventsOverview = ({ events }) => (
   <CardCollection>
-    {events.map(event => <EventCard
-      key={event.id}
-      id={event.id}
-      title={event.title}
+    {events.map(({key, value}) => <EventCard
+      key={key}
+      id={value.id}
+      title={value.title}
     />)  }
   </CardCollection>
 );

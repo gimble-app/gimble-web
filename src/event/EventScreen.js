@@ -7,7 +7,7 @@ import SaveButton from './SaveButton';
 import DeleteButton from './DeleteButton';
 import EventForm from './EventForm';
 import ToolbarTitleText from '../common/ToolbarTitleText';
-import { eventSaved, eventDeleted } from './actions';
+import { eventDeleted, saveEvent } from './actions';
 import { selectEventFromId } from './reducers';
 
 export class EventScreen extends Component {
@@ -28,7 +28,7 @@ export class EventScreen extends Component {
   };
 
   render () {
-    const { onSave, onDelete } = this.props;
+    const { onDelete, saveEvent } = this.props;
     const { fieldValues } = this.state;
 
     return (
@@ -40,7 +40,7 @@ export class EventScreen extends Component {
             {
               fieldValues.id && <DeleteButton onClick={() => onDelete(fieldValues.id)} />
             }
-            <SaveButton onClick={() => onSave(fieldValues)} />
+            <SaveButton onClick={() => saveEvent(fieldValues)} />
           </Toolbar>
         </AppBar>
         <EventForm
@@ -60,8 +60,8 @@ const mapStateToProps = (state, { match }) => {
 }
 
 const mapDispatchToProps = {
-  onSave: eventSaved,
-  onDelete: eventDeleted
+  onDelete: eventDeleted,
+  saveEvent
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventScreen);

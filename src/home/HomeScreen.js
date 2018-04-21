@@ -2,6 +2,8 @@ import React, { Fragment } from 'react';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import { connect } from 'react-redux';
+import { compose } from 'redux'
+import { firebaseConnect } from 'react-redux-firebase'
 import ToolbarTitleText from '../common/ToolbarTitleText';
 import BackgroundMessage from './BackgroundMessage';
 import ProfileMenu from './ProfileMenu';
@@ -9,7 +11,7 @@ import AddButton from './AddButton';
 import Page from '../common/Page';
 import EventsOverview from './EventsOverview';
 
-export const HomeScreen = ({ events }) => (
+export const HomeScreen = ({ events, data }) => (
   <Fragment>
     <AppBar position="sticky">
       <Toolbar>
@@ -18,18 +20,21 @@ export const HomeScreen = ({ events }) => (
       </Toolbar>
     </AppBar>
     <Page>
-      {events.length === 0 ? (
-        <BackgroundMessage />
-      ) : (
-        <EventsOverview events={events} />
-      )}
+      { events && events.length > 0
+        ? <EventsOverview events={events} />
+        : <BackgroundMessage /> }
       <AddButton />
     </Page>
   </Fragment>
 );
 
-const mapStateToProps = state => ({
-  events: state.events
-});
 
-export default connect(mapStateToProps)(HomeScreen);
+export default compose(
+  firebaseConnect((props) => [
+   { path: 'events' }
+ ]),
+  connect((state) => ({
+    events: state.firebase.ordered.events,
+    data: state.firebase.ordered.events,
+  }))
+)(HomeScreen)
