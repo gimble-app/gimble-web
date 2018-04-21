@@ -3,7 +3,7 @@ import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import { connect } from 'react-redux';
 import { compose } from 'redux'
-import { firebaseConnect } from 'react-redux-firebase'
+import { firestoreConnect } from 'react-redux-firebase'
 import ToolbarTitleText from '../common/ToolbarTitleText';
 import BackgroundMessage from './BackgroundMessage';
 import ProfileMenu from './ProfileMenu';
@@ -30,11 +30,11 @@ export const HomeScreen = ({ events, data }) => (
 
 
 export default compose(
-  firebaseConnect((props) => [
-   { path: 'events' }
+  firestoreConnect((props) => [
+   { collection: 'events' }
  ]),
   connect((state) => ({
-    events: state.firebase.ordered.events,
-    data: state.firebase.ordered.events,
+    events: state.firestore.ordered.events,
+    data: state.firestore.ordered.events,
   }))
 )(HomeScreen)

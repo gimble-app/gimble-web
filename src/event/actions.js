@@ -15,10 +15,10 @@ export const eventSaved = (data) => ({
 
 
 export const saveEvent = data =>
-  (dispatch, getState, getFirebase) => {
-    const firebase = getFirebase()
+  (dispatch, getState, getFirestore) => {
+    const firebase = getFirestore()
     firebase
-      .push('events', data)
+      .add('events', data)
       .then(() => {
         dispatch(eventSaved(data))
       })

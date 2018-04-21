@@ -1,10 +1,10 @@
 import thunk from 'redux-thunk';
 import { createStore, compose, applyMiddleware } from 'redux';
-import { persistStore, persistReducer } from 'redux-persist'
-import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
+import { reactReduxFirebase } from 'react-redux-firebase';
+import { reduxFirestore, getFirestore } from 'redux-firestore';
+import 'firebase/firestore'
 import firebase from 'firebase';
-
-import rootReducer from './reducers'
+import rootReducer from './reducers';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBlilaIaFcNa1UusIxbEJT9E0mm3RriRZE',
@@ -20,12 +20,14 @@ const config = {
 
 export default (initialState = {}) => {
   firebase.initializeApp(firebaseConfig)
+  firebase.firestore();
 
   const createStoreWithFirebase = compose(
     applyMiddleware(
-       thunk.withExtraArgument(getFirebase)
+       thunk.withExtraArgument(getFirestore)
      ),
     reactReduxFirebase(firebase, config),
+    reduxFirestore(firebase),
     typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f,
   )(createStore)
 
