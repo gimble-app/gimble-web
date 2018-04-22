@@ -1,5 +1,3 @@
-import { logOut, logIn } from './firebaseProvider';
-
 export const loginSuccess = (user) => ({
   type: 'LOGIN_SUCCESS',
   data: user
@@ -10,9 +8,10 @@ export const logoutSuccess = () => ({
 })
 
 export const logout = () => {
-    return async (dispatch, getState, getFirestore) => {
+    return async (dispatch, getState, { getFirestore, getFirebase }) => {
       try {
-        await logOut();
+        const firebase = getFirebase();
+        await firebase.logout();
         dispatch(logoutSuccess());
       } catch (exception) {
         console.error('logout failed', exception);
@@ -21,9 +20,10 @@ export const logout = () => {
 }
 
 export const login = () => {
-    return async (dispatch, getState, getFirestore) => {
+    return async (dispatch, getState, { getFirebase }) => {
       try {
-        const user = await logIn();
+        const firebase = getFirebase();
+        const user = await firebase.login({ provider: 'google', type: 'redirect' });
         dispatch(loginSuccess(user));
       } catch (exception) {
         console.error('login failed', exception);

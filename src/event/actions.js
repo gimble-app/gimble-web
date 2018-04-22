@@ -11,7 +11,7 @@ export const eventDeleted = id => ({
 });
 
 export const deleteEvent = (id) =>
-  (dispatch, getState, getFirestore) => {
+  (dispatch, getState, { getFirestore }) => {
     const firestore = getFirestore();
     firestore.delete(`events/${id}`)
       .then(() => {
@@ -29,7 +29,7 @@ export const eventSaved = (data) => ({
 
 
 export const saveEvent = (data, id) =>
-  async (dispatch, getState, getFirestore) => {
+  async (dispatch, getState, { getFirestore }) => {
     const firestore = getFirestore();
     try {
       if(!id) {
