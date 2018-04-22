@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom';
 import HomeScreen from '../home/HomeScreen';
-import EventScreen from '../event/EventScreen';
+import EventScreenDataContainer from '../event/EventScreenDataContainer';
 import ProtectedRoute from '../auth/ProtectedRoute';
 import LoginScreen from '../auth/LoginScreen';
 
@@ -16,13 +16,13 @@ const Navigation = ({ isLoggedIn }) =>
       <ProtectedRoute
         exact
         path="/event"
-        component={EventScreen}
+        component={EventScreenDataContainer}
         isAuthenticated={true}
       />
       <ProtectedRoute
         exact
         path="/event/:id"
-        component={EventScreen}
+        component={EventScreenDataContainer}
         isAuthenticated={true}
       />
 

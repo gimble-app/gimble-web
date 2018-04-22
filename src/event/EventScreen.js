@@ -8,7 +8,6 @@ import DeleteButton from './DeleteButton';
 import EventForm from './EventForm';
 import ToolbarTitleText from '../common/ToolbarTitleText';
 import { eventDeleted, saveEvent } from './actions';
-import { selectEventFromId } from './reducers';
 
 export class EventScreen extends Component {
 
@@ -52,16 +51,12 @@ export class EventScreen extends Component {
   }
 }
 
-const mapStateToProps = (state, { match }) => {
-  const id = match.params.id;
-  return id ? {
-    initialState: selectEventFromId(state, id)
-  } : {}
-}
-
 const mapDispatchToProps = {
   onDelete: eventDeleted,
   saveEvent
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EventScreen);
+export default connect(
+  () => ({}),
+  mapDispatchToProps
+)(EventScreen)
