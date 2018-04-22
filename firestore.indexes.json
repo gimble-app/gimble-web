@@ -1,0 +1,12 @@
+{
+  "indexes": [
+    {
+      "collectionId": "events",
+      "fields": [
+        { "fieldPath": "title", "mode": "ASCENDING" },
+        { "fieldPath": "id", "mode": "ASCENDING" },
+        { "fieldPath": "author", "mode": "ASCENDING" }
+      ]
+    }
+  ]
+}
