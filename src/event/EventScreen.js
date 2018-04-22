@@ -1,48 +1,42 @@
 import React, { Fragment, Component } from 'react';
 import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
 import { connect } from 'react-redux';
-import CancelButton from './CancelButton';
-import SaveButton from './SaveButton';
-import DeleteButton from './DeleteButton';
-import EventForm from './EventForm';
-import ToolbarTitleText from '../common/ToolbarTitleText';
+import ConnectedEventForm from './ConnectedEventForm';
 import { eventDeleted, saveEvent } from './actions';
+import EditingEventToolbar from './EditingEventToolbar';
 
 export class EventScreen extends Component {
 
-  constructor (props) {
-    super(props);
-    this.state = {
-      fieldValues: props.initialState || {}
-    };
+  state = {
+    fieldValues: {}
   }
 
   onChange = field => {
     this.setState({
       fieldValues: {
-        ...this.state.fieldValues, ...field
+        ...this.state.fieldValues,
+        ...field
       }
     });
   };
 
   render () {
-    const { onDelete, saveEvent } = this.props;
+    const { onDelete, saveEvent, match } = this.props;
     const { fieldValues } = this.state;
+    const id = match.params.id;
+    const isNew = !id;
 
     return (
       <Fragment>
         <AppBar position="static">
-          <Toolbar>
-            <CancelButton />
-            <ToolbarTitleText>Title</ToolbarTitleText>
-            {
-              fieldValues.id && <DeleteButton onClick={() => onDelete(fieldValues.id)} />
-            }
-            <SaveButton onClick={() => saveEvent(fieldValues)} />
-          </Toolbar>
+          <EditingEventToolbar
+            isNew={isNew}
+            onDelete={() => onDelete(id)}
+            onSave={() => saveEvent(fieldValues, id)}
+          />
         </AppBar>
-        <EventForm
+        <ConnectedEventForm
+          id={id}
           fieldValues={fieldValues}
           onChange={this.onChange}
         />

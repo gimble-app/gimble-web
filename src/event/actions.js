@@ -14,10 +14,10 @@ export const eventSaved = (data) => ({
 });
 
 
-export const saveEvent = data =>
+export const saveEvent = (data, id) =>
   (dispatch, getState, getFirestore) => {
     const firestore = getFirestore();
-    firestore.update(`events/${data.id}`, data)
+    firestore.update(`events/${id}`, data)
       .then(() => {
         dispatch(eventSaved(data))
       }).catch(error => {
