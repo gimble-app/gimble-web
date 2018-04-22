@@ -13,6 +13,7 @@ const config = {
   userProfile: 'users',
   attachAuthIsReady: true,
   firebaseStateName: 'firebase',
+  allowMultipleListeners: true,
   enableLogging: false
 }
 

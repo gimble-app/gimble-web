@@ -30,11 +30,9 @@ export const HomeScreen = ({ events, data }) => (
 
 
 export default compose(
-  firestoreConnect((props) => [
-   { collection: 'events' }
- ]),
+  firestoreConnect((props) => ['events']),
   connect((state) => ({
     events: state.firestore.ordered.events,
     data: state.firestore.ordered.events,
-  }))
+  })),
 )(HomeScreen)

@@ -35,7 +35,8 @@ export const saveEvent = (data, id) =>
       if(!id) {
         const generatedId = uuid();
         await firestore.set(`events/${generatedId}`, { ...data, id: generatedId })
-      } else {
+      }
+      else {
         await firestore.update(`events/${id}`, data)
       }
       dispatch(eventSaved(data))

@@ -14,10 +14,10 @@ export const ConnectedEventForm = ({ storedData, onChange, isNew }) => (
 const mapStateToProps = (state, { id }) => {
   const { data } = state.firestore;
   if(id) {
-      return {
-        storedData: data.events && data.events[id],
-        isNew: false
-      }
+    return {
+      storedData: data.events && data.events[id],
+      isNew: false
+    }
   }
   return {
     storedData: {},
@@ -27,7 +27,12 @@ const mapStateToProps = (state, { id }) => {
 
 export default compose(
   firestoreConnect(({ id }) => [
-   { collection: 'events', doc: id }
+   {
+     collection: 'events',
+     doc: id,
+     storeAs: 'edited-event'
+   },
+   'events'
   ]),
   connect(mapStateToProps)
 )(ConnectedEventForm)
