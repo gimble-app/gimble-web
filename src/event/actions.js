@@ -8,6 +8,18 @@ export const eventDeleted = id => ({
   }
 });
 
+export const deleteEvent = (id) =>
+  (dispatch, getState, getFirestore) => {
+    const firestore = getFirestore();
+    firestore.delete(`events/${id}`)
+      .then(() => {
+        dispatch(eventDeleted(id))
+      }).catch(error => {
+        console.error(error);
+      })
+  };
+
+
 export const eventSaved = (data) => ({
   type: EVENT_SAVED,
   data

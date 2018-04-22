@@ -3,7 +3,7 @@ import { shallow, mount } from 'enzyme';
 import TextField from 'material-ui/TextField';
 import { EventScreen } from './EventScreen';
 import ConnectedEventForm from './ConnectedEventForm';
-import EditingEventToolBar from './EditingEventToolBar';
+import EditingEventToolbar from './EditingEventToolbar';
 import DeleteButton from './DeleteButton';
 
 describe('<EventScreen>', () => {
@@ -48,18 +48,18 @@ describe('<EventScreen>', () => {
     const wrapper = shallow(<EventScreen match={{ params: { id: 'some-id' }}} saveEvent={saveEvent}/>);
     wrapper.setState({ fieldValues: { firstField: 'some-value' } });
 
-    wrapper.find(EditingEventToolBar).prop('onSave')();
+    wrapper.find(EditingEventToolbar).prop('onSave')();
 
     expect(saveEvent).toBeCalledWith({ firstField: 'some-value' }, 'some-id' );
   });
 
   it('sends the id to the delete prop when deleted', () => {
-    const onDelete = jest.fn();
-    const wrapper = shallow(<EventScreen  match={{params:{id: 'some-id'}}} onDelete={onDelete}/>);
+    const deleteEvent = jest.fn();
+    const wrapper = shallow(<EventScreen  match={{params:{id: 'some-id'}}} deleteEvent={deleteEvent}/>);
     wrapper.setState({ fieldValues: { title: 'data' } });
 
-    wrapper.find(EditingEventToolBar).prop('onDelete')();
+    wrapper.find(EditingEventToolbar).prop('onDelete')();
 
-    expect(onDelete).toBeCalledWith('some-id');
+    expect(deleteEvent).toBeCalledWith('some-id');
   });
 });

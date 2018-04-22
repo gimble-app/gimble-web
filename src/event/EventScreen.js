@@ -2,7 +2,7 @@ import React, { Fragment, Component } from 'react';
 import AppBar from 'material-ui/AppBar';
 import { connect } from 'react-redux';
 import ConnectedEventForm from './ConnectedEventForm';
-import { eventDeleted, saveEvent } from './actions';
+import { deleteEvent, saveEvent } from './actions';
 import EditingEventToolbar from './EditingEventToolbar';
 
 export class EventScreen extends Component {
@@ -21,7 +21,7 @@ export class EventScreen extends Component {
   };
 
   render () {
-    const { onDelete, saveEvent, match } = this.props;
+    const { deleteEvent, saveEvent, match } = this.props;
     const { fieldValues } = this.state;
     const id = match.params.id;
     const isNew = !id;
@@ -31,7 +31,7 @@ export class EventScreen extends Component {
         <AppBar position="static">
           <EditingEventToolbar
             isNew={isNew}
-            onDelete={() => onDelete(id)}
+            onDelete={() => deleteEvent(id)}
             onSave={() => saveEvent(fieldValues, id)}
           />
         </AppBar>
@@ -46,7 +46,7 @@ export class EventScreen extends Component {
 }
 
 const mapDispatchToProps = {
-  onDelete: eventDeleted,
+  deleteEvent,
   saveEvent
 }
 
