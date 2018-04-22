@@ -4,7 +4,7 @@ import CancelButton from './CancelButton';
 import SaveButton from './SaveButton';
 import DeleteButton from './DeleteButton';
 
-const EditingEventToolBar = ({ isNew, onDelete, onSave }) => (
+const EditingEventToolbar = ({ isNew, onDelete, onSave }) => (
   <Toolbar>
     <CancelButton />
     { !isNew && <DeleteButton onClick={onDelete} /> }
@@ -12,4 +12,4 @@ const EditingEventToolBar = ({ isNew, onDelete, onSave }) => (
   </Toolbar>
 );
 
-export default EditingEventToolBar;
+export default EditingEventToolbar;
