@@ -4,8 +4,8 @@ import { compose } from 'redux';
 import { firestoreConnect, isEmpty } from 'react-redux-firebase';
 import EventForm from './EventForm';
 
-export const ConnectedEventForm = ({ storedData, onChange }) => (
-  !isEmpty(storedData) && <EventForm
+export const ConnectedEventForm = ({ storedData, onChange, isNew }) => (
+  (!isEmpty(storedData) || isNew) && <EventForm
     fieldValues={storedData}
     onChange={onChange}
   />
@@ -16,9 +16,13 @@ const mapStateToProps = (state, { id }) => {
   if(id) {
       return {
         storedData: data.events && data.events[id],
+        isNew: false
       }
   }
-  return {};
+  return {
+    storedData: {},
+    isNew: !id
+  };
 }
 
 export default compose(

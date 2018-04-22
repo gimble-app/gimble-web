@@ -9,7 +9,7 @@ describe('<ConnectedEventForm>', () => {
     expect(rendered).toExist();
   });
 
-  it('renders and event form when there is initial data', () => {
+  it('renders an event form when there is initial data', () => {
     const rendered = shallow(<ConnectedEventForm
       storedData={{
         title: 'some-title'
@@ -17,7 +17,12 @@ describe('<ConnectedEventForm>', () => {
     expect(rendered.find(EventForm)).toExist();
   });
 
-  it('does not render the form when there is no data', () => {
+  it('renders an event form when when the event is new', () => {
+    const rendered = shallow(<ConnectedEventForm isNew />);
+    expect(rendered.find(EventForm)).toExist();
+  });
+
+  it('does not render the form when there is no data and the event is not new', () => {
     const rendered = shallow(<ConnectedEventForm />);
     expect(rendered.find(EventForm)).not.toExist();
   });

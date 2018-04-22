@@ -1,3 +1,5 @@
+import uuid from 'uuid/v4';
+
 export const EVENT_SAVED = 'EVENT_SAVED';
 export const EVENT_DELETED = 'EVENT_DELETED';
 
@@ -27,12 +29,18 @@ export const eventSaved = (data) => ({
 
 
 export const saveEvent = (data, id) =>
-  (dispatch, getState, getFirestore) => {
+  async (dispatch, getState, getFirestore) => {
     const firestore = getFirestore();
-    firestore.update(`events/${id}`, data)
-      .then(() => {
-        dispatch(eventSaved(data))
-      }).catch(error => {
-        console.error(error);
-      })
+    try {
+      if(!id) {
+        const generatedId = uuid();
+        await firestore.set(`events/${generatedId}`, { ...data, id: generatedId })
+      } else {
+        await firestore.update(`events/${id}`, data)
+      }
+      dispatch(eventSaved(data))
+
+    } catch (error) {
+      console.error(error);
+    }
   };
