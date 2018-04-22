@@ -29,12 +29,13 @@ export const eventSaved = (data) => ({
 
 
 export const saveEvent = (data, id) =>
-  async (dispatch, getState, { getFirestore }) => {
+  async (dispatch, getState, { getFirestore, getFirebase }) => {
     const firestore = getFirestore();
     try {
       if(!id) {
         const generatedId = uuid();
-        await firestore.set(`events/${generatedId}`, { ...data, id: generatedId })
+        const author = getState().firebase.auth.uid;
+        await firestore.set(`events/${generatedId}`, { ...data, id: generatedId, author });
       }
       else {
         await firestore.update(`events/${id}`, data)
