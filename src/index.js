@@ -4,12 +4,16 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import registerServiceWorker from './registerServiceWorker';
-import createStore from './store';
+import { ConnectedRouter } from 'react-router-redux';
+
+import initStore from './store';
 import App from './App';
 
+const { store, history } = initStore();
+
 render(
-  <Provider store={createStore()}>
-    <App />
+  <Provider store={store}>
+    <App history={history}/>
   </Provider>,
   document.getElementById('root')
 )

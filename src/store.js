@@ -6,6 +6,9 @@ import { reduxFirestore, getFirestore } from 'redux-firestore';
 import rootReducer from './reducers';
 import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
 
+import createHistory from 'history/createBrowserHistory';
+import { routerMiddleware } from 'react-router-redux';
+
 const config = {
   userProfile: 'users',
   attachAuthIsReady: true,
@@ -24,9 +27,13 @@ export default (initialState = {}) => {
   firebase.initializeApp(firebaseConfig)
   firebase.firestore();
 
+  const history = createHistory()
+  const historyMiddleware = routerMiddleware(history)
+
   const createStoreWithFirebase = compose(
     applyMiddleware(
        thunk.withExtraArgument({ getFirestore, getFirebase }),
+       historyMiddleware
      ),
     reactReduxFirebase(firebase, config),
     reduxFirestore(firebase),
@@ -35,5 +42,5 @@ export default (initialState = {}) => {
 
   const store = createStoreWithFirebase(rootReducer, initialState)
 
-  return store;
+  return { store, history };
 }

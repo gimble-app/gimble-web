@@ -1,12 +1,11 @@
 import React from 'react'
-import { Router } from 'react-router-dom';
 import { withStyles } from 'material-ui/styles';
 import { connect } from 'react-redux';
 import { compose } from 'redux'
 import { firebaseConnect } from 'react-redux-firebase'
-import browserHistory from './navigation/history';
 import Navigation from './navigation/Navigation';
 import { selectIsLoggedIn } from './auth/reducers';
+import { ConnectedRouter } from 'react-router-redux';
 
 const styles = {
   root: {
@@ -14,13 +13,11 @@ const styles = {
   }
 };
 
-export const App = ({classes, isLoggedIn }) => (
-    <div className={classes.root}>
-      <Router history={browserHistory}>
-        <Navigation isLoggedIn={isLoggedIn}/>
-      </Router>
-    </div>
-    )
+export const App = ({classes, isLoggedIn, history }) => (
+  <ConnectedRouter history={history}>
+    <Navigation isLoggedIn={isLoggedIn}/>
+  </ConnectedRouter>
+)
 
 const mapStateToProps = state => ({
   isLoggedIn: selectIsLoggedIn(state),
