@@ -7,3 +7,7 @@ export const getFirebaseAuth = () => {
 export const logOut = () => {
   return firebase.auth().signOut();
 }
+
+export const logIn = () => {
+  return firebase.login({ provider: 'google', type: 'redirect' });
+}

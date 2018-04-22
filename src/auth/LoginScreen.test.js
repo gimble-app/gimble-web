@@ -10,5 +10,5 @@ jest.doMock('./firebaseProvider.js', () => {
 
 xit('renders the component', () => {
   const wrapper = shallow(<LoginScreen />);
-  expect(wrapper.find(StyledFirebaseAuth)).toExist();
+  expect(wrapper.find(Page)).toExist();
 });

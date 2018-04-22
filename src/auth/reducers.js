@@ -1,16 +1,5 @@
-const auth = (state = {}, action) => {
-  switch (action.type) {
-    case 'LOGIN_SUCCESS':
-      return {
-        uid: action.data.uid
-      }
-    case 'LOGOUT_SUCCESS':
-      return {};
-    default:
-      return state;
-  }
-}
- 
-export default auth
+import { firebaseSelector } from '../reducers';
+import { isEmpty, isLoaded } from 'react-redux-firebase';
 
-export const selectIsLoggedIn = (state) => state.auth && state.auth.uid;
+export const selectIsLoggedIn = (state) => !isEmpty(firebaseSelector(state).auth);
+export const selectIsLoaded = (state) => isLoaded(firebaseSelector(state).auth);

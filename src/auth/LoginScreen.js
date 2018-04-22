@@ -1,60 +1,47 @@
 import React, { Fragment } from 'react';
-import { connect } from 'react-redux';
-import firebase from 'firebase';
+import { compose } from 'redux'
+import { connect } from 'react-redux'
+import { firebaseConnect } from 'react-redux-firebase'
 import { Redirect } from 'react-router-dom';
+import { selectIsLoggedIn, selectIsLoaded } from './reducers';
+import { login } from './actions';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import { getFirebaseAuth } from './firebaseProvider';
-import { loginSuccess } from './actions';
-import ToolbarTitleText from '../common/ToolbarTitleText';
 import Page from '../common/Page';
-import { selectIsLoggedIn } from './reducers';
+import ToolbarTitleText from '../common/ToolbarTitleText';
 
-export class LoginScreen extends React.Component {
-
-  uiConfig = {
-      signInFlow: 'popup',
-      signInOptions: [
-        firebase.auth.GoogleAuthProvider.PROVIDER_ID
-      ],
-      callbacks: {
-        signInSuccessWithAuthResult: auth => this.props.onLogin(auth.user)
+export const LoginScreen = ({ isLoaded, isLoggedIn, login }) => (
+  <Fragment>
+    <AppBar position="static">
+      <Toolbar>
+        <ToolbarTitleText>Gimble</ToolbarTitleText>
+      </Toolbar>
+    </AppBar>
+    <Page>
+    <div>
+      {
+        !isLoaded
+        ? <span>Loading...</span>
+        : !isLoggedIn
+          ? <button
+                onClick={login}
+              >Login With Google</button>
+          : <Redirect to="/" />
       }
-  }
+    </div>
+  </Page>
+</Fragment>)
 
-  render() {
-    return (
-      <Fragment>
-        <AppBar position="static">
-          <Toolbar>
-            <ToolbarTitleText>Gimble</ToolbarTitleText>
-          </Toolbar>
-        </AppBar>
-        <Page>
-        {
-          !this.props.isLoggedIn
-            ? <StyledFirebaseAuth
-              className="firebaseOverride"
-              uiConfig={this.uiConfig}
-              firebaseAuth={getFirebaseAuth()}/>
-            :  <Redirect to="/" /> }
-        </Page>
-      </Fragment>)
-  }
-}
+const mapDispatchToProps = {
+  login
+};
 
 const mapStateToProps = state => ({
-  isLoggedIn: selectIsLoggedIn(state)
-})
- 
-const mapDispatchToProps = dispatch => ({
-  onLogin: user => dispatch(loginSuccess(user))
-})
+  isLoaded: selectIsLoaded(state),
+  isLoggedIn: selectIsLoggedIn(state),
+});
 
-const ConnectedLoginScreen = connect(
-  mapStateToProps,
-  mapDispatchToProps
+export default compose(
+  firebaseConnect(),
+  connect(mapStateToProps, mapDispatchToProps)
 )(LoginScreen)
-
-export default ConnectedLoginScreen;

@@ -11,19 +11,19 @@ const Navigation = ({ isLoggedIn }) =>
         exact
         path="/"
         component={HomeScreen}
-        isAuthenticated={true}
+        isAuthenticated={isLoggedIn}
       />
       <ProtectedRoute
         exact
         path="/event"
         component={EventScreen}
-        isAuthenticated={true}
+        isAuthenticated={isLoggedIn}
       />
       <ProtectedRoute
         exact
         path="/event/:id"
         component={EventScreen}
-        isAuthenticated={true}
+        isAuthenticated={isLoggedIn}
       />
 
       <Route path="/login" component={LoginScreen} />

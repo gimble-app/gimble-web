@@ -1,5 +1,4 @@
-import { logOut } from './firebaseProvider';
-import browserHistory from '../navigation/history';
+import { logOut, logIn } from './firebaseProvider';
 
 export const loginSuccess = (user) => ({
   type: 'LOGIN_SUCCESS',
@@ -11,13 +10,23 @@ export const logoutSuccess = () => ({
 })
 
 export const logout = () => {
-    return async (dispatch) => {
+    return async (dispatch, getState, getFirestore) => {
       try {
         await logOut();
         dispatch(logoutSuccess());
-        browserHistory.push('/login');
       } catch (exception) {
-        console.error('logout failed');
+        console.error('logout failed', exception);
+      }
+    }
+}
+
+export const login = () => {
+    return async (dispatch, getState, getFirestore) => {
+      try {
+        const user = await logIn();
+        dispatch(loginSuccess(user));
+      } catch (exception) {
+        console.error('login failed', exception);
       }
     }
 }
