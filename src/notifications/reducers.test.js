@@ -1,4 +1,4 @@
-import notifications from './reducers';
+import notifications, { selectNextNotification } from './reducers';
 import stubbedUuid from 'uuid/v4';
 jest.mock('uuid/v4', () => jest.fn());
 
@@ -27,18 +27,35 @@ describe('notificationReducer', () => {
 
     const result = notifications(initialState, action);
 
-    expect(result).toEqual({
-      'stub-id': { message: 'hello' }
-    });
+    expect(result).toEqual({"stub-id": {"id": "stub-id", "message": "hello"}});
   });
 
-  it('removes the notification on NOTIFICATION_ELAPSED', () => {
+  it('removes the notification on NOTIFICATION_DISMISSED', () => {
     const initialState = { 'some-id' : { message: 'some-message' } };
-    const action = { type: 'NOTIFICATION_ELAPSED', data: { id: 'some-id'} };
+    const action = { type: 'NOTIFICATION_DISMISSED', data: { id: 'some-id'} };
 
     const result = notifications(initialState, action);
 
     expect(result).toEqual({});
   });
-
 });
+
+describe('selectNextNotification', () => {
+  it('returns undefined if no notifications exist', () => {
+    const state = { notifications: {}};
+
+    const next = selectNextNotification(state);
+
+    expect(next).toBeUndefined();
+  });
+
+  it('returns a notification when some exist', () => {
+    const state = {
+      notifications: {"stub-id": {"id": "stub-id", "message": "hello"}}
+    }
+
+    const next = selectNextNotification(state);
+
+    expect(next).toEqual({"id": "stub-id", "message": "hello"})
+  });
+})
