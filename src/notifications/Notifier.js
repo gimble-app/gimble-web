@@ -4,9 +4,9 @@ import { selectNextNotification } from './reducers';
 import { notificationDismissed } from './actions';
 import Notification from './Notification';
 
-export const Notifier = ({ notification, onDismiss }) => (
+export const Notifier = ({ notification, notificationDismissed }) => (
   !!notification
-  ? <Notification notification={notification} onDismiss={() => notificationDismissed(id)}/>
+  ? <Notification notification={notification} onDismiss={() => notificationDismissed(notification.id)}/>
   : null
 );
 

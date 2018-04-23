@@ -6,7 +6,7 @@ export const sendNotification = (message) => ({
   data: { message }
 });
 
-export const notificationElapsed = (id) => ({
+export const notificationDismissed = (id) => ({
   type: NOTIFICATION_DISMISSED,
   data: { id }
 });

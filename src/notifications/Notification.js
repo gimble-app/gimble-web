@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import Button from 'material-ui/Button';
 import Snackbar from 'material-ui/Snackbar';
 import IconButton from 'material-ui/IconButton';
 import CloseIcon from 'material-ui-icons/Close';
@@ -14,37 +13,19 @@ const styles = theme => ({
 });
 
 class SimpleSnackbar extends React.Component {
-  state = {
-    open: false,
-  };
-
-  handleClick = () => {
-    this.setState({ open: true });
-  };
-
-  handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    this.setState({ open: false });
-  };
-
   render() {
     const { classes, onDismiss, notification } = this.props;
     return (
-      <div>
-        <Button onClick={this.handleClick}>Open simple snackbar</Button>
         <Snackbar
           anchorOrigin={{
             vertical: 'bottom',
             horizontal: 'left',
           }}
-          open={this.state.open}
+          open={true}
           autoHideDuration={6000}
           onClose={onDismiss}
           SnackbarContentProps={{
-            'aria-describedby': 'message-id',
+            'aria-describedby': notification.id,
           }}
           message={<span id={notification.id}>{notification.message}</span>}
           action={[
@@ -59,7 +40,6 @@ class SimpleSnackbar extends React.Component {
             </IconButton>,
           ]}
         />
-      </div>
     );
   }
 }

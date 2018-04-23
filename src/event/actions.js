@@ -1,4 +1,5 @@
 import uuid from 'uuid/v4';
+import { sendNotification } from '../notifications/actions';
 
 export const EVENT_SAVED = 'EVENT_SAVED';
 export const EVENT_DELETED = 'EVENT_DELETED';
@@ -27,6 +28,8 @@ export const eventSaved = (data) => ({
   data
 });
 
+const EVENT_SAVE_SUCCESS = 'event successfully saved';
+const EVENT_SAVE_FAILURE = 'event failed to save';
 
 export const saveEvent = (data, id) =>
   async (dispatch, getState, { getFirestore, getFirebase }) => {
@@ -40,9 +43,11 @@ export const saveEvent = (data, id) =>
       else {
         await firestore.update(`events/${id}`, data)
       }
+      dispatch(sendNotification(EVENT_SAVE_SUCCESS));
       dispatch(eventSaved(data))
 
     } catch (error) {
+      dispatch(sendNotification(EVENT_SAVE_FAILURE));
       console.error(error);
     }
   };
