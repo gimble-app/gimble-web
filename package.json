@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@firebase/app": "0.x",
+    "@firebase/app-types": "0.x",
     "firebase": "^4.12.1",
     "lodash": "^4.17.5",
     "material-ui": "^1.0.0-beta.38",
