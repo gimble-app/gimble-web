@@ -1,29 +1,35 @@
 import React from 'react';
 import AddIcon from 'material-ui-icons/Add';
 import Button from 'material-ui/Button';
-import { Link } from 'react-router-dom';
+import { InternalLink } from '../common/InternalLinks';
 import { withStyles } from 'material-ui/styles';
+import Fade from 'material-ui/transitions/Fade';
 
 const styles = theme => ({
   fab: {
     margin: theme.spacing.unit,
     position: 'fixed',
-    bottom: 30,
-    right: 20
+    bottom: 0,
+    right: 0
   }
 });
 
 const AddButton = ({ classes }) => (
-  <Link to="/event">
+  <Fade
+    in
+    style={{ transitionDelay: 1000 }}
+  >
     <Button
       variant="fab"
       color="primary"
       aria-label="add"
       className={classes.fab}
     >
-      <AddIcon />
+      <InternalLink to="/event">
+        <AddIcon />
+      </InternalLink>
     </Button>
-  </Link>
+  </Fade>
 );
 
 export default withStyles(styles)(AddButton);
