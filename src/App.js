@@ -1,24 +1,31 @@
-import React, { Fragment } from 'react'
+import React from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'redux'
+import { compose } from 'redux';
 import { firebaseConnect } from 'react-redux-firebase'
 import { ConnectedRouter } from 'react-router-redux';
+import { withTheme } from "material-ui/styles/index";
+import styled from "styled-components";
 import Navigation from './navigation/Navigation';
 import { selectIsLoggedIn } from './auth/reducers';
 import Notifier from './notifications/Notifier';
 
-export const App = ({classes, isLoggedIn, history }) => (
-  <Fragment>
+const StyledAppRoot = withTheme()(styled.div`
+  background: ${props => props.theme.palette.common.grey || 'red' };
+  min-height: 100vh;
+`);
+
+export const App = ({ isLoggedIn, history }) => (
+  <StyledAppRoot>
     <ConnectedRouter history={history}>
       <Navigation isLoggedIn={isLoggedIn}/>
     </ConnectedRouter>
     <Notifier />
-  </Fragment>
-)
+  </StyledAppRoot>
+);
 
 const mapStateToProps = state => ({
   isLoggedIn: selectIsLoggedIn(state),
-})
+});
 
 export default compose(
   firebaseConnect(),
