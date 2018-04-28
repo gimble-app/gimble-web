@@ -19,7 +19,7 @@ const theme = createMuiTheme({
     },
   },
   spacing: {
-    unit: 4
+    unit: 8
   }
 });
 
