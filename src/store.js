@@ -15,21 +15,21 @@ const config = {
   firebaseStateName: 'firebase',
   allowMultipleListeners: true,
   enableLogging: false
-}
+};
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBlilaIaFcNa1UusIxbEJT9E0mm3RriRZE',
   authDomain: 'gimble-app.firebaseapp.com',
   databaseURL: 'https://gimble-app.firebaseio.com',
   projectId: "gimble-app",
-}
+};
 
 export default (initialState = {}) => {
-  firebase.initializeApp(firebaseConfig)
+  firebase.initializeApp(firebaseConfig);
   firebase.firestore();
 
-  const history = createHistory()
-  const historyMiddleware = routerMiddleware(history)
+  const history = createHistory();
+  const historyMiddleware = routerMiddleware(history);
 
   const createStoreWithFirebase = compose(
     applyMiddleware(
@@ -39,9 +39,9 @@ export default (initialState = {}) => {
     reactReduxFirebase(firebase, config),
     reduxFirestore(firebase),
     typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f,
-  )(createStore)
+  )(createStore);
 
-  const store = createStoreWithFirebase(rootReducer, initialState)
+  const store = createStoreWithFirebase(rootReducer, initialState);
 
   return { store, history };
 }

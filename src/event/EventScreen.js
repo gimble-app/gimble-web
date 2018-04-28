@@ -9,7 +9,7 @@ export class EventScreen extends Component {
 
   state = {
     fieldValues: {}
-  }
+  };
 
   onChange = field => {
     this.setState({
@@ -48,7 +48,7 @@ export class EventScreen extends Component {
 const mapDispatchToProps = {
   deleteEvent,
   saveEvent
-}
+};
 
 export default connect(
   () => ({}),

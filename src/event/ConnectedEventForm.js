@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firestoreConnect, isEmpty } from 'react-redux-firebase';
 import EventForm from './EventForm';
+import { EVENTS_COLLECTION } from './data';
 
 export const ConnectedEventForm = ({ storedData, onChange, isNew }) => (
   (!isEmpty(storedData) || isNew) && <EventForm
@@ -23,16 +24,16 @@ const mapStateToProps = (state, { id }) => {
     storedData: {},
     isNew: !id
   };
-}
+};
 
 export default compose(
   firestoreConnect(({ id }) => [
    {
-     collection: 'events',
+     collection: EVENTS_COLLECTION,
      doc: id,
      storeAs: 'edited-event'
    },
-   'events'
+      EVENTS_COLLECTION
   ]),
   connect(mapStateToProps)
 )(ConnectedEventForm)
