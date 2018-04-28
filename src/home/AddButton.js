@@ -1,13 +1,14 @@
 import React from 'react';
 import AddIcon from 'material-ui-icons/Add';
-import { InternalLink } from '../common/InternalLinks';
+import { withTheme } from 'material-ui/styles';
 import Fade from 'material-ui/transitions/Fade';
 import SecondaryFab from '../common/SecondaryFab';
+import { InternalLink } from '../common/InternalLinks';
 
-const AddButton = () => (
+const AddButton = ({theme}) => (
   <Fade
     in
-    style={{ transitionDelay: 1000 }}
+    style={{ transitionDelay: theme.transitions.duration.standard }}
   >
     <SecondaryFab aria-label="add">
       <InternalLink to="/event">
@@ -17,4 +18,4 @@ const AddButton = () => (
   </Fade>
 );
 
-export default AddButton;
+export default withTheme()(AddButton);
