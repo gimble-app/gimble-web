@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardCollection } from '../common/Cards';
+import CardCollection from '../common/CardCollection';
 import EventCard from './EventCard';
 
 const EventsOverview = ({ events }) => (

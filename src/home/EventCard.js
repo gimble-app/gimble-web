@@ -1,7 +1,7 @@
 import React from 'react';
 import { CardContent } from 'material-ui/Card';
 import { InternalLink } from '../common/InternalLinks';
-import { Card } from '../common/Cards';
+import Card from '../common/Card';
 
 const EventCard = ({ id, title }) => (
   <Card>
