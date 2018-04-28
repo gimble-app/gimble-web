@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { withTheme } from 'material-ui/styles';
+
 import BaseCard from 'material-ui/Card';
 
 export const CardCollection = styled.div`
@@ -8,7 +10,7 @@ export const CardCollection = styled.div`
   flex-direction:column;
 `;
 
-export const Card = styled(BaseCard)`
-   margin:12px;
+export const Card = withTheme()(styled(BaseCard)`
+   margin:${({theme}) => theme.spacing.unit * 3}px;
    max-width:400px;
-`
+`);

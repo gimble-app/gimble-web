@@ -16,8 +16,11 @@ const theme = createMuiTheme({
     },
     common: {
       grey: '#fafafa'
-    }
+    },
   },
+  spacing: {
+    unit: 4
+  }
 });
 
 export default theme;
