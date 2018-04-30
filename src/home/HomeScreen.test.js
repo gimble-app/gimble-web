@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Typography from 'material-ui/Typography';
 import { HomeScreen } from './HomeScreen';
 import ProfileMenu from './ProfileMenu';
 import EventsOverview from './EventsOverview';

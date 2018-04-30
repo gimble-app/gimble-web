@@ -17,8 +17,6 @@ const jss = create(jssPreset());
 jss.options.insertionPoint = document.getElementById('jss-insertion-point');
 const { store, history } = initStore();
 
-export default App;
-
 render(
   <JssProvider jss={jss} generateClassName={generateClassName}>
     <Provider store={store}>
