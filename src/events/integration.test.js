@@ -5,7 +5,7 @@ import { ConnectedRouter } from 'react-router-redux';
 import initStore from '../store';
 import getEvents from './__mocks__/eventsPayload';
 import EventCard from "./EventCard";
-import HomeScreen from './HomeScreen';
+import HomeScreen from './EventsScreen';
 import AddButton from './AddButton';
 import createHistory from 'history/createBrowserHistory';
 

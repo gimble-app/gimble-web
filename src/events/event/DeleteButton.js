@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from 'material-ui/Button';
-import { InternalLink } from '../common/InternalLinks';
+import { InternalLink } from '../../common/InternalLinks';
 
 const DeleteButton = ({ onClick }) => (
   <InternalLink to="/">

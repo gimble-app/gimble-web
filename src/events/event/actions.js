@@ -1,5 +1,5 @@
 import uuid from 'uuid/v4';
-import { sendNotification } from '../notifications/actions';
+import { sendNotification } from '../../notifications/actions';
 
 export const EVENT_SAVED = 'EVENT_SAVED';
 export const EVENT_DELETED = 'EVENT_DELETED';

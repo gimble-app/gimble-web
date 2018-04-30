@@ -11,7 +11,7 @@ import AddButton from './AddButton';
 import Page from '../common/Page';
 import EventsOverview from './EventsOverview';
 
-export const HomeScreen = ({ events, data }) => (
+export const EventsScreen = ({ events, data }) => (
   <Fragment>
     <AppBar position="sticky">
       <Toolbar>
@@ -39,4 +39,4 @@ export default compose(
     events: state.firestore.ordered.events,
     data: state.firestore.ordered.events,
   })),
-)(HomeScreen)
+)(EventsScreen)
