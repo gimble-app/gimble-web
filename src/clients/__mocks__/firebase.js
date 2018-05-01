@@ -1,5 +1,4 @@
 const firebase = jest.genMockFromModule('firebase');
-const auth = jest.genMockFromModule('firebase/auth');
 
 export default {
   ...firebase,
