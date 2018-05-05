@@ -16,17 +16,17 @@ export const deleteEvent = (id) =>
 export const EVENT_SAVE_SUCCESS = 'event successfully saved';
 export const EVENT_SAVE_FAILURE = 'event failed to save';
 
-  export const saveEvent = (data, id) =>
+  export const saveEvent = data =>
   async (dispatch, getState, { getFirestore }) => {
     const firestore = getFirestore();
     try {
-      if(!id) {
+      if(!data.id) {
         const generatedId = uuid();
         const author = getState().firebase.auth.uid;
         await firestore.set(`${EVENTS_COLLECTION}/${generatedId}`, { ...data, id: generatedId, author });
       }
       else {
-        await firestore.update(`${EVENTS_COLLECTION}/${id}`, data)
+        await firestore.update(`${EVENTS_COLLECTION}/${data.id}`, data)
       }
       dispatch(sendNotification(EVENT_SAVE_SUCCESS));
 

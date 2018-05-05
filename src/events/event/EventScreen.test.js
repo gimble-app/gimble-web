@@ -1,12 +1,10 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import TextField from 'material-ui/TextField';
 import { EventScreen } from './EventScreen';
 import ConnectedEventForm from './ConnectedEventForm';
 import EditingEventToolbar from './EditingEventToolbar';
-import DeleteButton from './DeleteButton';
 
-describe('<EventScreen>', () => {
+describe('<EventScreen />', () => {
   it('renders a ConnectedEventForm', () => {
     const wrapper = shallow(<EventScreen match={{params:{}}}/>);
     const initialFieldValues = {};
@@ -34,7 +32,7 @@ describe('<EventScreen>', () => {
     });
   });
 
-  it('updates an existing field value when the eventform changes', () => {
+  it('updates with a new field value when the eventform changes', () => {
     const wrapper = shallow(<EventScreen match={{params:{}}}/>);
     wrapper.setState({ fieldValues: { firstField: 'some-value' } });
 
@@ -43,17 +41,17 @@ describe('<EventScreen>', () => {
     expect(wrapper.state().fieldValues).toEqual({ firstField: 'some-updated-value' });
   });
 
-  it('sends the field data to the save prop to be saved when called', () => {
+  it('passes the event fields to be saved', () => {
     const saveEvent = jest.fn();
     const wrapper = shallow(<EventScreen match={{ params: { id: 'some-id' }}} saveEvent={saveEvent}/>);
     wrapper.setState({ fieldValues: { firstField: 'some-value' } });
 
     wrapper.find(EditingEventToolbar).prop('onSave')();
 
-    expect(saveEvent).toBeCalledWith({ firstField: 'some-value' }, 'some-id' );
+    expect(saveEvent).toBeCalledWith({ firstField: 'some-value' });
   });
 
-  it('sends the id to the delete prop when deleted', () => {
+  it('passes the event id be deleted', () => {
     const deleteEvent = jest.fn();
     const wrapper = shallow(<EventScreen  match={{params:{id: 'some-id'}}} deleteEvent={deleteEvent}/>);
     wrapper.setState({ fieldValues: { title: 'data' } });
