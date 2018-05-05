@@ -1,11 +1,19 @@
-import { saveEvent, EVENT_SAVE_SUCCESS, EVENT_SAVE_FAILURE } from './actions';
+import {
+  saveEvent,
+  deleteEvent,
+  EVENT_SAVE_SUCCESS,
+  EVENT_SAVE_FAILURE,
+  EVENT_DELETE_SUCCESS,
+  EVENT_DELETE_FAILURE
+} from './actions';
 import { SEND_NOTIFICATION } from '../../notifications/actions'
 import uuid from 'uuid/v4';
 import setupStore from './__mocks__/mockStore';
 
 export const firestore = {
   set: jest.fn(),
-  update: jest.fn()
+  update: jest.fn(),
+  delete: jest.fn()
 };
 
 const mockStore = setupStore({
@@ -98,6 +106,35 @@ describe('event actions', () => {
       expect(store.getActions()).toEqual([
         {
           data: { message: EVENT_SAVE_FAILURE },
+          type: SEND_NOTIFICATION
+        }
+      ]);
+    });
+  });
+
+  describe('deleteEvent', () => {
+
+    it('deletes an event', async () => {
+      firestore.delete.mockReturnValue(Promise.resolve());
+
+      await store.dispatch(deleteEvent('some-id'));
+
+      expect(store.getActions()).toEqual([
+        {
+          data: { message: EVENT_DELETE_SUCCESS },
+          type: SEND_NOTIFICATION
+        }
+      ]);
+    });
+
+    it('notifies when an delete fails', async () => {
+      firestore.delete.mockReturnValue(Promise.reject("some error"));
+
+      await store.dispatch(deleteEvent('some-id'));
+
+      expect(store.getActions()).toEqual([
+        {
+          data: { message: EVENT_DELETE_FAILURE },
           type: SEND_NOTIFICATION
         }
       ]);

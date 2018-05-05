@@ -2,19 +2,23 @@ import uuid from 'uuid/v4';
 import { sendNotification } from '../../notifications/actions';
 import { EVENTS_COLLECTION } from './data';
 
-export const deleteEvent = (id) =>
-  (dispatch, getState, { getFirestore }) => {
-    const firestore = getFirestore();
-    firestore.delete(`events/${id}`)
-      .then(() => {
-        dispatch(eventDeleted(id))
-      }).catch(error => {
-        console.error(error);
-      })
-  };
-
 export const EVENT_SAVE_SUCCESS = 'event successfully saved';
 export const EVENT_SAVE_FAILURE = 'event failed to save';
+
+export const EVENT_DELETE_SUCCESS = 'event successfully deleted';
+export const EVENT_DELETE_FAILURE = 'event failed to deleted';
+
+export const deleteEvent = (id) =>
+  async (dispatch, getState, { getFirestore }) => {
+    const firestore = getFirestore();
+    try {
+      await firestore.delete(`events/${id}`);
+      dispatch(sendNotification(EVENT_DELETE_SUCCESS));
+    } catch (error) {
+      dispatch(sendNotification(EVENT_DELETE_FAILURE));
+      console.log(error);
+    }
+  };
 
   export const saveEvent = data =>
   async (dispatch, getState, { getFirestore }) => {
