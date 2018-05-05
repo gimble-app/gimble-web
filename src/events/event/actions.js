@@ -32,6 +32,6 @@ export const EVENT_SAVE_FAILURE = 'event failed to save';
 
     } catch (error) {
       dispatch(sendNotification(EVENT_SAVE_FAILURE));
-      console.error(error);
+      console.log(error);
     }
   };
