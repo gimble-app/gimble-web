@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firestoreConnect, isEmpty } from 'react-redux-firebase';
 import EventForm from './EventForm';
-import { EVENTS_COLLECTION, selectEventFromId } from './data';
+import { eventsForUserQuery } from '../firestoreQueries';
+import { selectEventFromId } from './selectors';
 
 export const ConnectedEventForm = ({ storedData, onChange, isNew }) => (
   (!isEmpty(storedData) || isNew) && <EventForm
@@ -20,8 +21,6 @@ const mapStateToProps = (state, { id }) => {
 };
 
 export default compose(
-  firestoreConnect(() => [
-      EVENTS_COLLECTION
-  ]),
+  firestoreConnect(eventsForUserQuery),
   connect(mapStateToProps)
 )(ConnectedEventForm)

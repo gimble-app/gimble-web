@@ -1,6 +1,7 @@
-export const EVENTS_COLLECTION = 'events';
+
+const getRoot = state =>  state.firestore;
 
 export const selectEventFromId = (state, id) => {
-  const { data } = state.firestore;
+  const { data } = getRoot(state);
   return data.events && data.events[id];
 }

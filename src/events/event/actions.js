@@ -1,6 +1,6 @@
 import uuid from 'uuid/v4';
 import { sendNotification } from '../../notifications/actions';
-import { EVENTS_COLLECTION } from './data';
+import { EVENTS_COLLECTION } from '../firestoreQueries';
 
 export const EVENT_SAVE_SUCCESS = 'event successfully saved';
 export const EVENT_SAVE_FAILURE = 'event failed to save';
