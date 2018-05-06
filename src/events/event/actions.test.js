@@ -58,18 +58,12 @@ describe('event actions', () => {
     it('updates an existing event', async () => {
       firestore.update.mockReturnValue(Promise.resolve());
       const event = {
-        author: 'some-author',
-        id: 'existing-id',
-        title: 'title '
+        title: 'title'
       };
 
-      await store.dispatch(saveEvent(event));
+      await store.dispatch(saveEvent(event, 'existing-id'));
 
-      expect(firestore.update).toBeCalledWith('events/existing-id',
-        {
-          id: 'existing-id',
-          ...event
-        });
+      expect(firestore.update).toBeCalledWith('events/existing-id', event);
       expect(store.getActions()).toEqual([
         {
           data: { message: EVENT_SAVE_SUCCESS },
@@ -81,11 +75,9 @@ describe('event actions', () => {
     it('notifies when an update fails', async () => {
       firestore.update.mockReturnValue(Promise.reject("some error"));
       const event = {
-        author: 'some-author',
-        id: 'existing-id',
-        title: 'title '
+        title: 'title'
       };
-      await store.dispatch(saveEvent(event));
+      await store.dispatch(saveEvent(event, 'existing-id'));
 
       expect(store.getActions()).toEqual([
         {

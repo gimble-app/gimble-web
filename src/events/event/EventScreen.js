@@ -32,7 +32,7 @@ export class EventScreen extends Component {
           <EditingEventToolbar
             isNew={isNew}
             onDelete={() => deleteEvent(id)}
-            onSave={() => saveEvent(fieldValues)}
+            onSave={() => saveEvent(fieldValues, id)}
           />
         </AppBar>
         <ConnectedEventForm

@@ -34,30 +34,30 @@ describe('<EventScreen />', () => {
 
   it('updates with a new field value when the eventform changes', () => {
     const wrapper = shallow(<EventScreen match={{params:{}}}/>);
+
     wrapper.setState({ fieldValues: { firstField: 'some-value' } });
 
     wrapper.find(ConnectedEventForm).prop('onChange')({ firstField: 'some-updated-value' });
-
     expect(wrapper.state().fieldValues).toEqual({ firstField: 'some-updated-value' });
   });
 
   it('passes the event fields to be saved', () => {
     const saveEvent = jest.fn();
     const wrapper = shallow(<EventScreen match={{ params: { id: 'some-id' }}} saveEvent={saveEvent}/>);
+
     wrapper.setState({ fieldValues: { firstField: 'some-value' } });
 
     wrapper.find(EditingEventToolbar).prop('onSave')();
-
-    expect(saveEvent).toBeCalledWith({ firstField: 'some-value' });
+    expect(saveEvent).toBeCalledWith({ firstField: 'some-value' }, 'some-id');
   });
 
   it('passes the event id be deleted', () => {
     const deleteEvent = jest.fn();
     const wrapper = shallow(<EventScreen  match={{params:{id: 'some-id'}}} deleteEvent={deleteEvent}/>);
+
     wrapper.setState({ fieldValues: { title: 'data' } });
 
     wrapper.find(EditingEventToolbar).prop('onDelete')();
-
     expect(deleteEvent).toBeCalledWith('some-id');
   });
 });
