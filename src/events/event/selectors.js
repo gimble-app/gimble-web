@@ -1,7 +1,5 @@
-
-const getRoot = state =>  state.firestore;
+import { selectEvents } from "../selectors";
 
 export const selectEventFromId = (state, id) => {
-  const { data } = getRoot(state);
-  return data.events && data.events[id];
-}
+  return selectEvents(state) && selectEvents(state)[id];
+};

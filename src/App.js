@@ -6,7 +6,7 @@ import { ConnectedRouter } from 'react-router-redux';
 import { withTheme } from "material-ui/styles/index";
 import styled from "styled-components";
 import Navigation from './navigation/Navigation';
-import { selectIsLoggedIn } from './auth/reducers';
+import { selectIsLoggedIn } from './auth/selectors';
 import Notifier from './notifications/Notifier';
 
 const StyledAppRoot = withTheme()(styled.div`

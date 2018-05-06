@@ -11,8 +11,9 @@ import ProfileMenu from './ProfileMenu';
 import AddButton from './AddButton';
 import Page from '../common/Page';
 import EventsOverview from './EventsOverview';
+import { selectEventsList } from './selectors';
 
-export const EventsScreen = ({ events, data }) => (
+export const EventsScreen = ({ events }) => (
   <Fragment>
     <AppBar position="sticky">
       <Toolbar>
@@ -32,8 +33,7 @@ export const EventsScreen = ({ events, data }) => (
 export default compose(
   firebaseConnect(),
   firestoreConnect(eventsForUserQuery),
-  connect((state) => ({
-    events: state.firestore.ordered.events,
-    data: state.firestore.ordered.events,
+  connect(state => ({
+    events: selectEventsList(state)
   })),
 )(EventsScreen)

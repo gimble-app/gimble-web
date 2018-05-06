@@ -3,7 +3,7 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { firebaseConnect } from 'react-redux-firebase'
 import { Redirect } from 'react-router-dom';
-import { selectIsLoggedIn, selectIsLoaded } from './reducers';
+import { selectIsLoggedIn, selectIsLoaded } from './selectors';
 import { login } from './actions';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';

@@ -1,5 +1,4 @@
-import { selectIsLoggedIn } from './reducers';
-import { loginSuccess, logoutSuccess } from './actions';
+import { selectIsLoggedIn } from './selectors';
 
 describe('isLoggedIn selecter', () => {
 

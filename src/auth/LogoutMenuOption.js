@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { logout } from './actions';
-import { selectIsLoggedIn } from './reducers';
+import { selectIsLoggedIn } from './selectors';
 
 import { MenuItem } from 'material-ui/Menu';
 

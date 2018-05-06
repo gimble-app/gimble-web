@@ -22,10 +22,10 @@ describe('<EventScreen />', () => {
 
   it('adds a new field value when the eventform changes', () => {
     const wrapper = shallow(<EventScreen match={{params:{}}}/>);
+
     wrapper.setState({ fieldValues: { firstField: 'some-value' } });
 
     wrapper.find(ConnectedEventForm).prop('onChange')({ secondField: 'some-value' });
-
     expect(wrapper.state().fieldValues).toEqual({
       firstField: 'some-value',
       secondField: 'some-value'

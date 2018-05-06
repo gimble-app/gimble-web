@@ -36,7 +36,7 @@ describe('event actions', () => {
     it('saves a new event with author and generated id', async () => {
       firestore.set.mockReturnValue(Promise.resolve());
       const event = {
-        title: 'title '
+        title: 'title'
       }
 
       await store.dispatch(saveEvent(event));
@@ -97,7 +97,7 @@ describe('event actions', () => {
 
     it('notifies when an create fails', async () => {
       const event = {
-        title: 'title '
+        title: 'title'
       };
       firestore.set.mockReturnValue(Promise.reject("some error"));
 

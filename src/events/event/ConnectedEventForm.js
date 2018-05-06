@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { firestoreConnect, isEmpty } from 'react-redux-firebase';
+import { firestoreConnect, firebaseConnect, isEmpty } from 'react-redux-firebase';
 import EventForm from './EventForm';
 import { eventsForUserQuery } from '../firestoreQueries';
 import { selectEventFromId } from './selectors';
@@ -21,6 +21,7 @@ const mapStateToProps = (state, { id }) => {
 };
 
 export default compose(
+  firebaseConnect(),
   firestoreConnect(eventsForUserQuery),
   connect(mapStateToProps)
 )(ConnectedEventForm)

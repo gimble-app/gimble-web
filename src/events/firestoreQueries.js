@@ -1,7 +1,8 @@
-import { getCurrentUserId } from "./selectors";
+import { selectCurrentUserId } from "../auth/selectors";
 
 export const EVENTS_COLLECTION = 'events';
-export const eventsForUserQuery = ({firebase}) => [{
+
+export const eventsForUserQuery = (state) => [{
   collection: EVENTS_COLLECTION,
-  where: ['author', '==', getCurrentUserId(firebase)]
+  where: ['author', '==', selectCurrentUserId(state)]
 }];
