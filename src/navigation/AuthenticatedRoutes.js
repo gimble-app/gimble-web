@@ -3,6 +3,7 @@ import {Redirect, Route, Switch} from 'react-router-dom';
 import EventScreen from "../events/event/EventScreen";
 import Screen from "./Screen";
 import EventsPage from "../events/EventsPage";
+import FriendsPage from "../friends/FriendsPage";
 
 export default () => (
   <Switch>
@@ -20,6 +21,7 @@ export default () => (
       <Screen>
         <Switch>
           <Route exact path="/events" component={EventsPage} />
+          <Route exact path="/friends" component={FriendsPage} />
           <Redirect to="/events" />
         </Switch>
       </Screen>
