@@ -18,7 +18,6 @@ export const EventsPage = ({ events }) => (
   </Page>
 );
 
-
 export default compose(
   firebaseConnect(),
   firestoreConnect(eventsForUserQuery),

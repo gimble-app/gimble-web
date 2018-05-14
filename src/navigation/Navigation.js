@@ -6,9 +6,20 @@ import EventsPage from '../events/EventsPage';
 
 import ProtectedRoute from '../auth/ProtectedRoute';
 import LoginPage from '../auth/LoginPage';
+import FriendsPage from "../friends/FriendsPage";
 
 const Navigation = ({ isLoggedIn }) =>
     <Switch>
+      <ProtectedRoute
+        exact
+        path="/friends"
+        render={() => (
+          <Screen>
+            <FriendsPage />
+          </Screen>
+        )}
+        isAuthenticated={isLoggedIn}
+      />
       <ProtectedRoute
         exact
         path="/"
