@@ -3,9 +3,8 @@ import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import ToolbarTitleText from '../common/ToolbarTitleText';
 import ProfileMenu from './ProfileMenu';
-import EventsPage from "./EventsPage";
 
-export default () => (
+export default ({ children }) => (
   <Fragment>
     <AppBar position="sticky">
       <Toolbar>
@@ -13,6 +12,6 @@ export default () => (
         <ProfileMenu/>
       </Toolbar>
     </AppBar>
-    <EventsPage />
+    { children }
   </Fragment>
 );

@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { EventsPage } from './EventsPage';
-import ProfileMenu from './ProfileMenu';
 import EventsOverview from './EventsOverview';
 import BackgroundMessage from './BackgroundMessage';
 
