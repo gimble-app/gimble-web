@@ -5,7 +5,7 @@ import EventScreen from '../events/event/EventScreen';
 import EventsPage from '../events/EventsPage';
 
 import ProtectedRoute from '../auth/ProtectedRoute';
-import LoginScreen from '../auth/LoginScreen';
+import LoginPage from '../auth/LoginPage';
 
 const Navigation = ({ isLoggedIn }) =>
     <Switch>
@@ -31,8 +31,7 @@ const Navigation = ({ isLoggedIn }) =>
         component={EventScreen}
         isAuthenticated={isLoggedIn}
       />
-
-      <Route path="/login" component={LoginScreen} />
+      <Route path="/login" component={LoginPage} />
     </Switch>
 
 export default Navigation;
