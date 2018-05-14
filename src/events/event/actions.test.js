@@ -28,7 +28,15 @@ describe('event actions', () => {
   let store;
 
   beforeEach(() => {
-    store = mockStore({ firebase: { auth: { uid: 'some-uid' } } });
+    store = mockStore({
+      firebase: {
+        auth: () => ({
+          currentUser: {
+            uid: 'some-uid'
+          }
+        })
+      }
+    });
   });
 
   describe('saveEvent', () => {
