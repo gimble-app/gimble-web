@@ -12,17 +12,13 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 firebase.firestore();
 
-export const create = (collection, data, getFirestore) => {
-  const id = uuid();
-  return getFirestore().set(`${collection}/${id}`, {...data, id});
-};
+export const create = (collection, data, getFirestore) =>
+  (id => getFirestore().set(`${collection}/${id}`, {...data, id}))(uuid());
 
-export const update = (collection, id, data, getFirestore) => {
-  return getFirestore().update(`${collection}/${id}`, data);
-};
+export const update = (collection, id, data, getFirestore) =>
+  getFirestore().update(`${collection}/${id}`, data);
 
-export const remove = (collection, id, getFirestore) => {
-  return getFirestore().delete(`${collection}/${id}`);
-}
+export const remove = (collection, id, getFirestore) =>
+  getFirestore().delete(`${collection}/${id}`)
 
 export default firebase;
