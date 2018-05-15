@@ -5,7 +5,7 @@ import {selectEventsList} from "./selectors";
 import {firebaseConnect, firestoreConnect} from "react-redux-firebase";
 import {eventsForUserQuery} from "./firestoreQueries";
 import BackgroundMessage from './BackgroundMessage';
-import AddButton from './AddButton';
+import AddButton from "../common/AddButton";
 import Page from '../common/Page';
 import EventsOverview from './EventsOverview';
 
@@ -14,7 +14,7 @@ export const EventsPage = ({ events }) => (
     {events && events.length > 0
       ? <EventsOverview events={events}/>
       : <BackgroundMessage/>}
-    <AddButton/>
+    <AddButton type="event"/>
   </Page>
 );
 
