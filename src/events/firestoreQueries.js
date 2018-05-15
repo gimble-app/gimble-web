@@ -1,8 +1,8 @@
-import { selectCurrentUserId } from "../auth/selectors";
+import { selectCurrentUserIdForQuery } from "../auth/selectors";
 
 export const EVENTS_COLLECTION = 'events';
 
 export const eventsForUserQuery = (state) => [{
   collection: EVENTS_COLLECTION,
-  where: ['author', '==', selectCurrentUserId(state)]
+  where: ['author', '==', selectCurrentUserIdForQuery(state)]
 }];

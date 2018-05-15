@@ -25,5 +25,4 @@ export const remove = (collection, id, getFirestore) => {
   return getFirestore().delete(`${collection}/${id}`);
 }
 
-
 export default firebase;

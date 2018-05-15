@@ -17,7 +17,7 @@ jest.mock('../../clients/firebase', () => ({
 }));
 
 jest.mock('../../auth/selectors', () => ({
-  selectCurrentUserId: () => 'some-uid'
+  selectCurrentUserId: 'some-uid'
 }));
 
 describe('event actions', () => {
