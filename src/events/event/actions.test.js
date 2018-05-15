@@ -110,7 +110,7 @@ describe('event actions', () => {
 
         await store.dispatch(deleteEvent('some-id'));
 
-        expect(remove).toBeCalledWith('events', 'some-id');
+        expect(remove).toBeCalledWith('events', 'some-id', getFirestore);
 
         expect(store.getActions()).toEqual([
           {

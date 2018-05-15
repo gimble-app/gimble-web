@@ -9,7 +9,7 @@ export const EVENT_DELETE_SUCCESS = 'event successfully deleted';
 export const EVENT_DELETE_FAILURE = 'event failed to deleted';
 
 function deleteEventWithId({ getFirestore }, id) {
-  return remove(EVENTS_COLLECTION, id);
+  return remove(EVENTS_COLLECTION, id, getFirestore);
 }
 
 function updateEvent(getState, { getFirestore }, event, id) {
