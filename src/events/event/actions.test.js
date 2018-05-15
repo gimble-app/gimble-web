@@ -7,54 +7,46 @@ import {
   EVENT_DELETE_FAILURE
 } from './actions';
 import { SEND_NOTIFICATION } from '../../notifications/actions'
-import uuid from 'uuid/v4';
 import setupStore from './__mocks__/mockStore';
+import { create, update, remove } from '../../clients/firebase';
 
-export const firestore = {
-  set: jest.fn(),
+jest.mock('../../clients/firebase', () => ({
+  create: jest.fn(),
   update: jest.fn(),
-  delete: jest.fn()
-};
+  remove: jest.fn(),
+}));
 
-const mockStore = setupStore({
-  getFirestore: () => firestore
-});
-
-jest.mock('uuid/v4');
-uuid.mockReturnValue('generated-id');
+jest.mock('../../auth/selectors', () => ({
+  selectCurrentUserId: () => 'some-uid'
+}));
 
 describe('event actions', () => {
 
+  const getFirestore = jest.fn();
+  const mockStore = setupStore({ getFirestore });
   let store;
 
   beforeEach(() => {
-    store = mockStore({
-      firebase: {
-        auth: () => ({
-          currentUser: {
-            uid: 'some-uid'
-          }
-        })
-      }
-    });
+    store = mockStore();
   });
 
   describe('saveEvent', () => {
-
-    it('saves a new event with author and generated id', async () => {
-      firestore.set.mockReturnValue(Promise.resolve());
+    it('saves a new event with author', async () => {
+      create.mockReturnValue(Promise.resolve());
       const event = {
         title: 'title'
       }
 
       await store.dispatch(saveEvent(event));
 
-      expect(firestore.set).toBeCalledWith('events/generated-id',
+      expect(create).toBeCalledWith('events',
         {
           author: 'some-uid',
-          id: 'generated-id',
           ...event
-        });
+        },
+        getFirestore
+      );
+
       expect(store.getActions()).toEqual([
         {
           data: { message: EVENT_SAVE_SUCCESS },
@@ -63,15 +55,31 @@ describe('event actions', () => {
       ]);
     });
 
+    it('notifies when an create fails', async () => {
+      create.mockReturnValue(Promise.reject("some error"));
+      const event = {
+        title: 'title'
+      };
+
+      await store.dispatch(saveEvent(event));
+
+      expect(store.getActions()).toEqual([
+        {
+          data: { message: EVENT_SAVE_FAILURE },
+          type: SEND_NOTIFICATION
+        }
+      ]);
+    });
+
     it('updates an existing event', async () => {
-      firestore.update.mockReturnValue(Promise.resolve());
+      update.mockReturnValue(Promise.resolve());
       const event = {
         title: 'title'
       };
 
       await store.dispatch(saveEvent(event, 'existing-id'));
 
-      expect(firestore.update).toBeCalledWith('events/existing-id', event);
+      expect(update).toBeCalledWith('events', 'existing-id', event, getFirestore);
       expect(store.getActions()).toEqual([
         {
           data: { message: EVENT_SAVE_SUCCESS },
@@ -81,7 +89,7 @@ describe('event actions', () => {
     });
 
     it('notifies when an update fails', async () => {
-      firestore.update.mockReturnValue(Promise.reject("some error"));
+      update.mockReturnValue(Promise.reject("some error"));
       const event = {
         title: 'title'
       };
@@ -95,49 +103,35 @@ describe('event actions', () => {
       ]);
     });
 
-    it('notifies when an create fails', async () => {
-      const event = {
-        title: 'title'
-      };
-      firestore.set.mockReturnValue(Promise.reject("some error"));
+    describe('deleteEvent', () => {
 
-      await store.dispatch(saveEvent(event));
+      it('deletes an event', async () => {
+        remove.mockReturnValue(Promise.resolve());
 
-      expect(store.getActions()).toEqual([
-        {
-          data: { message: EVENT_SAVE_FAILURE },
-          type: SEND_NOTIFICATION
-        }
-      ]);
-    });
-  });
+        await store.dispatch(deleteEvent('some-id'));
 
-  describe('deleteEvent', () => {
+        expect(remove).toBeCalledWith('events', 'some-id');
 
-    it('deletes an event', async () => {
-      firestore.delete.mockReturnValue(Promise.resolve());
+        expect(store.getActions()).toEqual([
+          {
+            data: { message: EVENT_DELETE_SUCCESS },
+            type: SEND_NOTIFICATION
+          }
+        ]);
+      });
 
-      await store.dispatch(deleteEvent('some-id'));
+      it('notifies when an delete fails', async () => {
+        remove.mockReturnValue(Promise.reject("some error"));
 
-      expect(store.getActions()).toEqual([
-        {
-          data: { message: EVENT_DELETE_SUCCESS },
-          type: SEND_NOTIFICATION
-        }
-      ]);
-    });
+        await store.dispatch(deleteEvent('some-id'));
 
-    it('notifies when an delete fails', async () => {
-      firestore.delete.mockReturnValue(Promise.reject("some error"));
-
-      await store.dispatch(deleteEvent('some-id'));
-
-      expect(store.getActions()).toEqual([
-        {
-          data: { message: EVENT_DELETE_FAILURE },
-          type: SEND_NOTIFICATION
-        }
-      ]);
+        expect(store.getActions()).toEqual([
+          {
+            data: { message: EVENT_DELETE_FAILURE },
+            type: SEND_NOTIFICATION
+          }
+        ]);
+      });
     });
   });
 });

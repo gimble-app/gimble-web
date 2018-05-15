@@ -1,8 +1,7 @@
-import uuid from 'uuid/v4';
 import { selectCurrentUserId } from '../../auth/selectors';
 import { sendNotification } from '../../notifications/actions';
 import { EVENTS_COLLECTION } from '../firestoreQueries';
-
+import { create, update, remove } from '../../clients/firebase';
 export const EVENT_SAVE_SUCCESS = 'event successfully saved';
 export const EVENT_SAVE_FAILURE = 'event failed to save';
 
@@ -10,21 +9,16 @@ export const EVENT_DELETE_SUCCESS = 'event successfully deleted';
 export const EVENT_DELETE_FAILURE = 'event failed to deleted';
 
 function deleteEventWithId({ getFirestore }, id) {
-  return getFirestore().delete(`events/${id}`);
+  return remove(EVENTS_COLLECTION, id);
 }
 
 function updateEvent(getState, { getFirestore }, event, id) {
-  const firestore = getFirestore();
   if (!id) {
-    const generatedId = uuid();
     const author = selectCurrentUserId(getState());
-    return firestore.set(
-      `${EVENTS_COLLECTION}/${generatedId}`,
-      {...event, id: generatedId, author}
-      );
+    return create(EVENTS_COLLECTION, { ...event, author }, getFirestore);
   }
   else {
-    return firestore.update(`${EVENTS_COLLECTION}/${id}`, event)
+    return update(EVENTS_COLLECTION, id, event, getFirestore);
   }
 }
 
