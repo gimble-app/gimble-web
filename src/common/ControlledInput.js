@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 import Input from 'material-ui/Input';
 
 export class ControlledInput extends Component {
@@ -13,4 +14,7 @@ export class ControlledInput extends Component {
 
 }
 
-export default ControlledInput;
+export default styled(ControlledInput)`
+  flex: 1;
+   max-width: 400px;
+`;
