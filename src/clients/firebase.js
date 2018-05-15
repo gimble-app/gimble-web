@@ -19,6 +19,6 @@ export const update = (collection, id, data, getFirestore) =>
   getFirestore().update(`${collection}/${id}`, data);
 
 export const remove = (collection, id, getFirestore) =>
-  getFirestore().delete(`${collection}/${id}`)
+  getFirestore().delete(`${collection}/${id}`);
 
 export default firebase;
