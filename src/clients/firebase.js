@@ -15,6 +15,9 @@ firebase.firestore();
 export const create = (collection, data, getFirestore) =>
   (id => getFirestore().set(`${collection}/${id}`, {...data, id}))(uuid());
 
+export const createWithQuery = (query, data, getFirestore) =>
+  getFirestore().set(query, data)
+
 export const update = (collection, id, data, getFirestore) =>
   getFirestore().update(`${collection}/${id}`, data);
 

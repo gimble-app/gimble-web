@@ -7,7 +7,7 @@ import {
   EVENT_DELETE_FAILURE
 } from './actions';
 import { SEND_NOTIFICATION } from '../../notifications/actions'
-import setupStore from './__mocks__/mockStore';
+import setupStore from '../../__mocks__/mockStore';
 import { create, update, remove } from '../../clients/firebase';
 
 jest.mock('../../clients/firebase', () => ({

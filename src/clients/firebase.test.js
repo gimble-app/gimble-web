@@ -1,4 +1,4 @@
-import { create, update, remove } from './firebase';
+import { create, createWithQuery, update, remove } from './firebase';
 import uuid from "uuid/v4";
 
 jest.mock('uuid/v4');
@@ -17,6 +17,17 @@ describe('firebase', () => {
   beforeEach(() => {
     getFirestore.mockReturnValue(firestore);
   });
+
+  describe('createWithQuery', () => {
+    it('sets the item in the collection in firestore', async () => {
+      firestore.set.mockReturnValue(Promise.resolve());
+
+      await createWithQuery('some-collection/id', { some: 'data' }, getFirestore);
+
+      expect(firestore.set).toBeCalledWith('some-collection/id', { some: 'data' });
+    });
+  });
+
 
   describe('create', () => {
 

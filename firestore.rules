@@ -1,17 +1,25 @@
 service cloud.firestore {
   match /databases/{database}/documents {
 
-      function userIsAuthenticated () {
-        return request.auth.uid != null;
-      }
+    function userIsAuthenticated () {
+      return request.auth.uid != null;
+    }
 
-      function userOwnsResource (userId) {
-        return request.auth.uid == userId
-      }
+    function userOwnsResource (userId) {
+      return request.auth.uid == userId
+    }
 
-      match /events/{event} {
-        allow read, write: if userOwnsResource(resource.data.author);
-        allow create: if userIsAuthenticated();
-      }
+    match /events/{event} {
+      allow read, write: if userOwnsResource(resource.data.author);
+      allow create: if userIsAuthenticated();
+    }
+
+    match /friends/{uid} {
+      allow create: if userIsAuthenticated();
+    }
+
+    match /friends/{uid}/requested/{to} {
+      allow create: if userIsAuthenticated();
+    }
   }
 }

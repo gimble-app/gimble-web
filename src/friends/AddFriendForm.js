@@ -1,26 +1,36 @@
 import React from 'react';
-import ControlledInput from "../common/ControlledInput";
+import { connect } from 'react-redux';
 import Button from 'material-ui/Button';
 import styled from 'styled-components';
+import ControlledInput from "../common/ControlledInput";
+import { invite } from './actions';
 
 const Form = styled.form`
   display: flex;
 `;
 
-const AddFriendForm = () => (
-  <Form>
+export const AddFriendForm = ({invite}) => (
+  <Form onSubmit={e => {
+    invite(e.target.email.value);
+    e.preventDefault();
+  }}>
     <ControlledInput
       id="email"
       label="Email"
       type="email"
+      name="email"
       placeholder="add a friend by their email"
       autoFocus
     />
-    <Button>Invite</Button>
+    <Button type="submit">Invite</Button>
   </Form>
 );
 
-export default AddFriendForm;
+const mapDispatchToProps = {
+  invite
+};
 
-
-
+export default connect(
+  () => ({}),
+  mapDispatchToProps
+)(AddFriendForm)
