@@ -1,16 +1,25 @@
 import React, {Fragment} from 'react';
-import CardCollection from "../common/CardCollection";
+import ListItem from "material-ui/List/ListItem";
+import ListItemText from "material-ui/List/ListItemText";
+import List from "material-ui/List";
+import Avatar from 'material-ui/Avatar';
 
-const RequestEntry = ({ request }) => <p>{request.from}</p>;
+const RequestEntry = ({ request }) => <List dense>
+  <ListItem>
+    <Avatar>?</Avatar>
+    <ListItemText>{request.from}</ListItemText>
+  </ListItem>
+</List>;
+
 
 const RequestsList = ({ requests }) => (
   <Fragment>
     <p>Received friend requests:</p>
-    <CardCollection>
+    <List dense>
       {
         requests.map(request => <RequestEntry key={request.id} request={request} />)
       }
-    </CardCollection>
+    </List>
   </Fragment>
 );
 

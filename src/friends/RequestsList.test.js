@@ -5,7 +5,7 @@ import { shallow } from 'enzyme';
 describe('<RequestsList />', () => {
 
   it('renders an entry for each request', () => {
-    const rendered = shallow(<RequestsList requested={[{ id: 1 }, { id: 2 }]}/>);
+    const rendered = shallow(<RequestsList requests={[{ id: 1 }, { id: 2 }]}/>);
     expect(rendered.find('RequestEntry').length).toBe(2);
   });
 });
