@@ -5,7 +5,7 @@ import Input from 'material-ui/Input';
 export class ControlledInput extends Component {
 
   state = {
-    value: this.props.value
+    value: ''
   };
 
   handleChange = ({ target }) => this.setState({value: target.value});
