@@ -14,11 +14,8 @@ service cloud.firestore {
       allow create: if userIsAuthenticated();
     }
 
-    match /friends/{uid} {
-      allow create: if userIsAuthenticated();
-    }
-
-    match /friends/{uid}/requested/{to} {
+    match /friendRequests/{uid} {
+      allow read: if userOwnsResource(resource.data.from);
       allow create: if userIsAuthenticated();
     }
   }

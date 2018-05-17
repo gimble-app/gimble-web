@@ -3,7 +3,7 @@ import {
   INVITE_SUCCESS,
   INVITE_FAILURE
 } from "./actions";
-import {createWithQuery} from "../clients/firebase";
+import {create} from "../clients/firebase";
 import {SEND_NOTIFICATION} from "../notifications/actions";
 import setupStore from "../__mocks__/mockStore";
 
@@ -12,7 +12,7 @@ jest.mock('../auth/selectors', () => ({
 }));
 
 jest.mock('../clients/firebase', () => ({
-  createWithQuery: jest.fn(),
+  create: jest.fn(),
 }));
 
 describe('friends actions', () => {
@@ -28,14 +28,10 @@ describe('friends actions', () => {
 
   describe('invite friend', () => {
     it('saves an invite for the friend', async () => {
-      createWithQuery.mockReturnValue(Promise.resolve());
+      create.mockReturnValue(Promise.resolve());
 
       await store.dispatch(invite('some@email.com'));
-      expect(createWithQuery).toBeCalledWith(
-        { collection: "friends", doc: "some-uid", subcollections: [{collection: "requested", doc: "some@email.com"}]},
-        { email: 'some@email.com' },
-        getFirestore
-      );
+      expect(create).toBeCalledWith("friendRequests", { from: 'some-uid', to: 'some@email.com' }, getFirestore);
 
       expect(store.getActions()).toEqual([
         {
@@ -46,7 +42,7 @@ describe('friends actions', () => {
     });
 
     it('notifies when an invite fails', async () => {
-      createWithQuery.mockReturnValue(Promise.reject("some error"));
+      create.mockReturnValue(Promise.reject("some error"));
 
       await store.dispatch(invite('some@email.com'));
 

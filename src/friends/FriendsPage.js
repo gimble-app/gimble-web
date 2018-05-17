@@ -1,10 +1,24 @@
 import React from 'react';
-import Page from "../common/Page";
-import AddFriendForm from "./AddFriendForm";
+import {compose} from "redux";
+import {connect} from "react-redux";
+import {firebaseConnect, firestoreConnect} from "react-redux-firebase";
+import { requestedFromUserCollection } from './firestoreQueries';
+import { selectRequestedFriendsList } from './selectors';
+import Page from '../common/Page';
+import AddFriendForm from './AddFriendForm';
+import RequestedList from './RequestedList';
 
-const FriendsPage = ({ friends = [], onSave={} }) => (
+export const FriendsPage = ({ requested }) => (
   <Page>
-    <AddFriendForm onSave={onSave}/>
+    <AddFriendForm />
+    {requested && requested.length > 0 && <RequestedList requested={requested} /> }
   </Page>
 )
-export default FriendsPage;
+
+export default compose(
+  firebaseConnect(),
+  firestoreConnect(requestedFromUserCollection),
+  connect(state => ({
+    requested: selectRequestedFriendsList(state)
+  }))
+)(FriendsPage);
