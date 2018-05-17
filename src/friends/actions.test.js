@@ -1,9 +1,12 @@
 import {
   invite,
+  rescind,
   INVITE_SUCCESS,
-  INVITE_FAILURE
+  INVITE_FAILURE,
+  RESCIND_SUCCESS,
+  RESCIND_FAILURE
 } from "./actions";
-import {create} from "../clients/firebase";
+import {create, remove} from "../clients/firebase";
 import {SEND_NOTIFICATION} from "../notifications/actions";
 import setupStore from "../__mocks__/mockStore";
 
@@ -13,6 +16,7 @@ jest.mock('../auth/selectors', () => ({
 
 jest.mock('../clients/firebase', () => ({
   create: jest.fn(),
+  remove: jest.fn(),
 }));
 
 describe('friends actions', () => {
@@ -31,8 +35,8 @@ describe('friends actions', () => {
       create.mockReturnValue(Promise.resolve());
 
       await store.dispatch(invite('some@email.com'));
-      expect(create).toBeCalledWith("friendRequests", { from: 'some-uid', to: 'some@email.com' }, getFirestore);
 
+      expect(create).toBeCalledWith("friendRequests", { from: 'some-uid', to: 'some@email.com' }, getFirestore);
       expect(store.getActions()).toEqual([
         {
           data: { message: INVITE_SUCCESS },
@@ -49,6 +53,35 @@ describe('friends actions', () => {
       expect(store.getActions()).toEqual([
         {
           data: { message: INVITE_FAILURE },
+          type: SEND_NOTIFICATION
+        }
+      ]);
+    });
+  });
+
+  describe('recind invite', () => {
+    it('rescinds an invite', async () => {
+      remove.mockReturnValue(Promise.resolve());
+
+      await store.dispatch(rescind('some-id'));
+
+      expect(remove).toBeCalledWith("friendRequests", 'some-id', getFirestore);
+      expect(store.getActions()).toEqual([
+        {
+          data: { message: RESCIND_SUCCESS },
+          type: SEND_NOTIFICATION
+        }
+      ]);
+    });
+
+    it('notifies when an rescind fails', async () => {
+      remove.mockReturnValue(Promise.reject("some error"));
+
+      await store.dispatch(rescind('some-id'));
+
+      expect(store.getActions()).toEqual([
+        {
+          data: { message: RESCIND_FAILURE },
           type: SEND_NOTIFICATION
         }
       ]);

@@ -20,6 +20,7 @@ service cloud.firestore {
 
     match /friendRequests/{uid} {
     	allow read: if (matchesUserEmail(resource.data.to) || userOwnsResource(resource.data.from));
+      allow write: if userOwnsResource(resource.data.from);
       allow create: if userIsAuthenticated();
     }
   }
