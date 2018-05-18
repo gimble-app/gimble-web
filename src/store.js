@@ -8,11 +8,17 @@ import createHistory from 'history/createBrowserHistory';
 import { routerMiddleware } from 'react-router-redux';
 
 const config = {
-  userProfile: 'users',
   attachAuthIsReady: true,
   firebaseStateName: 'firebase',
   allowMultipleListeners: true,
-  enableLogging: false
+  enableLogging: false,
+  userProfile: 'profile',
+  useFirestoreForProfile: true,
+  profileFactory: (userData) => ({
+    displayName: userData.displayName,
+    photoURL: userData.photoURL,
+    email: userData.email
+  })
 };
 
 export default (initialState = {}) => {

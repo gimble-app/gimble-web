@@ -6,10 +6,11 @@ import {selectMyProfile} from "./selectors";
 import Page from '../common/Page';
 import LogoutMenuOption from "../auth/LogoutMenuOption";
 import {myProfile} from "./firestoreQueries";
+import Avatar from "material-ui/Avatar";
 
-export const FriendsPage = ({ profile }) => (
+export const ProfilePage = ({ profile = {} }) => (
   <Page>
-    <p>Hi!</p>
+    <Avatar src={profile.photoURL}></Avatar>
     <LogoutMenuOption />
   </Page>
 );
@@ -22,4 +23,4 @@ export default compose(
   connect(state => ({
     profile: selectMyProfile(state),
   }))
-)(FriendsPage);
+)(ProfilePage);

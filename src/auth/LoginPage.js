@@ -8,20 +8,18 @@ import { login } from './actions';
 import Page from '../common/Page';
 
 export const LoginPage = ({ isLoaded, isLoggedIn, login }) => (
-    <Page>
-      <div>
-        {
-          !isLoaded
-          ? <span>Loading...</span>
-          : !isLoggedIn
-            ? <button
-                  onClick={login}
-                >Login With Google</button>
-            : <Redirect to="/" />
-        }
-      </div>
+  <Page>
+    <div>
+      {
+        !isLoaded
+        ? <span>Loading...</span>
+        : !isLoggedIn
+          ? <button onClick={login}>Login With Google</button>
+          : <Redirect to="/" />
+      }
+    </div>
   </Page>
-)
+);
 
 const mapDispatchToProps = {
   login
