@@ -18,6 +18,10 @@ service cloud.firestore {
       allow create: if userIsAuthenticated();
     }
 
+    match /profile/{uid} {
+      allow create, read, write: if userOwnsResource(uid);
+    }
+
     match /friendRequests/{uid} {
     	allow read: if (matchesUserEmail(resource.data.to) || userOwnsResource(resource.data.from));
       allow write: if userOwnsResource(resource.data.from);
