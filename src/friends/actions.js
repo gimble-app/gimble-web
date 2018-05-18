@@ -2,6 +2,7 @@ import {create, remove} from '../clients/firebase';
 import {sendNotification} from '../notifications/actions';
 import {FRIEND_REQUEST_COLLECTION} from "./firestoreQueries";
 import {selectCurrentUserId} from "../auth/selectors";
+import {selectMyDisplayName} from "../profile/selectors";
 
 export const INVITE_SUCCESS = 'invite sent';
 export const INVITE_FAILURE = 'invite failed to send';
@@ -13,6 +14,7 @@ export const invite = email =>
     try {
       await create(FRIEND_REQUEST_COLLECTION, {
           from: selectCurrentUserId(getState()),
+          fromName: selectMyDisplayName(getState()),
           to: email
         },
         getFirestore

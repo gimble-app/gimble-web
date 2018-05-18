@@ -9,9 +9,14 @@ import {
 import {create, remove} from "../clients/firebase";
 import {SEND_NOTIFICATION} from "../notifications/actions";
 import setupStore from "../__mocks__/mockStore";
+import {selectMyDisplayName} from "../profile/selectors";
 
 jest.mock('../auth/selectors', () => ({
   selectCurrentUserId: () => 'some-uid'
+}));
+
+jest.mock('../profile/selectors', () => ({
+  selectMyDisplayName: () => 'some-name'
 }));
 
 jest.mock('../clients/firebase', () => ({
@@ -36,7 +41,7 @@ describe('friends actions', () => {
 
       await store.dispatch(invite('some@email.com'));
 
-      expect(create).toBeCalledWith("friendRequests", { from: 'some-uid', to: 'some@email.com' }, getFirestore);
+      expect(create).toBeCalledWith("friendRequests", { from: 'some-uid', fromName: 'some-name', to: 'some@email.com' }, getFirestore);
       expect(store.getActions()).toEqual([
         {
           data: { message: INVITE_SUCCESS },

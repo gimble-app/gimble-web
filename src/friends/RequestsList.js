@@ -1,16 +1,6 @@
 import React, {Fragment} from 'react';
-import ListItem from "material-ui/List/ListItem";
-import ListItemText from "material-ui/List/ListItemText";
 import List from "material-ui/List";
-import Avatar from 'material-ui/Avatar';
-
-const RequestEntry = ({ request }) => <List dense>
-  <ListItem>
-    <Avatar>?</Avatar>
-    <ListItemText>{request.from}</ListItemText>
-  </ListItem>
-</List>;
-
+import RequestEntry from "./RequestEntry";
 
 const RequestsList = ({ requests }) => (
   <Fragment>

@@ -1,5 +1,4 @@
-import {mapsSelector} from "../firebaseSelectors";
-import {selectCurrentUserId} from "../auth/selectors";
+import {firebaseSelector} from "../firebaseSelectors";
 
-export const selectMyProfile = state =>
-  mapsSelector(state).profile && mapsSelector(state).profile[selectCurrentUserId(state)];
+export const selectMyProfile = state => firebaseSelector(state).profile;
+export const selectMyDisplayName = state => selectMyProfile(state).displayName;

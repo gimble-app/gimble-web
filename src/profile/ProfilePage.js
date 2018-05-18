@@ -10,7 +10,7 @@ import Avatar from "material-ui/Avatar";
 
 export const ProfilePage = ({ profile = {} }) => (
   <Page>
-    <Avatar src={profile.photoURL}></Avatar>
+    <Avatar src={profile && profile.photoURL }></Avatar>
     <LogoutMenuOption />
   </Page>
 );
