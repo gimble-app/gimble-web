@@ -32,7 +32,18 @@ export const rescind = id =>
       await remove(FRIEND_REQUEST_COLLECTION, id, getFirestore);
       dispatch(sendNotification(RESCIND_SUCCESS));
     } catch(error) {
-    dispatch(sendNotification(RESCIND_FAILURE));
-    console.log(error);
-  }
-};
+      dispatch(sendNotification(RESCIND_FAILURE));
+      console.log(error);
+    }
+  };
+
+
+export const accept = id =>
+  async (dispatch, getState, { getFirestore } ) => {
+    console.log('accepted', id);
+  };
+
+export const reject = id =>
+  async (dispatch, getState, { getFirestore } ) => {
+    console.log('rejected', id);
+  };
