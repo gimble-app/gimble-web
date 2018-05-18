@@ -1,9 +1,19 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { LogoutMenuOption } from './LogoutMenuOption';
-import { MenuItem } from 'material-ui/Menu';
+import Button from "material-ui/Button";
+import {Redirect} from 'react-router-dom';
 
-it('renders a menu option', () => {
-  const wrapper = shallow(<LogoutMenuOption isLoggedIn />);
-  expect(wrapper.find(MenuItem)).toExist();
+describe('<LogoutMenuOption />', () => {
+  it('renders a button when the user is logged in', () => {
+    const wrapper = shallow(<LogoutMenuOption isLoggedIn />);
+    expect(wrapper.find(Button)).toExist();
+    expect(wrapper.find(Redirect)).not.toExist();
+  });
+
+  it('renders a redirect when the user is not logged in', () => {
+    const wrapper = shallow(<LogoutMenuOption />);
+    expect(wrapper.find(Button)).not.toExist();
+    expect(wrapper.find(Redirect)).toExist();
+  });
 });

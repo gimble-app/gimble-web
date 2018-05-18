@@ -1,26 +1,17 @@
 import React from 'react';
-import { firebaseConnect } from 'react-redux-firebase';
-import { Redirect } from 'react-router-dom';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { logout } from './actions';
-import { selectIsLoggedIn } from './selectors';
+import Button from "material-ui/Button";
+import {firebaseConnect} from 'react-redux-firebase';
+import {Redirect} from 'react-router-dom';
+import {compose} from 'redux';
+import {connect} from 'react-redux';
+import {logout} from './actions';
+import {selectIsLoggedIn} from './selectors';
 
-import { MenuItem } from 'material-ui/Menu';
+export const LogoutMenuOption = ({ logout, isLoggedIn }) =>
+  isLoggedIn
+    ? <Button color="inherit" aria-label="logout" onClick={logout} variant="flat">Logout</Button>
+    : <Redirect to="/login" />
 
-export const LogoutMenuOption = ({ handleClose, logout, isLoggedIn }) =>
-  <MenuItem
-    aria-label="logout"
-    onClick={async () => {
-      handleClose();
-      await logout();
-    }}
-  >
-    { !isLoggedIn
-      ? <Redirect to="/login" />
-      : "Logout" }
-  </MenuItem>
- 
 const mapDispatchToProps = {
   logout
 };

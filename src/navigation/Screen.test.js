@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Screen from './Screen';
-import ProfileMenu from './ProfileMenu';
 
 describe('<Screen />', () => {
   it('renders the provided children', () => {
@@ -9,9 +8,11 @@ describe('<Screen />', () => {
     expect(wrapper.find('button')).toExist();
   });
 
-  it('renders a profile menu option', () => {
+  it('renders navigation links', () => {
     const wrapper = shallow(<Screen events={[]} />);
-    expect(wrapper.find(ProfileMenu)).toExist();
+    expect(wrapper.find('[to="friends"]')).toExist();
+    expect(wrapper.find('[to="events"]')).toExist();
+    expect(wrapper.find('[to="profile"]')).toExist();
   });
-})
+});
 

@@ -4,6 +4,7 @@ import EventScreen from "../events/event/EventScreen";
 import Screen from "./Screen";
 import EventsPage from "../events/EventsPage";
 import FriendsPage from "../friends/FriendsPage";
+import ProfilePage from "../profile/ProfilePage";
 
 export default () => (
   <Switch>
@@ -22,6 +23,7 @@ export default () => (
         <Switch>
           <Route exact path="/events" component={EventsPage} />
           <Route exact path="/friends" component={FriendsPage} />
+          <Route exact path="/profile" component={ProfilePage} />
           <Redirect to="/events" />
         </Switch>
       </Screen>
