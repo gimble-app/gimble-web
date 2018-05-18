@@ -18,12 +18,12 @@ const RejectButton = ({ onClick }) =>
 
 export const RequestEntry = ({request, accept, reject}) =>
   <ListItem>
-    <ListItemText>{request.fromEmail}</ListItemText>
+    <ListItemText>{request.fromName}</ListItemText>
     <ListItemSecondaryAction>
       <AcceptButton onClick={() => accept(request.from)}/>
       <RejectButton onClick={() => reject(request.from)}/>
     </ListItemSecondaryAction>
-  </ListItem>
+  </ListItem>;
 
 const mapDispatchToProps = {
   accept,
