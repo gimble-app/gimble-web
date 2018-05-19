@@ -1,12 +1,17 @@
 import * as functions from 'firebase-functions';
-import * as admin from 'firebase-admin';
+import * as express from 'express';
+import * as cookieParser from 'cookie-parser';
+import * as cors from 'cors';
+import validateFirebaseIdToken from './authTokenValidator';
 
-admin.initializeApp();
-const firestore = admin.firestore();
+const app = express();
+app.use(cors({origin: true}));
+app.use(cookieParser());
+app.use(validateFirebaseIdToken);
 
-export const addFriendRequest = functions.firestore
-  .document('friendRequests/{requestId}')
-  .onCreate((snap, context) => {
-    const data = snap.data();
-    return firestore.collection('temp').add({ context, data });
-  });
+app.post('/requests', (req, res) => {
+  console.log(req.body.to);
+  res.sendStatus(200);
+});
+
+export const friends = functions.https.onRequest(app);
