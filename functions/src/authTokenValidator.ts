@@ -1,5 +1,4 @@
 import * as admin from 'firebase-admin';
-admin.initializeApp();
 
 const validateFirebaseIdToken = (req, res, next) => {
   if ((!req.headers.authorization || !req.headers.authorization.startsWith('Bearer ')) &&
