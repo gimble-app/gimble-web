@@ -4,6 +4,7 @@ import { reduxFirestore, getFirestore } from 'redux-firestore';
 import rootReducer from './reducers';
 import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
 import firebase from './clients/firebase';
+import api from './clients/api';
 import createHistory from 'history/createBrowserHistory';
 import { routerMiddleware } from 'react-router-redux';
 
@@ -21,14 +22,25 @@ const config = {
   })
 };
 
+const authTokenSupportedApi = (getFirebase) => {
+  const getApi = async () => {
+    const authToken = await getFirebase().auth().currentUser.getIdToken();
+    return api(authToken);
+  }
+  return getApi;
+}
+
 export default (initialState = {}) => {
 
   const history = createHistory();
   const historyMiddleware = routerMiddleware(history);
-
   const createStoreWithFirebase = compose(
     applyMiddleware(
-       thunk.withExtraArgument({ getFirestore, getFirebase }),
+       thunk.withExtraArgument({
+         getApi: authTokenSupportedApi(getFirebase),
+         getFirestore,
+         getFirebase,
+       }),
        historyMiddleware
      ),
     reactReduxFirebase(firebase, config),

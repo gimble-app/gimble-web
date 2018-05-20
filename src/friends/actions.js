@@ -1,4 +1,4 @@
-import {create, remove} from '../clients/firebase';
+import {remove} from '../clients/firebase';
 import {sendNotification} from '../notifications/actions';
 import {FRIEND_REQUEST_COLLECTION} from "./firestoreQueries";
 import {selectCurrentUserId} from "../auth/selectors";
@@ -9,16 +9,16 @@ export const INVITE_FAILURE = 'invite failed to send';
 export const RESCIND_SUCCESS = 'invite rescinded';
 export const RESCIND_FAILURE = 'failed to rescind invite';
 
+
 export const invite = email =>
-  async (dispatch, getState, { getFirestore } ) => {
+  async (dispatch, getState, { getFirestore, getFirebase, getApi } ) => {
     try {
-      await create(FRIEND_REQUEST_COLLECTION, {
-          from: selectCurrentUserId(getState()),
-          fromName: selectMyDisplayName(getState()),
-          to: email
-        },
-        getFirestore
-      );
+      const api = await getApi();
+      await api.post('friends/requests', {
+        from: selectCurrentUserId(getState()),
+        fromName: selectMyDisplayName(getState()),
+        to: email
+      });
       dispatch(sendNotification(INVITE_SUCCESS));
     } catch(error) {
       dispatch(sendNotification(INVITE_FAILURE));

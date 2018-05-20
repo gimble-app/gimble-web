@@ -6,7 +6,7 @@ import {
   RESCIND_SUCCESS,
   RESCIND_FAILURE
 } from "./actions";
-import {create, remove} from "../clients/firebase";
+import {remove} from "../clients/firebase";
 import {SEND_NOTIFICATION} from "../notifications/actions";
 import setupStore from "../__mocks__/mockStore";
 import {selectMyDisplayName} from "../profile/selectors";
@@ -20,28 +20,34 @@ jest.mock('../profile/selectors', () => ({
 }));
 
 jest.mock('../clients/firebase', () => ({
-  create: jest.fn(),
+  remove: jest.fn(),
+}));
+
+jest.mock('../clients/firebase', () => ({
   remove: jest.fn(),
 }));
 
 describe('friends actions', () => {
 
   const getFirestore = jest.fn();
-  const mockStore = setupStore({ getFirestore });
-
+  const getApi = jest.fn();
+  const mockStore = setupStore({ getFirestore, getApi });
+  const post = jest.fn();
   let store;
 
   beforeEach(() => {
+
+    getApi.mockReturnValue(Promise.resolve({ post }));
     store = mockStore();
   });
 
   describe('invite friend', () => {
     it('saves an invite for the friend', async () => {
-      create.mockReturnValue(Promise.resolve());
+      post.mockReturnValue(Promise.resolve());
 
       await store.dispatch(invite('some@email.com'));
 
-      expect(create).toBeCalledWith("friendRequests", { from: 'some-uid', fromName: 'some-name', to: 'some@email.com' }, getFirestore);
+      expect(post).toBeCalledWith("friends/requests", { from: 'some-uid', fromName: 'some-name', to: 'some@email.com' });
       expect(store.getActions()).toEqual([
         {
           data: { message: INVITE_SUCCESS },
@@ -51,7 +57,7 @@ describe('friends actions', () => {
     });
 
     it('notifies when an invite fails', async () => {
-      create.mockReturnValue(Promise.reject("some error"));
+      post.mockReturnValue(Promise.reject("some error"));
 
       await store.dispatch(invite('some@email.com'));
 

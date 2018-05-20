@@ -12,7 +12,7 @@ app.use(validateFirebaseIdToken);
 app.post('/requests', async (req, res) => {
   console.log(`received: ${req.body}`);
   try {
-    await functions.firestore.collection('temp').add({...req.body});
+    await functions.firestore.collection('friendRequests').add({...req.body});
     res.sendStatus(200);
   } catch(e) {
     console.error(e);
