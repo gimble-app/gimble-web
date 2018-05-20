@@ -9,9 +9,15 @@ app.use(cors({origin: true}));
 app.use(cookieParser());
 app.use(validateFirebaseIdToken);
 
-app.post('/requests', (req, res) => {
-  console.log(req.body.to);
-  res.sendStatus(200);
+app.post('/requests', async (req, res) => {
+  console.log(`received: ${req.body}`);
+  try {
+    await functions.firestore.collection('temp').add({...req.body});
+    res.sendStatus(200);
+  } catch(e) {
+    console.error(e);
+    res.sendStatus(500);
+  }
 });
 
 export const friends = functions.https.onRequest(app);
