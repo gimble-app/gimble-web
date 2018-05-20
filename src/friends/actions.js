@@ -11,7 +11,7 @@ export const RESCIND_FAILURE = 'failed to rescind invite';
 
 
 export const invite = email =>
-  async (dispatch, getState, { getFirestore, getFirebase, getApi } ) => {
+  async (dispatch, getState, { getApi } ) => {
     try {
       const api = await getApi();
       await api.post('friends/requests', {

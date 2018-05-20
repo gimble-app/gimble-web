@@ -11,7 +11,7 @@ app.use(cors({origin: true}));
 app.use(cookieParser());
 app.use(validateFirebaseIdToken);
 
-app.get('/requests', async (req, res) => {
+app.post('/requests', async (req, res) => {
   const firestore = admin.firestore();
   console.log(`received: ${JSON.stringify(req.body)}`);
   try {
