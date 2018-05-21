@@ -6,32 +6,25 @@ import {
   RESCIND_SUCCESS,
   RESCIND_FAILURE
 } from "./actions";
-import {remove} from "../clients/firebase";
 import {SEND_NOTIFICATION} from "../notifications/actions";
 import setupStore from "../__mocks__/mockStore";
-import {selectMyDisplayName} from "../profile/selectors";
 
-jest.mock('../auth/selectors', () => ({
-  selectCurrentUserId: () => 'some-uid'
-}));
-
-jest.mock('../profile/selectors', () => ({
-  selectMyDisplayName: () => 'some-name'
-}));
-
-jest.mock('../clients/firebase', () => ({
-  remove: jest.fn(),
-}));
+jest.mock('../auth/selectors', () => ({ selectCurrentUserId: () => 'some-uid' }));
+jest.mock('../profile/selectors', () => ({ selectMyDisplayName: () => 'some-name' }));
 
 describe('friends actions', () => {
 
   const requestFriendMock = jest.fn();
-  const getFirestore = jest.fn();
-  const getRemoteFunction = (name) => (name === 'requestFriend' ? requestFriendMock : jest.fn());
-  const mockStore = setupStore({
-    getRemoteFunction,
-    getFirestore
-  });
+  const rescindFriendRequestMock = jest.fn();
+
+  const getRemoteFunction = (name) => {
+    const functions = {
+      rescindFriendRequest: rescindFriendRequestMock,
+      requestFriend: requestFriendMock
+    };
+    return functions[name];
+  };
+  const mockStore = setupStore({ getRemoteFunction });
   let store;
 
   beforeEach(() => {
@@ -67,13 +60,13 @@ describe('friends actions', () => {
     });
   });
 
-  describe('recind invite', () => {
+  describe('rescind invite', () => {
     it('rescinds an invite', async () => {
-      remove.mockReturnValue(Promise.resolve());
+      rescindFriendRequestMock.mockReturnValue(Promise.resolve());
 
       await store.dispatch(rescind('some-id'));
 
-      expect(remove).toBeCalledWith("friendRequests", 'some-id', getFirestore);
+      expect(rescindFriendRequestMock).toBeCalledWith({ id: 'some-id' });
       expect(store.getActions()).toEqual([
         {
           data: { message: RESCIND_SUCCESS },
@@ -83,7 +76,7 @@ describe('friends actions', () => {
     });
 
     it('notifies when an rescind fails', async () => {
-      remove.mockReturnValue(Promise.reject("some error"));
+      rescindFriendRequestMock.mockReturnValue(Promise.reject("some error"));
 
       await store.dispatch(rescind('some-id'));
 
