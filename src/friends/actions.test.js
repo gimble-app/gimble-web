@@ -25,24 +25,26 @@ jest.mock('../clients/firebase', () => ({
 
 describe('friends actions', () => {
 
+  const requestFriendMock = jest.fn();
   const getFirestore = jest.fn();
-  const getFunctions = jest.fn();
-  const mockStore = setupStore({ getFirestore, getFunctions });
-  const post = jest.fn();
+  const getRemoteFunction = (name) => (name === 'requestFriend' ? requestFriendMock : jest.fn());
+  const mockStore = setupStore({
+    getRemoteFunction,
+    getFirestore
+  });
   let store;
 
   beforeEach(() => {
-    getFunctions.mockReturnValue(post);
     store = mockStore();
   });
 
   describe('invite friend', () => {
     it('saves an invite for the friend', async () => {
-      post.mockReturnValue(Promise.resolve());
+      requestFriendMock.mockReturnValue(Promise.resolve());
 
       await store.dispatch(invite('some@email.com'));
 
-      expect(post).toBeCalledWith({ from: 'some-uid', fromName: 'some-name', to: 'some@email.com' });
+      expect(requestFriendMock).toBeCalledWith({ from: 'some-uid', fromName: 'some-name', to: 'some@email.com' });
       expect(store.getActions()).toEqual([
         {
           data: { message: INVITE_SUCCESS },
@@ -52,7 +54,7 @@ describe('friends actions', () => {
     });
 
     it('notifies when an invite fails', async () => {
-      post.mockReturnValue(Promise.reject("some error"));
+      requestFriendMock.mockReturnValue(Promise.reject("some error"));
 
       await store.dispatch(invite('some@email.com'));
 

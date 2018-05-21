@@ -26,13 +26,15 @@ const authTokenSupportedApi = (getFirebase) => {
   const getApi = async () => {
     const authToken = await getFirebase().auth().currentUser.getIdToken();
     return api(authToken);
-  }
+  };
   return getApi;
-}
+};
 
 const functions = getFirebase => {
-  return () => getFirebase().functions().httpsCallable;
-}
+  return (named) => {
+    return getFirebase().functions().httpsCallable(named);
+  }
+};
 
 export default (initialState = {}) => {
 
@@ -41,7 +43,7 @@ export default (initialState = {}) => {
   const createStoreWithFirebase = compose(
     applyMiddleware(
        thunk.withExtraArgument({
-         getFunctions: functions(getFirebase),
+         getRemoteFunction: functions(getFirebase),
          getApi: authTokenSupportedApi(getFirebase),
          getFirestore,
          getFirebase,

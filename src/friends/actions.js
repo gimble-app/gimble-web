@@ -10,14 +10,15 @@ export const RESCIND_SUCCESS = 'invite rescinded';
 export const RESCIND_FAILURE = 'failed to rescind invite';
 
 export const invite = email =>
-  async (dispatch, getState, { getFunctions } ) => {
+  async (dispatch, getState, { getRemoteFunction } ) => {
     try {
-      const friendFunction = getFunctions('requestFriend');
-      await friendFunction({
+      const requestFriend = getRemoteFunction('requestFriend');
+      await requestFriend({
         to: email,
         from: selectCurrentUserId(getState()),
         fromName: selectMyDisplayName(getState())
       });
+
       dispatch(sendNotification(INVITE_SUCCESS));
     } catch(error) {
       dispatch(sendNotification(INVITE_FAILURE));
