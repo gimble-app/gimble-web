@@ -1,10 +1,10 @@
-import * as functions from 'firebase-functions';
-import * as express from 'express';
-import * as cookieParser from 'cookie-parser';
-import * as cors from 'cors';
-import * as admin from 'firebase-admin';
-
+import { https } from 'firebase-functions';
+import express from 'express';
+import cookieParser from 'cookie-parser';
+import cors from 'cors';
 import validateFirebaseIdToken from './authTokenValidator';
+import admin from 'firebase-admin';
+
 admin.initializeApp();
 const app = express();
 app.use(cors({origin: true}));
@@ -23,4 +23,4 @@ app.post('/requests', async (req, res) => {
   }
 });
 
-export const friends = functions.https.onRequest(app);
+export const friends = https.onRequest(app);
