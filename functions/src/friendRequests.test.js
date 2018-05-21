@@ -1,12 +1,12 @@
 import mocksdk from 'firebase-admin';
-import addFriendRequest from './addFriendRequest';
+import { request } from './friendRequests';
 
-describe('addFriendRequest', () => {
+describe('friendRequests', () => {
 
   const mockFirestore = mocksdk.firestore();
 
   it('adds to the collection', async () => {
-    const promise = addFriendRequest({ to: 'me', from: 'you' }, { auth: true });
+    const promise = request({ to: 'me', from: 'you' }, { auth: true });
     mockFirestore.flush();
     await promise;
 
