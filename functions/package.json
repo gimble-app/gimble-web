@@ -6,6 +6,7 @@
     "serve": "yarn run build && firebase serve --only functions",
     "shell": "yarn run build && firebase functions:shell",
     "start": "yarn run shell",
+    "test": "jest",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log"
   },
@@ -23,8 +24,11 @@
     "@babel/core": "^7.0.0-beta.47",
     "@babel/plugin-transform-runtime": "^7.0.0-beta.47",
     "@babel/preset-env": "^7.0.0-beta.47",
+    "babel-core": "^7.0.0-0",
+    "babel-jest": "^22.4.4",
     "eslint": "^4.19.1",
     "eslint-plugin-promise": "^3.7.0",
+    "jest": "^22.4.4",
     "typescript": "^2.5.3"
   },
   "private": true
