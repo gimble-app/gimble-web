@@ -20,8 +20,8 @@ export const RequestEntry = ({request, accept, reject}) =>
   <ListItem>
     <ListItemText>{request.fromName}</ListItemText>
     <ListItemSecondaryAction>
-      <AcceptButton onClick={() => accept(request.from)}/>
-      <RejectButton onClick={() => reject(request.from)}/>
+      <AcceptButton onClick={() => accept(request.id)}/>
+      <RejectButton onClick={() => reject(request.id)}/>
     </ListItemSecondaryAction>
   </ListItem>;
 

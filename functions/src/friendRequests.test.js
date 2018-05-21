@@ -1,16 +1,24 @@
 import mocksdk from 'firebase-admin';
-import { request } from './friendRequests';
+import { request, accept } from './friendRequests';
+import uuid from "uuid/v4";
+
+jest.mock('uuid/v4');
+uuid.mockReturnValue('generated-id');
 
 describe('friendRequests', () => {
 
   const mockFirestore = mocksdk.firestore();
 
-  it('adds to the collection', async () => {
-    const promise = request({ to: 'me', from: 'you' }, { auth: true });
-    mockFirestore.flush();
-    await promise;
+  beforeEach(() => {
+    mockFirestore.autoFlush();
+  });
 
-    expect(getMockCollectionEntries('friendRequests')[0]).toEqual({ to: 'me', from: 'you' });
+  describe('request', () => {
+    it('adds to the collection', async () => {
+      await request({ to: 'me', from: 'you' }, { auth: true });
+
+      expect(getMockCollectionEntries('friendRequests')[0]).toEqual({ to: 'me', from: 'you', id: 'generated-id' });
+    });
   });
 
   const getMockCollectionEntries = (collection) => {

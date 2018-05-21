@@ -7,7 +7,7 @@ describe('<RequestEntry />', () => {
   const reject = jest.fn();
 
   it('accepts with the id', () => {
-    const wrapper = shallow(<RequestEntry accept={accept} reject={reject} request={{ from: '1234' }}/>);
+    const wrapper = shallow(<RequestEntry accept={accept} reject={reject} request={{ id: '1234' }}/>);
 
     wrapper.find('AcceptButton').prop('onClick')();
 
@@ -15,7 +15,7 @@ describe('<RequestEntry />', () => {
   });
 
   it('rejects with the id', () => {
-    const wrapper = shallow(<RequestEntry accept={accept} reject={reject} request={{ from: '1234' }}/>);
+    const wrapper = shallow(<RequestEntry accept={accept} reject={reject} request={{ id: '1234' }}/>);
 
     wrapper.find('RejectButton').prop('onClick')();
 
