@@ -1,12 +1,12 @@
 import thunk from 'redux-thunk';
 import { createStore, compose, applyMiddleware } from 'redux';
 import { reduxFirestore, getFirestore } from 'redux-firestore';
-import rootReducer from './reducers';
 import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
-import firebase from './clients/firebase';
-import api from './clients/api';
-import createHistory from 'history/createBrowserHistory';
+import rootReducer from './reducers';
 import { routerMiddleware } from 'react-router-redux';
+import firebase from './clients/firebase';
+import { functionLookup } from './clients/remoteFunctions';
+import createHistory from 'history/createBrowserHistory';
 
 const config = {
   attachAuthIsReady: true,
@@ -22,20 +22,6 @@ const config = {
   })
 };
 
-const authTokenSupportedApi = (getFirebase) => {
-  const getApi = async () => {
-    const authToken = await getFirebase().auth().currentUser.getIdToken();
-    return api(authToken);
-  };
-  return getApi;
-};
-
-const functions = getFirebase => {
-  return (named) => {
-    return getFirebase().functions().httpsCallable(named);
-  }
-};
-
 export default (initialState = {}) => {
 
   const history = createHistory();
@@ -43,8 +29,7 @@ export default (initialState = {}) => {
   const createStoreWithFirebase = compose(
     applyMiddleware(
        thunk.withExtraArgument({
-         getRemoteFunction: functions(getFirebase),
-         getApi: authTokenSupportedApi(getFirebase),
+         getRemoteFunction: functionLookup(getFirebase),
          getFirestore,
          getFirebase,
        }),

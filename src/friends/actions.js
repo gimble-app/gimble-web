@@ -3,6 +3,7 @@ import {sendNotification} from '../notifications/actions';
 import {FRIEND_REQUEST_COLLECTION} from "./firestoreQueries";
 import {selectCurrentUserId} from "../auth/selectors";
 import {selectMyDisplayName} from "../profile/selectors";
+import {REQUEST_FRIEND} from "../clients/remoteFunctions";
 
 export const INVITE_SUCCESS = 'invite sent';
 export const INVITE_FAILURE = 'invite failed to send';
@@ -12,7 +13,7 @@ export const RESCIND_FAILURE = 'failed to rescind invite';
 export const invite = email =>
   async (dispatch, getState, { getRemoteFunction } ) => {
     try {
-      const requestFriend = getRemoteFunction('requestFriend');
+      const requestFriend = getRemoteFunction(REQUEST_FRIEND);
       await requestFriend({
         to: email,
         from: selectCurrentUserId(getState()),
