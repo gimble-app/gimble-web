@@ -9,15 +9,14 @@ export const INVITE_FAILURE = 'invite failed to send';
 export const RESCIND_SUCCESS = 'invite rescinded';
 export const RESCIND_FAILURE = 'failed to rescind invite';
 
-
 export const invite = email =>
-  async (dispatch, getState, { getApi } ) => {
+  async (dispatch, getState, { getFunctions } ) => {
     try {
-      const api = await getApi();
-      await api.post('friends/requests', {
+      const friendFunction = getFunctions('requestFriend');
+      await friendFunction({
+        to: email,
         from: selectCurrentUserId(getState()),
-        fromName: selectMyDisplayName(getState()),
-        to: email
+        fromName: selectMyDisplayName(getState())
       });
       dispatch(sendNotification(INVITE_SUCCESS));
     } catch(error) {

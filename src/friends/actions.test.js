@@ -23,21 +23,16 @@ jest.mock('../clients/firebase', () => ({
   remove: jest.fn(),
 }));
 
-jest.mock('../clients/firebase', () => ({
-  remove: jest.fn(),
-}));
-
 describe('friends actions', () => {
 
   const getFirestore = jest.fn();
-  const getApi = jest.fn();
-  const mockStore = setupStore({ getFirestore, getApi });
+  const getFunctions = jest.fn();
+  const mockStore = setupStore({ getFirestore, getFunctions });
   const post = jest.fn();
   let store;
 
   beforeEach(() => {
-
-    getApi.mockReturnValue(Promise.resolve({ post }));
+    getFunctions.mockReturnValue(post);
     store = mockStore();
   });
 
@@ -47,7 +42,7 @@ describe('friends actions', () => {
 
       await store.dispatch(invite('some@email.com'));
 
-      expect(post).toBeCalledWith("friends/requests", { from: 'some-uid', fromName: 'some-name', to: 'some@email.com' });
+      expect(post).toBeCalledWith({ from: 'some-uid', fromName: 'some-name', to: 'some@email.com' });
       expect(store.getActions()).toEqual([
         {
           data: { message: INVITE_SUCCESS },

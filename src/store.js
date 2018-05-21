@@ -30,6 +30,10 @@ const authTokenSupportedApi = (getFirebase) => {
   return getApi;
 }
 
+const functions = getFirebase => {
+  return getFirebase().functions().httpsCallable;
+}
+
 export default (initialState = {}) => {
 
   const history = createHistory();
@@ -37,6 +41,7 @@ export default (initialState = {}) => {
   const createStoreWithFirebase = compose(
     applyMiddleware(
        thunk.withExtraArgument({
+         getFunctions: functions(getFirebase),
          getApi: authTokenSupportedApi(getFirebase),
          getFirestore,
          getFirebase,

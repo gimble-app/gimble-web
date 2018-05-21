@@ -1,5 +1,6 @@
 import firebase from 'firebase';
 import 'firebase/firestore';
+import 'firebase/functions';
 import uuid from "uuid/v4";
 
 const firebaseConfig = {

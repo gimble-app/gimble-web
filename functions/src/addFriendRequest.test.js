@@ -6,7 +6,7 @@ describe('addFriendRequest', () => {
   const mockFirestore = mocksdk.firestore();
 
   it('adds to the collection', async () => {
-    const promise = addFriendRequest({ to: 'me', from: 'you' });
+    const promise = addFriendRequest({ to: 'me', from: 'you' }, { auth: true });
     mockFirestore.flush();
     await promise;
 
