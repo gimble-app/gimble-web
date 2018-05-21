@@ -31,7 +31,7 @@ const authTokenSupportedApi = (getFirebase) => {
 }
 
 const functions = getFirebase => {
-  return getFirebase().functions().httpsCallable;
+  return () => getFirebase().functions().httpsCallable;
 }
 
 export default (initialState = {}) => {
