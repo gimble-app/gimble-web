@@ -13,12 +13,21 @@ service cloud.firestore {
       return request.auth.token.email == email
     }
 
+    function userIsTheirFriend(userId) {
+    	return exists(/databases/$(database)/documents/profile/$(userId)/friends/$(request.auth.uid));
+    }
+
     match /events/{event} {
       allow read, write: if userOwnsResource(resource.data.author);
       allow create: if userIsAuthenticated();
     }
 
     match /profile/{uid} {
+      allow create, write: if userOwnsResource(uid);
+      allow read: if userOwnsResource(uid) || userIsTheirFriend(uid);
+    }
+
+    match /profile/{uid}/friends/{id} {
       allow create, read, write: if userOwnsResource(uid);
     }
 

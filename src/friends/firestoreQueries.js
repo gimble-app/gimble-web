@@ -1,5 +1,8 @@
-import {selectCurrentUserIdForQuery, selectCurrentUserEmailForQuery} from "../auth/selectors";
+import { selectCurrentUserIdForQuery, selectCurrentUserEmailForQuery} from "../auth/selectors";
+import { FRIENDS_STORE_KEY } from './selectors';
+
 export const FRIEND_REQUEST_COLLECTION = 'friendRequests';
+export const FRIENDS_COLLECTION = 'friends';
 export const PROFILES_COLLECTION = 'profile';
 
 export const requestsFromUserCollection = (state) => ({
@@ -14,7 +17,10 @@ export const requestsToUserCollection = (state) => ({
   storeAs: 'friendRequests'
 });
 
-export const fromProfileQuery = (from) => ({
+export const profileQuery = (id) => ({
   collection: PROFILES_COLLECTION,
-  doc: from,
+  doc: id,
+  storeAs: FRIENDS_STORE_KEY
 });
+
+export const friendsCollection = (state) => `${PROFILES_COLLECTION}/${selectCurrentUserIdForQuery(state)}/${FRIENDS_COLLECTION}`;
