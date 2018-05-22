@@ -4,6 +4,8 @@ node_js:
 install:
   - yarn
   - yarn test
+  - yarn --cwd functions
+  - yarn --cwd functions test
 script:
   - yarn build
   - yarn --cwd functions build
