@@ -18,7 +18,8 @@ const config = {
   profileFactory: (userData) => ({
     displayName: userData.displayName,
     photoURL: userData.photoURL,
-    email: userData.email
+    email: userData.email,
+    uid: userData.uid,
   })
 };
 
