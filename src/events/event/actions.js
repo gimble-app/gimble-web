@@ -14,8 +14,8 @@ function deleteEventWithId({ getFirestore }, id) {
 
 function updateEvent(getState, { getFirestore }, event, id) {
   if (!id) {
-    const author = selectCurrentUserId(getState());
-    return create(EVENTS_COLLECTION, { ...event, author }, getFirestore);
+    const me = selectCurrentUserId(getState());
+    return create(EVENTS_COLLECTION, { ...event, members: { [me]: true } }, getFirestore);
   }
   else {
     return update(EVENTS_COLLECTION, id, event, getFirestore);

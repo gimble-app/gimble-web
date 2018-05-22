@@ -31,7 +31,7 @@ describe('event actions', () => {
   });
 
   describe('saveEvent', () => {
-    it('saves a new event with author', async () => {
+    it('saves a new event with member', async () => {
       create.mockReturnValue(Promise.resolve());
       const event = {
         title: 'title'
@@ -41,7 +41,7 @@ describe('event actions', () => {
 
       expect(create).toBeCalledWith('events',
         {
-          author: 'some-uid',
+          members: {'some-uid': true },
           ...event
         },
         getFirestore

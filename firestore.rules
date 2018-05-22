@@ -9,16 +9,20 @@ service cloud.firestore {
       return request.auth.uid == userId
     }
 
+    function userIsMember (members) {
+      return members[request.auth.uid] != null;
+    }
+
     function matchesUserEmail (email) {
       return request.auth.token.email == email
     }
 
     function userIsTheirFriend(userId) {
-    	return exists(/databases/$(database)/documents/profile/$(userId)/friends/$(request.auth.uid));
+    	return exists(/profile/$(userId)/friends/$(request.auth.uid));
     }
 
     match /events/{event} {
-      allow read, write: if userOwnsResource(resource.data.author);
+      allow read, write: if userIsMember(resource.data.members);
       allow create: if userIsAuthenticated();
     }
 
