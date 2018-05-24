@@ -5,21 +5,20 @@ import {firebaseConnect, firestoreConnect} from "react-redux-firebase";
 import {
   requestsFromUserCollection,
   requestsToUserCollection,
-  friendsCollection
 } from './firestoreQueries';
 import { selectFriendRequests, selectRequestedFriends, selectFriendRefs } from './selectors';
 import Page from '../common/Page';
 import AddFriendForm from './AddFriendForm';
 import RequestedList from './RequestedList';
 import RequestsList from './RequestsList';
-import FriendList from './FriendList';
+import FriendProfileList from './FriendProfileList';
 
 export const FriendsPage = ({ requested, requests, friends }) => (
   <Page>
     <AddFriendForm />
     {requested && requested.length > 0 && <RequestedList requested={requested} /> }
     {requests && requests.length > 0 && <RequestsList requests={requests} /> }
-    {friends && friends.length > 0 && <FriendList friends={friends} /> }
+    {!!friends && <FriendProfileList friends={friends} /> }
   </Page>
 );
 
@@ -28,7 +27,6 @@ export default compose(
   firestoreConnect((state) => [
     requestsToUserCollection(state),
     requestsFromUserCollection(state),
-    friendsCollection(state)
   ]),
   connect(state => ({
     requests: selectFriendRequests(state),

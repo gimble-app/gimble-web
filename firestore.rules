@@ -18,7 +18,7 @@ service cloud.firestore {
     }
 
     function userIsTheirFriend(userId) {
-    	return exists(/profile/$(userId)/friends/$(request.auth.uid));
+    	return exists(/databases/$(database)/documents/profile/$(userId)/friends/$(request.auth.uid));
     }
 
     match /events/{event} {
