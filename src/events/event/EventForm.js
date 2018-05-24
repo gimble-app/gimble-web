@@ -32,6 +32,7 @@ export class EventForm extends Component {
 
     return (
       <Page>
+        <MembersChipsList members={fieldValues.members} />
         <TextField
           id="title"
           label="Title"
@@ -41,13 +42,11 @@ export class EventForm extends Component {
           margin="normal"
           autoFocus
         />
-        <p>
-          Members
-          <MembersChipsList members={fieldValues.members} />
-        </p>
       </Page>
     );
   }
 }
+
+
 
 export default withStyles(styles)(EventForm);

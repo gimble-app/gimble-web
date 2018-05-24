@@ -3,6 +3,7 @@ import {withFirestore} from 'react-redux-firebase';
 import FriendEntry from "./FriendEntry";
 import {connect} from "react-redux";
 import {compose} from "redux";
+import List from "material-ui/List";
 import {selectMyProfileWithFriends} from "../profile/selectors";
 import {PROFILES_COLLECTION} from "../profile/firestoreQueries";
 
@@ -49,7 +50,9 @@ class FriendProfileList extends Component {
   render () {
     const { friendsList } = this.state;
     return (
-      friendsList.map(friend => <FriendEntry key={friend.uid} friend={friend} />)
+      <List dense>
+        { friendsList.map(friend => <FriendEntry key={friend.uid} friend={friend} />) }
+      </List>
     );
   }
 }
