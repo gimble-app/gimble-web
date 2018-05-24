@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import TextField from 'material-ui/TextField';
 import { EventForm } from './EventForm';
 
@@ -14,7 +14,7 @@ it('renders a title text field', () => {
 it('passes the new field key and value to onChange when the title changes', () => {
   const onChange = jest.fn();
   const mockFieldChangeEvent = { target: { value: 'new-value' }};
-  const wrapper = mount(
+  const wrapper = shallow(
     <EventForm onChange={onChange} fieldValues={{ title: 'some-value' }} classes={{}} />
   );
 

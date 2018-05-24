@@ -1,9 +1,9 @@
 import { selectCurrentUserIdForQuery, selectCurrentUserEmailForQuery} from "../auth/selectors";
 import { FRIENDS_STORE_KEY } from './selectors';
+import {PROFILES_COLLECTION} from "../profile/firestoreQueries";
 
 export const FRIEND_REQUEST_COLLECTION = 'friendRequests';
 export const FRIENDS_COLLECTION = 'friends';
-export const PROFILES_COLLECTION = 'profile';
 
 export const requestsFromUserCollection = (state) => ({
   collection: FRIEND_REQUEST_COLLECTION,

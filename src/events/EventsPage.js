@@ -8,6 +8,7 @@ import BackgroundMessage from './BackgroundMessage';
 import AddButton from "../common/AddButton";
 import Page from '../common/Page';
 import EventsOverview from './EventsOverview';
+import {myProfileWithFriends} from "../profile/firestoreQueries";
 
 export const EventsPage = ({ events }) => (
   <Page>
@@ -18,10 +19,11 @@ export const EventsPage = ({ events }) => (
   </Page>
 );
 
+//TODO make the profile more global
 export default compose(
   firebaseConnect(),
-  firestoreConnect(eventsForUserQuery),
+  firestoreConnect(props => [eventsForUserQuery(props), myProfileWithFriends(props)]),
   connect(state => ({
-    events: selectEventsList(state)
+    events: selectEventsList(state),
   })),
-)(EventsPage)
+)(EventsPage);

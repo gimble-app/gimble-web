@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import { withStyles } from 'material-ui/styles';
 import TextField from 'material-ui/TextField';
+import Page from "../../common/Page";
+import MembersChipsList from "./MembersChipsList";
 
 const styles = theme => ({
   textField: {
@@ -29,15 +31,21 @@ export class EventForm extends Component {
     const { classes, fieldValues } = this.props;
 
     return (
-      <TextField
-        id="title"
-        label="Title"
-        className={classes.textField}
-        defaultValue={fieldValues.title}
-        onChange={this.handleChange('title')}
-        margin="normal"
-        autoFocus
-      />
+      <Page>
+        <TextField
+          id="title"
+          label="Title"
+          className={classes.textField}
+          defaultValue={fieldValues.title}
+          onChange={this.handleChange('title')}
+          margin="normal"
+          autoFocus
+        />
+        <p>
+          Members
+          <MembersChipsList members={fieldValues.members} />
+        </p>
+      </Page>
     );
   }
 }

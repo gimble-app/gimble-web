@@ -4,12 +4,13 @@ import FriendEntry from "./FriendEntry";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {selectMyProfileWithFriends} from "../profile/selectors";
-import {PROFILES_COLLECTION} from "./firestoreQueries";
+import {PROFILES_COLLECTION} from "../profile/firestoreQueries";
 
 class FriendProfileList extends Component {
 
   state = {
-    friends: {}
+    friends: {},
+    friendsList: []
   };
 
   componentDidMount() {
@@ -17,7 +18,6 @@ class FriendProfileList extends Component {
   }
 
   static getDerivedStateFromProps(prevProps, prevState) {
-    console.log(prevProps)
     return (prevProps.friends !== prevState.friends) ? prevProps.friends : null;
   }
 
@@ -43,14 +43,13 @@ class FriendProfileList extends Component {
       photoURL: data.photoURL,
       displayName: data.displayName,
     }));
-    this.setState({ friends: newFriends });
+    this.setState({ friendsList: newFriends });
   };
 
   render () {
-    console.log(this.props)
-    const { friends } = this.state;
+    const { friendsList } = this.state;
     return (
-      Object.values(friends).map(friend => <FriendEntry id={friend.email} friend={friend} />)
+      friendsList.map(friend => <FriendEntry key={friend.uid} friend={friend} />)
     );
   }
 }

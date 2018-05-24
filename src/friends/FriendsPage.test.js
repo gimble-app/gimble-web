@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import { FriendsPage } from './FriendsPage';
 import AddFriendForm from './AddFriendForm';
 import RequestedList from './RequestedList';
-import FriendList from './FriendList';
+import FriendProfileList from './FriendProfileList';
 
 describe('<FriendsPage />', () => {
   it('renders the AddFriendForm', () => {
@@ -21,8 +21,8 @@ describe('<FriendsPage />', () => {
     expect(wrapper.find(RequestedList)).toExist();
   });
 
-  it('renders a FriendList when there are friend requests', () => {
+  it('renders a FriendProfileList when there are friend requests', () => {
     const wrapper = shallow(<FriendsPage friends={[{ id: 'some-id' }]}/>);
-    expect(wrapper.find(FriendList)).toExist();
+    expect(wrapper.find(FriendProfileList)).toExist();
   });
 });
