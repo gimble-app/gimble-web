@@ -5,7 +5,7 @@
   "dependencies": {
     "@firebase/app": "0.x",
     "@firebase/app-types": "0.x",
-    "firebase": "^4.12.1",
+    "firebase": "^5.0.4",
     "lodash": "^4.17.5",
     "material-ui": "^1.0.0-beta.38",
     "material-ui-icons": "^1.0.0-beta.36",
@@ -17,7 +17,7 @@
     "react-router-redux": "^5.0.0-alpha.9",
     "react-scripts": "^1.1.1",
     "redux": "^4.0.0",
-    "redux-firestore": "^0.4.2",
+    "redux-firestore": "^0.5.4",
     "redux-mock-store": "^1.5.1",
     "redux-thunk": "^2.2.0",
     "styled-components": "^3.2.5",
