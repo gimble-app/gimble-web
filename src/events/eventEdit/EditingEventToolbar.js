@@ -1,15 +1,13 @@
 import React from 'react';
 import Toolbar from 'material-ui/Toolbar';
-import CancelButton from './CancelButton';
+import CancelButton from '../../common/CancelButton';
 import SaveButton from './SaveButton';
-import DeleteButton from './DeleteButton';
 import ToolbarTitleText from '../../common/ToolbarTitleText';
 
-const EditingEventToolBar = ({ isNew, onDelete, onSave }) => (
+const EditingEventToolBar = ({ onSave }) => (
   <Toolbar>
     <CancelButton />
-    <ToolbarTitleText></ToolbarTitleText>
-    { !isNew && <DeleteButton onClick={onDelete} /> }
+    <ToolbarTitleText />
     <SaveButton onClick={onSave}/>
   </Toolbar>
 );

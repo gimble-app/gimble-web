@@ -1,12 +1,12 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import { firebaseConnect } from 'react-redux-firebase'
-import { ConnectedRouter } from 'react-router-redux';
-import { withTheme } from "material-ui/styles/index";
+import {connect} from 'react-redux';
+import {compose} from 'redux';
+import {firebaseConnect} from "react-redux-firebase";
+import {ConnectedRouter} from 'react-router-redux';
+import {withTheme} from "material-ui/styles";
 import styled from "styled-components";
 import Navigation from './navigation/Navigation';
-import { selectIsLoggedIn } from './auth/selectors';
+import {selectIsLoggedIn} from './auth/selectors';
 import Notifier from './notifications/Notifier';
 
 const StyledAppRoot = withTheme()(styled.div`

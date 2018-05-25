@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import { withStyles } from 'material-ui/styles';
 import TextField from 'material-ui/TextField';
 import Page from "../../common/Page";
-import MembersChipsList from "./MembersChipsList";
 
 const styles = theme => ({
   textField: {
@@ -32,7 +31,6 @@ export class EventForm extends Component {
 
     return (
       <Page>
-        <MembersChipsList members={fieldValues.members} />
         <TextField
           id="title"
           label="Title"
@@ -46,7 +44,5 @@ export class EventForm extends Component {
     );
   }
 }
-
-
 
 export default withStyles(styles)(EventForm);

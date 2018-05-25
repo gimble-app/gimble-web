@@ -51,13 +51,4 @@ describe('<EventScreen />', () => {
     expect(saveEvent).toBeCalledWith({ firstField: 'some-value' }, 'some-id');
   });
 
-  it('passes the event id be deleted', () => {
-    const deleteEvent = jest.fn();
-    const wrapper = shallow(<EventScreen  match={{params:{id: 'some-id'}}} deleteEvent={deleteEvent}/>);
-
-    wrapper.setState({ fieldValues: { title: 'data' } });
-
-    wrapper.find(EditingEventToolbar).prop('onDelete')();
-    expect(deleteEvent).toBeCalledWith('some-id');
-  });
 });

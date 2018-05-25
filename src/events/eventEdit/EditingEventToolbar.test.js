@@ -1,7 +1,8 @@
 import React from 'react';
 import EditingEventToolbar from './EditingEventToolbar';
-import DeleteButton from './DeleteButton';
+import SaveButton from './SaveButton';
 import { shallow } from 'enzyme';
+import CancelButton from "../../common/CancelButton";
 
 describe('<EditingEventToolbar>', () => {
   it('renders the component', () => {
@@ -9,13 +10,13 @@ describe('<EditingEventToolbar>', () => {
     expect(rendered).toExist();
   });
 
-  it('renders a delete button when the event is not new', () => {
+  it('renders a save button', () => {
     const rendered = shallow(<EditingEventToolbar />);
-    expect(rendered.find(DeleteButton)).toExist();
+    expect(rendered.find(SaveButton)).toExist();
   });
 
-  it('does not render a delete button when the event is new', () => {
-    const rendered = shallow(<EditingEventToolbar isNew />);
-    expect(rendered.find(DeleteButton)).not.toExist();
-  })
+  it('renders a cancel button', () => {
+    const rendered = shallow(<EditingEventToolbar />);
+    expect(rendered.find(CancelButton)).toExist();
+  });
 });
