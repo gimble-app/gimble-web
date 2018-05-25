@@ -1,13 +1,13 @@
 import React from 'react';
-import { InternalLink } from '../../common/InternalLinks';
 import DeleteIcon from 'material-ui-icons/Delete';
-import IconButton from "material-ui/IconButton";
+import { InternalLink } from '../../common/InternalLinks';
+import ContrastTextIconButton from "./ContrastTextIconButton";
 
 const DeleteButton = ({ onClick }) => (
   <InternalLink to="/">
-    <IconButton color="inherit" aria-label="delete" onClick={onClick}>
+    <ContrastTextIconButton color="inherit" aria-label="delete" onClick={onClick}>
       <DeleteIcon />
-    </IconButton>
+    </ContrastTextIconButton>
   </InternalLink>
 );
 

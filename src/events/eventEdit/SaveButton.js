@@ -1,12 +1,13 @@
 import React from 'react';
-import Button from 'material-ui/Button';
+import CheckIcon from 'material-ui-icons/Check';
+import IconButton from 'material-ui/IconButton';
 import { InternalLink } from '../../common/InternalLinks';
 
 const SaveButton = ({ onClick }) => (
   <InternalLink to="/">
-    <Button onClick={onClick} color="inherit" aria-label="save" variant="flat">
-      Save
-    </Button>
+    <IconButton onClick={onClick} color="inherit" aria-label="save">
+      <CheckIcon />
+    </IconButton>
   </InternalLink>
 );
 

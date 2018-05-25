@@ -11,12 +11,6 @@ describe('<EventPageToolbar>', () => {
     expect(rendered).toExist();
   });
 
-  it('renders an edit button', () => {
-    const rendered = shallow(<EventPageToolbar />);
-
-    expect(rendered.find(EditButton)).toExist();
-  });
-
   it('renders a delete button', () => {
     const rendered = shallow(<EventPageToolbar />);
 
