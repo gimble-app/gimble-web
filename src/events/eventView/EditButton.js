@@ -1,14 +1,14 @@
 import React from 'react';
 import EditIcon from 'material-ui-icons/Edit';
 import {InternalLink} from "../../common/InternalLinks";
-import ContrastTextIconButton from "./ContrastTextIconButton";
+import Fab from "../../common/Fab";
 
 const EditButton = ({ id }) => (
-  <InternalLink to={`/event/${id}/edit`}>
-    <ContrastTextIconButton color="inherit" aria-label="edit">
+  <Fab aria-label="edit">
+    <InternalLink to={`/event/${id}/edit`}>
       <EditIcon />
-    </ContrastTextIconButton>
-  </InternalLink>
+    </InternalLink>
+  </Fab>
 );
 
 export default EditButton;

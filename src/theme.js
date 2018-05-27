@@ -23,4 +23,13 @@ const theme = createMuiTheme({
   }
 });
 
+export const fromPalette = ({palette}, type) => {
+  switch(type) {
+    case 'primary': return palette.primary.main;
+    case 'secondary': return palette.secondary.main;
+    case 'secondaryContrast': return palette.secondary.contrastText;
+    default: return;
+  }
+};
+
 export default theme;

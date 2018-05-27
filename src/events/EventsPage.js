@@ -6,10 +6,9 @@ import {firebaseConnect, firestoreConnect, isLoaded, isEmpty} from "react-redux-
 import {selectEventsList} from "./selectors";
 import {eventsForUserQuery} from "./firestoreQueries";
 import BackgroundMessage from './BackgroundMessage';
-import AddButton from "../common/AddButton";
+import AddButton from "./AddButton";
 import Page from '../common/Page';
 import EventsOverview from './EventsOverview';
-
 
 export const EventsPage = ({ events }) => (
   <Page>
