@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import Toolbar from 'material-ui/Toolbar';
+import Toolbar from '@material-ui/core/Toolbar';
 import CancelButton from "./CancelButton";
 import DeleteButton from "./DeleteButton";
 import {deleteEvent} from "../eventEdit/actions";

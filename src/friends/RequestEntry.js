@@ -1,8 +1,10 @@
 import React from 'react';
-import {ListItem, ListItemText, ListItemSecondaryAction} from "material-ui/List";
-import IconButton from "material-ui/IconButton";
-import Done from 'material-ui-icons/Done';
-import Clear from 'material-ui-icons/Clear';
+import ListItem from "@material-ui/core/List";
+import ListItemText from "@material-ui/core/List";
+import ListItemSecondaryAction from "@material-ui/core/List";
+import IconButton from "@material-ui/core/IconButton";
+import Done from '@material-ui/icons/Done';
+import Clear from '@material-ui/icons/Clear';
 import {accept, reject} from "./actions";
 import {connect} from "react-redux";
 

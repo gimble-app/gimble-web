@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Button from 'material-ui/Button';
 import styled from 'styled-components';
+import Button from '@material-ui/core/Button';
 import ControlledInput from "../common/ControlledInput";
 import { invite } from './actions';
 

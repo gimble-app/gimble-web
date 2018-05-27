@@ -1,6 +1,6 @@
 import React from 'react';
-import CheckIcon from 'material-ui-icons/Check';
-import IconButton from 'material-ui/IconButton';
+import CheckIcon from '@material-ui/icons/Check';
+import IconButton from '@material-ui/core/IconButton';
 import { InternalLink } from '../../common/InternalLinks';
 
 const SaveButton = ({ onClick }) => (

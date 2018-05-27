@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { FriendEntry } from './FriendEntry';
-import Avatar from "material-ui/Avatar/index";
+import Avatar from "@material-ui/core/Avatar";
 
 describe('<FriendEntry />', () => {
 

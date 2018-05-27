@@ -1,13 +1,8 @@
 import React, {Component} from 'react';
 import {withFirestore} from 'react-redux-firebase';
-import Chip from "material-ui/Chip";
-import Avatar from "material-ui/Avatar";
+import Chip from "@material-ui/core/Chip";
+import Avatar from "@material-ui/core/Avatar";
 import {PROFILES_COLLECTION} from "../../profile/firestoreQueries";
-import styled from "styled-components";
-import {withTheme} from "material-ui/styles";
-
-const StyledP = withTheme()(styled.div`
-`);
 
 class FriendProfileList extends Component {
 
@@ -52,13 +47,13 @@ class FriendProfileList extends Component {
   render () {
     const { membersList } = this.state;
     return (
-      <StyledP>
+      <div>
         { membersList.map(member => <Chip
           avatar={<Avatar src={member.photoUrl} />}
           label={member.displayName}
           key={member.uid}
         />)}
-      </StyledP>
+      </div>
     )
   }
 }

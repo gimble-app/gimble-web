@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
-import {withTheme} from "material-ui/styles";
-import Button from "material-ui/Button";
+import {withTheme} from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
 
 const FixedButton = withTheme()(styled(Button)`
     position:fixed;

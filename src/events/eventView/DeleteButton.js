@@ -1,5 +1,5 @@
 import React from 'react';
-import DeleteIcon from 'material-ui-icons/Delete';
+import DeleteIcon from '@material-ui/icons/Delete';
 import { InternalLink } from '../../common/InternalLinks';
 import ContrastTextIconButton from "./ContrastTextIconButton";
 

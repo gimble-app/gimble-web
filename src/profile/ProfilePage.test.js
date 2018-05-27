@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProfilePage } from './ProfilePage';
-import Avatar from 'material-ui/Avatar';
+import Avatar from '@material-ui/core/Avatar';
 
 describe('<ProfilePage />', () => {
   it('renders an avatar for the profile', () => {

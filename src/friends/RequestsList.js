@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import List from "material-ui/List";
+import List from "@material-ui/core/List";
 import RequestEntry from "./RequestEntry";
 
 const RequestsList = ({ requests }) => (

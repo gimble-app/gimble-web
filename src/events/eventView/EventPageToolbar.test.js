@@ -1,6 +1,5 @@
 import React from 'react';
 import { EventPageToolbar } from './EventPageToolbar';
-import EditButton from './EditButton';
 import DeleteButton from "./DeleteButton";
 import { shallow } from 'enzyme';
 

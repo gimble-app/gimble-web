@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import { withStyles } from 'material-ui/styles';
-import TextField from 'material-ui/TextField';
+import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
 import Page from "../../common/Page";
 
 const styles = theme => ({

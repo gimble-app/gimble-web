@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import AppBar from 'material-ui/AppBar';
+import AppBar from '@material-ui/core/AppBar';
 import {connect} from 'react-redux';
 import ConnectedEventForm from './ConnectedEventForm';
 import {saveEvent} from './actions';

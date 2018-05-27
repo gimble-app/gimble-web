@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardContent } from 'material-ui/Card';
+import CardContent from '@material-ui/core/CardContent';
 import { InternalLink } from '../common/InternalLinks';
 import Card from '../common/Card';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import TextField from 'material-ui/TextField';
+import TextField from '@material-ui/core/TextField';
 import { EventForm } from './EventForm';
 
 it('renders a title text field', () => {

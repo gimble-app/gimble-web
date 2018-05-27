@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import Input from 'material-ui/Input';
+import Input from '@material-ui/core/Input';
 
 export class ControlledInput extends Component {
 

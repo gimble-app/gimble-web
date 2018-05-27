@@ -1,6 +1,6 @@
 import React from 'react';
-import IconButton from 'material-ui/IconButton';
-import NavigationClose from 'material-ui-icons/Close';
+import IconButton from '@material-ui/core/IconButton';
+import NavigationClose from '@material-ui/icons/Close';
 import {withRouter} from "react-router-dom";
 
 const CancelButton = ({ history }) => (

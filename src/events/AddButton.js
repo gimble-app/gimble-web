@@ -1,7 +1,7 @@
 import React from 'react';
-import AddIcon from 'material-ui-icons/Add';
-import { withTheme } from 'material-ui/styles';
-import Fade from 'material-ui/transitions/Fade';
+import AddIcon from '@material-ui/icons/Add';
+import { withTheme } from '@material-ui/core/styles';
+import Fade from '@material-ui/core/Fade';
 import { InternalLink } from '../common/InternalLinks';
 import Fab from "../common/Fab";
 

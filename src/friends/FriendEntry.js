@@ -1,7 +1,7 @@
 import React from 'react';
-import ListItem from "material-ui/List/ListItem";
-import ListItemText from "material-ui/List/ListItemText";
-import Avatar from "material-ui/Avatar";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import Avatar from "@material-ui/core/Avatar";
 
 export const FriendEntry = ({ friend = {} }) =>
   <ListItem>

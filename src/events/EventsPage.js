@@ -1,8 +1,8 @@
 import React from 'react';
 import {compose} from "redux";
 import {connect} from "react-redux";
-import { LinearProgress } from 'material-ui/Progress';
 import {firebaseConnect, firestoreConnect, isLoaded, isEmpty} from "react-redux-firebase";
+import LinearProgress from '@material-ui/core/LinearProgress';
 import {selectEventsList} from "./selectors";
 import {eventsForUserQuery} from "./firestoreQueries";
 import BackgroundMessage from './BackgroundMessage';

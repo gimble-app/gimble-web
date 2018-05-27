@@ -1,7 +1,6 @@
 import React from 'react';
 import { Notifier } from './Notifier';
 import { shallow } from 'enzyme';
-import Snackbar from 'material-ui/Snackbar';
 import Notification from './Notification';
 
 describe('<Notifier>', () => {

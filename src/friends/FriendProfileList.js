@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {withFirestore} from 'react-redux-firebase';
-import FriendEntry from "./FriendEntry";
 import {connect} from "react-redux";
 import {compose} from "redux";
-import List from "material-ui/List";
+import List from "@material-ui/core/List";
 import {selectMyProfileWithFriends} from "../profile/selectors";
+import FriendEntry from "./FriendEntry";
 import {getFriendProfiles} from "./friendProfileData";
 
 class FriendProfileList extends Component {

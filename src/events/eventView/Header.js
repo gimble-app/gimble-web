@@ -1,6 +1,6 @@
-import Paper from "material-ui/Paper";
-import {withTheme} from "material-ui/styles";
 import styled from "styled-components";
+import Paper from "@material-ui/core/Paper";
+import {withTheme} from "@material-ui/core/styles";
 
 export const HEADER_HEIGHT_PX = 140;
 
