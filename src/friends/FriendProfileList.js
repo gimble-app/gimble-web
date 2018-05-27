@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {compose} from "redux";
 import List from "material-ui/List";
 import {selectMyProfileWithFriends} from "../profile/selectors";
-import {PROFILES_COLLECTION} from "../profile/firestoreQueries";
+import {getFriendProfiles} from "./friendProfileData";
 
 class FriendProfileList extends Component {
 
@@ -15,36 +15,16 @@ class FriendProfileList extends Component {
   };
 
   componentDidMount() {
-    this._loadFriends(this.props.firebase, this.state.friends);
+    return this._loadFriends(this.props.firebase, this.state.friends);
   }
 
   static getDerivedStateFromProps(prevProps, prevState) {
     return (prevProps.friends !== prevState.friends) ? prevProps.friends : null;
   }
 
-  _lookupProfileData = async (ref) => {
-    try {
-      const snapshot = await ref.get();
-      return snapshot.data();
-    }
-    catch (e) {
-      console.log('errored while trying to load profile info for friend', e);
-      return {};
-    }
-  };
-
   _loadFriends = async (firebase, friends) => {
-    const result = await Promise.all(
-      Object.keys(friends)
-      .map(id => firebase.firestore().doc(`${PROFILES_COLLECTION}/${id}`))
-      .map(this._lookupProfileData)
-    );
-    const newFriends = result.map(data => ({
-      uid: data.uid,
-      photoURL: data.photoURL,
-      displayName: data.displayName,
-    }));
-    this.setState({ friendsList: newFriends });
+    const friendDetails = await getFriendProfiles(firebase.firestore(), Object.keys(friends));
+    this.setState({ friendsList: friendDetails });
   };
 
   render () {
