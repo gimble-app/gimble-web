@@ -1,14 +1,14 @@
 import React from 'react';
 import EditIcon from 'material-ui-icons/Edit';
 import {InternalLink} from "../../common/InternalLinks";
-import Fab from "../../common/Fab";
+import FixedHeaderButton from "./FixedHeaderButton";
 
 const EditButton = ({ id }) => (
-  <Fab aria-label="edit">
+  <FixedHeaderButton aria-label="edit">
     <InternalLink to={`/event/${id}/edit`}>
       <EditIcon />
     </InternalLink>
-  </Fab>
+  </FixedHeaderButton>
 );
 
 export default EditButton;
