@@ -17,7 +17,7 @@ function updateEvent(getState, { getFirestore }, event, id) {
     const me = selectCurrentUserId(getState());
     return create(EVENTS_COLLECTION, {
       ...event,
-      members: { ...event.members, [me]: true }
+      participants: { ...event.participants, [me]: true }
     }, getFirestore);
   }
   else {

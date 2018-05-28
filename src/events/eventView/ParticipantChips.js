@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import {withFirestore} from 'react-redux-firebase';
-import Chip from "@material-ui/core/Chip";
-import Avatar from "@material-ui/core/Avatar";
 import {PROFILES_COLLECTION} from "../../profile/firestoreQueries";
+import ParticipantChip from "./ParticipantChip";
 
 class ParticipantChips extends Component {
 
@@ -16,7 +15,10 @@ class ParticipantChips extends Component {
   }
 
   static getDerivedStateFromProps(prevProps, prevState) {
-    return (prevProps.participants !== prevState.participants) ? prevProps.participants : null;
+    if (prevProps.participants) {
+      return (prevProps.participants !== prevState.participants) ? prevProps.participants : null;
+    }
+    return null;
   }
 
   _lookupProfileData = async (ref) => {
@@ -30,7 +32,7 @@ class ParticipantChips extends Component {
     }
   };
 
-  _loadFriends = async (firebase, participants) => {
+  _loadFriends = async (firebase, participants = []) => {
     const result = await Promise.all(
       Object.keys(participants)
       .map(id => firebase.firestore().doc(`${PROFILES_COLLECTION}/${id}`))
@@ -47,13 +49,7 @@ class ParticipantChips extends Component {
   render () {
     const { participantsList } = this.state;
     return (
-      <div>
-        { participantsList.map(participant => <Chip
-          avatar={<Avatar src={participant.photoUrl} />}
-          label={participant.displayName}
-          key={participant.uid}
-        />)}
-      </div>
+        participantsList.map(participant => <ParticipantChip participant={participant}/>)
     )
   }
 }
