@@ -4,19 +4,19 @@ import Chip from "@material-ui/core/Chip";
 import Avatar from "@material-ui/core/Avatar";
 import {PROFILES_COLLECTION} from "../../profile/firestoreQueries";
 
-class FriendProfileList extends Component {
+class ParticipantChips extends Component {
 
   state = {
-    members: {},
-    membersList: []
+    participants: {},
+    participantsList: []
   };
 
   componentDidMount() {
-    this._loadFriends(this.props.firebase, this.props.members);
+    this._loadFriends(this.props.firebase, this.props.participants);
   }
 
   static getDerivedStateFromProps(prevProps, prevState) {
-    return (prevProps.members !== prevState.members) ? prevProps.members : null;
+    return (prevProps.participants !== prevState.participants) ? prevProps.participants : null;
   }
 
   _lookupProfileData = async (ref) => {
@@ -25,37 +25,37 @@ class FriendProfileList extends Component {
       return snapshot.data();
     }
     catch (e) {
-      console.log('errored while trying to load profile info for member', e);
+      console.log('errored while trying to load profile info for participant', e);
       return {};
     }
   };
 
-  _loadFriends = async (firebase, members) => {
+  _loadFriends = async (firebase, participants) => {
     const result = await Promise.all(
-      Object.keys(members)
+      Object.keys(participants)
       .map(id => firebase.firestore().doc(`${PROFILES_COLLECTION}/${id}`))
       .map(this._lookupProfileData)
     );
-    const newMembers = result.map(data => ({
+    const profiles = result.map(data => ({
       uid: data.uid,
       photoURL: data.photoURL,
       displayName: data.displayName,
     }));
-    this.setState({ membersList: newMembers });
+    this.setState({ participantsList: profiles });
   };
 
   render () {
-    const { membersList } = this.state;
+    const { participantsList } = this.state;
     return (
       <div>
-        { membersList.map(member => <Chip
-          avatar={<Avatar src={member.photoUrl} />}
-          label={member.displayName}
-          key={member.uid}
+        { participantsList.map(participant => <Chip
+          avatar={<Avatar src={participant.photoUrl} />}
+          label={participant.displayName}
+          key={participant.uid}
         />)}
       </div>
     )
   }
 }
 
-export default withFirestore(FriendProfileList);
+export default withFirestore(ParticipantChips);

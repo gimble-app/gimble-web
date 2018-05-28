@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import Page from "../../common/Page";
 import EventPageToolbar from "./EventPageToolbar";
 import {selectEventFromId} from "../eventEdit/selectors";
-import MembersChipsList from "./MembersChipsList";
+import MembersChipsList from "./ParticipantChips";
 import EditButton from "./EditButton";
 import Header from "./Header";
 import HeaderTitleText from "./HeaderTitleText";
