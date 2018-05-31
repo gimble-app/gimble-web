@@ -1,5 +1,6 @@
 import React, {Fragment} from "react";
 import {connect} from "react-redux";
+import {withRouter} from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import {selectFriendRefs} from "../../friends/selectors";
@@ -10,7 +11,7 @@ import Page from "../../common/Page";
 import {addFriend} from "./actions";
 import {selectEventFromId} from "../eventEdit/selectors";
 
-const AddFriendPage = ({ friends, event, addFriend }) => (
+const AddFriendPage = ({ friends, event, addFriend, history }) => (
   <Fragment>
     <AppBar position="static">
       <Toolbar>
@@ -19,7 +20,10 @@ const AddFriendPage = ({ friends, event, addFriend }) => (
       </Toolbar>
     </AppBar>
     <Page>
-      <FriendProfileList onSelect={(id) => addFriend(event, id)} friends={friends} />
+      <FriendProfileList onSelect={async (id) => {
+        await addFriend(event, id);
+        history.goBack();
+      }} friends={friends} />
     </Page>
   </Fragment>
 );
@@ -30,4 +34,5 @@ const mapStateToProps = (state, { match }) => ({
 
 export default connect(mapStateToProps, {
   addFriend
-})(AddFriendPage);
+})(withRouter(AddFriendPage));
+

@@ -41,7 +41,6 @@ export const saveEvent = (event, id) =>
     try {
       await updateEvent(getState, middleware, event, id);
       dispatch(sendNotification(EVENT_SAVE_SUCCESS));
-
     } catch (error) {
       dispatch(sendNotification(EVENT_SAVE_FAILURE));
       console.log(error);
