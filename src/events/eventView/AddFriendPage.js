@@ -7,8 +7,10 @@ import FriendProfileList from "../../friends/FriendProfileList";
 import CancelButton from "../../common/CancelButton";
 import ToolbarTitleText from "../../common/ToolbarTitleText";
 import Page from "../../common/Page";
+import {addFriend} from "./actions";
+import {selectEventFromId} from "../eventEdit/selectors";
 
-const AddFriendPage = ({ friends }) => (
+const AddFriendPage = ({ friends, event, addFriend }) => (
   <Fragment>
     <AppBar position="static">
       <Toolbar>
@@ -17,11 +19,15 @@ const AddFriendPage = ({ friends }) => (
       </Toolbar>
     </AppBar>
     <Page>
-      <FriendProfileList onSelect={(id) => console.log(id)} friends={friends} />
+      <FriendProfileList onSelect={(id) => addFriend(event, id)} friends={friends} />
     </Page>
   </Fragment>
 );
-
-export default connect(state => ({
+const mapStateToProps = (state, { match }) => ({
+  event: match.params.id ? selectEventFromId(state, match.params.id) : {},
   friends: selectFriendRefs(state)
-}))(AddFriendPage);
+});
+
+export default connect(mapStateToProps, {
+  addFriend
+})(AddFriendPage);

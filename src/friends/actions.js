@@ -70,7 +70,7 @@ const friendProfilesUpdated = (profiles) => ({
 const getProfileFromRef = async (ref) => {
   try {
     const snapshot = await ref.get();
-    return snapshot.data();
+    return snapshot.exists && friendProfileMapper(snapshot.data(), snapshot.id);
   }
   catch (e) {
     console.log('errored while trying to load profile info for friend', e);
@@ -87,15 +87,15 @@ export const mapFriendProfiles = friendRefs =>
           .map(id => firestore.doc(`${PROFILES_COLLECTION}/${id}`))
           .map(getProfileFromRef)
       );
-      const profiles = result.filter(response => !!response).map(friendProfileMapper);
+      const profiles = result.filter(response => !!response);
       dispatch(friendProfilesUpdated(profiles));
     } catch(e) {
       console.error(e);
     }
   };
 
-const friendProfileMapper = data => ({
-  uid: data.uid,
+const friendProfileMapper = (data, id) => ({
+  uid: id,
   photoURL: data.photoURL,
   displayName: data.displayName,
 });
