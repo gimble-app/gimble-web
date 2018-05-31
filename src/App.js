@@ -8,6 +8,7 @@ import {withTheme} from "@material-ui/core/styles";
 import Navigation from './navigation/Navigation';
 import {selectIsLoggedIn} from './auth/selectors';
 import Notifier from './notifications/Notifier';
+import FriendDataPopulator from "./friends/FriendDataPopulator";
 
 const StyledAppRoot = withTheme()(styled.div`
   background: ${props => props.theme.palette.common.grey || 'red' };
@@ -20,6 +21,7 @@ export const App = ({ isLoggedIn, history }) => (
       <Navigation isLoggedIn={isLoggedIn}/>
     </ConnectedRouter>
     <Notifier />
+    { isLoggedIn && <FriendDataPopulator /> }
   </StyledAppRoot>
 );
 

@@ -1,9 +1,18 @@
 import React, {Component} from 'react';
 import {withFirestore} from 'react-redux-firebase';
+import {withTheme} from "@material-ui/core/styles";
+import styled from "styled-components";
 import {PROFILES_COLLECTION} from "../../profile/firestoreQueries";
 import ParticipantChip from "./ParticipantChip";
+import AddFriendButton from "./AddFriendButton";
 
-class ParticipantChips extends Component {
+const ChipList = withTheme()(styled.div`
+  display: flex;
+  align-items: center;
+`);
+
+
+class Participants extends Component {
 
   state = {
     participants: {},
@@ -11,7 +20,7 @@ class ParticipantChips extends Component {
   };
 
   componentDidMount() {
-    this._loadFriends(this.props.firebase, this.props.participants);
+    this._loadParticipants(this.props.firebase, this.props.participants);
   }
 
   static getDerivedStateFromProps(prevProps, prevState) {
@@ -32,7 +41,7 @@ class ParticipantChips extends Component {
     }
   };
 
-  _loadFriends = async (firebase, participants = []) => {
+  _loadParticipants = async (firebase, participants = []) => {
     const result = await Promise.all(
       Object.keys(participants)
       .map(id => firebase.firestore().doc(`${PROFILES_COLLECTION}/${id}`))
@@ -48,10 +57,17 @@ class ParticipantChips extends Component {
 
   render () {
     const { participantsList } = this.state;
+    const { id } = this.props;
+
     return (
-        participantsList.map(participant => <ParticipantChip participant={participant}/>)
+      [
+        <ChipList>
+          { participantsList.map(participant => <ParticipantChip participant={participant}/>) }
+          <AddFriendButton id={id}/>
+        </ChipList>,
+      ]
     )
   }
 }
 
-export default withFirestore(ParticipantChips);
+export default withFirestore(Participants);

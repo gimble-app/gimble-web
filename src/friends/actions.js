@@ -1,3 +1,4 @@
+import {PROFILES_COLLECTION} from '../profile/firestoreQueries';
 import {sendNotification} from '../notifications/actions';
 import {selectCurrentUserId} from "../auth/selectors";
 import {selectMyDisplayName} from "../profile/selectors";
@@ -58,3 +59,43 @@ export const reject = id =>
   async (dispatch, getState, { getFirestore } ) => {
     console.log('rejected', id);
   };
+
+export const FRIEND_PROFILES_UPDATED = 'FRIEND_PROFILES_UPDATED';
+
+const friendProfilesUpdated = (profiles) => ({
+  type: FRIEND_PROFILES_UPDATED,
+  data: profiles
+});
+
+const getProfileFromRef = async (ref) => {
+  try {
+    const snapshot = await ref.get();
+    return snapshot.data();
+  }
+  catch (e) {
+    console.log('errored while trying to load profile info for friend', e);
+  }
+};
+
+export const mapFriendProfiles = friendRefs =>
+  async (dispatch, getState, { getFirestore } ) => {
+    const firestore = getFirestore();
+    try {
+      const profileKeys = Object.keys(friendRefs);
+      const result = await Promise.all(
+        profileKeys
+          .map(id => firestore.doc(`${PROFILES_COLLECTION}/${id}`))
+          .map(getProfileFromRef)
+      );
+      const profiles = result.filter(response => !!response).map(friendProfileMapper);
+      dispatch(friendProfilesUpdated(profiles));
+    } catch(e) {
+      console.error(e);
+    }
+  };
+
+const friendProfileMapper = data => ({
+  uid: data.uid,
+  photoURL: data.photoURL,
+  displayName: data.displayName,
+});

@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import Page from "../../common/Page";
 import EventPageToolbar from "./EventPageToolbar";
 import {selectEventFromId} from "../eventEdit/selectors";
-import ParticipantChips from "./ParticipantChips";
+import Participants from "./Participants";
 import EditButton from "./EditButton";
 import Header from "./Header";
 import HeaderTitleText from "./HeaderTitleText";
@@ -16,7 +16,7 @@ export const EventPage = ({ event }) => (
     </Header>
     <EditButton id={event.id}/>
     <Page>
-      <ParticipantChips participants={ event.participants } />
+      <Participants id={event.id} participants={ event.participants } />
     </Page>
   </Fragment>
 );

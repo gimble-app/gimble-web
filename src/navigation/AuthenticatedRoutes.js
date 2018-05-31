@@ -9,6 +9,7 @@ import EventsPage from "../events/EventsPage";
 import FriendsPage from "../friends/FriendsPage";
 import ProfilePage from "../profile/ProfilePage";
 import EventPage from "../events/eventView/EventPage";
+import AddFriendPage from "../events/eventView/AddFriendPage";
 import {myProfileWithFriends} from "../profile/firestoreQueries";
 import {selectIsLoggedIn} from "../auth/selectors";
 
@@ -28,6 +29,11 @@ const AuthenticatedRoutes = () => (
       exact
       path="/event/:id/edit"
       component={EventScreen}
+    />
+    <Route
+      exact
+      path="/event/:id/add-friend"
+      component={AddFriendPage}
     />
 
     <Route render={() => (
