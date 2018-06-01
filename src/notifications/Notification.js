@@ -24,9 +24,7 @@ class SimpleSnackbar extends React.Component {
           open={true}
           autoHideDuration={6000}
           onClose={onDismiss}
-          SnackbarContentProps={{
-            'aria-describedby': notification.id,
-          }}
+          ContentProps={{ 'aria-describedby': notification.id }}
           message={<span id={notification.id}>{notification.message}</span>}
           action={[
             <IconButton
