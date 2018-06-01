@@ -1,6 +1,6 @@
 import React from 'react';
 import { EventPageToolbar } from './EventPageToolbar';
-import DeleteButton from "./DeleteButton";
+import EventActions from "./EventActions";
 import { shallow } from 'enzyme';
 
 describe('<EventPageToolbar>', () => {
@@ -10,19 +10,12 @@ describe('<EventPageToolbar>', () => {
     expect(rendered).toExist();
   });
 
-  it('renders a delete button', () => {
-    const rendered = shallow(<EventPageToolbar />);
+  it('passes the event id to the actions menu', () => {
+    const wrapper = shallow(<EventPageToolbar id='some-id' />);
 
-    expect(rendered.find(DeleteButton)).toExist();
-  });
+    const prop = wrapper.find(EventActions).prop('id');
 
-  it('passes the event id be deleted', () => {
-    const deleteEvent = jest.fn();
-    const wrapper = shallow(<EventPageToolbar id='some-id' deleteEvent={deleteEvent}/>);
-
-    wrapper.find(DeleteButton).prop('onClick')();
-
-    expect(deleteEvent).toBeCalledWith('some-id');
+    expect(prop).toBe('some-id');
   });
 
 });

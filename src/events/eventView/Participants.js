@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {withFirestore} from 'react-redux-firebase';
 import {PROFILES_COLLECTION} from "../../profile/firestoreQueries";
 import ParticipantChip from "./ParticipantHead";
-import AddFriendButton from "./AddFriendButton";
 import FlexContainer from "../../common/FlexContainer";
 
 class Participants extends Component {
@@ -50,12 +49,10 @@ class Participants extends Component {
 
   render () {
     const { participantsList } = this.state;
-    const { id } = this.props;
 
     return (
         <FlexContainer>
           { participantsList.map(participant => <ParticipantChip participant={participant}/>) }
-          <AddFriendButton id={id}/>
        </FlexContainer>
     )
   }

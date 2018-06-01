@@ -1,22 +1,15 @@
 import React from 'react';
-import {connect} from "react-redux";
 import Toolbar from '@material-ui/core/Toolbar';
 import CancelButton from "./CancelButton";
-import DeleteButton from "./DeleteButton";
-import {deleteEvent} from "../eventEdit/actions";
 import TitleText from "../../common/typography/TitleText";
+import EventActions from "./EventActions";
 
-export const EventPageToolbar = ({id, deleteEvent}) => (
+export const EventPageToolbar = ({id}) => (
   <Toolbar>
     <CancelButton />
     <TitleText/>
-    <DeleteButton onClick={() => deleteEvent(id)} />
+    <EventActions id={id} />
   </Toolbar>
 );
 
-const mapDispatchToProps = {
-  deleteEvent,
-};
-
-export default connect(() => ({}), mapDispatchToProps)(EventPageToolbar);
-
+export default EventPageToolbar;

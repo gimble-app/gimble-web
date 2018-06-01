@@ -17,7 +17,7 @@ export const EventPage = ({ event }) => (
     </Header>
     <EditButton id={event.id}/>
     <Page>
-      <Participants id={event.id} participants={ event.participants } />
+      <Participants participants={ event.participants } />
     </Page>
   </Fragment>
 );
