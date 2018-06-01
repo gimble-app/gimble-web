@@ -2,7 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import {withTheme} from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
-import {HEADER_HEIGHT_PX} from "./Header";
+import {HEADER_HEIGHT_PX} from "./header/Header";
 
 const BUTTON_HEIGHT_OFFSET_PX = 14;
 const FixedButton = withTheme()(styled(Button)`

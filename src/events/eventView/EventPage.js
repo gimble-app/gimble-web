@@ -1,20 +1,14 @@
 import React, {Fragment} from "react";
 import {connect} from "react-redux";
 import Page from "../../common/Page";
-import HeaderTitleText from "../../common/typography/HeaderText";
-import EventPageToolbar from "./EventPageToolbar";
 import {selectEventFromId} from "../eventEdit/selectors";
 import Participants from "./Participants";
 import EditButton from "./EditButton";
-import Header from "./Header";
-import HeaderContent from "./HeaderContent";
+import EventHeader from "./header/EventHeader";
 
 export const EventPage = ({ event }) => (
   <Fragment>
-    <Header>
-      <EventPageToolbar id={ event.id }/>
-      <HeaderContent><HeaderTitleText>{ event.title }</HeaderTitleText></HeaderContent>
-    </Header>
+    <EventHeader event={event}/>
     <EditButton id={event.id}/>
     <Page>
       <Participants participants={ event.participants } />

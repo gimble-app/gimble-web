@@ -1,6 +1,6 @@
 import React from "react";
 import MenuItem from "@material-ui/core/MenuItem";
-import {InternalLink} from "../../common/InternalLinks";
+import {InternalLink} from "../../../common/InternalLinks";
 
 const AddFriendMenuItem = ({id, onClick}) =>
   <MenuItem onClick={onClick}>

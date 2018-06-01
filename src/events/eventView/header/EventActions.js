@@ -3,7 +3,7 @@ import Menu from '@material-ui/core/Menu';
 import Divider from "@material-ui/core/Divider";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import DeleteMenuItem from "./DeleteMenuItem";
-import {deleteEvent} from "../eventEdit/actions";
+import {deleteEvent} from "../../eventEdit/actions";
 import {connect} from "react-redux";
 import AddFriendMenuItem from "./AddFriendMenuItem";
 import ContrastTextIconButton from "./ContrastTextIconButton";
