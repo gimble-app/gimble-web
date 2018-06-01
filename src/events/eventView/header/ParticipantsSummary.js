@@ -53,7 +53,7 @@ class Participants extends Component {
     return (
         <FlexContainer>
           { participantsList.map(
-            participant => (<AvatarOrPlaceholder key={participant.displayName} photoUrl={participant.photoUrl} />)
+            participant => (<AvatarOrPlaceholder key={participant.displayName} photoUrl={participant.photoURL} />)
           ) }
        </FlexContainer>
     )
