@@ -2,12 +2,12 @@ import React from 'react';
 import Toolbar from '@material-ui/core/Toolbar';
 import CancelButton from '../../common/CancelButton';
 import SaveButton from './SaveButton';
-import ToolbarTitleText from '../../common/ToolbarTitleText';
+import TitleText from '../../common/typography/TitleText';
 
 const EditingEventToolBar = ({ onSave }) => (
   <Toolbar>
     <CancelButton />
-    <ToolbarTitleText />
+    <TitleText />
     <SaveButton onClick={onSave}/>
   </Toolbar>
 );

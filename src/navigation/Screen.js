@@ -5,14 +5,14 @@ import IconButton from '@material-ui/core/IconButton';
 import EventNote from '@material-ui/icons/EventNote';
 import Group from '@material-ui/icons/Group';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import ToolbarTitleText from '../common/ToolbarTitleText';
+import TitleText from '../common/typography/TitleText';
 import {NavigationLink} from "../common/NavigationLink";
 
 export default ({ children }) => (
   <Fragment>
     <AppBar position="sticky">
       <Toolbar>
-        <ToolbarTitleText />
+        <TitleText />
         <NavItem to="friends"><Group /></NavItem>
         <NavItem to="events"><EventNote /></NavItem>
         <NavItem to="profile"><AccountCircle /></NavItem>

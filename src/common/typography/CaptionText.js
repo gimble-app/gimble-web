@@ -2,20 +2,20 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import styled from 'styled-components';
 
-export const StyledTypography = styled(Typography)`
+const StyledTypography = styled(Typography)`
   flex: 1;
 `;
 
-export const ToolbarTitleText = ({ children, ...props}) =>
+const CaptionText = ({ children, ...props}) =>
 <StyledTypography
-  variant="title"
+  variant="caption"
   color="inherit"
   {...props}
 >
   {children}
-</StyledTypography>
+</StyledTypography>;
 
-export default ToolbarTitleText;
+export default CaptionText;
 
 
 

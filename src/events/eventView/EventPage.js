@@ -6,7 +6,7 @@ import {selectEventFromId} from "../eventEdit/selectors";
 import Participants from "./Participants";
 import EditButton from "./EditButton";
 import Header from "./Header";
-import HeaderTitleText from "./HeaderTitleText";
+import HeaderTitleText from "../../common/typography/HeaderText";
 
 export const EventPage = ({ event }) => (
   <Fragment>

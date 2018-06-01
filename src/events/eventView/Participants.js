@@ -1,16 +1,9 @@
 import React, {Component} from 'react';
 import {withFirestore} from 'react-redux-firebase';
-import {withTheme} from "@material-ui/core/styles";
-import styled from "styled-components";
 import {PROFILES_COLLECTION} from "../../profile/firestoreQueries";
-import ParticipantChip from "./ParticipantChip";
+import ParticipantChip from "./ParticipantHead";
 import AddFriendButton from "./AddFriendButton";
-
-const ChipList = withTheme()(styled.div`
-  display: flex;
-  align-items: center;
-`);
-
+import FlexContainer from "../../common/FlexContainer";
 
 class Participants extends Component {
 
@@ -60,12 +53,10 @@ class Participants extends Component {
     const { id } = this.props;
 
     return (
-      [
-        <ChipList>
+        <FlexContainer>
           { participantsList.map(participant => <ParticipantChip participant={participant}/>) }
           <AddFriendButton id={id}/>
-        </ChipList>,
-      ]
+       </FlexContainer>
     )
   }
 }

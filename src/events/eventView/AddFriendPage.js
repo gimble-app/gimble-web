@@ -6,7 +6,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import {selectFriendRefs} from "../../friends/selectors";
 import FriendProfileList from "../../friends/FriendProfileList";
 import CancelButton from "../../common/CancelButton";
-import ToolbarTitleText from "../../common/ToolbarTitleText";
+import TitleText from "../../common/typography/TitleText";
 import Page from "../../common/Page";
 import {addFriend} from "./actions";
 import {selectEventFromId} from "../eventEdit/selectors";
@@ -16,7 +16,7 @@ const AddFriendPage = ({ friends, event, addFriend, history }) => (
     <AppBar position="static">
       <Toolbar>
         <CancelButton />
-        <ToolbarTitleText>Add a friend</ToolbarTitleText>
+        <TitleText>Add a friend</TitleText>
       </Toolbar>
     </AppBar>
     <Page>

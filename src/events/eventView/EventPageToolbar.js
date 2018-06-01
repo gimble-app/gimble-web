@@ -4,12 +4,12 @@ import Toolbar from '@material-ui/core/Toolbar';
 import CancelButton from "./CancelButton";
 import DeleteButton from "./DeleteButton";
 import {deleteEvent} from "../eventEdit/actions";
-import ToolbarTitleText from "../../common/ToolbarTitleText";
+import TitleText from "../../common/typography/TitleText";
 
 export const EventPageToolbar = ({id, deleteEvent}) => (
   <Toolbar>
     <CancelButton />
-    <ToolbarTitleText/>
+    <TitleText/>
     <DeleteButton onClick={() => deleteEvent(id)} />
   </Toolbar>
 );

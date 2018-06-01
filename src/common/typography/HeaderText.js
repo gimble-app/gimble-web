@@ -4,12 +4,12 @@ import Typography from "@material-ui/core/Typography";
 import styled from "styled-components";
 import {fromPalette} from "../../theme";
 
-const HeaderTitleText = withTheme()(styled(Typography)`
+const HeaderText = withTheme()(styled(Typography)`
   color: ${({theme}) => fromPalette(theme, 'secondaryContrast')};
 `);
 
 export default ({ children }) => (
-  <HeaderTitleText variant="display1" color="inherit">
+  <HeaderText variant="display1" color="inherit">
     { children }
-  </HeaderTitleText>
+  </HeaderText>
 );
