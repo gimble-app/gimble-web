@@ -5,13 +5,13 @@ import { shallow } from 'enzyme';
 
 describe('<EventPageToolbar>', () => {
   it('renders the component', () => {
-    const rendered = shallow(<EventPageToolbar />);
+    const rendered = shallow(<EventPageToolbar event={{id:'some-id'}} />);
 
     expect(rendered).toExist();
   });
 
   it('passes the event id to the actions menu', () => {
-    const wrapper = shallow(<EventPageToolbar id='some-id' />);
+    const wrapper = shallow(<EventPageToolbar event={{id:'some-id'}} />);
 
     const prop = wrapper.find(EventActions).prop('id');
 

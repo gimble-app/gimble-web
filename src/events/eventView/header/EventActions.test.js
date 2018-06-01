@@ -2,13 +2,14 @@ import React from 'react';
 import { EventActions } from './EventActions';
 import DeleteMenuItem from "./DeleteMenuItem";
 import { shallow } from 'enzyme';
-import AddFriendMenuItem from "./AddFriendMenuItem";
+import ChangeParticipantsMenuItem from "./ChangeParticipantsMenuItem";
 
 describe('<EventActions>', () => {
   it('renders an add friend menu item', () => {
-    const rendered = shallow(<EventActions />);
+    const rendered = shallow(<EventActions id='some-id' />);
 
-    expect(rendered.find(AddFriendMenuItem)).toExist();
+    expect(rendered.find(ChangeParticipantsMenuItem)).toExist();
+    expect(rendered.find(ChangeParticipantsMenuItem).prop('id')).toBe('some-id');
   });
 
   it('renders a delete menu item', () => {

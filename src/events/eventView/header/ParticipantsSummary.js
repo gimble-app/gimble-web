@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {withFirestore} from 'react-redux-firebase';
-import {PROFILES_COLLECTION} from "../../profile/firestoreQueries";
-import ParticipantChip from "./ParticipantHead";
-import FlexContainer from "../../common/FlexContainer";
+import {PROFILES_COLLECTION} from "../../../profile/firestoreQueries";
+import FlexContainer from "../../../common/FlexContainer";
+import AvatarOrPlaceholder from "../AvatarOrPlaceholder";
 
 class Participants extends Component {
 
@@ -52,7 +52,9 @@ class Participants extends Component {
 
     return (
         <FlexContainer>
-          { participantsList.map(participant => <ParticipantChip participant={participant}/>) }
+          { participantsList.map(
+            participant => (<AvatarOrPlaceholder key={participant.displayName} photoUrl={participant.photoUrl} />)
+          ) }
        </FlexContainer>
     )
   }

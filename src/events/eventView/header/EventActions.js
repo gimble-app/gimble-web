@@ -5,7 +5,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import DeleteMenuItem from "./DeleteMenuItem";
 import {deleteEvent} from "../../eventEdit/actions";
 import {connect} from "react-redux";
-import AddFriendMenuItem from "./AddFriendMenuItem";
+import ChangeParticipantsMenuItem from "./ChangeParticipantsMenuItem";
 import ContrastTextIconButton from "./ContrastTextIconButton";
 
 export class EventActions extends Component {
@@ -39,7 +39,7 @@ export class EventActions extends Component {
         open={Boolean(anchorEl)}
         onClose={this.handleClose}
       >
-        <AddFriendMenuItem onClick={this.handleClose}/>
+        <ChangeParticipantsMenuItem id={id} onClick={this.handleClose}/>
         <Divider />
         <DeleteMenuItem onClick={() => {
           deleteEvent(id);
