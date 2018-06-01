@@ -51,7 +51,7 @@ class Participants extends Component {
     const { participantsList } = this.state;
 
     return (
-        <FlexContainer style={{'margin-bottom': '16px'}}>
+        <FlexContainer style={{marginBottom: '16px'}}>
           { participantsList.map(participant => <ParticipantChip key={participant.displayName} participant={participant}/>) }
        </FlexContainer>
     )
