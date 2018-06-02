@@ -4,7 +4,7 @@ import {firestoreConnect} from "react-redux-firebase";
 import {firebaseConnect} from "react-redux-firebase";
 import {compose} from "redux";
 import EventScreen from "../events/eventEdit/EventScreen";
-import Screen from "./Screen";
+import Screen from "./BaseScreen";
 import EventsPage from "../events/EventsPage";
 import FriendsPage from "../friends/FriendsPage";
 import ProfilePage from "../profile/ProfilePage";
