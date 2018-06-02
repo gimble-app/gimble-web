@@ -9,8 +9,8 @@ import {selectIsLoggedIn} from './selectors';
 
 export const LogoutMenuOption = ({ logout, isLoggedIn }) =>
   isLoggedIn
-    ? <Button color="inherit" aria-label="logout" onClick={logout} variant="flat">Logout</Button>
-    : <Redirect to="/login" />
+    ? <Button color="inherit" aria-label="logout" onClick={logout} variant="outlined">Logout</Button>
+    : <Redirect to="/login" />;
 
 const mapDispatchToProps = {
   logout
