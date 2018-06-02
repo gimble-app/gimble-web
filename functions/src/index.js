@@ -7,3 +7,5 @@ admin.initializeApp();
 export const requestFriend = https.onCall(request);
 export const rescindFriendRequest = https.onCall(rescind);
 export const acceptFriendRequest = https.onCall(accept);
+export { attachImageToEvent } from './events';
+
