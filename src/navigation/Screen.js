@@ -1,32 +1,28 @@
 import React, { Fragment } from 'react';
 import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
 import EventNote from '@material-ui/icons/EventNote';
 import Group from '@material-ui/icons/Group';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import TitleText from '../common/typography/TitleText';
 import {NavigationLink} from "../common/NavigationLink";
+import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
+import BottomNavigation from "@material-ui/core/BottomNavigation";
+import withRouter from "react-router-dom/withRouter";
 
-export default ({ children }) => (
+export default withRouter(({ children, location }) => (
   <Fragment>
     <AppBar position="sticky">
-      <Toolbar>
-        <TitleText />
-        <NavItem to="friends"><Group /></NavItem>
-        <NavItem to="events"><EventNote /></NavItem>
-        <NavItem to="profile"><AccountCircle /></NavItem>
-      </Toolbar>
+      <BottomNavigation>
+        <NavItem currentPath={location.pathname} to="friends" icon={<Group />} />
+        <NavItem currentPath={location.pathname} to="events" icon={<EventNote />} />
+        <NavItem currentPath={location.pathname} to="profile" icon={<AccountCircle />} />
+      </BottomNavigation>
     </AppBar>
     { children }
   </Fragment>
+))
+
+const NavItem = ({ to, icon, children, currentPath }) => (
+  <NavigationLink to={to}>
+    <BottomNavigationAction selected={currentPath.includes(to)} showLabel label={to} icon={icon} />
+  </NavigationLink>
 );
-
-const NavItem = ({ to, children }) => (
-
-  <IconButton
-    color="inherit"
-  >
-    <NavigationLink to={to}>{children}</NavigationLink>
-  </IconButton>
-)
