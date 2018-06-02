@@ -11,3 +11,7 @@ body {
 figure {
   margin: inherit;
 }
+
+a {
+  display: inherit;
+}
