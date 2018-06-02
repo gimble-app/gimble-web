@@ -3,10 +3,8 @@ import { createStore, compose, applyMiddleware } from 'redux';
 import { reduxFirestore, getFirestore } from 'redux-firestore';
 import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
 import rootReducer from './reducers';
-import { routerMiddleware } from 'react-router-redux';
 import firebase from './clients/firebase';
 import { functionLookup } from './clients/remoteFunctions';
-import createHistory from 'history/createBrowserHistory';
 
 const config = {
   attachAuthIsReady: true,
@@ -25,8 +23,6 @@ const config = {
 
 export default (initialState = {}) => {
 
-  const history = createHistory();
-  const historyMiddleware = routerMiddleware(history);
   const createStoreWithFirebase = compose(
     applyMiddleware(
        thunk.withExtraArgument({
@@ -34,7 +30,6 @@ export default (initialState = {}) => {
          getFirestore,
          getFirebase,
        }),
-       historyMiddleware
      ),
     reactReduxFirebase(firebase, config),
     reduxFirestore(firebase),
@@ -43,5 +38,5 @@ export default (initialState = {}) => {
 
   const store = createStoreWithFirebase(rootReducer, initialState);
 
-  return { store, history };
+  return store;
 }

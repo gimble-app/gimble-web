@@ -2,9 +2,9 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
 import {firebaseConnect} from "react-redux-firebase";
-import {ConnectedRouter} from 'react-router-redux';
 import styled from "styled-components";
 import {withTheme} from "@material-ui/core/styles";
+import BrowserRouter from "react-router-dom/BrowserRouter";
 import Navigation from './navigation/Navigation';
 import {selectIsLoggedIn} from './auth/selectors';
 import Notifier from './notifications/Notifier';
@@ -15,11 +15,11 @@ const StyledAppRoot = withTheme()(styled.div`
   min-height: 100vh;
 `);
 
-export const App = ({ isLoggedIn, history }) => (
+export const App = ({ isLoggedIn }) => (
   <StyledAppRoot>
-    <ConnectedRouter history={history}>
+    <BrowserRouter>
       <Navigation isLoggedIn={isLoggedIn}/>
-    </ConnectedRouter>
+    </BrowserRouter>
     <Notifier />
     { isLoggedIn && <FriendDataPopulator /> }
   </StyledAppRoot>

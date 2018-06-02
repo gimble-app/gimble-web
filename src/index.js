@@ -14,13 +14,13 @@ import theme from './theme';
 const generateClassName = createGenerateClassName();
 const jss = create(jssPreset());
 jss.options.insertionPoint = document.getElementById('jss-insertion-point');
-const { store, history } = initStore();
+const store = initStore();
 
 render(
   <JssProvider jss={jss} generateClassName={generateClassName}>
     <Provider store={store}>
       <MuiThemeProvider theme={theme}>
-        <App history={history}/>
+        <App/>
       </MuiThemeProvider>
     </Provider>
   </JssProvider>,
