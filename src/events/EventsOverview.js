@@ -8,6 +8,7 @@ const EventsOverview = ({ events }) => (
       key={event.id}
       id={event.id}
       title={event.title}
+      image={event.image}
     />)  }
   </CardCollection>
 );
