@@ -17,7 +17,7 @@ export const attachImageToEvent = firestore
 
     const data = response.data;
     const image = {};
-    image.src = data.results[0].urls.regular;
+    image.src = data.results[0].urls.small;
     image.author = data.results[0].user.username;
     return snap.ref.set({image: image}, {merge: true});
   });
