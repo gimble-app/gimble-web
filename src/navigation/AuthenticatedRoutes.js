@@ -12,6 +12,10 @@ import EventPage from "../events/eventView/EventPage";
 import AddFriendPage from "../events/eventView/friends/AddFriendPage";
 import {myProfileWithFriends} from "../profile/firestoreQueries";
 import {selectIsLoggedIn} from "../auth/selectors";
+import PageSlideIn from "../common/animation/PageSlideIn";
+import PageFadeIn from "../common/animation/PageFadeIn";
+
+const PUSH_ACTION = "PUSH";
 
 const AuthenticatedRoutes = () => (
   <Switch>
@@ -23,7 +27,12 @@ const AuthenticatedRoutes = () => (
     <Route
       exact
       path="/event/:id"
-      component={EventPage}
+      children={({match, history}) => (
+        match &&
+          history.action === PUSH_ACTION
+          ? <PageFadeIn><EventPage match={match}/></PageFadeIn>
+          : <EventPage match={match}/>
+      )}
     />
     <Route
       exact
@@ -33,7 +42,7 @@ const AuthenticatedRoutes = () => (
     <Route
       exact
       path="/event/:id/participants"
-      component={AddFriendPage}
+      children={({match}) => match && <PageSlideIn><AddFriendPage match={match}/></PageSlideIn>}
     />
 
     <Route render={() => (
