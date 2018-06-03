@@ -1,13 +1,11 @@
-import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
+import Tab from "@material-ui/core/Tab";
 import {NavigationLink} from "../common/NavigationLink";
 import React from "react";
 
-const BaseNavigationItem = ({ to, icon, isActive }) => (
+const BaseNavigationItem = ({ to, icon }) => (
   <NavigationLink to={to}>
-    <BottomNavigationAction
-      selected={isActive}
-      showLabel
-      label={to}
+    <Tab
+      value={to}
       icon={icon}
     />
   </NavigationLink>

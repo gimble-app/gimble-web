@@ -17,6 +17,10 @@ import PageFadeIn from "../common/animation/PageFadeIn";
 
 const PUSH_ACTION = "PUSH";
 
+export const EVENTS_KEY = "events";
+export const FRIENDS_KEY = "friends";
+export const PROFILE_KEY = "profile";
+
 const AuthenticatedRoutes = () => (
   <Switch>
     <Route
@@ -48,10 +52,10 @@ const AuthenticatedRoutes = () => (
     <Route render={() => (
       <Screen>
         <Switch>
-          <Route exact path="/events" component={EventsPage} />
-          <Route exact path="/friends" component={FriendsPage} />
-          <Route exact path="/profile" component={ProfilePage} />
-          <Redirect to="/events" />
+          <Route exact path={`/${EVENTS_KEY}`} component={EventsPage} />
+          <Route exact path={`/${FRIENDS_KEY}`} component={FriendsPage} />
+          <Route exact path={`/${PROFILE_KEY}`} component={ProfilePage} />
+          <Redirect to="events" />
         </Switch>
       </Screen>
     )} />
