@@ -12,20 +12,20 @@ export const ACCEPT_SUCCESS = 'invite accepted';
 export const ACCEPT_FAILURE = 'failed to accept invite';
 
 export const invite = email =>
-  async (dispatch, getState, { getRemoteFunction } ) => {
-    try {
-      const requestFriend = getRemoteFunction(REQUEST_FRIEND);
-      await requestFriend({
-        to: email,
-        from: selectCurrentUserId(getState()),
-        fromName: selectMyDisplayName(getState())
-      });
-
+  (dispatch, getState, { getRemoteFunction } ) => {
+    const requestFriend = getRemoteFunction(REQUEST_FRIEND);
+    return requestFriend({
+      to: email,
+      from: selectCurrentUserId(getState()),
+      fromName: selectMyDisplayName(getState())
+    }).then(() => {
       dispatch(sendNotification(INVITE_SUCCESS));
-    } catch(error) {
+      return true;
+    }).catch(error => {
       dispatch(sendNotification(INVITE_FAILURE));
       console.log(error);
-    }
+      return false;
+    });
   };
 
 export const rescind = id =>
@@ -35,9 +35,11 @@ export const rescind = id =>
       await rescindFriendRequest({ id });
 
       dispatch(sendNotification(RESCIND_SUCCESS));
+      return true;
     } catch(error) {
       dispatch(sendNotification(RESCIND_FAILURE));
       console.log(error);
+      return false;
     }
   };
 
