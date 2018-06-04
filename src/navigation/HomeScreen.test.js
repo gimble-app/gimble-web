@@ -1,31 +1,20 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { HomeScreen } from './HomeScreen';
+import SwipeableViews from "react-swipeable-views";
 import FriendsPage from "../friends/FriendsPage";
 import EventsPage from "../events/EventsPage";
 import ProfilePage from "../profile/ProfilePage";
 
 describe('<HomeScreen />', () => {
-  it('renders the pages to swipe through', () => {
-    const wrapper = shallow(<HomeScreen
-      events={[]}
-      theme={{}}
-    ></HomeScreen>);
+  it('renders the pages to swipe through in the correct order', () => {
+    const wrapper = shallow(<HomeScreen events={[]} theme={{}} />);
 
-    expect(wrapper.find(FriendsPage)).toExist();
-    expect(wrapper.find(EventsPage)).toExist();
-    expect(wrapper.find(ProfilePage)).toExist();
-  });
+    const views = wrapper.find(SwipeableViews);
 
-  it('renders navigation links', () => {
-    const wrapper = shallow(<HomeScreen
-      events={[]}
-      theme={{}}
-    >></HomeScreen>);
-
-    expect(wrapper.find('[label="friends"]')).toExist();
-    expect(wrapper.find('[label="events"]')).toExist();
-    expect(wrapper.find('[label="profile"]')).toExist();
+    expect(views.childAt(0).type()).toEqual(FriendsPage);
+    expect(views.childAt(1).type()).toEqual(EventsPage);
+    expect(views.childAt(2).type()).toEqual(ProfilePage);
   });
 });
 
