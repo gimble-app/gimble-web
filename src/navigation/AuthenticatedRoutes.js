@@ -1,13 +1,9 @@
 import React from 'react'
-import {Redirect, Route, Switch} from 'react-router-dom';
-import {firestoreConnect} from "react-redux-firebase";
-import {firebaseConnect} from "react-redux-firebase";
+import {Route, Switch} from 'react-router-dom';
+import {firebaseConnect, firestoreConnect} from "react-redux-firebase";
 import {compose} from "redux";
 import EventScreen from "../events/eventEdit/EventScreen";
-import Screen from "./BaseScreen";
-import EventsPage from "../events/EventsPage";
-import FriendsPage from "../friends/FriendsPage";
-import ProfilePage from "../profile/ProfilePage";
+import HomeScreen from "./HomeScreen";
 import EventPage from "../events/eventView/EventPage";
 import AddFriendPage from "../events/eventView/friends/AddFriendPage";
 import {myProfileWithFriends} from "../profile/firestoreQueries";
@@ -17,17 +13,9 @@ import PageFadeIn from "../common/animation/PageFadeIn";
 
 const PUSH_ACTION = "PUSH";
 
-export const EVENTS_KEY = "events";
-export const FRIENDS_KEY = "friends";
-export const PROFILE_KEY = "profile";
-
 const AuthenticatedRoutes = () => (
   <Switch>
-    <Route
-      exact
-      path="/event"
-      component={EventScreen}
-    />
+    <Route exact path="/event" component={EventScreen} />
     <Route
       exact
       path="/event/:id"
@@ -38,27 +26,14 @@ const AuthenticatedRoutes = () => (
           : <EventPage match={match}/>
       )}
     />
-    <Route
-      exact
-      path="/event/:id/edit"
-      component={EventScreen}
-    />
+    <Route exact path="/event/:id/edit" component={EventScreen} />
     <Route
       exact
       path="/event/:id/participants"
       children={({match}) => match && <PageSlideIn><AddFriendPage match={match}/></PageSlideIn>}
     />
 
-    <Route render={() => (
-      <Screen>
-        <Switch>
-          <Route exact path={`/${EVENTS_KEY}`} component={EventsPage} />
-          <Route exact path={`/${FRIENDS_KEY}`} component={FriendsPage} />
-          <Route exact path={`/${PROFILE_KEY}`} component={ProfilePage} />
-          <Redirect to="events" />
-        </Switch>
-      </Screen>
-    )} />
+    <Route exact path={'/'} component={HomeScreen} />
   </Switch>
 );
 
