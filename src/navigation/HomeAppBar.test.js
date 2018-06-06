@@ -7,9 +7,9 @@ describe('<HomeAppBar />', () => {
     const wrapper = shallow(<HomeAppBar events={[]} theme={{}} />);
     const tabs = wrapper.find('SpacedTabs');
 
-    expect(tabs.childAt(0).prop('label')).toEqual("friends");
-    expect(tabs.childAt(1).prop('label')).toEqual("events");
-    expect(tabs.childAt(2).prop('label')).toEqual("profile");
+    expect(tabs.childAt(0).prop('label')).toEqual("events");
+    expect(tabs.childAt(1).prop('label')).toEqual("profile");
+    expect(tabs.childAt(2).prop('label')).toEqual("friends");
   });
 });
 

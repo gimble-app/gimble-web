@@ -23,9 +23,9 @@ const PROFILE_KEY = "profile";
 const HomeAppBar = ({ onSelect, value }) => (
   <FadingAppBar>
     <SpacedTabs fullWidth value={value} onChange={onSelect}>
-      <Tab label={FRIENDS_KEY} icon={<GroupIcon />} />
       <Tab label={EVENTS_KEY} icon={<EventNoteIcon />} />
       <Tab label={PROFILE_KEY} icon={<ProfileIcon />} />
+      <Tab label={FRIENDS_KEY} icon={<GroupIcon />} />
     </SpacedTabs>
   </FadingAppBar>
 );

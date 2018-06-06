@@ -10,7 +10,7 @@ import HomeAppBar from "./HomeAppBar";
 export class HomeScreen extends Component {
 
   state = {
-    value: 1
+    value: 0
   };
 
   handleChange = (event, value) => {
@@ -32,9 +32,9 @@ export class HomeScreen extends Component {
           index={value}
           onChangeIndex={this.handleSwipeChange}
         >
-          <FriendsPage />
           <EventsPage />
           <ProfilePage />
+          <FriendsPage />
         </SwipeableViews>
       </Fragment>
     );

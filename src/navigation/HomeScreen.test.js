@@ -12,9 +12,9 @@ describe('<HomeScreen />', () => {
 
     const views = wrapper.find(SwipeableViews);
 
-    expect(views.childAt(0).type()).toEqual(FriendsPage);
-    expect(views.childAt(1).type()).toEqual(EventsPage);
-    expect(views.childAt(2).type()).toEqual(ProfilePage);
+    expect(views.childAt(0).type()).toEqual(EventsPage);
+    expect(views.childAt(1).type()).toEqual(ProfilePage);
+    expect(views.childAt(2).type()).toEqual(FriendsPage);
   });
 });
 
