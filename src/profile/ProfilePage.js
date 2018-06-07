@@ -5,30 +5,39 @@ import {firebaseConnect, firestoreConnect} from "react-redux-firebase";
 import styled from "styled-components";
 import Avatar from "@material-ui/core/Avatar";
 import {selectMyProfile} from "./selectors";
-import Page from '../common/Page';
 import LogoutMenuOption from "../auth/LogoutMenuOption";
 import {myProfile} from "./firestoreQueries";
-import TitleText from "../common/typography/TitleText";
+import FriendsPage from "../friends/FriendsPage";
+import {withTheme} from "@material-ui/core/styles/index";
+import {fromPalette} from "../theme";
+import FlexContainer from "../common/FlexContainer";
 
-export const BigAvatar = styled(Avatar)`
+export const BigAvatar = withTheme()(styled(Avatar)`
+  border: 2px solid #ffffff;
   width: 80px;
   height: 80px;
-`;
+  box-shadow: 0 0 0px 4px ${({theme}) => fromPalette(theme, 'secondary')};
+  margin-bottom:${({theme}) => theme.spacing.unit * 2}px;
+`);
 
-const CenteredPage = styled(Page)`
-  height: 75vh;
-  display: flex;
+const CenteredFlex = styled(FlexContainer)`
   justify-content: space-between;
   align-items: center;
-  flex-direction: column;
+  flex-direction: column; 
 `;
 
+const ProfilePanel = withTheme()(styled(CenteredFlex)`
+  margin:${({theme}) => theme.spacing.unit * 2}px 0px;
+`);
+
 export const ProfilePage = ({ profile = {} }) => (
-  <CenteredPage>
-    <TitleText> Hey { profile.displayName } </TitleText>
-    <BigAvatar src={profile && profile.photoURL }></BigAvatar>
-    <LogoutMenuOption />
-  </CenteredPage>
+    <CenteredFlex>
+      <ProfilePanel>
+        <BigAvatar src={profile && profile.photoURL }></BigAvatar>
+        <LogoutMenuOption />
+      </ProfilePanel>
+      <FriendsPage />
+    </CenteredFlex>
 );
 
 export default compose(

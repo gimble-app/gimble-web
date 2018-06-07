@@ -2,7 +2,6 @@ import React, {Component, Fragment} from 'react';
 import withRouter from "react-router-dom/withRouter";
 import {withTheme} from "@material-ui/core/styles";
 import SwipeableViews from 'react-swipeable-views';
-import FriendsPage from "../friends/FriendsPage";
 import EventsPage from "../events/EventsPage";
 import ProfilePage from "../profile/ProfilePage";
 import HomeAppBar from "./HomeAppBar";
@@ -34,7 +33,6 @@ export class HomeScreen extends Component {
         >
           <EventsPage />
           <ProfilePage />
-          <FriendsPage />
         </SwipeableViews>
       </Fragment>
     );

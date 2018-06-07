@@ -2,7 +2,6 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { HomeScreen } from './HomeScreen';
 import SwipeableViews from "react-swipeable-views";
-import FriendsPage from "../friends/FriendsPage";
 import EventsPage from "../events/EventsPage";
 import ProfilePage from "../profile/ProfilePage";
 
@@ -14,7 +13,6 @@ describe('<HomeScreen />', () => {
 
     expect(views.childAt(0).type()).toEqual(EventsPage);
     expect(views.childAt(1).type()).toEqual(ProfilePage);
-    expect(views.childAt(2).type()).toEqual(FriendsPage);
   });
 });
 

@@ -27,6 +27,7 @@ export const fromPalette = ({palette}, type) => {
   switch(type) {
     case 'primary': return palette.primary.main;
     case 'secondary': return palette.secondary.main;
+    case 'secondaryLight': return palette.secondary.light;
     case 'secondaryContrast': return palette.secondary.contrastText;
     default: return;
   }
