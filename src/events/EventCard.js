@@ -13,6 +13,7 @@ const StyledCardMedia = styled(CardMedia)`
 `;
 
 const StyledCardContent = styled(CardContent)`
+  min-width: 120px;
   flex: 1;
 `;
 
