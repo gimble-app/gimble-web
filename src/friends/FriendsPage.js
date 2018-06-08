@@ -20,7 +20,13 @@ const Div = withTheme()(styled.div`
 
 export const FriendsPage = ({ requests, friends }) => (
   <Div>
-    <FlexContainer><SectionHeaderText>Friends</SectionHeaderText><AddButton /></FlexContainer>
+    <FlexContainer
+      justifyContent="space-between"
+      alignItems="center"
+    >
+      <SectionHeaderText>Friends</SectionHeaderText>
+      <AddButton />
+    </FlexContainer>
 
     {!!friends && <FriendProfileList friends={friends} /> }
 
