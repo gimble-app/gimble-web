@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {withFirestore} from 'react-redux-firebase';
 import {PROFILES_COLLECTION} from "../../../profile/firestoreQueries";
-import FlexContainer from "../../../common/FlexContainer";
+import FlexContainer from "../../../common/layout/FlexContainer";
 import AvatarOrPlaceholder from "../AvatarOrPlaceholder";
 
 class Participants extends Component {

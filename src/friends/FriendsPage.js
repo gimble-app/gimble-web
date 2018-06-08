@@ -10,7 +10,7 @@ import styled from "styled-components";
 import {withTheme} from "@material-ui/core";
 import SectionHeaderText from "../common/typography/SectionHeaderText";
 import AddButton from "../profile/AddButton";
-import FlexContainer from "../common/FlexContainer";
+import FlexContainer from "../common/layout/FlexContainer";
 
 const Div = withTheme()(styled.div`
   padding:${({theme}) => theme.spacing.unit * 2}px;

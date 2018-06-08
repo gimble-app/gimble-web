@@ -4,7 +4,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import styled from 'styled-components';
 import { InternalLink } from '../common/InternalLinks';
 import Card from '../common/Card';
-import FlexContainer from "../common/FlexContainer";
+import FlexContainer from "../common/layout/FlexContainer";
 
 const StyledCardMedia = styled(CardMedia)`
   min-width: 200px;

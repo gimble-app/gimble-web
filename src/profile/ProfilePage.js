@@ -4,13 +4,13 @@ import {connect} from "react-redux";
 import {firebaseConnect, firestoreConnect} from "react-redux-firebase";
 import styled from "styled-components";
 import Avatar from "@material-ui/core/Avatar";
+import {withTheme} from "@material-ui/core/styles";
 import {selectMyProfile} from "./selectors";
 import LogoutMenuOption from "../auth/LogoutMenuOption";
 import {myProfile} from "./firestoreQueries";
 import FriendsPage from "../friends/FriendsPage";
-import {withTheme} from "@material-ui/core/styles/index";
 import {fromPalette} from "../theme";
-import FlexContainer from "../common/FlexContainer";
+import CentredFlex from "../common/layout/CentredFlex";
 
 export const BigAvatar = withTheme()(styled(Avatar)`
   border: 2px solid #ffffff;
@@ -20,24 +20,19 @@ export const BigAvatar = withTheme()(styled(Avatar)`
   margin-bottom:${({theme}) => theme.spacing.unit * 2}px;
 `);
 
-const CenteredFlex = styled(FlexContainer)`
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: column; 
-`;
 
-const ProfilePanel = withTheme()(styled(CenteredFlex)`
+const ProfilePanel = withTheme()(styled(CentredFlex)`
   margin:${({theme}) => theme.spacing.unit * 2}px 0px;
 `);
 
 export const ProfilePage = ({ profile = {} }) => (
-    <CenteredFlex>
+    <CentredFlex>
       <ProfilePanel>
         <BigAvatar src={profile && profile.photoURL }></BigAvatar>
         <LogoutMenuOption />
       </ProfilePanel>
       <FriendsPage />
-    </CenteredFlex>
+    </CentredFlex>
 );
 
 export default compose(

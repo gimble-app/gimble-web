@@ -6,9 +6,10 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import {selectEventsList} from "./selectors";
 import {eventsForUserQuery} from "./firestoreQueries";
 import BackgroundMessage from './BackgroundMessage';
-import AddButton from "./AddButton";
+import AddEventButton from "./AddEventButton";
 import Page from '../common/Page';
 import EventsOverview from './EventsOverview';
+import CentredFlex from "../common/layout/CentredFlex";
 
 export const EventsPage = ({ events }) => (
   <Page>
@@ -19,7 +20,7 @@ export const EventsPage = ({ events }) => (
           ? <BackgroundMessage/>
           : <EventsOverview events={events}/>
     }
-    <AddButton type="event"/>
+    <CentredFlex><AddEventButton/></CentredFlex>
   </Page>
 );
 
