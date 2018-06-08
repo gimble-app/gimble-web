@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react';
 import List from "@material-ui/core/List";
-import RequestedEntry from './RequestedEntry';
+import RequestedEntry from '../invites/RequestedEntry';
 
 const RequestedList = ({ requested }) => (
   <Fragment>

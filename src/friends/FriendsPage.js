@@ -2,15 +2,15 @@ import React from 'react';
 import {compose} from "redux";
 import {connect} from "react-redux";
 import {firebaseConnect, firestoreConnect} from "react-redux-firebase";
-import {requestsFromUserCollection, requestsToUserCollection,} from './firestoreQueries';
-import {selectFriendRefs, selectFriendRequests, selectRequestedFriends} from './selectors';
-import AddFriendForm from './AddFriendForm';
-import RequestedList from './RequestedList';
+import {requestsToUserCollection,} from './firestoreQueries';
+import {selectFriendRefs, selectFriendRequests} from './selectors';
 import RequestsList from './RequestsList';
 import FriendProfileList from './FriendProfileList';
 import styled from "styled-components";
 import {withTheme} from "@material-ui/core";
 import SectionHeaderText from "../common/typography/SectionHeaderText";
+import AddButton from "../profile/AddButton";
+import FlexContainer from "../common/FlexContainer";
 
 const Div = withTheme()(styled.div`
   padding:${({theme}) => theme.spacing.unit * 2}px;
@@ -18,12 +18,12 @@ const Div = withTheme()(styled.div`
   background-color:${({theme}) => theme.palette.background.paper}
 `);
 
-export const FriendsPage = ({ requested, requests, friends }) => (
+export const FriendsPage = ({ requests, friends }) => (
   <Div>
-    <SectionHeaderText>Friends</SectionHeaderText>
+    <FlexContainer><SectionHeaderText>Friends</SectionHeaderText><AddButton /></FlexContainer>
+
     {!!friends && <FriendProfileList friends={friends} /> }
-    <AddFriendForm />
-    {requested && requested.length > 0 && <RequestedList requested={requested} /> }
+
     {requests && requests.length > 0 && <RequestsList requests={requests} /> }
   </Div>
 );
@@ -32,11 +32,9 @@ export default compose(
   firebaseConnect(),
   firestoreConnect((state) => [
     requestsToUserCollection(state),
-    requestsFromUserCollection(state),
   ]),
   connect(state => ({
     requests: selectFriendRequests(state),
-    requested: selectRequestedFriends(state),
     friends: selectFriendRefs(state)
   }))
 )(FriendsPage);

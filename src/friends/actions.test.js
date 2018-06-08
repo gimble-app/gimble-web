@@ -1,12 +1,6 @@
 
 import {
-  invite,
-  rescind,
   accept,
-  INVITE_SUCCESS,
-  INVITE_FAILURE,
-  RESCIND_SUCCESS,
-  RESCIND_FAILURE,
   ACCEPT_SUCCESS,
   ACCEPT_FAILURE
 } from "./actions";
@@ -35,64 +29,6 @@ describe('friends actions', () => {
 
   beforeEach(() => {
     store = mockStore();
-  });
-
-  describe('invite friend', () => {
-    it('saves an invite for the friend', async () => {
-      requestFriendMock.mockReturnValue(Promise.resolve());
-
-      await store.dispatch(invite('some@email.com'));
-
-      expect(requestFriendMock).toBeCalledWith({ from: 'some-uid', fromName: 'some-name', to: 'some@email.com' });
-      expect(store.getActions()).toEqual([
-        {
-          data: { message: INVITE_SUCCESS },
-          type: SEND_NOTIFICATION
-        }
-      ]);
-    });
-
-    it('notifies when an invite fails', async () => {
-      requestFriendMock.mockReturnValue(Promise.reject("some error"));
-
-      await store.dispatch(invite('some@email.com'));
-
-      expect(store.getActions()).toEqual([
-        {
-          data: { message: INVITE_FAILURE },
-          type: SEND_NOTIFICATION
-        }
-      ]);
-    });
-  });
-
-  describe('rescind invite', () => {
-    it('rescinds an invite', async () => {
-      rescindFriendRequestMock.mockReturnValue(Promise.resolve());
-
-      await store.dispatch(rescind('some-id'));
-
-      expect(rescindFriendRequestMock).toBeCalledWith({ id: 'some-id' });
-      expect(store.getActions()).toEqual([
-        {
-          data: { message: RESCIND_SUCCESS },
-          type: SEND_NOTIFICATION
-        }
-      ]);
-    });
-
-    it('notifies when an rescind fails', async () => {
-      rescindFriendRequestMock.mockReturnValue(Promise.reject("some error"));
-
-      await store.dispatch(rescind('some-id'));
-
-      expect(store.getActions()).toEqual([
-        {
-          data: { message: RESCIND_FAILURE },
-          type: SEND_NOTIFICATION
-        }
-      ]);
-    });
   });
 
   describe('accept invite', () => {

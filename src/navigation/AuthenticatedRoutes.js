@@ -10,6 +10,7 @@ import {myProfileWithFriends} from "../profile/firestoreQueries";
 import {selectIsLoggedIn} from "../auth/selectors";
 import PageSlideIn from "../common/animation/PageSlideIn";
 import PageFadeIn from "../common/animation/PageFadeIn";
+import InviteScreen from "../invites/InviteScreen";
 
 const PUSH_ACTION = "PUSH";
 
@@ -32,7 +33,7 @@ const AuthenticatedRoutes = () => (
       path="/event/:id/participants"
       children={({match}) => match && <PageSlideIn><AddFriendPage match={match}/></PageSlideIn>}
     />
-
+    <Route exact path="/invites" component={InviteScreen} />
     <Route exact path={'/'} component={HomeScreen} />
   </Switch>
 );

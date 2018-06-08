@@ -1,6 +1,6 @@
 import React from 'react';
 import RequestedList from './RequestedList';
-import RequestedEntry from './RequestedEntry';
+import RequestedEntry from '../invites/RequestedEntry';
 import { shallow } from 'enzyme';
 
 describe('<RequestedList />', () => {
