@@ -15,14 +15,11 @@ const SpacedTabs = styled(Tabs)`
 
 SpacedTabs.displayName = "SpacedTabs";
 
-const EVENTS_KEY = "events";
-const PROFILE_KEY = "profile";
-
 const HomeAppBar = ({ onSelect, value }) => (
   <FadingAppBar>
     <SpacedTabs fullWidth value={value} onChange={onSelect}>
-      <Tab label={EVENTS_KEY} icon={<EventNoteIcon />} />
-      <Tab label={PROFILE_KEY} icon={<ProfileIcon />} />
+      <Tab icon={<EventNoteIcon />} />
+      <Tab icon={<ProfileIcon />} />
     </SpacedTabs>
   </FadingAppBar>
 );
