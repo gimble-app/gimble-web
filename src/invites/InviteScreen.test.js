@@ -1,7 +1,7 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 import {InviteScreen} from './InviteScreen';
-import RequestedList from "../friends/RequestedList";
+import RequestedList from "./RequestedList";
 
 describe('<InviteScreen />', () => {
 

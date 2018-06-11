@@ -1,16 +1,16 @@
 import React, {Component, Fragment} from 'react';
+import {compose} from "redux";
 import {connect} from 'react-redux';
+import {firebaseConnect, firestoreConnect} from "react-redux-firebase";
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from "@material-ui/core/Toolbar";
-import {firebaseConnect, firestoreConnect} from "react-redux-firebase";
-import {compose} from "redux";
-import {requestsFromUserCollection} from "../friends/firestoreQueries";
+import {requestsFromUserCollection} from "./firestoreQueries";
+import {selectRequestedFriends} from "./selectors";
 import CancelButton from "../common/CancelButton";
 import TitleText from "../common/typography/TitleText";
 import Page from "../common/Page";
 import AddFriendForm from "./AddFriendForm";
-import RequestedList from "../friends/RequestedList";
-import {selectRequestedFriends} from "../friends/selectors";
+import RequestedList from "./RequestedList";
 
 export class InviteScreen extends Component {
 
