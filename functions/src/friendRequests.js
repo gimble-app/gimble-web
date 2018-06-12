@@ -33,7 +33,6 @@ export const request = (data, context) => {
 
 export const rescind = ({ id }, context) => {
   verifyAuth(context);
-
   return friendRequestDocForId(id).delete();
 };
 
@@ -49,8 +48,13 @@ export const accept = async ({ requestId }, context) => {
   const myId = getRequestorId(context);
   const requestRef = friendRequestDocForId(requestId);
   const request = await requestRef.get();
-  const { from } = request.data();
 
+  if (!request.exists) {
+    console.error(`Unable to find request with id ${requestId}. Cancelled accepting invite.`);
+    return;
+  }
+
+  const { from } = request.data();
   const batch = firestore.batch();
   batch.set(friendEntryForId(myId, from), { to: from});
   batch.set(friendEntryForId(from, myId), { to: myId});

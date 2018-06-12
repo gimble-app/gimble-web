@@ -15,6 +15,13 @@ describe('friendRequests', () => {
     mockFirestore.autoFlush();
   });
 
+  afterEach(() => {
+    //cleanup - need a better way to reset the mock
+    mockFirestore.doc(`${FRIEND_REQUESTS_COLLECTION}/generated-id`).delete();
+    mockFirestore.doc(`${PROFILE_COLLECTION}/my-id/${FRIENDS_COLLECTION}/their-id`).delete();
+    mockFirestore.doc(`${PROFILE_COLLECTION}/their-id/${FRIENDS_COLLECTION}/my-id`).delete();
+  });
+
   describe('request', () => {
     it('adds to the collection', async () => {
       await request({to: 'me', from: 'you'}, stubAuthorisedContext);
@@ -27,17 +34,14 @@ describe('friendRequests', () => {
   describe('rescind', () => {
     it('removes from the collection', async () => {
       await mockFirestore.collection(FRIEND_REQUESTS_COLLECTION).doc("generated-id").set({ from: "their-id" });
+
       await rescind({ id: 'generated-id' }, stubAuthorisedContext);
 
       expect(mockFirestore).not.toContainDocAtPath(`${FRIEND_REQUESTS_COLLECTION}/generated-id`);
     });
-
-    it('does not throw an exception when the request does not exist', async () => {
-      await rescind({id: 'generated-ids'}, stubAuthorisedContext);
-    });
   });
 
-  describe('accept', async () => {
+  describe('accept', () => {
     it('adds friend entries for the profiles and removes the friend request', async () => {
       await mockFirestore.collection(FRIEND_REQUESTS_COLLECTION).doc("friend-request-id").set({ from: "their-id" });
 
@@ -46,6 +50,13 @@ describe('friendRequests', () => {
       expect(mockFirestore).toContainDocAtPath(`${PROFILE_COLLECTION}/my-id/${FRIENDS_COLLECTION}/their-id`);
       expect(mockFirestore).toContainDocAtPath(`${PROFILE_COLLECTION}/their-id/${FRIENDS_COLLECTION}/my-id`);
       expect(mockFirestore).not.toContainDocAtPath(`${FRIEND_REQUESTS_COLLECTION}/friend-request-id`);
+    });
+
+    it('does not update the friend entries when a request does not exist', async () => {
+      await accept({ requestId: 'friend-request-id' }, stubAuthorisedContext);
+
+      expect(mockFirestore).not.toContainDocAtPath(`${PROFILE_COLLECTION}/my-id/${FRIENDS_COLLECTION}/their-id`);
+      expect(mockFirestore).not.toContainDocAtPath(`${PROFILE_COLLECTION}/their-id/${FRIENDS_COLLECTION}/my-id`);
     });
   });
 
