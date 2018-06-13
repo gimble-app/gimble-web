@@ -16,7 +16,7 @@ const getRequestorId = (context) => {
 
 const verifyAuth = (context) => {
   if (!context.auth) {
-    throw new httpFailedPrecondition();
+    throw httpFailedPrecondition();
   }
   return true;
 };

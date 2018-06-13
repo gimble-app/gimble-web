@@ -1,11 +1,19 @@
 import mocksdk from 'firebase-admin';
-import {request, accept, rescind, FRIEND_REQUESTS_COLLECTION, PROFILE_COLLECTION, FRIENDS_COLLECTION} from './friendRequests';
+import { utils } from 'firebase-mock';
+import {
+  request,
+  accept,
+  rescind,
+  FRIEND_REQUESTS_COLLECTION,
+  PROFILE_COLLECTION,
+  FRIENDS_COLLECTION
+} from './friendRequests';
 import uuid from "uuid/v4";
 
 jest.mock('uuid/v4');
 
 const mockFirestore = mocksdk.firestore();
-
+console.log(utils);
 describe('friendRequests', () => {
 
   const stubAuthorisedContext = { auth: { uid: 'my-id'}};
@@ -23,6 +31,17 @@ describe('friendRequests', () => {
   });
 
   describe('request', () => {
+
+    it('throws that the auth was invalid when no auth exists', async () => {
+      try {
+        await request({to: 'me', from: 'you'}, {});
+        fail("should have thrown an error by now");
+      } catch(error) {
+        expect(error.code).toBe("failed-precondition");
+        expect(error.message).toBe("The function must be called while authenticated.");
+      }
+    });
+
     it('adds to the collection', async () => {
       await request({to: 'me', from: 'you'}, stubAuthorisedContext);
 
@@ -32,6 +51,17 @@ describe('friendRequests', () => {
   });
 
   describe('rescind', () => {
+
+    it('throws that the auth was invalid when no auth exists', async () => {
+      try {
+        await rescind({ id: 'generated-id' }, {});
+        fail("should have thrown an error by now");
+      } catch(error) {
+        expect(error.code).toBe("failed-precondition");
+        expect(error.message).toBe("The function must be called while authenticated.");
+      }
+    });
+
     it('removes from the collection', async () => {
       await mockFirestore.collection(FRIEND_REQUESTS_COLLECTION).doc("generated-id").set({ from: "their-id" });
 
@@ -42,6 +72,17 @@ describe('friendRequests', () => {
   });
 
   describe('accept', () => {
+
+    it('throws that the auth was invalid when no auth exists', async () => {
+      try {
+        await accept({ requestId: 'friend-request-id' }, {});
+        fail("should have thrown an error by now");
+      } catch(error) {
+        expect(error.message).toBe("The function must be called while authenticated.");
+        expect(error.code).toBe("failed-precondition");
+      }
+    });
+
     it('adds friend entries for the profiles and removes the friend request', async () => {
       await mockFirestore.collection(FRIEND_REQUESTS_COLLECTION).doc("friend-request-id").set({ from: "their-id" });
 
