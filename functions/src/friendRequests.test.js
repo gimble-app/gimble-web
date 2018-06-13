@@ -1,5 +1,4 @@
 import mocksdk from 'firebase-admin';
-import { utils } from 'firebase-mock';
 import {
   request,
   accept,
@@ -13,7 +12,7 @@ import uuid from "uuid/v4";
 jest.mock('uuid/v4');
 
 const mockFirestore = mocksdk.firestore();
-console.log(utils);
+
 describe('friendRequests', () => {
 
   const stubAuthorisedContext = { auth: { uid: 'my-id'}};
@@ -24,7 +23,6 @@ describe('friendRequests', () => {
   });
 
   afterEach(() => {
-    //cleanup - need a better way to reset the mock
     mockFirestore.doc(`${FRIEND_REQUESTS_COLLECTION}/generated-id`).delete();
     mockFirestore.doc(`${PROFILE_COLLECTION}/my-id/${FRIENDS_COLLECTION}/their-id`).delete();
     mockFirestore.doc(`${PROFILE_COLLECTION}/their-id/${FRIENDS_COLLECTION}/my-id`).delete();
@@ -76,6 +74,7 @@ describe('friendRequests', () => {
     it('throws that the auth was invalid when no auth exists', async () => {
       try {
         await accept({ requestId: 'friend-request-id' }, {});
+
         fail("should have thrown an error by now");
       } catch(error) {
         expect(error.message).toBe("The function must be called while authenticated.");

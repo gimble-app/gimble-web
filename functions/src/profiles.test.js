@@ -17,6 +17,7 @@ describe('profiles', () => {
     it('throws that the auth was invalid when no auth exists', async () => {
       try {
         await registerProfileName({profileName: 'my-name'}, {});
+
         fail("should have thrown an error by now");
       } catch (error) {
         expect(error.code).toBe("failed-precondition");
@@ -27,6 +28,7 @@ describe('profiles', () => {
     it('throws that the argument was invalid when no profile name is provided', async () => {
       try {
         await registerProfileName({}, stubAuthorisedContext);
+
         fail("should have thrown an error by now");
       } catch (error) {
         expect(error.code).toBe("invalid-argument");
@@ -39,6 +41,7 @@ describe('profiles', () => {
 
       try {
         await registerProfileName({profileName: 'already-exists'}, stubAuthorisedContext);
+
         fail("should have thrown an error by now");
       } catch (error) {
         expect(error.code).toBe("firestore/already-exists");

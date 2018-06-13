@@ -2359,9 +2359,9 @@ firebase-functions@^1.0.1:
     jsonwebtoken "^8.2.1"
     lodash "^4.6.1"
 
-firebase-mock@^2.2.4:
+"firebase-mock@https://github.com/yearofthedan/firebase-mock":
   version "2.2.4"
-  resolved "https://registry.yarnpkg.com/firebase-mock/-/firebase-mock-2.2.4.tgz#2b76fe22f5fb6fb373121c5692cd4adc5e3bf9ca"
+  resolved "https://github.com/yearofthedan/firebase-mock#9d57c28f3a9c029fe0c22ab8f279052807b00519"
   dependencies:
     firebase-auto-ids "~1.1.0"
     lodash.assign "^4.2.0"
