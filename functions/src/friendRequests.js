@@ -6,8 +6,6 @@ export const FRIEND_REQUESTS_COLLECTION = 'friendRequests';
 export const PROFILE_COLLECTION = 'profile';
 export const FRIENDS_COLLECTION = 'friends';
 
-const firestore = admin.firestore();
-
 const getRequestorId = (context) => {
   if (verifyAuth(context)) {
     return context.auth.uid;
@@ -22,6 +20,7 @@ const verifyAuth = (context) => {
 };
 
 const friendRequestDocForId = (id) => {
+  const firestore = admin.firestore();
   return firestore.collection(FRIEND_REQUESTS_COLLECTION).doc(id);
 };
 
@@ -37,6 +36,7 @@ export const rescind = ({ id }, context) => {
 };
 
 const friendEntryForId = (profileId, friendId) => {
+  const firestore = admin.firestore();
   return firestore
     .collection(PROFILE_COLLECTION)
     .doc(profileId)
@@ -45,6 +45,7 @@ const friendEntryForId = (profileId, friendId) => {
 };
 
 export const accept = async ({ requestId }, context) => {
+  const firestore = admin.firestore();
   const myId = getRequestorId(context);
   const requestRef = friendRequestDocForId(requestId);
   const request = await requestRef.get();
