@@ -1,3 +1,4 @@
+import { reducer as formReducer } from 'redux-form'
 import {combineReducers} from 'redux';
 import {firebaseReducer} from 'react-redux-firebase';
 import {firestoreReducer} from 'redux-firestore';
@@ -8,5 +9,6 @@ export default combineReducers({
   firebase: firebaseReducer,
   firestore: firestoreReducer,
   notifications: notificationReducer,
-  friends: friendsReducer
+  friends: friendsReducer,
+  form: formReducer
 });
