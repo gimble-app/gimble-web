@@ -1,7 +1,8 @@
 import admin from 'firebase-admin';
-import {httpFailedPrecondition, invalidArgument} from "./httpErrors";
+import {alreadyExists, httpFailedPrecondition, invalidArgument} from "./httpErrors";
 
 const PROFILE_COLLECTION = 'profile';
+export const ALREADY_EXISTS = 6;
 export const PROFILE_NAMES_COLLECTION = 'profileNames';
 
 const getRequestorId = (context) => {
@@ -20,10 +21,17 @@ export const registerProfileName = async ({profileName}, context) => {
     throw invalidArgument("Profile name can't be empty.");
   }
 
-  await firestore
-    .collection(PROFILE_NAMES_COLLECTION)
-    .doc(profileName)
-    .create({profileName});
+  try {
+    await firestore
+      .collection(PROFILE_NAMES_COLLECTION)
+      .doc(profileName)
+      .create({profileName});
+  } catch(error) {
+    if(error.code === ALREADY_EXISTS) {
+      throw alreadyExists("Profile name is taken.");
+    }
+    throw error;
+  }
 
   return firestore
     .collection(PROFILE_COLLECTION)

@@ -44,8 +44,8 @@ describe('profiles', () => {
 
         fail("should have thrown an error by now");
       } catch (error) {
-        expect(error.code).toBe("firestore/already-exists");
-        expect(error.message).toBe("Cannot create a document which already exists");
+        expect(error.code).toBe("already-exists");
+        expect(error.message).toBe("Profile name is taken.");
       }
     });
 
