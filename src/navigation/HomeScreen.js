@@ -5,6 +5,7 @@ import SwipeableViews from 'react-swipeable-views';
 import EventsPage from "../events/EventsPage";
 import ProfilePage from "../profile/ProfilePage";
 import HomeAppBar from "./HomeAppBar";
+import ProfileActionsDialog from "../profile/ProfileActionsDialog";
 
 export class HomeScreen extends Component {
 
@@ -34,6 +35,7 @@ export class HomeScreen extends Component {
           <EventsPage />
           <ProfilePage />
         </SwipeableViews>
+        <ProfileActionsDialog />
       </Fragment>
     );
   }

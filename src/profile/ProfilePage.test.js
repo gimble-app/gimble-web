@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import {BigAvatar, ProfilePage} from './ProfilePage';
+import { ProfilePage } from './ProfilePage';
+import BigAvatar from '../common/BigAvatar';
 
 describe('<ProfilePage />', () => {
   it('renders an avatar for the profile', () => {
