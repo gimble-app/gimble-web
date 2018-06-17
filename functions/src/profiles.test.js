@@ -25,16 +25,23 @@ describe('profiles', () => {
       }
     });
 
-    it('throws that the argument was invalid when no profile name is provided', async () => {
+    [
+      { desc: 'empty string', datum: '' },
+      { desc: 'only white space', datum: '  ' },
+      { desc: 'not enough characters', datum: '   s   ' },
+      { desc: 'too many characters', datum: 'sssssssssssssssssssssssssssssss' },
+      { desc: 'invalid characters', datum: '   :   ' },
+    ].forEach(testData =>
+    it(`throws that the argument was invalid when given ${testData.desc}`, async () => {
       try {
-        await registerProfileName({}, stubAuthorisedContext);
+        await registerProfileName({ profileName: testData.datum}, stubAuthorisedContext);
 
         fail("should have thrown an error by now");
       } catch (error) {
         expect(error.code).toBe("invalid-argument");
-        expect(error.message).toBe("Profile name can't be empty.");
+        expect(error.message).toBe("Invalid profile name.");
       }
-    });
+    }));
 
     it('throws that the name exists when it is already taken', async () => {
       await mockFirestore.collection(PROFILE_NAMES_COLLECTION).doc("already-exists").set({});

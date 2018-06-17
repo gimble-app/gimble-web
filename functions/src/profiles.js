@@ -17,15 +17,21 @@ export const registerProfileName = async ({profileName}, context) => {
 
   const firestore = admin.firestore();
 
-  if(!profileName || !profileName.length > 0) {
-    throw invalidArgument("Profile name can't be empty.");
+  if(!profileName) {
+    throw invalidArgument("Invalid profile name.");
+  }
+
+  const trimmedProfileName = profileName.trim();
+
+  if(!/^\w[\w|\s|\-|\_]{1,29}$/.test(trimmedProfileName)) {
+    throw invalidArgument("Invalid profile name.");
   }
 
   try {
     await firestore
       .collection(PROFILE_NAMES_COLLECTION)
-      .doc(profileName)
-      .create({profileName});
+      .doc(trimmedProfileName)
+      .create({trimmedProfileName});
   } catch(error) {
     if(error.code === ALREADY_EXISTS) {
       throw alreadyExists("Profile name is taken.");
@@ -36,5 +42,5 @@ export const registerProfileName = async ({profileName}, context) => {
   return firestore
     .collection(PROFILE_COLLECTION)
     .doc(profileId)
-    .set({profileName: profileName}, {merge: true});
+    .set({profileName: trimmedProfileName}, {merge: true});
 };
