@@ -6,13 +6,15 @@ import styled from "styled-components/";
 import {fromPalette} from "../../theme";
 
 const BorderedAvatar = withTheme()(styled(Avatar)`
+  box-shadow: 0px 1px 1px 1px ${({theme}) => fromPalette(theme, 'darkGrey')};
   border: 1px solid ${({theme}) => fromPalette(theme, 'secondaryContrast')};
+  right: -${({position}) => position * 20}px;
 `);
 
 
-const AvatarOrPlaceholder = ({ photoUrl }) => (
+const AvatarOrPlaceholder = ({ photoUrl, position }) => (
   photoUrl
-    ? <BorderedAvatar src={photoUrl} />
-    : <BorderedAvatar><FaceIcon /></BorderedAvatar>
+    ? <BorderedAvatar position={position} src={photoUrl} />
+    : <BorderedAvatar position={position}><FaceIcon /></BorderedAvatar>
 );
 export default AvatarOrPlaceholder;

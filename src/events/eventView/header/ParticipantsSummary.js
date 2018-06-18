@@ -1,8 +1,13 @@
 import React, {Component} from 'react';
 import {withFirestore} from 'react-redux-firebase';
+import styled from "styled-components";
 import {PROFILES_COLLECTION} from "../../../profile/firestoreQueries";
 import FlexContainer from "../../../common/layout/FlexContainer";
 import AvatarOrPlaceholder from "../AvatarOrPlaceholder";
+
+const RightDirectionFlexContainer = styled(FlexContainer)`
+  direction: rtl;
+`;
 
 class Participants extends Component {
 
@@ -49,15 +54,15 @@ class Participants extends Component {
 
   render () {
     const { participantsList } = this.state;
-
     return (
-        <FlexContainer>
+        <RightDirectionFlexContainer>
           { participantsList.map(
-            participant => (<AvatarOrPlaceholder key={participant.displayName} photoUrl={participant.photoURL} />)
+            (participant, i) => (<AvatarOrPlaceholder position={i} key={participant.displayName} photoUrl={participant.photoURL} />)
           ) }
-       </FlexContainer>
+       </RightDirectionFlexContainer>
     )
   }
 }
+
 
 export default withFirestore(Participants);
