@@ -8,7 +8,7 @@ import {fromPalette} from "../../theme";
 const BorderedAvatar = withTheme()(styled(Avatar)`
   box-shadow: 0px 1px 1px 1px ${({theme}) => fromPalette(theme, 'darkGrey')};
   border: 1px solid ${({theme}) => fromPalette(theme, 'secondaryContrast')};
-  right: -${({position}) => position * 20}px;
+  right: -${({position}) => position * 24}px;
 `);
 
 

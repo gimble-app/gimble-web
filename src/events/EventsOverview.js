@@ -6,9 +6,7 @@ const EventsOverview = ({ events }) => (
   <CardCollection>
     {events.map(event => <EventCard
       key={event.id}
-      id={event.id}
-      title={event.title}
-      image={event.image}
+      event={event}
     />)  }
   </CardCollection>
 );

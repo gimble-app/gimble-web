@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { InternalLink } from '../common/InternalLinks';
 import Card from '../common/Card';
 import FlexContainer from "../common/layout/FlexContainer";
+import ParticipantsSummary from "./eventView/header/ParticipantsSummary";
 
 const StyledCardMedia = styled(CardMedia)`
   min-width: 200px;
@@ -17,12 +18,17 @@ const StyledCardContent = styled(CardContent)`
   flex: 1;
 `;
 
-const EventCard = ({ id, title, image = {} }) => (
+const EventCard = ({ event }) => (
   <Card>
-    <InternalLink to={`/event/${id}`}>
+    <InternalLink to={`/event/${event.id}`}>
       <FlexContainer>
-        { !!image.src && <StyledCardMedia image={image.src} title={image.author}/> }
-        <StyledCardContent>{title}</StyledCardContent>
+        { !!event.image && event.image.src && <StyledCardMedia image={event.image.src} title={event.image.author}/> }
+        <StyledCardContent>
+          {event.title}
+        </StyledCardContent>
+        <StyledCardContent>
+          <ParticipantsSummary participants={ event.participants } />
+        </StyledCardContent>
       </FlexContainer>
     </InternalLink>
   </Card>
