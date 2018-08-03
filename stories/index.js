@@ -16,6 +16,7 @@ import TimelineEventBuddyList from "../src/timeline/TimelineEventBuddyList";
 import TimelineTimelineEventBuddyListItem from "../src/timeline/TimelineEventBuddyListItem";
 import Avatar from "../src/common/Avatar";
 import TitleText from "../src/common/typography/TitleText";
+import BigRedButton from "../src/common/buttons/BigRedButton";
 
 storiesOf('Buttons', module)
   .add('floating action buttons', () => [
@@ -24,6 +25,9 @@ storiesOf('Buttons', module)
   ])
   .add('profile button', () => [
     <BigProfileButton onClick={action('clicked')}>Placeholder</BigProfileButton>
+  ])
+  .add('big red button', () => [
+    <BigRedButton onClick={action('clicked')}>Placeholder</BigRedButton>
   ]);
 
 
