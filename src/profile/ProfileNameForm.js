@@ -20,7 +20,7 @@ const ProfileNameForm = ({ profile, submitting, handleSubmit, dirty, setProfileN
   <form onSubmit={handleSubmit(setProfileName)}>
     <CentredPanel>
       <BigAvatar src={profile && profile.photoURL }>?</BigAvatar>
-      <Timeline>
+      <Timeline endPadding={"100px"}>
         <TimelineEvent>
           <TimelineProfileEventSummary>
             <Field

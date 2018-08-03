@@ -11,7 +11,7 @@ import Timeline from "../src/timeline/Timeline";
 import TimelineEvent from "../src/timeline/TimelineEvent";
 import TimelineEventSummary from "../src/timeline/TimelineEventSummary";
 import TimelineEventDescription from "../src/timeline/TimelineEventDescription";
-import TimelineEventDescriptionTitleText from "../src/timeline/TimelineEventDescriptionText";
+import TimelineNode from "../src/timeline/TimelineNode";
 import TimelineEventBuddyList from "../src/timeline/TimelineEventBuddyList";
 import TimelineTimelineEventBuddyListItem from "../src/timeline/TimelineEventBuddyListItem";
 import Avatar from "../src/common/Avatar";
@@ -58,6 +58,7 @@ storiesOf('Event lists', module)
           </TimelineEventBuddyList>
         </TimelineEventSummary>
       </TimelineEvent>
+      <TimelineNode />
     </Timeline>
     </div>
   ]);
