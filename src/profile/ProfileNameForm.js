@@ -8,6 +8,9 @@ import {withTheme} from "@material-ui/core";
 import { setProfileName } from "./actions";
 import BigAvatar from "../common/BigAvatar";
 import CentredFlex from "../common/layout/CentredFlex";
+import Timeline from "../timeline/Timeline";
+import TimelineEvent from "../timeline/TimelineEvent";
+import TimelineProfileEventSummary from "./TimelineProfileEventSummary";
 
 const CentredPanel = withTheme()(styled(CentredFlex)`
   margin:${({theme}) => theme.spacing.unit * 2}px 0px;
@@ -16,21 +19,27 @@ const CentredPanel = withTheme()(styled(CentredFlex)`
 const ProfileNameForm = ({ profile, submitting, handleSubmit, dirty, setProfileName }) => (
   <form onSubmit={handleSubmit(setProfileName)}>
     <CentredPanel>
-      <BigAvatar src={profile && profile.photoURL }></BigAvatar>
-      <Field
-        name="profileName"
-        component={TextField}
-        type="text"
-        autoFocus
-        fullWidth
-        label="You can call me..."
-        disabled={submitting}
-      />
+      <BigAvatar src={profile && profile.photoURL }>?</BigAvatar>
+      <Timeline>
+        <TimelineEvent>
+          <TimelineProfileEventSummary>
+            <Field
+              name="profileName"
+              component={TextField}
+              type="text"
+              autoFocus
+              fullWidth
+              label="They call me..."
+              disabled={submitting}
+            />
+          </TimelineProfileEventSummary>
+        </TimelineEvent>
+      </Timeline>
       <Button
         type="submit"
         variant="flat"
         disabled={ submitting || !dirty }
-      >Update</Button>
+      >welcome</Button>
     </CentredPanel>
   </form>
 );

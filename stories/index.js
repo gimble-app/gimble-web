@@ -7,13 +7,13 @@ import AddIcon from '@material-ui/icons/Add';
 import FloatingActionButtonSmall from "../src/common/buttons/FloatingActionButtonSmall";
 import FloatingActionButton from "../src/common/buttons/FloatingActionButton";
 import BigProfileButton from "../src/common/buttons/BigProfileButton";
-import EventTimeline from "../src/timeline/Timeline";
-import EventTimelineItem from "../src/timeline/TimelineEvent";
-import EventSummary from "../src/timeline/TimelineEventSummary";
-import EventDescription from "../src/timeline/TimelineEventDescription";
-import EventDescriptionTitleText from "../src/timeline/TimelineEventDescriptionText";
-import EventBuddyList from "../src/timeline/TimelineEventBuddyList";
-import EventBuddyListItem from "../src/timeline/TimelineEventBuddyListItem";
+import Timeline from "../src/timeline/Timeline";
+import TimelineEvent from "../src/timeline/TimelineEvent";
+import TimelineEventSummary from "../src/timeline/TimelineEventSummary";
+import TimelineEventDescription from "../src/timeline/TimelineEventDescription";
+import TimelineEventDescriptionTitleText from "../src/timeline/TimelineEventDescriptionText";
+import TimelineEventBuddyList from "../src/timeline/TimelineEventBuddyList";
+import TimelineTimelineEventBuddyListItem from "../src/timeline/TimelineEventBuddyListItem";
 import Avatar from "../src/common/Avatar";
 import TitleText from "../src/common/typography/TitleText";
 
@@ -30,34 +30,34 @@ storiesOf('Buttons', module)
 storiesOf('Event lists', module)
   .add('lists', () => [
     <div style={{ boxSixing: 'border-box', display: "flex", justifyContent: "center"}}>
-    <EventTimeline>
-      <EventTimelineItem>
-        <EventSummary>
-          <EventDescription>
+    <Timeline>
+      <TimelineEvent>
+        <TimelineEventSummary>
+          <TimelineEventDescription>
             <TitleText>Some text</TitleText>
-          </EventDescription>
-          <EventBuddyList>
-            <EventBuddyListItem>
+          </TimelineEventDescription>
+          <TimelineEventBuddyList>
+            <TimelineTimelineEventBuddyListItem>
               <Avatar>J</Avatar>
-            </EventBuddyListItem>
-          </EventBuddyList>
-        </EventSummary>
-      </EventTimelineItem>
-      <EventTimelineItem>
-        <EventSummary>
-          <EventDescription>
+            </TimelineTimelineEventBuddyListItem>
+          </TimelineEventBuddyList>
+        </TimelineEventSummary>
+      </TimelineEvent>
+      <TimelineEvent>
+        <TimelineEventSummary>
+          <TimelineEventDescription>
             <TitleText>Some more text</TitleText>
-          </EventDescription>
-          <EventBuddyList>
-            <EventBuddyListItem>
+          </TimelineEventDescription>
+          <TimelineEventBuddyList>
+            <TimelineTimelineEventBuddyListItem>
               <Avatar>J</Avatar>
-            </EventBuddyListItem>
-            <EventBuddyListItem>
+            </TimelineTimelineEventBuddyListItem>
+            <TimelineTimelineEventBuddyListItem>
               <Avatar>K</Avatar>
-            </EventBuddyListItem>
-          </EventBuddyList>
-        </EventSummary>
-      </EventTimelineItem>
-    </EventTimeline>
+            </TimelineTimelineEventBuddyListItem>
+          </TimelineEventBuddyList>
+        </TimelineEventSummary>
+      </TimelineEvent>
+    </Timeline>
     </div>
   ]);

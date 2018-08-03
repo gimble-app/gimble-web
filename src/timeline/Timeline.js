@@ -4,9 +4,10 @@ import {fromPalette} from "../theme";
 
 export default withTheme()(styled.ul`
   box-sizing: border-box;
+  margin-top: 0;
   position: relative;
   padding: 0px;
-  width: 120px;
+  width: 0px;
   border-left: 4px solid ${({theme}) => fromPalette(theme, 'primary')};
 
   &::after {

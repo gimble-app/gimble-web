@@ -4,11 +4,9 @@ import {fromPalette} from "../theme";
 
 export default withTheme()(styled.section`
   box-sizing: border-box;
-  display: flex;
-  height: 124px;
   width: 240px;
   border: 4px solid ${({theme}) => fromPalette(theme, 'primary')};
   border-radius: 20px;
-  background-color: ${({theme}) => fromPalette(theme, 'primaryLight')};
-  padding: 8px 8px;
+  background-color: ${({theme}) => fromPalette(theme, 'primaryContrast')};
+  padding: 16px;
 `);
