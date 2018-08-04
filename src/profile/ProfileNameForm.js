@@ -21,8 +21,8 @@ const CentredPanel = withTheme()(styled(CentredFlex)`
 const ProfileNameForm = ({ profile, submitting, handleSubmit, dirty, setProfileName }) => (
   <form onSubmit={handleSubmit(setProfileName)}>
     <CentredPanel>
-      <BigAvatar src={profile && profile.photoURL }>?</BigAvatar>
-      <Timeline endPadding="40px">
+      <BigAvatar src={profile && profile.photoURL } />
+      <Timeline>
         <TimelineEvent>
           <TimelineProfileEventSummary>
             <CaptionText>They call me...</CaptionText>
@@ -36,11 +36,12 @@ const ProfileNameForm = ({ profile, submitting, handleSubmit, dirty, setProfileN
             />
           </TimelineProfileEventSummary>
         </TimelineEvent>
-        <TimelineNode>
+        <TimelineNode topOffset={"10vh"}>
           <BigRedButton
             type="submit"
             variant="flat"
             disabled={ submitting || !dirty }
+            right="100%"
           >welcome</BigRedButton>
         </TimelineNode>
       </Timeline>

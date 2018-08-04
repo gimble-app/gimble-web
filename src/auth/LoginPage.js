@@ -6,6 +6,7 @@ import { Redirect } from 'react-router-dom';
 import { selectIsLoggedIn, selectIsLoaded } from './selectors';
 import { login } from './actions';
 import Page from '../common/Page';
+import BigRedButton from "../common/buttons/BigRedButton";
 
 export const LoginPage = ({ isLoaded, isLoggedIn, login }) => (
   <Page>
@@ -14,7 +15,7 @@ export const LoginPage = ({ isLoaded, isLoggedIn, login }) => (
         !isLoaded
         ? <span>Loading...</span>
         : !isLoggedIn
-          ? <button onClick={login}>Login With Google</button>
+          ? <BigRedButton onClick={login}>login</BigRedButton>
           : <Redirect to="/" />
       }
     </div>
