@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from "styled-components";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import {withTheme} from "@material-ui/core/styles/index";

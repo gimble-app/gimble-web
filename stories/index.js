@@ -6,7 +6,7 @@ import AddIcon from '@material-ui/icons/Add';
 
 import FloatingActionButtonSmall from "../src/common/buttons/FloatingActionButtonSmall";
 import FloatingActionButton from "../src/common/buttons/FloatingActionButton";
-import BigProfileButton from "../src/common/buttons/BigProfileButton";
+import BigProfileButton from "../src/common/buttons/BigButton";
 import Timeline from "../src/timeline/Timeline";
 import TimelineEvent from "../src/timeline/TimelineEvent";
 import TimelineEventSummary from "../src/timeline/TimelineEventSummary";
