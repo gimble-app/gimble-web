@@ -10,5 +10,6 @@ export default withTheme()(styled.section`
   border: 4px solid ${({theme}) => fromPalette(theme, 'primary')};
   border-radius: 20px;
   background-color: ${({theme}) => fromPalette(theme, 'primaryLight')};
+  background-image: url(${({image}) => image && image.src});
   padding: 8px 8px;
 `);

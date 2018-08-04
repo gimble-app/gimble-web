@@ -13,7 +13,7 @@ const TripTimeline = ({ events }) => (
   {events.map(event => (
     <TimelineEvent key={event.id}>
       <InternalLink to={`/event/${event.id}`}>
-        <TimelineEventSummary>
+        <TimelineEventSummary image={event.image}>
           <TimelineEventDescription>
             <TitleText>{event.title}</TitleText>
           </TimelineEventDescription>
