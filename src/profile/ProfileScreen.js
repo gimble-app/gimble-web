@@ -17,7 +17,7 @@ const ProfilePanel = withTheme()(styled(CentredFlex)`
   margin:${({theme}) => theme.spacing.unit * 2}px 0px;
 `);
 
-export const ProfilePage = ({ profile = {} }) => (
+export const ProfileScreen = ({ profile = {} }) => (
     <CentredFlex>
       <BackButton />
       <ProfilePanel>
@@ -37,4 +37,4 @@ export default compose(
   connect(state => ({
     profile: selectMyProfile(state),
   }))
-)(ProfilePage);
+)(ProfileScreen);

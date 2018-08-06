@@ -1,11 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { ProfilePage } from './ProfilePage';
+import { ProfileScreen } from './ProfileScreen';
 import BigAvatar from '../common/BigAvatar';
 
-describe('<ProfilePage />', () => {
+describe('<ProfileScreen />', () => {
   it('renders an avatar for the profile', () => {
-    const wrapper = shallow(<ProfilePage profile={{ photoURL: 'some-profile-url' }}/>);
+    const wrapper = shallow(<ProfileScreen profile={{ photoURL: 'some-profile-url' }}/>);
     expect(wrapper.find(BigAvatar)).toExist();
     expect(wrapper.find(BigAvatar).prop('src')).toBe('some-profile-url');
   });

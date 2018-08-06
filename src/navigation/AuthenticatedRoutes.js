@@ -2,16 +2,16 @@ import React from 'react'
 import {Route, Switch, Redirect} from 'react-router-dom';
 import {firebaseConnect, firestoreConnect} from "react-redux-firebase";
 import {compose} from "redux";
-import EventScreen from "../events/eventEdit/EventScreen";
-import TimelineScreen from "../timeline/TimelineScreen";
-import InviteScreen from "../invites/InviteScreen";
-import EventPage from "../events/eventView/EventPage";
-import AddFriendPage from "../events/eventView/friends/AddFriendPage";
 import {myProfileWithFriends} from "../profile/firestoreQueries";
 import {selectIsLoggedIn} from "../auth/selectors";
 import PageSlideIn from "../common/animation/PageSlideIn";
 import PageFadeIn from "../common/animation/PageFadeIn";
-import ProfilePage from "../profile/ProfilePage";
+import EventScreen from "../events/eventEdit/EventScreen";
+import TimelineScreen from "../timeline/TimelineScreen";
+import InviteScreen from "../invites/InviteScreen";
+import ProfileScreen from "../profile/ProfileScreen";
+import EventPage from "../events/eventView/EventPage";
+import AddFriendPage from "../events/eventView/friends/AddFriendPage";
 
 const PUSH_ACTION = "PUSH";
 
@@ -39,7 +39,7 @@ const AuthenticatedRoutes = () => (
     <Route
       exact
       path="/profile"
-      render={() => <PageFadeIn><ProfilePage/></PageFadeIn>}/>
+      render={() => <PageFadeIn><ProfileScreen/></PageFadeIn>}/>
     <Redirect from="/" to="/timeline" />
   </Switch>
 );
