@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react';
 import withRouter from "react-router-dom/withRouter";
 import {withTheme} from "@material-ui/core/styles";
 import SwipeableViews from 'react-swipeable-views';
-import TimelinePage from "../timeline/TimelinePage";
+import TimelineScreen from "../timeline/TimelineScreen";
 import ProfilePage from "../profile/ProfilePage";
 import HomeAppBar from "./HomeAppBar";
 import ProfileActionsDialog from "../profile/ProfileActionsDialog";
@@ -32,7 +32,7 @@ export class HomeScreen extends Component {
           index={value}
           onChangeIndex={this.handleSwipeChange}
         >
-          <TimelinePage />
+          <TimelineScreen />
           <ProfilePage />
         </SwipeableViews>
         <ProfileActionsDialog />

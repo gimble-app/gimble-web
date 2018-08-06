@@ -21,19 +21,22 @@ import CentredFlex from "../common/layout/CentredFlex";
 import BigAvatar from "../common/BigAvatar";
 import BigButton from "../common/buttons/BigButton";
 import BackgroundMessage from "./BackgroundMessage";
+import {InternalLink} from "../common/InternalLinks";
 
 const CentredPanel = withTheme()(styled(CentredFlex)`
   margin:${({theme}) => theme.spacing.unit * 2}px 0px;
 `);
 
-export const TimelinePage = ({ events, profile }) => (
+export const TimelineScreen = ({ events, profile }) => (
   <Page>
     <CentredPanel>
       <div style={{position: "relative", width: "100%", display: "flex", justifyContent: "space-around", alignItems: "flex-end"}}>
         <span style={{flex: 1}}/>
-        <BigButton>
-          <BigAvatar src={profile && profile.photoURL } />
-        </BigButton>
+        <InternalLink to="profile">
+          <BigButton>
+            <BigAvatar src={profile && profile.photoURL } />
+          </BigButton>
+        </InternalLink>
         <div style={{flex: 1, position: "relative"}}>
           <div style={{position: "absolute", bottom: "-12px", left: "12px"}}>
             <AddEventButton/>
@@ -60,4 +63,4 @@ export default compose(
     events: selectEventsList(state),
     profile: selectMyProfile(state),
   })),
-)(TimelinePage);
+)(TimelineScreen);

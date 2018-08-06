@@ -9,6 +9,7 @@ import Navigation from './navigation/Navigation';
 import {selectIsLoggedIn} from './auth/selectors';
 import Notifier from './notifications/Notifier';
 import FriendDataPopulator from "./friends/FriendDataPopulator";
+import ProfileActionsDialog from "./profile/ProfileActionsDialog";
 
 const StyledAppRoot = withTheme()(styled.div`
   background: ${props => props.theme.palette.common.grey || 'red' };
@@ -22,6 +23,7 @@ export const App = ({ isLoggedIn }) => (
     </BrowserRouter>
     <Notifier />
     { isLoggedIn && <FriendDataPopulator /> }
+    { isLoggedIn && <ProfileActionsDialog /> }
   </StyledAppRoot>
 );
 

@@ -11,6 +11,7 @@ import FriendsPage from "../friends/FriendsPage";
 import CentredFlex from "../common/layout/CentredFlex";
 import BigAvatar from "../common/BigAvatar";
 import TitleText from "../common/typography/TitleText";
+import BackButton from "../common/BackButton";
 
 const ProfilePanel = withTheme()(styled(CentredFlex)`
   margin:${({theme}) => theme.spacing.unit * 2}px 0px;
@@ -18,6 +19,7 @@ const ProfilePanel = withTheme()(styled(CentredFlex)`
 
 export const ProfilePage = ({ profile = {} }) => (
     <CentredFlex>
+      <BackButton />
       <ProfilePanel>
         <BigAvatar src={profile && profile.photoURL }></BigAvatar>
         <TitleText>{ profile.profileName }</TitleText>
