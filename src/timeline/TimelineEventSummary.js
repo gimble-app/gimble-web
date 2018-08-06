@@ -5,7 +5,7 @@ import {fromPalette} from "../theme";
 export default withTheme()(styled.section`
   box-sizing: border-box;
   display: flex;
-  height: 124px;
+  height: 160px;
   width: 240px;
   border: 4px solid ${({theme}) => fromPalette(theme, 'primary')};
   border-radius: 20px;

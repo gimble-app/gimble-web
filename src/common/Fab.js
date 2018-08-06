@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button";
 const Fab = ({children, ...props}) => (
     <Button
       variant="fab"
-      color="secondary"
+      color="primary"
       {...props}
     >
       {children}

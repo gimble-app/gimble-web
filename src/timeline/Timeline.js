@@ -7,8 +7,7 @@ export default withTheme()(styled.ul`
   margin-top: 0;
   position: relative;
   padding: 0px;
-  width: 0px;
-  left: -1px;
-  border-left: 4px solid ${({theme}) => fromPalette(theme, 'primary')};
-  padding-bottom: ${({endPadding}) => endPadding || '0px'};
+  width: 4px;
+  min-height: 80px;
+  border: 2px solid ${({theme}) => fromPalette(theme, 'primary')};
 `);

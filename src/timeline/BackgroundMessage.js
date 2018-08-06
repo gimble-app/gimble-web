@@ -7,7 +7,7 @@ const BackgroundMessage = () =>
     color="inherit"
     align="center"
   >
-    Not much here at the moment. Maybe you should add an event...
+    Nothing planned yet...
   </Typography>
 
 

@@ -3,18 +3,16 @@ import { withTheme } from '@material-ui/core/styles';
 import {fromPalette} from "../theme";
 
 export default withTheme()(styled.li`
-   content: '';
-   display: inline-block;
-   position: relative;
+   list-style-type:none;
+   position: absolute;
    width: 40px;
    height: 40px;
+   left: -20px;
    bottom: -20px;
-   right: 22px;
    border-radius: 100%;
    border-width: 4px;
    box-sizing: border-box;
    border-style: solid;
-   margin-top: ${({topOffset}) => topOffset || '0px'};
    border-color: ${({theme}) => fromPalette(theme, 'primaryContrast')};
    background-color: ${({theme}) => fromPalette(theme, 'secondary')};
 `);

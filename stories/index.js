@@ -31,38 +31,43 @@ storiesOf('Buttons', module)
   ]);
 
 
-storiesOf('Event lists', module)
-  .add('lists', () => [
+storiesOf('Timelines', module)
+  .add('empty timeline', () => (
     <div style={{ boxSixing: 'border-box', display: "flex", justifyContent: "center"}}>
-    <Timeline>
-      <TimelineEvent>
-        <TimelineEventSummary>
-          <TimelineEventDescription>
-            <TitleText>Some text</TitleText>
-          </TimelineEventDescription>
-          <TimelineEventBuddyList>
-            <TimelineTimelineEventBuddyListItem>
-              <Avatar>J</Avatar>
-            </TimelineTimelineEventBuddyListItem>
-          </TimelineEventBuddyList>
-        </TimelineEventSummary>
-      </TimelineEvent>
-      <TimelineEvent>
-        <TimelineEventSummary>
-          <TimelineEventDescription>
-            <TitleText>Some more text</TitleText>
-          </TimelineEventDescription>
-          <TimelineEventBuddyList>
-            <TimelineTimelineEventBuddyListItem>
-              <Avatar>J</Avatar>
-            </TimelineTimelineEventBuddyListItem>
-            <TimelineTimelineEventBuddyListItem>
-              <Avatar>K</Avatar>
-            </TimelineTimelineEventBuddyListItem>
-          </TimelineEventBuddyList>
-        </TimelineEventSummary>
-      </TimelineEvent>
-      <TimelineNode />
-    </Timeline>
+      <Timeline />
+    </div>
+  ))
+  .add('timeline with entries', () => [
+    <div style={{ boxSixing: 'border-box', display: "flex", justifyContent: "center"}}>
+      <Timeline>
+        <TimelineEvent>
+          <TimelineEventSummary>
+            <TimelineEventDescription>
+              <TitleText>Some text</TitleText>
+            </TimelineEventDescription>
+            <TimelineEventBuddyList>
+              <TimelineTimelineEventBuddyListItem>
+                <Avatar>J</Avatar>
+              </TimelineTimelineEventBuddyListItem>
+            </TimelineEventBuddyList>
+          </TimelineEventSummary>
+        </TimelineEvent>
+        <TimelineEvent>
+          <TimelineEventSummary>
+            <TimelineEventDescription>
+              <TitleText>Some more text</TitleText>
+            </TimelineEventDescription>
+            <TimelineEventBuddyList>
+              <TimelineTimelineEventBuddyListItem>
+                <Avatar>J</Avatar>
+              </TimelineTimelineEventBuddyListItem>
+              <TimelineTimelineEventBuddyListItem>
+                <Avatar>K</Avatar>
+              </TimelineTimelineEventBuddyListItem>
+            </TimelineEventBuddyList>
+          </TimelineEventSummary>
+        </TimelineEvent>
+        <TimelineNode />
+      </Timeline>
     </div>
   ]);
