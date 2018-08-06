@@ -7,21 +7,19 @@ import {
   isLoaded,
   isEmpty
 } from "react-redux-firebase";
-import LinearProgress from '@material-ui/core/LinearProgress';
-import {withTheme} from "@material-ui/core/styles";
-import styled from "styled-components";
 import {selectEventsList} from "./selectors";
 import {eventsForUserQuery} from "./firestoreQueries";
 import {selectMyProfile} from "../profile/selectors";
 import {myProfile} from "../profile/firestoreQueries";
-import AddEventButton from "./AddEventButton";
+
+import LinearProgress from '@material-ui/core/LinearProgress';
+import {withTheme} from "@material-ui/core/styles";
+import styled from "styled-components";
 import Page from '../common/Page';
 import TripTimeline from './TripTimeline';
+import TimelineHeader from './TimelineHeader';
 import CentredFlex from "../common/layout/CentredFlex";
-import BigAvatar from "../common/BigAvatar";
-import BigButton from "../common/buttons/BigButton";
 import BackgroundMessage from "./BackgroundMessage";
-import {InternalLink} from "../common/InternalLinks";
 
 const CentredPanel = withTheme()(styled(CentredFlex)`
   margin:${({theme}) => theme.spacing.unit * 2}px 0px;
@@ -30,26 +28,14 @@ const CentredPanel = withTheme()(styled(CentredFlex)`
 export const TimelineScreen = ({ events, profile }) => (
   <Page>
     <CentredPanel>
-      <div style={{position: "relative", width: "100%", display: "flex", justifyContent: "space-around", alignItems: "flex-end"}}>
-        <span style={{flex: 1}}/>
-        <InternalLink to="profile">
-          <BigButton>
-            <BigAvatar src={profile && profile.photoURL } />
-          </BigButton>
-        </InternalLink>
-        <div style={{flex: 1, position: "relative"}}>
-          <div style={{position: "absolute", bottom: "-12px", left: "12px"}}>
-            <AddEventButton/>
-          </div>
-        </div>
-      </div>
+      <TimelineHeader profile={profile} />
       {
         !isLoaded(events)
-          ? <LinearProgress />
+          ? <LinearProgress/>
           : <TripTimeline events={events}/>
       }
     </CentredPanel>
-    { isLoaded(events) && isEmpty(events) && <BackgroundMessage/> }
+    {isLoaded(events) && isEmpty(events) && <BackgroundMessage/>}
   </Page>
 );
 
