@@ -1,5 +1,5 @@
-import {REGISTER_PROFILE_NAME} from "../clients/remoteFunctions";
 import {SubmissionError} from "redux-form";
+import {REGISTER_PROFILE_NAME} from "../clients/remoteFunctions";
 import {sendNotification} from "../notifications/actions";
 
 export const UPDATE_PROFILE_SUCCESS = 'profile updated';

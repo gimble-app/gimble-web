@@ -10,9 +10,7 @@ export default withTheme()(styled.li`
    left: -20px;
    bottom: -20px;
    border-radius: 100%;
-   border-width: 4px;
    box-sizing: border-box;
-   border-style: solid;
-   border-color: ${({theme}) => fromPalette(theme, 'primaryContrast')};
+   border: 4px solid ${({theme}) => fromPalette(theme, 'primaryContrast')};
    background-color: ${({theme}) => fromPalette(theme, 'secondary')};
 `);

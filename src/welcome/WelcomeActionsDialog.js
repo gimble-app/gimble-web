@@ -8,18 +8,18 @@ import {compose} from "redux";
 import {connect} from "react-redux";
 import DialogContent from "@material-ui/core/DialogContent";
 import Dialog from "@material-ui/core/Dialog";
-import ProfileNameForm from "./ProfileNameForm";
-import {selectMyProfile} from "./selectors";
-import {myProfile} from "./firestoreQueries";
+import ProfileSetupPage from "./ProfileSetupPage";
+import {selectMyProfile} from "../profile/selectors";
+import {myProfile} from "../profile/firestoreQueries";
 
-const ProfileActionsDialog = ({profile = {}}) => (
+const WelcomeActionsDialog = ({profile = {}}) => (
   <Dialog
     open={isLoaded(profile) && !profile.profileName}
     fullScreen
     transitionDuration={{ enter: 0, exit: 10 }}
   >
     <DialogContent>
-      <ProfileNameForm profile={profile}/>
+      <ProfileSetupPage profile={profile}/>
     </DialogContent>
   </Dialog>
 );
@@ -32,4 +32,4 @@ export default compose(
   connect(state => ({
     profile: selectMyProfile(state),
   }))
-)(ProfileActionsDialog);
+)(WelcomeActionsDialog);

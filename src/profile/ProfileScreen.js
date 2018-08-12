@@ -2,31 +2,26 @@ import React from 'react';
 import {compose} from "redux";
 import {connect} from "react-redux";
 import {firebaseConnect, firestoreConnect} from "react-redux-firebase";
-import styled from "styled-components";
-import {withTheme} from "@material-ui/core/styles";
 import {selectMyProfile} from "./selectors";
 import LogoutMenuOption from "../auth/LogoutMenuOption";
 import {myProfile} from "./firestoreQueries";
 import FriendsPage from "../friends/FriendsPage";
 import CentredFlex from "../common/layout/CentredFlex";
-import BigAvatar from "../common/BigAvatar";
 import TitleText from "../common/typography/TitleText";
 import BackButton from "../common/BackButton";
-
-const ProfilePanel = withTheme()(styled(CentredFlex)`
-  margin:${({theme}) => theme.spacing.unit * 2}px 0px;
-`);
+import CentredPanel from "../common/CentredPanel";
+import BorderedBigAvatar from "./BorderedBigAvatar";
 
 export const ProfileScreen = ({ profile = {} }) => (
-    <CentredFlex>
-      <BackButton />
-      <ProfilePanel>
-        <BigAvatar src={profile && profile.photoURL }></BigAvatar>
-        <TitleText>{ profile.profileName }</TitleText>
-        <LogoutMenuOption />
-      </ProfilePanel>
-      <FriendsPage />
-    </CentredFlex>
+  <CentredFlex>
+    <BackButton />
+    <CentredPanel>
+      <BorderedBigAvatar src={profile && profile.photoURL } />
+      <TitleText>{ profile.profileName }</TitleText>
+      <LogoutMenuOption />
+    </CentredPanel>
+    <FriendsPage />
+  </CentredFlex>
 );
 
 export default compose(
