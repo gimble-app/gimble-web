@@ -17,6 +17,7 @@ const theme = createMuiTheme({
     common: {
       grey: '#fafafa',
       darkGrey: '#444444',
+      black: '#000000',
     },
   },
   spacing: {
@@ -32,6 +33,7 @@ export const fromPalette = ({palette}, type) => {
     case 'primaryContrast': return palette.primary.contrastText;
     case 'darkGrey': return palette.common.darkGrey;
     case 'grey': return palette.common.grey;
+    case 'black': return palette.common.black;
     case 'secondary': return palette.secondary.main;
     case 'secondaryLight': return palette.secondary.light;
     case 'secondaryContrast': return palette.secondary.contrastText;
