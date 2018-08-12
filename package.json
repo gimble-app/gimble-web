@@ -7,7 +7,7 @@
     "@firebase/app": "0.x",
     "@firebase/app-types": "0.x",
     "@material-ui/core": "^1.1.0",
-    "@material-ui/icons": "^1.1.0",
+    "@material-ui/icons": "^2.0.0",
     "firebase": "^5.0.4",
     "lodash": "^4.17.5",
     "prop-types": "^15.6.1",
