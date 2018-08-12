@@ -1,14 +1,9 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
+import BodyText from "../common/typography/BodyText";
 
 const BackgroundMessage = () =>
-  <Typography
-    variant="body1"
-    color="inherit"
-    align="center"
-  >
+  <BodyText>
     Nothing planned yet...
-  </Typography>
-
+  </BodyText>;
 
 export default BackgroundMessage;

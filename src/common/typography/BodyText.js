@@ -1,4 +1,3 @@
-import React from "react";
 import {withTheme} from "@material-ui/core/styles";
 import styled from "styled-components";
 import {fromPalette} from "../../theme";
