@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProfileScreen } from './ProfileScreen';
-import BorderedBigAvatar from './BorderedBigAvatar';
+import BorderedBigAvatar from '../common/avatars/BorderedBigAvatar';
 
 describe('<ProfileScreen />', () => {
   it('renders an avatar for the profile', () => {

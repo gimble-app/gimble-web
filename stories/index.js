@@ -14,7 +14,7 @@ import TimelineEventDescription from "../src/timeline/TimelineEventDescription";
 import TimelineNode from "../src/timeline/TimelineNode";
 import TimelineEventBuddyList from "../src/timeline/TimelineEventBuddyList";
 import TimelineTimelineEventBuddyListItem from "../src/timeline/TimelineEventBuddyListItem";
-import Avatar from "../src/common/Avatar";
+import Avatar from "../src/common/avatars/Avatar";
 import TitleText from "../src/common/typography/TitleText";
 import BigRedButton from "../src/common/buttons/BigRedButton";
 

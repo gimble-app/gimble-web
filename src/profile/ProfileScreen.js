@@ -10,7 +10,7 @@ import CentredFlex from "../common/layout/CentredFlex";
 import TitleText from "../common/typography/TitleText";
 import BackButton from "../common/BackButton";
 import CentredPanel from "../common/CentredPanel";
-import BorderedBigAvatar from "./BorderedBigAvatar";
+import BorderedBigAvatar from "../common/avatars/BorderedBigAvatar";
 
 export const ProfileScreen = ({ profile = {} }) => (
   <CentredFlex>

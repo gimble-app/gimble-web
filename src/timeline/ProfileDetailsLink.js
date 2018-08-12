@@ -1,5 +1,5 @@
 import {InternalLink} from "../common/InternalLinks";
-import BigAvatar from "../common/BigAvatar";
+import BigAvatar from "../common/avatars/BigAvatar";
 import BigButton from "../common/buttons/BigButton";
 import React from "react";
 

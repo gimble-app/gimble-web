@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {TextField} from 'redux-form-material-ui';
 import {Field, reduxForm} from 'redux-form'
 import {setProfileName} from "./actions";
-import BigAvatar from "../common/BigAvatar";
 import ActionList from "../timeline/Timeline";
 import ActionListItem from "../timeline/TimelineEvent";
 import LastActionItem from "../timeline/TimelineNode";
@@ -11,10 +10,11 @@ import ActionSection from "./ActionSection";
 import BigRedButton from "../common/buttons/BigRedButton";
 import CaptionText from "../common/typography/CaptionText";
 import ActionsForm from "./ActionsForm";
+import BorderedBigAvatar from "../common/avatars/BorderedBigAvatar";
 
 const ProfileSetupPage = ({ profile, submitting, handleSubmit, dirty, setProfileName }) => (
   <ActionsForm onSubmit={handleSubmit(setProfileName)}>
-    <BigAvatar src={profile && profile.photoURL } />
+    <BorderedBigAvatar src={profile && profile.photoURL } />
     <ActionList>
       <ActionListItem>
         <ActionSection>
