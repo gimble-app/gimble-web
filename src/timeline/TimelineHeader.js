@@ -11,7 +11,7 @@ const SpacedAroundFlex = styled.div`
   alignItems: flex-end;
 `;
 
-const TimelineHeader = (profile) => (
+const TimelineHeader = ({profile}) => (
 <SpacedAroundFlex>
   <span style={{flex: 1}}/>
   <ProfileDetailsLink profile={profile}/>
