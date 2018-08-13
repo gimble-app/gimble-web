@@ -12,3 +12,4 @@ const SubheadingText = withTheme()(styled.h3`
 `);
 
 export default SubheadingText;
+

@@ -25,8 +25,9 @@ const theme = createMuiTheme({
   }
 });
 
-export const fromPalette = ({palette}, type) => {
-  switch(type) {
+export const fromPalette = (theme, colour, defaultColour) => {
+  const palette = theme.palette;
+  switch(colour) {
     case 'primary': return palette.primary.main;
     case 'primaryLight': return palette.primary.light;
     case 'primaryDark': return palette.primary.dark;
@@ -37,7 +38,7 @@ export const fromPalette = ({palette}, type) => {
     case 'secondary': return palette.secondary.main;
     case 'secondaryLight': return palette.secondary.light;
     case 'secondaryContrast': return palette.secondary.contrastText;
-    default: return;
+    default: return defaultColour ? fromPalette(theme, defaultColour) : '';
   }
 };
 
