@@ -8,7 +8,7 @@ import ActionListItem from "../timeline/TimelineEvent";
 import LastActionItem from "../timeline/TimelineNode";
 import ActionSection from "./ActionSection";
 import BigRedButton from "../common/buttons/BigRedButton";
-import SubheadingText from "../common/typography/SubheadingText";
+import FieldHeadingText from "../common/typography/FieldHeadingText";
 import ActionsForm from "./ActionsForm";
 import BorderedBigAvatar from "../common/avatars/BorderedBigAvatar";
 
@@ -18,7 +18,7 @@ const ProfileSetupPage = ({ profile, submitting, handleSubmit, dirty, setProfile
     <ActionList>
       <ActionListItem>
         <ActionSection>
-          <SubheadingText>They call me...</SubheadingText>
+          <FieldHeadingText>They call me...</FieldHeadingText>
           <Field
             name="profileName"
             component={TextField}
