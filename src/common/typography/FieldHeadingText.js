@@ -8,7 +8,7 @@ const FieldHeadingText = withTheme()(styled.span`
   font-family: Roboto, Helvetica, Arial, sans-serif;
   line-height: 14px;
   margin: 0px;
-  color: ${({theme, colour}) => fromPalette(theme, colour, 'darkGrey')};
+  color: ${({theme, colour}) => fromPalette(theme, colour, 'grey')};
 `);
 
 export default FieldHeadingText;
