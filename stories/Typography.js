@@ -15,7 +15,7 @@ storiesOf('Typography', module)
 .addDecorator(
   muiTheme([theme]),
 )
-.add('body text', () => [
+.add('text', () => [
   <div style={{backgroundColor: primary}}><DisplayText>DisplayText - for page headers</DisplayText></div>,
   <div style={{backgroundColor: primary}}><TitleText>TitleText - to title event list entries</TitleText></div>,
   <SubheadingText>SubheadingText - highlights smaller sections on the page</SubheadingText>,
