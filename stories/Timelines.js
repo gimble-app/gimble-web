@@ -1,5 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import {muiTheme} from "storybook-addon-material-ui";
 
 import Timeline from "../src/timeline/Timeline";
 import TimelineEvent from "../src/timeline/TimelineEvent";
@@ -11,8 +12,12 @@ import TimelineTimelineEventBuddyListItem from "../src/timeline/TimelineEventBud
 
 import Avatar from "../src/common/avatars/Avatar";
 import TitleText from "../src/common/typography/TitleText";
+import theme from "../src/theme";
 
 storiesOf('Timelines', module)
+.addDecorator(
+  muiTheme([theme]),
+)
 .add('empty timeline', () => (
   <div style={{ boxSixing: 'border-box', display: "flex", justifyContent: "center"}}>
     <Timeline />
