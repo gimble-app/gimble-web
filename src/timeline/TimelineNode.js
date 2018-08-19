@@ -1,8 +1,7 @@
 import styled from 'styled-components';
-import { withTheme } from '@material-ui/core/styles';
 import {fromPalette} from "../theme/theme";
 
-export default withTheme()(styled.li`
+export default styled.li`
    list-style-type:none;
    position: absolute;
    width: 40px;
@@ -13,4 +12,4 @@ export default withTheme()(styled.li`
    box-sizing: border-box;
    border: 4px solid ${({theme}) => fromPalette(theme, 'primaryContrast')};
    background-color: ${({theme}) => fromPalette(theme, 'secondary')};
-`);
+`;

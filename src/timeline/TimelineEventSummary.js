@@ -1,8 +1,7 @@
 import styled from 'styled-components';
-import {withTheme} from '@material-ui/core/styles';
 import {fromPalette} from "../theme/theme";
 
-export default withTheme()(styled.section`
+export default styled.section`
   box-sizing: border-box;
   display: flex;
   height: 160px;
@@ -12,4 +11,4 @@ export default withTheme()(styled.section`
   background-color: ${({theme}) => fromPalette(theme, 'primaryLight')};
   background-image: url(${({image}) => image && image.src});
   padding: 8px 8px;
-`);
+`;

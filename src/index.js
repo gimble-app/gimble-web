@@ -1,8 +1,10 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
+import { ThemeProvider } from 'styled-components'
+import './theme/globalStyle'
 import registerServiceWorker from './registerServiceWorker';
-import { MuiThemeProvider, createGenerateClassName, jssPreset } from '@material-ui/core/styles';
+import { createGenerateClassName, jssPreset } from '@material-ui/core/styles';
 import JssProvider from 'react-jss/lib/JssProvider';
 import { create } from 'jss';
 import initStore from './store';
@@ -17,9 +19,9 @@ const store = initStore();
 render(
   <JssProvider jss={jss} generateClassName={generateClassName}>
     <Provider store={store}>
-      <MuiThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
         <App/>
-      </MuiThemeProvider>
+      </ThemeProvider>
     </Provider>
   </JssProvider>,
 document.getElementById('root')

@@ -1,5 +1,4 @@
 import React from 'react';
-import {muiTheme} from "storybook-addon-material-ui";
 import { storiesOf } from '@storybook/react';
 import theme, {fromPalette} from "../src/theme/theme";
 import BodyText from "../src/common/typography/BodyText";
@@ -12,9 +11,6 @@ import LabelText from "../src/common/typography/LabelText";
 const primary = fromPalette(theme, "primary");
 
 storiesOf('Typography', module)
-.addDecorator(
-  muiTheme([theme]),
-)
 .add('text', () => [
   <div style={{backgroundColor: primary}}><DisplayText>DisplayText - for page headers</DisplayText></div>,
   <div style={{backgroundColor: primary}}><TitleText>TitleText - to title event list entries</TitleText></div>,

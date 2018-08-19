@@ -7,16 +7,15 @@ import {selectFriendRefs, selectFriendRequests} from './selectors';
 import RequestsList from './RequestsList';
 import FriendProfileList from './FriendProfileList';
 import styled from "styled-components";
-import {withTheme} from "@material-ui/core";
 import SectionHeaderText from "../common/typography/SectionHeaderText";
 import AddButton from "../profile/AddButton";
 import FlexContainer from "../common/layout/FlexContainer";
 
-const Div = withTheme()(styled.div`
+const Div = styled.div`
   padding:${({theme}) => theme.spacing.unit * 2}px;
   width: 100%;
   background-color:${({theme}) => theme.palette.background.paper}
-`);
+`;
 
 export const FriendsPage = ({ requests, friends }) => (
   <Div>

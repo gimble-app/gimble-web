@@ -1,6 +1,4 @@
-import { createMuiTheme } from '@material-ui/core/styles';
-
-const theme = createMuiTheme({
+const theme ={
   palette: {
     primary: {
       main: '#2f3e9e',
@@ -23,7 +21,7 @@ const theme = createMuiTheme({
   spacing: {
     unit: 8
   }
-});
+};
 
 export const fromPalette = (theme, colour, defaultColour) => {
   const palette = theme.palette;
