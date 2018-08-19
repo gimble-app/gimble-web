@@ -11,4 +11,6 @@ addDecorator((story) => (
 
 require('./Timelines');
 require('./Buttons');
+require('./Forms');
 require('./Typography');
+
