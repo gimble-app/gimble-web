@@ -1,5 +1,3 @@
-import 'typeface-roboto';
-import './index.css';
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
@@ -9,7 +7,7 @@ import JssProvider from 'react-jss/lib/JssProvider';
 import { create } from 'jss';
 import initStore from './store';
 import App from './App';
-import theme from './theme';
+import theme from './theme/theme';
 
 const generateClassName = createGenerateClassName();
 const jss = create(jssPreset());

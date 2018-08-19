@@ -1,6 +1,6 @@
 import {withTheme} from "@material-ui/core/styles";
 import styled from "styled-components";
-import {fromPalette} from "../../theme";
+import {fromPalette} from "../../theme/theme";
 
 const BodyText = withTheme()(styled.p`
   font-size: 16px;

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {withTheme} from "@material-ui/core/styles";
-import {fromPalette} from "../../theme";
+import {fromPalette} from "../../theme/theme";
 
 const DisplayText = withTheme()(styled.h1`
   font-size: 24px;

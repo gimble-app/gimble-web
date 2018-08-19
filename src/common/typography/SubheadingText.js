@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {withTheme} from "@material-ui/core/styles";
-import {fromPalette} from "../../theme";
+import {fromPalette} from "../../theme/theme";
 
 const SubheadingText = withTheme()(styled.h3`
   font-size: 16px;

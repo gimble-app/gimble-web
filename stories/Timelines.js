@@ -12,7 +12,7 @@ import TimelineTimelineEventBuddyListItem from "../src/timeline/TimelineEventBud
 
 import Avatar from "../src/common/avatars/Avatar";
 import TitleText from "../src/common/typography/TitleText";
-import theme from "../src/theme";
+import theme from "../src/theme/theme";
 
 storiesOf('Timelines', module)
 .addDecorator(

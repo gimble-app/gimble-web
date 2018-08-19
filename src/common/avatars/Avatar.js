@@ -1,7 +1,7 @@
 import {withTheme} from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import styled from "styled-components";
-import {fromPalette} from "../../theme";
+import {fromPalette} from "../../theme/theme";
 
 export default withTheme()(styled(Avatar)`
   width: 32px !important;

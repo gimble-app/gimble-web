@@ -1,7 +1,7 @@
 import React from 'react';
 import {muiTheme} from "storybook-addon-material-ui";
 import { storiesOf } from '@storybook/react';
-import theme, {fromPalette} from "../src/theme";
+import theme, {fromPalette} from "../src/theme/theme";
 import BodyText from "../src/common/typography/BodyText";
 import FieldHeadingText from "../src/common/typography/FieldHeadingText";
 import TitleText from "../src/common/typography/TitleText";

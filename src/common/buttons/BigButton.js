@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import {withTheme} from "@material-ui/core/styles/index";
-import {fromPalette} from "../../theme";
+import {fromPalette} from "../../theme/theme";
 
 export default withTheme()(styled(ButtonBase)`
   && {
