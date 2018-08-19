@@ -2,7 +2,8 @@ import React from "react";
 import {
   firebaseConnect,
   firestoreConnect,
-  isLoaded
+  isLoaded,
+  isEmpty
 } from "react-redux-firebase";
 import {compose} from "redux";
 import {connect} from "react-redux";
@@ -14,7 +15,7 @@ import {myProfile} from "../profile/firestoreQueries";
 
 const WelcomeActionsDialog = ({profile = {}}) => (
   <Dialog
-    open={isLoaded(profile) && !profile.profileName}
+    open={isLoaded(profile) && !isEmpty(profile) && !profile.profileName}
     fullScreen
     transitionDuration={{ enter: 0, exit: 10 }}
   >
