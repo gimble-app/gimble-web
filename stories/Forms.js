@@ -4,6 +4,8 @@ import TextInputField from "../src/common/forms/TextInputField";
 import Form from "../src/common/forms/Form";
 import BuddySelectionEntry from "../src/common/forms/ImageSelectEntry";
 import profileImage from './placeholder-profile.jpg';
+import Label from "../src/common/forms/Label";
+import FormGroup from "@material-ui/core/FormGroup";
 
 storiesOf('Forms', module)
 .add('text inputs', () => [
@@ -29,9 +31,16 @@ storiesOf('Forms', module)
       label="What is your name?"
       value="Captain Somebody"
     />
-    <BuddySelectionEntry
-      imageUrl={profileImage}
-      label="Dan"
-    />
+    <FormGroup style={{width: "100%"}}>
+      <Label shrink >Who is coming?</Label>
+      <div style={{
+        marginTop: "8px",
+        display: "flex",
+        justifyContent: "space-evenly"
+      }}>
+        <BuddySelectionEntry checked imageUrl={profileImage} label="Dan" />
+        <BuddySelectionEntry imageUrl={profileImage} label="Dan" />
+      </div>
+    </FormGroup>
   </Form>
 ]);

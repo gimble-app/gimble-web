@@ -1,9 +1,8 @@
 import React from 'react';
 import MaterialCheckbox from "@material-ui/core/Checkbox";
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 import {fromPalette} from "../../theme/theme";
-import CheckCircleOutline from '@material-ui/icons/CheckCircleOutline';
-import Add from "@material-ui/icons/Add";
+import Check from '@material-ui/icons/Check';
 import MaterialFormControlLabel from "@material-ui/core/FormControlLabel";
 import LabelText from "../typography/LabelText";
 
@@ -13,7 +12,7 @@ const Checkbox = styled(MaterialCheckbox)`
   height: 80px !important;
   width: 80px !important;
   position: relative !important;
-  border: 1px solid ${({theme, checked}) => checked ? fromPalette(theme, 'primaryContrast') : 'red'} !important;
+  border: 1px solid ${({theme}) => fromPalette(theme, 'primaryContrast')} !important;
 `;
 
 const ImageSurround = styled.span`
@@ -24,16 +23,13 @@ const ImageSurround = styled.span`
   align-items: center;
   background-color:  ${({theme}) => fromPalette(theme, 'primaryLight') };
   border-radius: 2px;
+  
+  ${({theme, checked}) => checked && css`
+    border: 2px solid ${fromPalette(theme, 'primary')};
+  `}
 `;
 
-const AddIcon = styled(Add)`
-    position: absolute;
-    right: -12px;
-    top: -8px;
-    color: ${({theme}) => fromPalette(theme, 'secondary') } !important;
-`;
-
-const CheckCircleOutlineIcon = styled(CheckCircleOutline)`
+const CheckIcon = styled(Check)`
     position: absolute;
     right: -12px;
     top: -8px;
@@ -48,14 +44,14 @@ const FormControlLabel = styled(MaterialFormControlLabel)`
     justify-content: space-evenly;
 `;
 
-const ImageSelectEntry = ({label, ...props}) => (
-  <ImageSurround>
+const ImageSelectEntry = ({label, checked, ...props}) => (
+  <ImageSurround checked={checked}>
     <FormControlLabel
       control={
         <Checkbox
-          checked
-          icon={<AddIcon />}
-          checkedIcon={<CheckCircleOutlineIcon />}
+          checked={checked}
+          icon=""
+          checkedIcon={<CheckIcon />}
           {...props}
         />}
       label={<LabelText>{label}</LabelText>}
