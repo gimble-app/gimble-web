@@ -8,7 +8,7 @@ import MaterialFormControlLabel from "@material-ui/core/FormControlLabel";
 import LabelText from "../typography/LabelText";
 
 const Checkbox = styled(MaterialCheckbox)`
-  background-image: url(https://lh5.googleusercontent.com/-zUXAPbg2Atc/AAAAAAAAAAI/AAAAAAAAE3g/tbROa5YzibA/photo.jpg);
+  background-image: url(${({imageUrl}) => imageUrl });
   background-size: contain;
   height: 80px !important;
   width: 80px !important;
@@ -16,9 +16,9 @@ const Checkbox = styled(MaterialCheckbox)`
   border: 1px solid ${({theme, checked}) => checked ? fromPalette(theme, 'primaryContrast') : 'red'} !important;
 `;
 
-const ProfileSurround = styled.span`
+const ImageSurround = styled.span`
   height: 116px;
-  width: 96px;
+  width: 116px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,14 +28,14 @@ const ProfileSurround = styled.span`
 
 const AddIcon = styled(Add)`
     position: absolute;
-    right: -8px;
+    right: -12px;
     top: -8px;
     color: ${({theme}) => fromPalette(theme, 'secondary') } !important;
 `;
 
 const CheckCircleOutlineIcon = styled(CheckCircleOutline)`
     position: absolute;
-    right: -8px;
+    right: -12px;
     top: -8px;
     color: ${({theme}) => fromPalette(theme, 'primaryContrast') } !important;
 `;
@@ -43,18 +43,24 @@ const CheckCircleOutlineIcon = styled(CheckCircleOutline)`
 const FormControlLabel = styled(MaterialFormControlLabel)`
     margin: 0px !important;
     flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-evenly;
 `;
 
-export default () => (
-  <ProfileSurround>
-  <FormControlLabel
-    control={
-      <Checkbox
-        checked
-        icon={<AddIcon />}
-        checkedIcon={<CheckCircleOutlineIcon />}
-      />}
-    label={<LabelText>Me</LabelText>}
-  /></ProfileSurround>
+const ImageSelectEntry = ({label, ...props}) => (
+  <ImageSurround>
+    <FormControlLabel
+      control={
+        <Checkbox
+          checked
+          icon={<AddIcon />}
+          checkedIcon={<CheckCircleOutlineIcon />}
+          {...props}
+        />}
+      label={<LabelText>{label}</LabelText>}
+    />
+  </ImageSurround>
 )
+
+export default ImageSelectEntry;

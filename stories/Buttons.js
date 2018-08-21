@@ -5,16 +5,20 @@ import AddIcon from '@material-ui/icons/Add';
 import FloatingActionButtonSmall
   from "../src/common/buttons/FloatingActionButtonSmall";
 import FloatingActionButton from "../src/common/buttons/FloatingActionButton";
-import BigProfileButton from "../src/common/buttons/BigButton";
 import BigRedButton from "../src/common/buttons/BigRedButton";
+import profileImage from './placeholder-profile.jpg';
+import BigAvatar from "../src/common/avatars/BigAvatar";
+import BigButton from "../src/common/buttons/BigButton";
 
 storiesOf('Buttons', module)
 .add('floating action buttons', () => [
   <FloatingActionButton onClick={action('clicked')}><AddIcon /></FloatingActionButton>,
   <FloatingActionButtonSmall onClick={action('clicked')}><AddIcon /></FloatingActionButtonSmall>
 ])
-.add('profile button', () => [
-  <BigProfileButton onClick={action('clicked')}>Placeholder</BigProfileButton>
+.add('big button', () => [
+  <BigButton onClick={action('clicked')}>
+    <BigAvatar src={profileImage}/>
+  </BigButton>
 ])
 .add('big red button', () => [
   <BigRedButton onClick={action('clicked')}>Placeholder</BigRedButton>,

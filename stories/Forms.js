@@ -2,7 +2,8 @@ import {storiesOf} from '@storybook/react';
 import React from "react";
 import TextInputField from "../src/common/forms/TextInputField";
 import Form from "../src/common/forms/Form";
-import ProfileSelector from "../src/common/forms/ProfileSelector";
+import BuddySelectionEntry from "../src/common/forms/ImageSelectEntry";
+import profileImage from './placeholder-profile.jpg';
 
 storiesOf('Forms', module)
 .add('text inputs', () => [
@@ -28,6 +29,9 @@ storiesOf('Forms', module)
       label="What is your name?"
       value="Captain Somebody"
     />
-    <ProfileSelector/>
+    <BuddySelectionEntry
+      imageUrl={profileImage}
+      label="Dan"
+    />
   </Form>
 ]);

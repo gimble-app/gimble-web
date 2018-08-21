@@ -10,6 +10,7 @@ import TimelineTimelineEventBuddyListItem
   from "../src/timeline/TimelineEventBuddyListItem";
 import Avatar from "../src/common/avatars/Avatar";
 import TitleText from "../src/common/typography/TitleText";
+import profileImage from './placeholder-profile.jpg';
 
 storiesOf('Timelines', module)
 .add('empty timeline', () => (
@@ -27,7 +28,7 @@ storiesOf('Timelines', module)
           </TimelineEventDescription>
           <TimelineEventBuddyList>
             <TimelineTimelineEventBuddyListItem>
-              <Avatar>J</Avatar>
+              <Avatar src={profileImage} />
             </TimelineTimelineEventBuddyListItem>
           </TimelineEventBuddyList>
         </TimelineEventSummary>
@@ -39,7 +40,7 @@ storiesOf('Timelines', module)
           </TimelineEventDescription>
           <TimelineEventBuddyList>
             <TimelineTimelineEventBuddyListItem>
-              <Avatar>J</Avatar>
+              <Avatar src={profileImage} />
             </TimelineTimelineEventBuddyListItem>
             <TimelineTimelineEventBuddyListItem>
               <Avatar>K</Avatar>

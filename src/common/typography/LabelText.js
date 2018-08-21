@@ -3,7 +3,7 @@ import {fromPalette} from "../../theme/theme";
 
 const LabelText = styled.p`
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 300;
   font-family: Roboto, Helvetica, Arial, sans-serif;
   line-height: 16px;
   margin: 0px;
