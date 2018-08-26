@@ -12,12 +12,13 @@ import InviteScreen from "../invites/InviteScreen";
 import ProfileScreen from "../profile/ProfileScreen";
 import EventPage from "../events/eventView/EventPage";
 import AddFriendPage from "../events/eventView/friends/AddFriendPage";
+import NewEventPage from "../events/new/NewEventPage";
 
 const PUSH_ACTION = "PUSH";
 
 const AuthenticatedRoutes = () => (
   <Switch>
-    <Route exact path="/event" component={EventScreen} />
+    <Route exact path="/event" component={NewEventPage} />
     <Route
       exact
       path="/event/:id"

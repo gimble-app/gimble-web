@@ -2,17 +2,18 @@ import {storiesOf} from '@storybook/react';
 import React from "react";
 import TextInputField from "../src/common/forms/TextInputField";
 import Form from "../src/common/forms/Form";
-import BuddySelectionEntry from "../src/common/forms/ImageSelectEntry";
-import profileImage from './placeholder-profile.jpg';
+import ImageCheckboxField from "../src/common/forms/ImageCheckboxField";
 import Label from "../src/common/forms/Label";
-import FormGroup from "@material-ui/core/FormGroup";
+import FormGroup from "../src/common/forms/FormGroup";
+import profileImage from './placeholder-profile.jpg';
+import FlexContainer from "../src/common/layout/FlexContainer";
 
 storiesOf('Forms', module)
 .add('text inputs', () => [
   <TextInputField
     required
     label="What is your name?"
-    value="Captain Somebody"
+    defaultValue="Captain Somebody"
   />,
   <TextInputField
     error
@@ -31,16 +32,12 @@ storiesOf('Forms', module)
       label="What is your name?"
       value="Captain Somebody"
     />
-    <FormGroup style={{width: "100%"}}>
+    <FormGroup>
       <Label shrink >Who is coming?</Label>
-      <div style={{
-        marginTop: "8px",
-        display: "flex",
-        justifyContent: "space-evenly"
-      }}>
-        <BuddySelectionEntry checked imageUrl={profileImage} label="Dan" />
-        <BuddySelectionEntry imageUrl={profileImage} label="Dan" />
-      </div>
+      <FlexContainer>
+        <ImageCheckboxField checked imageUrl={profileImage} label="Dan" />
+        <ImageCheckboxField imageUrl={profileImage} label="Dan" />
+      </FlexContainer>
     </FormGroup>
   </Form>
 ]);

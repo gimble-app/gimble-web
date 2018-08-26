@@ -5,13 +5,14 @@ import Input from "./Input";
 import FormHelperText from "@material-ui/core/FormHelperText";
 
 const TextInputField = ({
+  error,
+  focused,
+  filled,
   required,
   disabled,
-  error,
-  filled,
-  focused,
   label,
   helperText,
+  value,
   ...props}) => (
   <FormControl
     error={error}
@@ -19,7 +20,7 @@ const TextInputField = ({
     required={required}
   >
     <Label shrink >{label}</Label>
-    <Input {...props } />
+    <Input value={value} {...props } />
     <FormHelperText
       filled={filled}
       focused={focused}

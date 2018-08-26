@@ -7,18 +7,23 @@ import MaterialFormControlLabel from "@material-ui/core/FormControlLabel";
 import LabelText from "../typography/LabelText";
 
 const Checkbox = styled(MaterialCheckbox)`
+  position: relative !important;
+`;
+
+const CheckBoxImageBackground = styled.div`
   background-image: url(${({imageUrl}) => imageUrl });
   background-size: contain;
-  height: 80px !important;
-  width: 80px !important;
-  position: relative !important;
-  border: 1px solid ${({theme}) => fromPalette(theme, 'primaryContrast')} !important;
+  height: 80px;
+  width: 80px;
+  border: 1px solid ${({theme}) => fromPalette(theme, 'primaryContrast')};
+  border-radius: 100%;
 `;
 
 const ImageSurround = styled.span`
   height: 116px;
   width: 116px;
   display: flex;
+  margin: 4px;
   justify-content: center;
   align-items: center;
   background-color:  ${({theme}) => fromPalette(theme, 'primaryLight') };
@@ -44,19 +49,30 @@ const FormControlLabel = styled(MaterialFormControlLabel)`
     justify-content: space-evenly;
 `;
 
-const ImageSelectEntry = ({label, checked, ...props}) => (
-  <ImageSurround checked={checked}>
+const ImageCheckboxField = ({
+  error,
+  focused,
+  label,
+  value,
+  checked,
+  helperText,
+  imageUrl,
+  ...props}) => (
+  <ImageSurround checked={value === "true"}>
     <FormControlLabel
-      control={
-        <Checkbox
-          checked={checked}
-          icon=""
-          checkedIcon={<CheckIcon />}
-          {...props}
-        />}
+      control={<CheckBoxImageBackground imageUrl={imageUrl}>
+          <Checkbox
+            checked={checked}
+            icon=""
+            checkedIcon={<CheckIcon />}
+            value={value}
+            {...props}
+          />
+        </CheckBoxImageBackground>
+        }
       label={<LabelText>{label}</LabelText>}
     />
   </ImageSurround>
-)
+);
 
-export default ImageSelectEntry;
+export default ImageCheckboxField;
