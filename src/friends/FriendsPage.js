@@ -10,11 +10,12 @@ import styled from "styled-components";
 import SectionHeaderText from "../common/typography/SectionHeaderText";
 import AddButton from "../profile/AddButton";
 import FlexContainer from "../common/layout/FlexContainer";
+import {fromPalette} from "../theme/theme";
 
 const Div = styled.div`
   padding:${({theme}) => theme.spacing.unit * 2}px;
   width: 100%;
-  background-color:${({theme}) => theme.palette.background.paper}
+  background-color:${({theme}) => fromPalette(theme, 'primaryContrast')}
 `;
 
 export const FriendsPage = ({ requests, friends }) => (
