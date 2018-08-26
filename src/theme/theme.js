@@ -13,6 +13,7 @@ const theme ={
       contrastText: '#ffffff',
     },
     common: {
+      lightGrey: '#DEDEDE',
       grey: '#7A7A7A',
       darkGrey: '#444444',
       black: '#000000',
@@ -20,6 +21,9 @@ const theme ={
   },
   spacing: {
     unit: 8
+  },
+  z: {
+    header: 200
   }
 };
 
@@ -30,8 +34,9 @@ export const fromPalette = (theme, colour, defaultColour) => {
     case 'primaryLight': return palette.primary.light;
     case 'primaryDark': return palette.primary.dark;
     case 'primaryContrast': return palette.primary.contrastText;
-    case 'darkGrey': return palette.common.darkGrey;
     case 'grey': return palette.common.grey;
+    case 'lightGrey': return palette.common.lightGrey;
+    case 'darkGrey': return palette.common.darkGrey;
     case 'black': return palette.common.black;
     case 'secondary': return palette.secondary.main;
     case 'secondaryLight': return palette.secondary.light;

@@ -2,13 +2,18 @@ import React from 'react';
 import styled from "styled-components";
 import NewEventLink from "./NewEventLink";
 import ProfileDetailsLink from "./ProfileDetailsLink";
+import {fromPalette} from "../theme/theme";
 
 const SpacedAroundFlex = styled.div`
-  position: relative;
+  position: sticky;
   width: 100%;
+  background-color: ${({theme}) => fromPalette(theme, 'primaryContrast')}d1;
   display: flex;
-  justifyContent: space-around;
-  alignItems: flex-end;
+  justify-content: space-around;
+  align-items: flex-end;
+  z-index: ${({theme}) => theme.z.header};
+  top: 0px;
+  padding-top: 16px;
 `;
 
 const TimelineHeader = ({profile}) => (
