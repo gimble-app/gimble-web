@@ -13,7 +13,7 @@ const SpacedAroundFlex = styled.div`
   align-items: flex-end;
   z-index: ${({theme}) => theme.z.header};
   top: 0px;
-  padding-top: 16px;
+  padding-top: 20px;
 `;
 
 const TimelineHeader = ({profile}) => (
