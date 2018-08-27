@@ -1,18 +1,13 @@
 import styled, { css } from "styled-components";
-import ButtonBase from "@material-ui/core/ButtonBase";
 import {fromPalette} from "../../theme/theme";
+import BigButton from "./BigButton";
 
-export default styled(ButtonBase)`
-  && {
-    width: 100px;
-    height: 100px;
-    box-shadow: 0 6px 6px 0 #CCCCCC;
-    border: 4px ${({theme}) => fromPalette(theme, 'primary')} solid;
+const BigRedButton = styled(BigButton)`
+    && {
+    transition: background-color 0.5s ease-out;
     background-color: ${({theme}) => fromPalette(theme, 'secondary')};
     color: ${({theme}) => fromPalette(theme, 'secondaryContrast')};
-    border-radius: 100%;
-    transition: background-color 0.5s ease-out;
-    
+
     &[disabled] {
       border: 4px ${({theme}) => fromPalette(theme, 'grey')} solid;
       background-color: ${({theme}) => fromPalette(theme, 'grey')};
@@ -23,5 +18,10 @@ export default styled(ButtonBase)`
       position: relative;
       right: ${({right}) => right};
     `}
-  }  
+    }
+    
 `;
+
+BigRedButton.displayName = 'BigRedButton';
+
+export default BigRedButton;

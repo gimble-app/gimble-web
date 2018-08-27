@@ -11,4 +11,6 @@ const FloatingActionButton = ({children, ...props}) => (
     </Button>
 );
 
+FloatingActionButton.displayName = "FloatingActionButton";
+
 export default FloatingActionButton;
