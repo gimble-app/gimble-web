@@ -10,19 +10,21 @@ import Notifier from './notifications/Notifier';
 import FriendDataPopulator from "./friends/FriendDataPopulator";
 import ProfileActionsDialog from "./welcome/WelcomeActionsDialog";
 
-const StyledAppRoot = styled.div`
+const FullScreen = styled.article`
   min-height: 100vh;
+  width: 100%;
 `;
+FullScreen.displayName = "FullScreen";
 
 export const App = ({ isLoggedIn }) => (
-  <StyledAppRoot>
+  <FullScreen>
     <BrowserRouter>
       <Navigation isLoggedIn={isLoggedIn}/>
     </BrowserRouter>
     <Notifier />
     { isLoggedIn && <FriendDataPopulator /> }
     { isLoggedIn && <ProfileActionsDialog /> }
-  </StyledAppRoot>
+  </FullScreen>
 );
 
 const mapStateToProps = state => ({
