@@ -13,7 +13,6 @@ import {saveEvent} from "./actions";
 import {compose} from "redux";
 import {withRouter} from "react-router-dom";
 import {selectFriends} from "../../friends/selectors";
-import CentredFlex from "../../common/layout/CentredFlex";
 import FloatingActionButtonSmall
   from "../../common/buttons/FloatingActionButtonSmall";
 
@@ -32,41 +31,41 @@ const NewEventForm = ({
   history
 }) => (
   <Form onSubmit={handleSubmit(saveEvent)}>
-    <CentredFlex>
-    <Field
-      name="title"
-      label="What are we planning?"
-      component={
-        props => bridgeReduxFormField(TextInputField, props)
-      }
-      autoFocus
-      validate={[requiredValidation]}
-      required
-      disabled={submitting}
-    />
-    <FormGroup>
-      <Label shrink >Who's coming?</Label>
-      <FlexContainer>
-        {
-          friends.map(friend => (<Field
-              name={`participants.${friend.uid}`}
-              key={friend.displayName}
-              label={friend.displayName}
-              component={
-                props => bridgeReduxFormField(ImageCheckboxField, props)
-              }
-              disabled={submitting}
-              imageUrl={friend.photoURL}
-            />))
+    <div style={{width:'100%'}}>
+      <Field
+        name="title"
+        label="What are we planning?"
+        component={
+          props => bridgeReduxFormField(TextInputField, props)
         }
-      </FlexContainer>
-    </FormGroup>
+        autoFocus
+        validate={[requiredValidation]}
+        required
+        disabled={submitting}
+      />
+      <FormGroup>
+        <Label shrink >Who's coming?</Label>
+        <FlexContainer>
+          {
+            friends.map(friend => (<Field
+                name={`participants.${friend.uid}`}
+                key={friend.displayName}
+                label={friend.displayName}
+                component={
+                  props => bridgeReduxFormField(ImageCheckboxField, props)
+                }
+                disabled={submitting}
+                imageUrl={friend.photoURL}
+              />))
+          }
+        </FlexContainer>
+      </FormGroup>
+    </div>
     { submitSucceeded && history.goBack() }
       <FloatingActionButtonSmall
         type="submit"
         disabled={ submitting || pristine || invalid }
       ><CheckIcon /></FloatingActionButtonSmall>
-    </CentredFlex>
   </Form>
 );
 

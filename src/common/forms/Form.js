@@ -1,9 +1,14 @@
 import styled from "styled-components";
 
-export default styled.form`
+const Form = styled.form`
+  flex: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: column; 
-  margin:${({theme}) => theme.spacing.unit * 2}px 0px;
+  margin: 0px;
 `;
+
+Form.displayName = 'Form';
+
+export default Form;
