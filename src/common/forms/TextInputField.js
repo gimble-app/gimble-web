@@ -2,7 +2,7 @@ import React from "react";
 import FormControl from "./FormControl";
 import Label from "./Label";
 import Input from "./Input";
-import FormHelperText from "@material-ui/core/FormHelperText";
+import FormHelperText from './FormHelperText';
 
 const TextInputField = ({
   error,
@@ -28,5 +28,7 @@ const TextInputField = ({
     >{helperText}</FormHelperText>
   </FormControl>
 );
+
+TextInputField.displayName = 'TextInputField';
 
 export default TextInputField;

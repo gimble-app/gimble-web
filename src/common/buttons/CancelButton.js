@@ -1,10 +1,16 @@
 import React from 'react';
 import IconButton from '@material-ui/core/IconButton';
-import NavigationClose from '@material-ui/icons/Close';
+import MaterialCloseIcon from '@material-ui/icons/Close';
+import styled from "styled-components";
+import {fromPalette} from "../../theme/theme";
 
-const CancelButton = ({ onClick }) => (
+const CloseIcon = styled(MaterialCloseIcon)`
+    color: ${({theme, colour}) => fromPalette(theme, colour, 'black')};
+`;
+
+const CancelButton = ({ onClick, colour}) => (
   <IconButton color="inherit" aria-label="cancel" onClick={onClick}>
-    <NavigationClose />
+    <CloseIcon colour={colour}/>
   </IconButton>
 );
 

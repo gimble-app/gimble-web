@@ -7,21 +7,32 @@ import Page from "../src/common/Page";
 import TextInputField from "../src/common/forms/TextInputField";
 import FloatingActionButtonSmall
   from "../src/common/buttons/FloatingActionButtonSmall";
+import Header from "../src/common/Header";
+import PageContent from "../src/common/PageContent";
+import DetailedHeader from "../src/common/DetailedHeader";
 
 storiesOf('Screens', module)
 .add('new screen', () => [
   <Page>
-    <CancelButton />
-    <Form>
-      <TextInputField label="Name"/>
-      <FloatingActionButtonSmall><CheckIcon /></FloatingActionButtonSmall>
-    </Form>
+    <Header colour={"primaryContrast"}>
+      <CancelButton />
+    </Header>
+    <PageContent>
+      <Form>
+        <TextInputField label="Name"/>
+        <FloatingActionButtonSmall><CheckIcon /></FloatingActionButtonSmall>
+      </Form>
+    </PageContent>
   </Page>
 ])
 .add('entry screen', () => [
   <Page>
-    <CancelButton />
-
+    <DetailedHeader>
+      <CancelButton colour={"primaryContrast"}/>
+    </DetailedHeader>
+    <PageContent>
+    </PageContent>
   </Page>
 ])
 ;
+//main

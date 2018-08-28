@@ -1,13 +1,13 @@
 import React from "react";
-import Header from "./Header";
 import HeaderContent from "./HeaderContent";
 import EventPageToolbar from "./EventPageToolbar";
 import DisplayText from "../../../common/typography/DisplayText";
+import DetailedHeader from "../../../common/DetailedHeader";
 
 const EventHeader = ({ event }) =>
-  <Header square image={ event.image && event.image.src }>
+  <DetailedHeader image={ event.image && event.image.src }>
     <EventPageToolbar event={ event }/>
     <HeaderContent><DisplayText>{ event.title }</DisplayText></HeaderContent>
-  </Header>;
+  </DetailedHeader>;
 
 export default EventHeader;
