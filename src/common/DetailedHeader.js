@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Paper from "@material-ui/core/Paper";
 import {fromPalette} from "../theme/theme";
 
 const DetailedHeader = styled.header`

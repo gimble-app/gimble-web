@@ -1,12 +1,12 @@
 import React, {Component, Fragment} from 'react';
 import Menu from '@material-ui/core/Menu';
 import Divider from "@material-ui/core/Divider";
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import DeleteMenuItem from "./DeleteMenuItem";
 import {deleteEvent} from "../../eventEdit/actions";
 import {connect} from "react-redux";
 import ChangeParticipantsMenuItem from "./ChangeParticipantsMenuItem";
-import ContrastTextIconButton from "./ContrastTextIconButton";
+import ActionsButton from "../../../common/buttons/ActionsButton";
+import EditMenuItem from "../EditMenuItem";
 
 export class EventActions extends Component {
   state = {
@@ -25,14 +25,12 @@ export class EventActions extends Component {
     const { anchorEl } = this.state;
     const { deleteEvent, id } = this.props;
     return (<Fragment>
-      <ContrastTextIconButton
-        aria-label="More"
+      <ActionsButton
         aria-owns={anchorEl ? 'actions-menu' : null}
         aria-haspopup="true"
+        aria-label="options"
         onClick={this.handleClick}
-      >
-        <MoreVertIcon/>
-      </ContrastTextIconButton>,
+      />,
       <Menu
         id={'actions-menu'}
         anchorEl={anchorEl}
@@ -40,6 +38,8 @@ export class EventActions extends Component {
         onClose={this.handleClose}
       >
         <ChangeParticipantsMenuItem id={id} onClick={this.handleClose}/>
+        <Divider />
+        <EditMenuItem/>
         <Divider />
         <DeleteMenuItem onClick={() => {
           deleteEvent(id);

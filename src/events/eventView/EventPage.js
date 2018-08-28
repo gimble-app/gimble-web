@@ -1,23 +1,15 @@
-import React, {Fragment} from "react";
-import {connect} from "react-redux";
+import React from "react";
 import Page from "../../common/Page";
-import {selectEventFromId} from "../eventEdit/selectors";
-import EditButton from "./EditButton";
 import EventHeader from "./header/EventHeader";
 import PageContent from "../../common/PageContent";
 
-export const EventPage = ({ event }) => (
+export const EventPage = () => (
   <Page>
-    <EventHeader event={event}/>
-    <EditButton id={event.id}/>
-    <PageContent/>
+    <EventHeader />
+    <PageContent />
   </Page>
 );
 
-const mapStateToProps = (state, { match }) => ({
-  event: match.params.id ? selectEventFromId(state, match.params.id) : {}
-});
-
-export default connect(mapStateToProps)(EventPage);
+export default EventPage;
 
 

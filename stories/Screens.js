@@ -11,6 +11,7 @@ import Header from "../src/common/Header";
 import PageContent from "../src/common/PageContent";
 import DetailedHeader from "../src/common/DetailedHeader";
 import DisplayText from "../src/common/typography/DisplayText";
+import ActionsButton from "../src/common/buttons/ActionsButton";
 
 storiesOf('Screens', module)
 .add('new screen', () => [
@@ -30,7 +31,10 @@ storiesOf('Screens', module)
   <Page>
     <DetailedHeader>
       <CancelButton colour={"primaryContrast"}/>
-      <DisplayText>Today's entry</DisplayText>
+      <div style={{textAlign: "right"}}>
+        <DisplayText>Today's entry</DisplayText>
+        <ActionsButton />
+      </div>
     </DetailedHeader>
     <PageContent>
     </PageContent>
