@@ -14,5 +14,5 @@ require('./Timelines');
 require('./Buttons');
 require('./Forms');
 require('./Typography');
+require('./Tabs');
 require('./Screens');
-
