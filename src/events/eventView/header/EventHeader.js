@@ -5,8 +5,6 @@ import HistoryAwareCancelButton
   from "../../../common/buttons/HistoryAwareCancelButton";
 import EventActions from "./EventActions";
 import ParticipantsSummary from "./ParticipantsSummary";
-import {selectEventFromId} from "../../eventEdit/selectors";
-import {connect} from "react-redux";
 
 export const EventHeader = ({ event }) =>
   <DetailedHeader image={ event.image && event.image.src }>
@@ -20,8 +18,4 @@ export const EventHeader = ({ event }) =>
     </div>
   </DetailedHeader>;
 
-const mapStateToProps = (state, { match }) => ({
-  event: match.params.id ? selectEventFromId(state, match.params.id) : {}
-});
-
-export default connect(mapStateToProps)(EventHeader);
+export default EventHeader;
