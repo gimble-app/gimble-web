@@ -2,8 +2,8 @@ import React from 'react';
 import {withRouter} from "react-router-dom";
 import CancelButton from "./CancelButton";
 
-const HistoryAwareCancelButton = ({ history }) => (
-  <CancelButton onClick={history.goBack} />
+const HistoryAwareCancelButton = ({ history, colour }) => (
+  <CancelButton onClick={history.goBack} colour={colour} />
 );
 
 export default withRouter(HistoryAwareCancelButton);

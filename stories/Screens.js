@@ -10,6 +10,7 @@ import FloatingActionButtonSmall
 import Header from "../src/common/Header";
 import PageContent from "../src/common/PageContent";
 import DetailedHeader from "../src/common/DetailedHeader";
+import DisplayText from "../src/common/typography/DisplayText";
 
 storiesOf('Screens', module)
 .add('new screen', () => [
@@ -29,6 +30,7 @@ storiesOf('Screens', module)
   <Page>
     <DetailedHeader>
       <CancelButton colour={"primaryContrast"}/>
+      <DisplayText>Today's entry</DisplayText>
     </DetailedHeader>
     <PageContent>
     </PageContent>

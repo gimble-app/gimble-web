@@ -4,13 +4,14 @@ import Page from "../../common/Page";
 import {selectEventFromId} from "../eventEdit/selectors";
 import EditButton from "./EditButton";
 import EventHeader from "./header/EventHeader";
+import PageContent from "../../common/PageContent";
 
 export const EventPage = ({ event }) => (
-  <Fragment>
+  <Page>
     <EventHeader event={event}/>
     <EditButton id={event.id}/>
-    <Page />
-  </Fragment>
+    <PageContent/>
+  </Page>
 );
 
 const mapStateToProps = (state, { match }) => ({
