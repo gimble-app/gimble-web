@@ -2,7 +2,7 @@ import React from 'react';
 import EditingEventToolbar from './EditingEventToolbar';
 import SaveButton from './SaveButton';
 import { shallow } from 'enzyme';
-import CancelButton from "../../common/CancelButton";
+import CancelButton from "../../common/buttons/HistoryAwareCancelButton";
 
 describe('<EditingEventToolbar>', () => {
   it('renders the component', () => {

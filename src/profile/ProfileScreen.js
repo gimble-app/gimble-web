@@ -8,7 +8,7 @@ import {myProfile} from "./firestoreQueries";
 import FriendsPage from "../friends/FriendsPage";
 import CentredFlex from "../common/layout/CentredFlex";
 import TitleText from "../common/typography/TitleText";
-import BackButton from "../common/BackButton";
+import BackButton from "../common/buttons/HistoryAwareBackButton";
 import CentredPanel from "../common/CentredPanel";
 import BorderedBigAvatar from "../common/avatars/BorderedBigAvatar";
 

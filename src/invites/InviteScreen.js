@@ -6,7 +6,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from "@material-ui/core/Toolbar";
 import {requestsFromUserCollection} from "./firestoreQueries";
 import {selectRequestedFriends} from "./selectors";
-import CancelButton from "../common/CancelButton";
+import CancelButton from "../common/buttons/HistoryAwareCancelButton";
 import TitleText from "../common/typography/TitleText";
 import Page from "../common/Page";
 import AddFriendForm from "./AddFriendForm";

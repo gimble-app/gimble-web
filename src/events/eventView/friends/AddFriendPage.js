@@ -5,7 +5,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import {selectFriendRefs} from "../../../friends/selectors";
 import FriendProfileList from "../../../friends/FriendProfileList";
-import CancelButton from "../../../common/CancelButton";
+import CancelButton from "../../../common/buttons/HistoryAwareCancelButton";
 import TitleText from "../../../common/typography/TitleText";
 import Page from "../../../common/Page";
 import {addFriend} from "../actions";

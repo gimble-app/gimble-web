@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import Toolbar from '@material-ui/core/Toolbar';
-import CancelButton from '../../common/CancelButton';
+import CancelButton from '../../common/buttons/HistoryAwareCancelButton';
 import SaveButton from './SaveButton';
 import TitleText from '../../common/typography/TitleText';
 

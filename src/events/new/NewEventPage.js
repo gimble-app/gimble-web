@@ -1,6 +1,6 @@
 import React from "react";
 import NewEventForm from "./NewEventForm";
-import CancelButton from "../../common/CancelButton";
+import CancelButton from "../../common/buttons/HistoryAwareCancelButton";
 import Page from "../../common/Page";
 
 const NewEventPage = () => (
