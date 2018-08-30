@@ -1,9 +1,10 @@
 import React, {Component} from "react";
 
 class LongPressAware extends Component {
-  handleButtonPress = () => {
+  handleButtonPress = (e) => {
+    const target = e.target;
     const timeout = 800;
-    this.timer = setTimeout(this.props.onPress, timeout);
+    this.timer = setTimeout(() => this.props.onPress(target), timeout);
   };
 
   handleButtonRelease = () => {

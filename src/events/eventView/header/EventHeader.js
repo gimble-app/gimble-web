@@ -3,8 +3,8 @@ import DisplayText from "../../../common/typography/DisplayText";
 import DetailedHeader from "../../../common/DetailedHeader";
 import HistoryAwareCancelButton
   from "../../../common/buttons/HistoryAwareCancelButton";
-import EventActions from "./EventActions";
 import ParticipantsSummary from "./ParticipantsSummary";
+import EditButton from "./EditButton";
 
 export const EventHeader = ({ event }) =>
   <DetailedHeader image={ event.image && event.image.src }>
@@ -13,7 +13,7 @@ export const EventHeader = ({ event }) =>
       <DisplayText>{ event.title }</DisplayText>
       <div>
         <ParticipantsSummary participants={ event.participants } />
-        <EventActions id={event.id} />
+        <EditButton id={event.id}/>
       </div>
     </div>
   </DetailedHeader>;

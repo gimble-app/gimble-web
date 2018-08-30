@@ -1,13 +1,14 @@
 import React from 'react';
+import {action} from "@storybook/addon-actions";
 import {storiesOf} from '@storybook/react';
 import Timeline from "../src/timeline/Timeline";
-import TimelineEvent from "../src/timeline/TimelineEvent";
+import TimelineItem from "../src/timeline/TimelineItem";
 import TimelineEventSummary from "../src/timeline/TimelineEventSummary";
 import TimelineEventDescription from "../src/timeline/TimelineEventDescription";
 import TimelineNode from "../src/timeline/TimelineNode";
 import TimelineEventBuddyList from "../src/timeline/TimelineEventBuddyList";
 import TimelineTimelineEventBuddyListItem
-  from "../src/timeline/TimelineEventBuddyListItem";
+from "../src/timeline/TimelineEventBuddyListItem";
 import Avatar from "../src/common/avatars/Avatar";
 import TitleText from "../src/common/typography/TitleText";
 import profileImage from './placeholder-profile.jpg';
@@ -22,7 +23,7 @@ storiesOf('Timelines', module)
 .add('timeline with entries', () => [
   <div style={{ boxSixing: 'border-box', display: "flex", justifyContent: "center"}}>
     <Timeline>
-      <TimelineEvent>
+      <TimelineItem>
         <TimelineEventSummary>
           <TimelineEventDescription>
             <TitleText>Some text</TitleText>
@@ -33,9 +34,9 @@ storiesOf('Timelines', module)
             </TimelineTimelineEventBuddyListItem>
           </TimelineEventBuddyList>
         </TimelineEventSummary>
-      </TimelineEvent>
-      <TimelineEvent>
-        <LongPressAware onPress={() => alert('well done')}>
+      </TimelineItem>
+      <TimelineItem>
+        <LongPressAware onPress={action('long press')}>
           <TimelineEventSummary>
             <TimelineEventDescription>
               <TitleText>You can long press me ;)</TitleText>
@@ -50,7 +51,7 @@ storiesOf('Timelines', module)
             </TimelineEventBuddyList>
           </TimelineEventSummary>
         </LongPressAware>
-      </TimelineEvent>
+      </TimelineItem>
       <TimelineNode />
     </Timeline>
   </div>

@@ -4,7 +4,7 @@ import {TextField} from 'redux-form-material-ui';
 import {Field, reduxForm} from 'redux-form'
 import {setProfileName} from "./actions";
 import ActionList from "../timeline/Timeline";
-import ActionListItem from "../timeline/TimelineEvent";
+import ActionListItem from "../timeline/TimelineItem";
 import LastActionItem from "../timeline/TimelineNode";
 import ActionSection from "./ActionSection";
 import BigRedButton from "../common/buttons/BigRedButton";
