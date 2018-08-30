@@ -11,6 +11,7 @@ import TimelineTimelineEventBuddyListItem
 import Avatar from "../src/common/avatars/Avatar";
 import TitleText from "../src/common/typography/TitleText";
 import profileImage from './placeholder-profile.jpg';
+import LongPressAware from "../src/common/LongPressAware";
 
 storiesOf('Timelines', module)
 .add('empty timeline', () => (
@@ -34,19 +35,21 @@ storiesOf('Timelines', module)
         </TimelineEventSummary>
       </TimelineEvent>
       <TimelineEvent>
-        <TimelineEventSummary>
-          <TimelineEventDescription>
-            <TitleText>Some more text</TitleText>
-          </TimelineEventDescription>
-          <TimelineEventBuddyList>
-            <TimelineTimelineEventBuddyListItem>
-              <Avatar src={profileImage} />
-            </TimelineTimelineEventBuddyListItem>
-            <TimelineTimelineEventBuddyListItem>
-              <Avatar>K</Avatar>
-            </TimelineTimelineEventBuddyListItem>
-          </TimelineEventBuddyList>
-        </TimelineEventSummary>
+        <LongPressAware onPress={() => alert('well done')}>
+          <TimelineEventSummary>
+            <TimelineEventDescription>
+              <TitleText>You can long press me ;)</TitleText>
+            </TimelineEventDescription>
+            <TimelineEventBuddyList>
+              <TimelineTimelineEventBuddyListItem>
+                <Avatar src={profileImage} />
+              </TimelineTimelineEventBuddyListItem>
+              <TimelineTimelineEventBuddyListItem>
+                <Avatar>K</Avatar>
+              </TimelineTimelineEventBuddyListItem>
+            </TimelineEventBuddyList>
+          </TimelineEventSummary>
+        </LongPressAware>
       </TimelineEvent>
       <TimelineNode />
     </Timeline>
