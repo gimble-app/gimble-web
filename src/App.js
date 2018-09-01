@@ -7,7 +7,6 @@ import BrowserRouter from "react-router-dom/BrowserRouter";
 import Navigation from './navigation/Navigation';
 import {selectIsLoggedIn} from './auth/selectors';
 import Notifier from './notifications/Notifier';
-import ProfileDataHydrator from "./profile/ProfileDataHydrator";
 import ProfileActionsDialog from "./welcome/WelcomeActionsDialog";
 
 const FullScreen = styled.article`
@@ -22,7 +21,6 @@ export const App = ({ isLoggedIn }) => (
       <Navigation isLoggedIn={isLoggedIn}/>
     </BrowserRouter>
     <Notifier />
-    { isLoggedIn && <ProfileDataHydrator /> }
     { isLoggedIn && <ProfileActionsDialog /> }
   </FullScreen>
 );

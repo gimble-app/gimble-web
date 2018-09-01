@@ -1,4 +1,5 @@
 import {PROFILES_COLLECTION} from "./firestoreQueries";
+import {listsSelector} from "../firebaseSelectors";
 
 export const PROFILES_HYDRATED = 'PROFILES_HYDRATED';
 
@@ -32,6 +33,23 @@ export const hydrateProfiles = uids =>
       console.error(e);
     }
   };
+
+export const profileHydrationMiddleware = store => next => action => {
+  if(action.type === "@@reduxFirestore/LISTENER_RESPONSE"
+    && action.meta.collection === "profile"
+    && action.meta.subcollections
+    && action.meta.subcollections[0]
+    && action.meta.subcollections[0].collection === "friends"
+  )  {
+    store.dispatch(hydrateProfiles([
+      listsSelector(store.getState()).profile[0].uid,
+      ...action.payload.ordered.map(item => item.id)
+    ]));
+  }
+
+  return next(action);
+};
+
 
 
 const friendProfileMapper = (data, id) => ({

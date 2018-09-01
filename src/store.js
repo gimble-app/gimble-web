@@ -5,6 +5,7 @@ import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
 import rootReducer from './reducers';
 import firebase from './clients/firebase';
 import { functionLookup } from './clients/remoteFunctions';
+import {profileHydrationMiddleware} from "./profile/actions";
 
 const config = {
   attachAuthIsReady: true,
@@ -24,15 +25,16 @@ const config = {
 export default (initialState = {}) => {
 
   const createStoreWithFirebase = compose(
+    reactReduxFirebase(firebase, config),
+    reduxFirestore(firebase),
     applyMiddleware(
+      profileHydrationMiddleware,
        thunk.withExtraArgument({
          getRemoteFunction: functionLookup(getFirebase),
          getFirestore,
          getFirebase,
        }),
      ),
-    reactReduxFirebase(firebase, config),
-    reduxFirestore(firebase),
     typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f,
   )(createStore);
 

@@ -1,4 +1,8 @@
-import {firebaseSelector, mapsSelector} from "../firebaseSelectors";
+import {
+  firebaseSelector,
+  listsSelector,
+  mapsSelector
+} from "../firebaseSelectors";
 import {selectCurrentUserId} from "../auth/selectors";
 
 export const selectMyProfile = state => firebaseSelector(state).profile; //TODO distinguish between these two profiles better
