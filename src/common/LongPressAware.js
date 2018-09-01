@@ -1,16 +1,30 @@
 import React, {Component} from "react";
 import styled from "styled-components";
 
-window.oncontextmenu = function ({target}) {
-  const isLongPressAware = target.closest(".long-press-aware");
-  return !isLongPressAware;
-};
-
 const WebkitTouchSafeWrapper = styled.div`
     -webkit-touch-callout: none;
 `;
 
 class LongPressAware extends Component {
+
+  componentDidMount = () => {
+    this.scrollListener = window.addEventListener("scroll", () => {
+      this.timer && this.handleButtonRelease();
+    });
+
+    this.contextMenuListener = window.addEventListener("contextmenu", (e) => {
+      const isLongPressAware = e.target.closest(".long-press-aware");
+      if(isLongPressAware) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    });
+  };
+
+  componentWillUnmount = () => {
+    window.removeEventListener("scroll", this.scrollListener);
+    window.removeEventListener("contextmenu", this.contextMenuListener);
+  };
 
   handleButtonPress = (e) => {
     const target = e.target;
@@ -25,6 +39,7 @@ class LongPressAware extends Component {
 
   handleButtonRelease = () => {
     clearTimeout(this.timer);
+    this.timer = null;
   };
 
   render() {
