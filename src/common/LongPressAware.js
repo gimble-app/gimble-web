@@ -16,7 +16,7 @@ class LongPressAware extends Component {
     const target = e.target;
     const timeout = 800;
     this.timer = setTimeout(() => {
-        window.navigator.vibrate && window.navigator.vibrate(100);
+        window.navigator.vibrate && window.navigator.vibrate(30);
         this.props.onPress(target);
       }
         , timeout
