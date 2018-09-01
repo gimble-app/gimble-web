@@ -15,7 +15,12 @@ class LongPressAware extends Component {
   handleButtonPress = (e) => {
     const target = e.target;
     const timeout = 800;
-    this.timer = setTimeout(() => this.props.onPress(target), timeout);
+    this.timer = setTimeout(() => {
+        window.navigator.vibrate && window.navigator.vibrate(100);
+        this.props.onPress(target);
+      }
+        , timeout
+    );
   };
 
   handleButtonRelease = () => {
