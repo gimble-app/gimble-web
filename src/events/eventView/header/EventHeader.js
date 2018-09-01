@@ -10,10 +10,9 @@ export const EventHeader = ({ event }) =>
   <DetailedHeader image={ event.image && event.image.src }>
     <HistoryAwareCancelButton colour="primaryContrast" />
     <div style={{textAlign: "right"}}>
-      <DisplayText>{ event.title }</DisplayText>
+      <DisplayText>{ event.title }<EditButton id={event.id}/></DisplayText>
       <div>
         <ParticipantsSummary participants={ event.participants } />
-        <EditButton id={event.id}/>
       </div>
     </div>
   </DetailedHeader>;
