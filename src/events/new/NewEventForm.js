@@ -12,7 +12,7 @@ import TextInputField from "../../common/forms/TextInputField";
 import {saveEvent} from "./actions";
 import {compose} from "redux";
 import {withRouter} from "react-router-dom";
-import {selectFriends} from "../../friends/selectors";
+import {selectProfiles} from "../../profile/selectors";
 import FloatingActionButtonSmall
   from "../../common/buttons/FloatingActionButtonSmall";
 
@@ -71,7 +71,7 @@ const NewEventForm = ({
 
 const mapDispatchToProps = { saveEvent };
 const mapStateToProps = state => ({
-  friends: selectFriends(state),
+  profiles: selectProfiles(state),
 });
 
 const ConnectedNewEventForm =

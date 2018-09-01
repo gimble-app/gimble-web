@@ -1,9 +1,10 @@
 import {listsSelector} from "../firebaseSelectors";
-import {selectMyProfileWithFriends} from "../profile/selectors";
-export const FRIENDS_STORE_KEY = 'friends';
+import {selectProfiles} from "../profile/selectors";
+import {selectCurrentUserId} from "../auth/selectors";
 
-export const selectFriendRefs = state => selectMyProfileWithFriends(state) && selectMyProfileWithFriends(state).friends;
-export const selectFriends = state => state.friends;
+export const FRIENDS_STORE_KEY = 'profiles';
+
+export const selectFriendProfiles = state => selectProfiles(state).filter(({uid}) => uid !== selectCurrentUserId(state));
 export const selectFriendRequests = state => listsSelector(state).friendRequests;
 
 

@@ -3,12 +3,12 @@ import {combineReducers} from 'redux';
 import {firebaseReducer} from 'react-redux-firebase';
 import {firestoreReducer} from 'redux-firestore';
 import notificationReducer from './notifications/reducers';
-import friendsReducer from './friends/reducers';
+import profilesReducer from './profile/reducers';
 
 export default combineReducers({
   firebase: firebaseReducer,
   firestore: firestoreReducer,
   notifications: notificationReducer,
-  friends: friendsReducer,
+  profiles: profilesReducer,
   form: formReducer
 });

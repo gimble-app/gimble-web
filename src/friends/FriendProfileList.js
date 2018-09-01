@@ -3,8 +3,8 @@ import {withFirestore} from 'react-redux-firebase';
 import {connect} from "react-redux";
 import {compose} from "redux";
 import List from "@material-ui/core/List";
-import {selectFriends} from "./selectors";
 import FriendEntry from "./FriendEntry";
+import {selectFriendProfiles} from "./selectors";
 
 export const FriendProfileList = ({ onSelect, friends }) =>
   <List dense>
@@ -15,6 +15,6 @@ export const FriendProfileList = ({ onSelect, friends }) =>
 
 export default withFirestore(compose(
   connect(state => ({
-    friends: selectFriends(state)
+    friends: selectFriendProfiles(state)
   })),
 )(FriendProfileList));

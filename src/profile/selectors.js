@@ -5,3 +5,9 @@ export const selectMyProfile = state => firebaseSelector(state).profile; //TODO 
 export const selectMyProfileWithFriends = props => mapsSelector(props).profile  && mapsSelector(props).profile[selectCurrentUserId(props)];
 
 export const selectMyDisplayName = state => selectMyProfile(state).displayName;
+
+export const selectAllProfileUids = state => {
+  const profile = selectMyProfileWithFriends(state);
+  return profile && profile.friends ? [...Object.keys(profile.friends), profile.uid] : [];
+};
+export const selectProfiles = state => state.profiles;

@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import {selectFriendRefs} from "../../../friends/selectors";
+import {selectFriendProfiles} from "../../../friends/selectors";
 import FriendProfileList from "../../../friends/FriendProfileList";
 import CancelButton from "../../../common/buttons/HistoryAwareCancelButton";
 import TitleText from "../../../common/typography/TitleText";
@@ -31,7 +31,7 @@ const ChangeParticipantsPage = ({ friends, event, addFriend, history }) => (
 );
 const mapStateToProps = (state, { match }) => ({
   event: match.params.id ? selectEventFromId(state, match.params.id) : {},
-  friends: selectFriendRefs(state)
+  friends: selectFriendProfiles(state)
 });
 
 export default connect(mapStateToProps, {

@@ -13,7 +13,7 @@ import setupStore from "../__mocks__/mockStore";
 jest.mock('../auth/selectors', () => ({ selectCurrentUserId: () => 'some-uid' }));
 jest.mock('../profile/selectors', () => ({ selectMyDisplayName: () => 'some-name' }));
 
-describe('friends actions', () => {
+describe('invites actions', () => {
 
   const requestFriendMock = jest.fn();
   const rescindFriendRequestMock = jest.fn();

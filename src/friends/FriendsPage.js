@@ -3,7 +3,7 @@ import {compose} from "redux";
 import {connect} from "react-redux";
 import {firebaseConnect, firestoreConnect} from "react-redux-firebase";
 import {requestsToUserCollection,} from './firestoreQueries';
-import {selectFriendRefs, selectFriendRequests} from './selectors';
+import {selectFriendRequests} from './selectors';
 import RequestsList from './RequestsList';
 import FriendProfileList from './FriendProfileList';
 import styled from "styled-components";
@@ -18,7 +18,7 @@ const Div = styled.div`
   background-color:${({theme}) => fromPalette(theme, 'primaryContrast')}
 `;
 
-export const FriendsPage = ({ requests, friends }) => (
+export const FriendsPage = ({ requests }) => (
   <Div>
     <FlexContainer
       justifyContent="space-between"
@@ -27,8 +27,7 @@ export const FriendsPage = ({ requests, friends }) => (
       <SectionHeaderText>Friends</SectionHeaderText>
       <AddButton />
     </FlexContainer>
-
-    {!!friends && <FriendProfileList friends={friends} /> }
+    <FriendProfileList />
 
     {requests && requests.length > 0 && <RequestsList requests={requests} /> }
   </Div>
@@ -41,6 +40,5 @@ export default compose(
   ]),
   connect(state => ({
     requests: selectFriendRequests(state),
-    friends: selectFriendRefs(state)
   }))
 )(FriendsPage);
