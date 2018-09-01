@@ -44,7 +44,7 @@ storiesOf('Screens', module)
       { label: 'Dates', icon: DateRangeIcon },
       { label: 'Chat', icon: ChatIcon }
     ]}
-          value={1} onChange={() => {}} fullWidth
+          value={1} onChange={() => {}}
     />
     <PageContent>
       <BodyText>Body text</BodyText>
