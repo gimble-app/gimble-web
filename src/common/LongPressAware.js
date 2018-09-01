@@ -1,11 +1,17 @@
 import React, {Component} from "react";
+import styled from "styled-components";
 
-window.oncontextmenu = function (e) {
-  return !e.target.closest(".long-press-aware");
+window.oncontextmenu = function ({target}) {
+  const isLongPressAware = target.closest(".long-press-aware");
+  return !isLongPressAware;
 };
 
+const WebkitTouchSafeWrapper = styled.div`
+    -webkit-touch-callout: none;
+`;
+
 class LongPressAware extends Component {
-  
+
   handleButtonPress = (e) => {
     const target = e.target;
     const timeout = 800;
@@ -19,15 +25,16 @@ class LongPressAware extends Component {
   render() {
     const {children} = this.props;
     return (
-      <div
+      <WebkitTouchSafeWrapper
         className="long-press-aware"
         onTouchStart={this.handleButtonPress}
         onTouchEnd={this.handleButtonRelease}
         onMouseDown={this.handleButtonPress}
         onMouseUp={this.handleButtonRelease}
-      >{children}</div>
+      >{children}</WebkitTouchSafeWrapper>
     );
   }
 }
 
 export default LongPressAware;
+
