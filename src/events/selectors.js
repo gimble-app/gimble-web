@@ -6,4 +6,4 @@ export const selectEvents = state => {
 
 export const selectEventsList = state => {
   return listsSelector(state).events;
-}
+};

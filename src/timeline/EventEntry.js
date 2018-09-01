@@ -42,7 +42,7 @@ export class EventEntry extends Component {
           deleteEvent(event.id);
           this.handleClose();
         }}/>
-      </Menu>,
+      </Menu>
       <LongPressAware onPress={this.triggerMenu}>
         <InternalLink to={`/event/${event.id}`}>
           <TimelineEventSummary image={event.image}>

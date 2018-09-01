@@ -3,7 +3,7 @@ import {withFirestore} from 'react-redux-firebase';
 import styled from "styled-components";
 import {PROFILES_COLLECTION} from "../../../profile/firestoreQueries";
 import FlexContainer from "../../../common/layout/FlexContainer";
-import AvatarOrPlaceholder from "../AvatarOrPlaceholder";
+import AvatarOrPlaceholder from "../../../common/avatars/AvatarOrPlaceholder";
 
 const RightDirectionFlexContainer = styled(FlexContainer)`
   direction: rtl;

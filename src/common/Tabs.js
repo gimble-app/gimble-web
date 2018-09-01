@@ -4,7 +4,7 @@ import Tab from "./Tab";
 
 const TabLabel = ({ Icon, label }) =>
   <Fragment>
-    <Icon />,
+    <Icon />
     <span style={{paddingLeft: '8px'}}>{label}</span>
   </Fragment>;
 
