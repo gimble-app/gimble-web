@@ -4,16 +4,17 @@ import CancelButton from "../../common/buttons/HistoryAwareCancelButton";
 import Page from "../../common/Page";
 import Header from "../../common/Header";
 import PageContent from "../../common/PageContent";
+import {withRouter} from "react-router-dom";
 
-const NewEventPage = () => (
+const NewEventPage = ({history}) => (
   <Page>
     <Header colour={"primaryContrast"}>
       <CancelButton />
     </Header>
     <PageContent>
-      <NewEventForm />
+      <NewEventForm onSuccess={history.goBack}/>
     </PageContent>
   </Page>
 );
 
-export default NewEventPage;
+export default withRouter(NewEventPage);

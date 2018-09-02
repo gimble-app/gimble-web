@@ -10,8 +10,6 @@ import bridgeReduxFormField from "../../common/forms/bridgeReduxFormField";
 import ImageCheckboxField from "../../common/forms/ImageCheckboxField";
 import TextInputField from "../../common/forms/TextInputField";
 import {saveEvent} from "./actions";
-import {compose} from "redux";
-import {withRouter} from "react-router-dom";
 import {selectProfiles} from "../../profile/selectors";
 import FloatingActionButtonSmall
   from "../../common/buttons/FloatingActionButtonSmall";
@@ -26,9 +24,7 @@ const NewEventForm = ({
   pristine,
   invalid,
   valid,
-  saveEvent,
-  submitSucceeded,
-  history
+  saveEvent
 }) => (
   <Form onSubmit={handleSubmit(saveEvent)}>
     <div style={{width:'100%'}}>
@@ -61,7 +57,6 @@ const NewEventForm = ({
         </FlexContainer>
       </FormGroup>
     </div>
-    { submitSucceeded && history.goBack() }
       <FloatingActionButtonSmall
         type="submit"
         disabled={ submitting || pristine || invalid }
@@ -74,12 +69,9 @@ const mapStateToProps = state => ({
   profiles: selectProfiles(state),
 });
 
-const ConnectedNewEventForm =
-  compose(
-    connect(mapStateToProps, mapDispatchToProps),
-    withRouter
-  )(NewEventForm);
+const ConnectedNewEventForm = connect(mapStateToProps, mapDispatchToProps)(NewEventForm);
 
 export default reduxForm({
-  form: 'newEvent'
+  form: 'newEvent',
+  onSubmitSuccess: (result, dispatch, props)  => props.onSuccess()
 })(ConnectedNewEventForm);
