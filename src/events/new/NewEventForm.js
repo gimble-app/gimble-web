@@ -2,7 +2,6 @@ import React from "react";
 import Form from "../../common/forms/Form";
 import {Field, reduxForm} from 'redux-form'
 import {connect} from "react-redux";
-import CheckIcon from '@material-ui/icons/Check';
 import FormGroup from "../../common/forms/FormGroup";
 import Label from "../../common/forms/Label";
 import FlexContainer from "../../common/layout/FlexContainer";
@@ -11,8 +10,7 @@ import ImageCheckboxField from "../../common/forms/ImageCheckboxField";
 import TextInputField from "../../common/forms/TextInputField";
 import {saveEvent} from "./actions";
 import {selectProfiles} from "../../profile/selectors";
-import FloatingActionButtonSmall
-  from "../../common/buttons/FloatingActionButtonSmall";
+import SubmitButton from "./SubmitButton";
 
 const requiredValidation = value => (value || typeof value === 'number' ? undefined : 'Required');
 
@@ -34,7 +32,6 @@ const NewEventForm = ({
         component={
           props => bridgeReduxFormField(TextInputField, props)
         }
-        autoFocus
         validate={[requiredValidation]}
         required
         disabled={submitting}
@@ -57,16 +54,13 @@ const NewEventForm = ({
         </FlexContainer>
       </FormGroup>
     </div>
-      <FloatingActionButtonSmall
-        type="submit"
-        disabled={ submitting || pristine || invalid }
-      ><CheckIcon /></FloatingActionButtonSmall>
+      <SubmitButton disabled={ submitting || pristine || invalid }/>
   </Form>
 );
 
 const mapDispatchToProps = { saveEvent };
 const mapStateToProps = state => ({
-  profiles: selectProfiles(state),
+  friends: selectProfiles(state),
 });
 
 const ConnectedNewEventForm = connect(mapStateToProps, mapDispatchToProps)(NewEventForm);
