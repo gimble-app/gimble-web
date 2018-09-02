@@ -50,8 +50,6 @@ export const profileHydrationMiddleware = store => next => action => {
   return next(action);
 };
 
-
-
 const friendProfileMapper = (data, id) => ({
   uid: id,
   photoURL: data.photoURL,

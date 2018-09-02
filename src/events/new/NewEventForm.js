@@ -11,11 +11,13 @@ import TextInputField from "../../common/forms/TextInputField";
 import {saveEvent} from "./actions";
 import {selectProfiles} from "../../profile/selectors";
 import SubmitButton from "./SubmitButton";
+import {selectCurrentUserId} from "../../auth/selectors";
 
 const requiredValidation = value => (value || typeof value === 'number' ? undefined : 'Required');
 
 const NewEventForm = ({
-  friends =[],
+  participants =[],
+  me,
   submitting,
   handleSubmit,
   dirty,
@@ -29,9 +31,7 @@ const NewEventForm = ({
       <Field
         name="title"
         label="What are we planning?"
-        component={
-          props => bridgeReduxFormField(TextInputField, props)
-        }
+        component={ props => bridgeReduxFormField(TextInputField, props) }
         validate={[requiredValidation]}
         required
         disabled={submitting}
@@ -40,15 +40,14 @@ const NewEventForm = ({
         <Label shrink >Who's coming?</Label>
         <FlexContainer>
           {
-            friends.map(friend => (<Field
-                name={`participants.${friend.uid}`}
-                key={friend.displayName}
-                label={friend.displayName}
-                component={
-                  props => bridgeReduxFormField(ImageCheckboxField, props)
-                }
-                disabled={submitting}
-                imageUrl={friend.photoURL}
+            participants.map(({uid, displayName, photoURL}) => (
+              <Field
+                name={`participants.${uid}`}
+                key={displayName}
+                label={displayName}
+                component={ props => bridgeReduxFormField(ImageCheckboxField, props) }
+                disabled={submitting || uid === me}
+                imageUrl={photoURL}
               />))
           }
         </FlexContainer>
@@ -60,12 +59,18 @@ const NewEventForm = ({
 
 const mapDispatchToProps = { saveEvent };
 const mapStateToProps = state => ({
-  friends: selectProfiles(state),
+  participants: selectProfiles(state),
+  me: selectCurrentUserId(state),
+  initialValues: {
+    participants: {
+      [selectCurrentUserId(state)]: true
+    }
+  }
 });
 
-const ConnectedNewEventForm = connect(mapStateToProps, mapDispatchToProps)(NewEventForm);
-
-export default reduxForm({
+const NewEventReduxForm = reduxForm({
   form: 'newEvent',
   onSubmitSuccess: (result, dispatch, props)  => props.onSuccess()
-})(ConnectedNewEventForm);
+})(NewEventForm);
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewEventReduxForm);

@@ -27,7 +27,7 @@ const ImageSurround = styled.span`
   justify-content: center;
   align-items: center;
   border-radius: 2px;
-  border: 2px solid ${({theme, checked}) => checked ? fromPalette(theme, 'primaryLight') : fromPalette(theme, 'lightGrey')};
+  border: 2px solid ${({theme, value}) => value === "true" ? fromPalette(theme, 'primaryLight') : fromPalette(theme, 'lightGrey')};
 `;
 
 const CheckIcon = styled(Check)`
@@ -54,13 +54,13 @@ const ImageCheckboxField = ({
   helperText,
   imageUrl,
   ...props}) => (
-  <ImageSurround checked={checked || value === "true"}>
+  <ImageSurround value={value}>
     <FormControlLabel
       control={<CheckBoxImageBackground imageUrl={imageUrl}>
           <Checkbox
-            checked={checked}
             icon=""
             checkedIcon={<CheckIcon />}
+            checked={value === "true"}
             value={value}
             {...props}
           />

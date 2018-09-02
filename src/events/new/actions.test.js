@@ -29,7 +29,8 @@ describe('event actions', () => {
     it('saves a new event with participants', async () => {
       create.mockReturnValue(Promise.resolve());
       const event = {
-        title: 'title'
+        title: 'title',
+        participants: {'some-uid': true },
       }
 
       await store.dispatch(saveEvent(event));
