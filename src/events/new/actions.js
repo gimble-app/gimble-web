@@ -6,8 +6,16 @@ export const EVENT_SAVE_SUCCESS = 'event successfully saved';
 export const EVENT_SAVE_FAILURE = 'event failed to save';
 
 function updateEvent(getState, { getFirestore }, event) {
+
+  const participants = Object.keys(event.participants || {})
+      .reduce((result, uid) => {
+        result[uid] = {uid};
+        return result;
+      }, {});
+
   return create(EVENTS_COLLECTION, {
     ...event,
+    participants
   }, getFirestore);
 }
 

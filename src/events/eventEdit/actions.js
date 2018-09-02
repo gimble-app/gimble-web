@@ -1,7 +1,7 @@
-import { selectCurrentUserId } from '../../auth/selectors';
-import { sendNotification } from '../../notifications/actions';
-import { EVENTS_COLLECTION } from '../firestoreQueries';
-import { create, update, remove } from '../../clients/firebase';
+import {sendNotification} from '../../notifications/actions';
+import {EVENTS_COLLECTION} from '../firestoreQueries';
+import {remove, update} from '../../clients/firebase';
+
 export const EVENT_SAVE_SUCCESS = 'event successfully saved';
 export const EVENT_SAVE_FAILURE = 'event failed to save';
 
@@ -13,16 +13,7 @@ function deleteEventWithId({ getFirestore }, id) {
 }
 
 function updateEvent(getState, { getFirestore }, event, id) {
-  if (!id) {
-    const me = selectCurrentUserId(getState());
-    return create(EVENTS_COLLECTION, {
-      ...event,
-      participants: { ...event.participants, [me]: true }
-    }, getFirestore);
-  }
-  else {
-    return update(EVENTS_COLLECTION, id, event, getFirestore);
-  }
+  return update(EVENTS_COLLECTION, id, event, getFirestore);
 }
 
 export const deleteEvent = (id) =>

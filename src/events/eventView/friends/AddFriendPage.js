@@ -4,7 +4,6 @@ import {withRouter} from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import {selectFriendProfiles} from "../../../friends/selectors";
-import FriendProfileList from "../../../friends/FriendProfileList";
 import CancelButton from "../../../common/buttons/HistoryAwareCancelButton";
 import TitleText from "../../../common/typography/TitleText";
 import Page from "../../../common/Page";
@@ -12,7 +11,7 @@ import {addFriend} from "../actions";
 import {selectEventFromId} from "../../eventEdit/selectors";
 import Participants from "./Participants";
 
-const ChangeParticipantsPage = ({ friends, event, addFriend, history }) => (
+const ChangeParticipantsPage = ({ friends, event }) => (
   <Fragment>
     <AppBar position="static">
       <Toolbar>
@@ -22,10 +21,6 @@ const ChangeParticipantsPage = ({ friends, event, addFriend, history }) => (
     </AppBar>
     <Page>
       <Participants participants={ event.participants } />
-      <FriendProfileList onSelect={async (id) => {
-        await addFriend(event, id);
-        history.goBack();
-      }} friends={friends} />
     </Page>
   </Fragment>
 );

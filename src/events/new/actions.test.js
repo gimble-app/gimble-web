@@ -31,14 +31,14 @@ describe('event actions', () => {
       const event = {
         title: 'title',
         participants: {'some-uid': true },
-      }
+      };
 
       await store.dispatch(saveEvent(event));
 
       expect(create).toBeCalledWith('events',
         {
-          participants: {'some-uid': true },
-          ...event
+          title: 'title',
+          participants: { 'some-uid': { uid: 'some-uid' } },
         },
         getFirestore
       );
@@ -54,7 +54,8 @@ describe('event actions', () => {
     it('notifies when an create fails', async () => {
       create.mockReturnValue(Promise.reject("some error"));
       const event = {
-        title: 'title'
+        title: 'title',
+        participants: {'some-uid': true }
       };
 
       await store.dispatch(saveEvent(event));

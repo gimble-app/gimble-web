@@ -31,45 +31,6 @@ describe('event actions', () => {
   });
 
   describe('saveEvent', () => {
-    it('saves a new event with participants', async () => {
-      create.mockReturnValue(Promise.resolve());
-      const event = {
-        title: 'title'
-      }
-
-      await store.dispatch(saveEvent(event));
-
-      expect(create).toBeCalledWith('events',
-        {
-          participants: {'some-uid': true },
-          ...event
-        },
-        getFirestore
-      );
-
-      expect(store.getActions()).toEqual([
-        {
-          data: { message: EVENT_SAVE_SUCCESS },
-          type: SEND_NOTIFICATION
-        }
-      ]);
-    });
-
-    it('notifies when an create fails', async () => {
-      create.mockReturnValue(Promise.reject("some error"));
-      const event = {
-        title: 'title'
-      };
-
-      await store.dispatch(saveEvent(event));
-
-      expect(store.getActions()).toEqual([
-        {
-          data: { message: EVENT_SAVE_FAILURE },
-          type: SEND_NOTIFICATION
-        }
-      ]);
-    });
 
     it('updates an existing event', async () => {
       update.mockReturnValue(Promise.resolve());
