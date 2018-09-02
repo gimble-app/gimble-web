@@ -10,7 +10,7 @@ const IconButton = styled(MaterialIconButton)`
 `;
 
 const SimpleIconButton = ({ onClick, colour, ariaLabel, children }) => (
-  <IconButton onClick={onClick} colour={colour}>
+  <IconButton onClick={onClick} colour={colour} aria-label={ariaLabel}>
     {children}
   </IconButton>
 );
