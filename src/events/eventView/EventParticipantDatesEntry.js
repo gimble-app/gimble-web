@@ -1,13 +1,12 @@
 import React from "react";
 import {connect} from "react-redux";
 import styled from 'styled-components';
-import AddIcon from '@material-ui/icons/Add';
 import AvatarOrPlaceholder from "../../common/avatars/AvatarOrPlaceholder";
 import LabelText from "../../common/typography/LabelText";
 import BodyText from "../../common/typography/BodyText";
 import {selectProfileFromUid} from "../../profile/selectors";
 import {selectCurrentUserId} from "../../auth/selectors";
-import SimpleIconButton from "../../common/buttons/SimpleIconButton";
+import AddButton from "./AddButton";
 
 const DatesEntryContainer = styled.div`
   flex: 1;
@@ -20,11 +19,6 @@ const LabelledAvatar = ({displayName, photoUrl}) =>
     <AvatarOrPlaceholder key={displayName} photoUrl={photoUrl} />
     <LabelText colour="primary">{displayName}</LabelText>
   </div>;
-
-const AddButton = ({onClick}) =>
-  <SimpleIconButton onClick={onClick} ariaLabel="add" colour="secondary">
-    <AddIcon />
-  </SimpleIconButton>;
 
 
 const EventParticipantDatesEntry = ({profile, participant, isMe}) => (
