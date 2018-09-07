@@ -6,7 +6,7 @@ import {DayPickerRangeController} from 'react-dates';
 import {Field, reduxForm} from 'redux-form'
 import Form from "../../common/forms/Form";
 import {addPreferredDate} from "./actions";
-import * as moment from "moment";
+import moment from "moment";
 import SubmitButton from "../new/SubmitButton";
 
 class AddPreferredDateForm extends React.Component {
@@ -37,24 +37,26 @@ class AddPreferredDateForm extends React.Component {
       <Form onSubmit={handleSubmit(addPreferredDate)}>
         <Field
           name="range"
-          label="What are we planning?"
-          component={({input}) => (
-            <DayPickerRangeController
-            startDate={ input.value.from && moment(input.value.from) }
-              endDate={ input.value.to && moment(input.value.to) }
-              onDatesChange={({ startDate, endDate }) => input.onChange({
-                from: startDate, to: endDate
-              })}
-              focusedInput={focusedInput}
-              onFocusChange={this.onFocusChange}
-            />
-          )}
+          component={dayPickerFieldBridge}
+          focusedInput={focusedInput}
+          onFocusChange={this.onFocusChange}
         />
         <SubmitButton disabled={ submitting || pristine || invalid }/>
       </Form>
     )
   }
 }
+
+const dayPickerFieldBridge = ({ input, meta, ...rest }) => (
+  <DayPickerRangeController
+    startDate={input.value.from && moment(input.value.from) }
+    endDate={ input.value.to && moment(input.value.to) }
+    onDatesChange={({ startDate, endDate }) => input.onChange({
+      from: startDate, to: endDate
+    })}
+    {...rest}
+  />
+);
 
 const mapDispatchToProps = { addPreferredDate };
 
