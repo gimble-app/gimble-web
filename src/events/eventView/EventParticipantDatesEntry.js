@@ -6,7 +6,7 @@ import LabelText from "../../common/typography/LabelText";
 import BodyText from "../../common/typography/BodyText";
 import {selectProfileFromUid} from "../../profile/selectors";
 import {selectCurrentUserId} from "../../auth/selectors";
-import AddButton from "./AddButton";
+import AddDateHandler from "./AddDateHandler";
 
 const DatesEntryContainer = styled.div`
   flex: 1;
@@ -24,7 +24,7 @@ const LabelledAvatar = ({displayName, photoUrl}) =>
 const EventParticipantDatesEntry = ({profile, participant, isMe}) => (
     <DatesEntryContainer>
       <LabelledAvatar displayName={profile.displayName} photoUrl={profile.photoURL} />
-      { isMe &&  <AddButton onClick={() => {}}/> }
+      { isMe &&  <AddDateHandler /> }
       { !participant.dates && <BodyText>no dates added yet...</BodyText> }
     </DatesEntryContainer>
   );

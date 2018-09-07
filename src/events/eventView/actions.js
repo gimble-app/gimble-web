@@ -16,3 +16,7 @@ export const addFriend = (event, friendId) =>
     }
   };
 
+export const addPreferredDate = () =>
+  async (dispatch, getState, {getFirestore}) => {
+    console.log('it happens');
+  };
