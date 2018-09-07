@@ -15,7 +15,7 @@ jest.mock('../../auth/selectors', () => ({
   selectCurrentUserId: () => 'some-uid'
 }));
 
-describe('event actions', () => {
+describe('new event actions', () => {
 
   const getFirestore = jest.fn();
   const mockStore = setupStore({ getFirestore });

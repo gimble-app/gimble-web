@@ -3,6 +3,7 @@ import {update} from "../../clients/firebase";
 import {sendNotification} from "../../notifications/actions";
 
 export const FRIEND_ADD_FAILURE = 'could not add friend to event';
+export const EVENT_SAVE_FAILURE = 'event failed to save';
 
 export const addFriend = (event, friendId) =>
   async (dispatch, getState, {getFirestore}) => {
@@ -16,7 +17,18 @@ export const addFriend = (event, friendId) =>
     }
   };
 
-export const addPreferredDate = () =>
+export const addPreferredDateRange = (range, event, participant) =>
   async (dispatch, getState, {getFirestore}) => {
-    console.log('it happens');
+    const from = range.from.format();
+    const to = range.to.format();
+    try {
+      await update(EVENTS_COLLECTION, event.id,
+      {
+        [`participants.${participant.uid}.preferredDates`]: [{ from, to }]
+      }, getFirestore);
+
+    } catch (error) {
+      dispatch(sendNotification(EVENT_SAVE_FAILURE));
+      console.log(error);
+    }
   };

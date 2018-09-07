@@ -21,11 +21,11 @@ const LabelledAvatar = ({displayName, photoUrl}) =>
   </div>;
 
 
-const EventParticipantDatesEntry = ({profile, participant, isMe}) => (
+const EventParticipantDatesEntry = ({profile, participant, isMe, event}) => (
     <DatesEntryContainer>
       <LabelledAvatar displayName={profile.displayName} photoUrl={profile.photoURL} />
-      { isMe &&  <AddDateHandler /> }
-      { !participant.dates && <BodyText>no dates added yet...</BodyText> }
+      { isMe &&  <AddDateHandler participant={participant} event={event} /> }
+      { !participant.preferredDates && <BodyText>no dates added yet...</BodyText> }
     </DatesEntryContainer>
   );
 

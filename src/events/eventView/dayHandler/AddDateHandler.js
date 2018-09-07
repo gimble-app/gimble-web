@@ -23,6 +23,7 @@ class AddDateHandler extends React.Component {
 
   render() {
     const { open } = this.state;
+    const { event, participant } = this.props;
 
     return (
       <Fragment>
@@ -32,7 +33,11 @@ class AddDateHandler extends React.Component {
           open={open}
           onClose={this.handleClose}
         >
-          <AddDateForm onSubmitSuccess={this.handleClose}/>
+          <AddDateForm
+            event={event}
+            participant={participant}
+            onSubmitSuccess={this.handleClose}
+          />
         </Dialog>
       </Fragment>
     );

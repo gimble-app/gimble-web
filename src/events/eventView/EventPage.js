@@ -19,7 +19,9 @@ export const EventPage = ({ event }) => (
     <PageContent>
       <SubheadingText>Availability</SubheadingText>
       <div style={{display: "flex", justifyContent: "space-around", flexWrap: "wrap"}}>
-        { Object.values(event.participants).map(participant => <EventParticipantDateEntry key={participant.uid} participant={participant} />) }
+        { Object.values(event.participants).map(
+          participant => <EventParticipantDateEntry key={participant.uid} participant={participant} event={event} />
+        ) }
       </div>
     </PageContent>
   </Page>

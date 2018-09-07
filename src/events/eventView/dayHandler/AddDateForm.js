@@ -2,9 +2,10 @@ import React from "react";
 import {connect} from "react-redux";
 import {Field, reduxForm} from 'redux-form'
 import Form from "../../../common/forms/Form";
-import {addPreferredDate} from "../actions";
+import {addPreferredDateRange} from "../actions";
 import SubmitButton from "../../../common/forms/SubmitButton";
 import DayPickerField from "./DayPickerField";
+import moment from "moment/moment";
 
 class AddDateForm extends React.Component {
 
@@ -46,10 +47,18 @@ class AddDateForm extends React.Component {
   }
 }
 
-const mapDispatchToProps = { addPreferredDate };
+const mapDispatchToProps = (dispatch, { event, participant }) => ({
+  addPreferredDate: ({range}) => dispatch(addPreferredDateRange(range, event, participant))
+});
 
 const NewEventReduxForm = reduxForm({
-  form: 'addPreferredDate'
+  form: 'addPreferredDateRange',
+  initialValues: {
+    range: {
+      from: moment.now(),
+      to: moment.now()
+    }
+  }
 })(AddDateForm);
 
 export default connect(() => ({}), mapDispatchToProps)(NewEventReduxForm);
