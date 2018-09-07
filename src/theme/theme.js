@@ -40,6 +40,7 @@ export const fromPalette = (theme, colour, defaultColour) => {
     case 'black': return palette.common.black;
     case 'secondary': return palette.secondary.main;
     case 'secondaryLight': return palette.secondary.light;
+    case 'secondaryDark': return palette.secondary.dark;
     case 'secondaryContrast': return palette.secondary.contrastText;
     default: return defaultColour ? fromPalette(theme, defaultColour) : '';
   }

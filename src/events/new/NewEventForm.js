@@ -10,7 +10,7 @@ import ImageCheckboxField from "../../common/forms/ImageCheckboxField";
 import TextInputField from "../../common/forms/TextInputField";
 import {saveEvent} from "./actions";
 import {selectProfiles} from "../../profile/selectors";
-import SubmitButton from "./SubmitButton";
+import SubmitButton from "../../common/forms/SubmitButton";
 import {selectCurrentUserId} from "../../auth/selectors";
 
 const requiredValidation = value => (value || typeof value === 'number' ? undefined : 'Required');

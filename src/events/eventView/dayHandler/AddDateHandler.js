@@ -1,7 +1,7 @@
 import React, {Fragment} from "react";
 import Dialog from "@material-ui/core/Dialog";
 import AddButton from "./AddButton";
-import AddPreferredDateForm from "./AddPreferredDateForm";
+import AddDateForm from "./AddDateForm";
 
 class AddDateHandler extends React.Component {
 
@@ -28,10 +28,11 @@ class AddDateHandler extends React.Component {
       <Fragment>
         <AddButton onClick={this.handleClickOpen}/>
         <Dialog
+          fullScreen
           open={open}
           onClose={this.handleClose}
         >
-          <AddPreferredDateForm onSubmitSuccess={this.handleClose}/>
+          <AddDateForm onSubmitSuccess={this.handleClose}/>
         </Dialog>
       </Fragment>
     );

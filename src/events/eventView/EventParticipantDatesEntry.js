@@ -6,7 +6,7 @@ import LabelText from "../../common/typography/LabelText";
 import BodyText from "../../common/typography/BodyText";
 import {selectProfileFromUid} from "../../profile/selectors";
 import {selectCurrentUserId} from "../../auth/selectors";
-import AddDateHandler from "./AddDateHandler";
+import AddDateHandler from "./dayHandler/AddDateHandler";
 
 const DatesEntryContainer = styled.div`
   flex: 1;

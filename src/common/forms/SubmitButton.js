@@ -1,7 +1,7 @@
 import React from "react";
 import CheckIcon from '@material-ui/icons/Check';
 import FloatingActionButtonSmall
-from "../../common/buttons/FloatingActionButtonSmall";
+from "../buttons/FloatingActionButtonSmall";
 
 const SubmitButton = ({disabled}) =>
   <FloatingActionButtonSmall
