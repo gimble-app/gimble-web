@@ -71,36 +71,45 @@ describe('event actions', () => {
 
   describe('addPreferredDateRange', () => {
 
-    [
-      {
-        given: undefined,
-        then: [{ from: '2001-09-29', to: '2001-10-20', uid: 'generated-id'}]
-      },
-      {
-        given: [{ from: '2001-09-28', to: '2001-10-19', uid: 'generated-id' }],
-        then: [{ from: '2001-09-28', to: '2001-10-19', uid: 'generated-id'}, { from: '2001-09-29', to: '2001-10-20', uid: 'generated-id'}]
-      }
-    ].forEach(({given, then}) => (
-      it(`Given ${JSON.stringify(given)}\n it adds the date preference`, async () => {
+    it('It adds a first date preference', async () => {
 
-        baseEventData.participants['my-id'].preferredDates = given;
-        getDocData.mockReturnValue(Promise.resolve(baseEventData));
-        updateDoc.mockReturnValue(Promise.resolve());
+      baseEventData.participants['my-id'].preferredDates = undefined;
+      getDocData.mockReturnValue(Promise.resolve(baseEventData));
+      updateDoc.mockReturnValue(Promise.resolve());
 
-        const range = {
-          from: moment('2001-09-29T00:00:00+02:00'),
-          to: moment('2001-10-20T00:00:00+02:00')
-        };
+      const range = {
+        from: moment('2001-09-29T00:00:00+02:00'),
+        to: moment('2001-10-20T00:00:00+02:00')
+      };
 
-        await store.dispatch(addPreferredDateRange(range, { id: 'event-id'}));
+      await store.dispatch(addPreferredDateRange(range, { id: 'event-id'}));
 
-        expect(updateDoc).toBeCalledWith(
-          'events/event-id',
-          {["participants.my-id.preferredDates"]: then},
-          stubFirestore
-       );
-      })
-    ));
+      expect(updateDoc).toBeCalledWith(
+        'events/event-id',
+        {["participants.my-id.preferredDates"]: [{from: '2001-09-29', to: '2001-10-20', uid: 'generated-id'}]},
+        stubFirestore
+      );
+    });
+
+    it('It adds a date preference to the list', async () => {
+
+      baseEventData.participants['my-id'].preferredDates = [{ from: '2001-09-28', to: '2001-10-19', uid: 'generated-id' }];
+      getDocData.mockReturnValue(Promise.resolve(baseEventData));
+      updateDoc.mockReturnValue(Promise.resolve());
+
+      const range = {
+        from: moment('2001-09-29T00:00:00+02:00'),
+        to: moment('2001-10-20T00:00:00+02:00')
+      };
+
+      await store.dispatch(addPreferredDateRange(range, { id: 'event-id'}));
+
+      expect(updateDoc).toBeCalledWith(
+        'events/event-id',
+        {["participants.my-id.preferredDates"]: [{ from: '2001-09-28', to: '2001-10-19', uid: 'generated-id'}, { from: '2001-09-29', to: '2001-10-20', uid: 'generated-id'}]},
+        stubFirestore
+      );
+    });
 
     it('notifies when an update fails', async () => {
       getDocData.mockReturnValue(Promise.resolve(baseEventData));
