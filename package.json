@@ -73,8 +73,5 @@
       "Firefox ESR",
       "not ie < 11"
     ]
-  },
-  "jest": {
-    "clearMocks": true
   }
 }
