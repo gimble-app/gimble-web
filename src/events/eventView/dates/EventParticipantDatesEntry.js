@@ -11,12 +11,14 @@ import PreferredDates from "./PreferredDates";
 
 const DatesEntryContainer = styled.div`
   flex: 1;
-  max-width: 150px;
   margin: 8px;
+  display: inline-block;
+  max-width: 150px;
+  text-align: center;
 `;
 
 const LabelledAvatar = ({displayName, photoUrl}) =>
-  <div style={{display: 'flex', marginLeft: '4px', alignItems: 'center'}}>
+  <div style={{display: 'flex', marginLeft: '4px', alignItems: 'center', maxHeight: '40px'}}>
     <AvatarOrPlaceholder key={displayName} photoUrl={photoUrl} />
     <span style={{paddingLeft: '4px'}}><LabelText colour="primary">{displayName}</LabelText></span>
   </div>;
@@ -25,12 +27,14 @@ const LabelledAvatar = ({displayName, photoUrl}) =>
 const EventParticipantDatesEntry = ({profile = {}, participant, isMe, event}) => (
     <DatesEntryContainer>
       <LabelledAvatar displayName={profile.displayName} photoUrl={profile.photoURL} />
-      { isMe &&  <AddDateHandler participant={participant} event={event} /> }
-      {
-        participant.preferredDates ?
-          <PreferredDates preferredDates={participant.preferredDates} />
-          : <BodyText>no dates added yet...</BodyText>
-      }
+      <div style={{marginTop: '12px'}}>
+        {
+          participant.preferredDates ?
+            <PreferredDates preferredDates={participant.preferredDates} />
+            : <BodyText>no dates added yet...</BodyText>
+        }
+        { isMe &&  <AddDateHandler event={event} /> }
+      </div>
     </DatesEntryContainer>
   );
 

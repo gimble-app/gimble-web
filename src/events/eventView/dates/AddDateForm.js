@@ -47,8 +47,8 @@ class AddDateForm extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch, { event, participant }) => ({
-  addPreferredDate: ({range}) => dispatch(addPreferredDateRange(range, event, participant))
+const mapDispatchToProps = (dispatch, { event }) => ({
+  addPreferredDate: ({range}) => dispatch(addPreferredDateRange(range, event))
 });
 
 const NewEventReduxForm = reduxForm({

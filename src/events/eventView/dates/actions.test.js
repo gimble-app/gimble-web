@@ -53,7 +53,7 @@ describe('event actions', () => {
           to: moment('2001-10-20T00:00:00+02:00')
         };
 
-        await store.dispatch(addPreferredDateRange(range, { id: 'event-id'}, { uid: 'my-id'}));
+        await store.dispatch(addPreferredDateRange(range, { id: 'event-id'}, 'my-id'));
 
         expect(updateDoc).toBeCalledWith(
           'events/event-id',
@@ -72,7 +72,7 @@ describe('event actions', () => {
         to: moment('2001-10-20T00:00:00+02:00')
       };
 
-      await store.dispatch(addPreferredDateRange(range, { id: 'event-id'}, { uid: 'my-id'}));
+      await store.dispatch(addPreferredDateRange(range, { id: 'event-id'}, 'my-id'));
 
       expect(store.getActions()).toEqual([
         {
