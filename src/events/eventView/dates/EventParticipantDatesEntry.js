@@ -13,7 +13,6 @@ const DatesEntryContainer = styled.div`
   flex: 1;
   margin: 8px;
   display: inline-block;
-  max-width: 150px;
   text-align: center;
 `;
 
