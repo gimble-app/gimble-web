@@ -25,6 +25,7 @@ describe('event actions', () => {
   beforeEach(() => {
     getFirestore.mockReturnValue(stubFirestore);
     store = mockStore();
+    store.clearActions();
     uuid.mockReturnValue('generated-id');
     selectCurrentUserId.mockReturnValue('my-id');
     baseEventData = {
@@ -52,7 +53,7 @@ describe('event actions', () => {
         {["participants.my-id.preferredDates"]: [{ from: '2001-09-28', to: '2001-10-19', uid: 'id1' }]},
         stubFirestore
       );
-    })
+    });
 
     it('notifies when an update fails', async () => {
       getDocData.mockReturnValue(Promise.resolve(baseEventData));
