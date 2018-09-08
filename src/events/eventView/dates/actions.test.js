@@ -23,7 +23,8 @@ describe('event actions', () => {
   const stubFirestore = {};
 
   beforeEach(() => {
-    jest.clearAllMocks;
+    updateDoc.mockReset();
+    getDocData.mockReset();
 
     getFirestore.mockReturnValue(stubFirestore);
     store = mockStore();
