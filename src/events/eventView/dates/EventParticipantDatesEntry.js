@@ -8,6 +8,7 @@ import {selectProfileFromUid} from "../../../profile/selectors";
 import {selectCurrentUserId} from "../../../auth/selectors";
 import AddDateHandler from "./AddDateHandler";
 import PreferredDateEntry from "./PreferredDateEntry";
+import moment from "moment";
 
 const DatesEntryContainer = styled.div`
   flex: 1;
@@ -30,16 +31,25 @@ const EventParticipantDatesEntry = ({profile = {}, participant, isMe, event}) =>
         {
           participant.preferredDates ?
             <ul style={{ listStyle: "none", padding: "0px", margin: "0px" }}>
-              { participant.preferredDates.map(date => (
-                <li style={{
-                  margin: "4px",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  height: '30px'
-                }} key={`${date.from} - ${date.to}`}>
-                  <PreferredDateEntry isMe={isMe} event={event} from={date.from} to={date.to} />
-                </li>
-              ))}
+              { participant.preferredDates
+                  .map(date => ({ ...date, from: moment(date.from), to: moment(date.to) }))
+                  .map(date => (
+                    <li style={{
+                      margin: "4px",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      height: '30px'
+                    }} key={`${date.uid}`}>
+                      <PreferredDateEntry
+                        isMe={isMe}
+                        event={event}
+                        from={date.from.format('DD MMM')}
+                        to={date.to.format('DD MMM')}
+                        uid={date.uid}
+                       />
+                    </li>
+                  )
+              )}
             </ul>
             : <BodyText>no dates added yet...</BodyText>
         }

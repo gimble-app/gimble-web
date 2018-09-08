@@ -4,11 +4,13 @@ import {
   EVENT_SAVE_FAILURE,
   removePreferredDate,
 } from './actions';
-import {SEND_NOTIFICATION} from '../../../notifications/actions'
+import {SEND_NOTIFICATION} from '../../../notifications/actions';
 import setupStore from '../../../__mocks__/mockStore';
 import {getDocData, updateDoc} from '../../../clients/firebase';
 import {selectCurrentUserId} from '../../../auth/selectors';
+import uuid from "uuid/v4";
 
+jest.mock('uuid/v4');
 jest.mock('../../../clients/firebase');
 jest.mock('../../../auth/selectors');
 
@@ -21,9 +23,9 @@ describe('event actions', () => {
   const stubFirestore = {};
 
   beforeEach(() => {
-
     getFirestore.mockReturnValue(stubFirestore);
     store = mockStore();
+    uuid.mockReturnValue('generated-id');
     selectCurrentUserId.mockReturnValue('my-id');
     baseEventData = {
       participants: {
@@ -37,14 +39,17 @@ describe('event actions', () => {
   describe('removePreferredDate', () => {
 
     it('Deletes the date preference', async () => {
-      baseEventData.participants['my-id'].preferredDates = [{ from: '2001-09-28', to: '2001-10-19'}, { from: '2001-09-29', to: '2001-10-20'}];
+      baseEventData.participants['my-id'].preferredDates = [
+        { from: '2001-09-28', to: '2001-10-19', uid: 'id1'},
+        { from: '2001-09-29', to: '2001-10-20', uid: 'id2'}
+      ];
       getDocData.mockReturnValue(Promise.resolve(baseEventData));
 
-      await store.dispatch(removePreferredDate('2001-09-29', '2001-10-20', { id: 'event-id'}));
+      await store.dispatch(removePreferredDate('id2', { id: 'event-id'} ));
 
       expect(updateDoc).toBeCalledWith(
         'events/event-id',
-        {["participants.my-id.preferredDates"]: [{ from: '2001-09-28', to: '2001-10-19'}]},
+        {["participants.my-id.preferredDates"]: [{ from: '2001-09-28', to: '2001-10-19', uid: 'id1' }]},
         stubFirestore
       );
     })
@@ -53,7 +58,7 @@ describe('event actions', () => {
       getDocData.mockReturnValue(Promise.resolve(baseEventData));
       updateDoc.mockReturnValue(Promise.reject());
 
-      await store.dispatch(removePreferredDate('2001-09-29', '2001-10-20', { id: 'event-id'}));
+      await store.dispatch(removePreferredDate('id2', { id: 'event-id'}));
 
       expect(store.getActions()).toEqual([
         {
@@ -69,11 +74,11 @@ describe('event actions', () => {
     [
       {
         given: undefined,
-        then: [{ from: '2001-09-29', to: '2001-10-20'}]
+        then: [{ from: '2001-09-29', to: '2001-10-20', uid: 'generated-id'}]
       },
       {
-        given: [{ from: '2001-09-28', to: '2001-10-19'}],
-        then: [{ from: '2001-09-28', to: '2001-10-19'}, { from: '2001-09-29', to: '2001-10-20'}]
+        given: [{ from: '2001-09-28', to: '2001-10-19', uid: 'generated-id' }],
+        then: [{ from: '2001-09-28', to: '2001-10-19', uid: 'generated-id'}, { from: '2001-09-29', to: '2001-10-20', uid: 'generated-id'}]
       }
     ].forEach(({given, then}) => (
       it(`Given ${JSON.stringify(given)}\n it adds the date preference`, async () => {
@@ -87,7 +92,7 @@ describe('event actions', () => {
           to: moment('2001-10-20T00:00:00+02:00')
         };
 
-        await store.dispatch(addPreferredDateRange(range, { id: 'event-id'}, 'my-id'));
+        await store.dispatch(addPreferredDateRange(range, { id: 'event-id'}));
 
         expect(updateDoc).toBeCalledWith(
           'events/event-id',
@@ -106,7 +111,7 @@ describe('event actions', () => {
         to: moment('2001-10-20T00:00:00+02:00')
       };
 
-      await store.dispatch(addPreferredDateRange(range, { id: 'event-id'}, 'my-id'));
+      await store.dispatch(addPreferredDateRange(range, { id: 'event-id'}));
 
       expect(store.getActions()).toEqual([
         {

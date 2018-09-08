@@ -1,18 +1,17 @@
 import Chip from "../../../common/Chip";
 import React, {Fragment} from "react";
-import moment from "moment";
 import LabelText from "../../../common/typography/LabelText";
 import SimpleIconButton from "../../../common/buttons/SimpleIconButton";
 import MaterialCloseIcon from '@material-ui/icons/Close';
 import {connect} from "react-redux";
 import {removePreferredDate} from "./actions";
 
-const PreferredDateEntry = ({ isMe, event, from, to, removePreferredDate }) => (
+const PreferredDateEntry = ({ isMe, event, to, from, uid, removePreferredDate }) => (
   <Fragment>
     <Chip>
-      <LabelText>{moment(from).format('DD MMM')} - {moment(to).format('DD MMM')}</LabelText>
+      <LabelText>{from} - {to}</LabelText>
     </Chip>
-    { isMe && <SimpleIconButton onClick={() => removePreferredDate(from, to, event)}><MaterialCloseIcon/></SimpleIconButton> }
+    { isMe && <SimpleIconButton onClick={() => removePreferredDate(uid, event)}><MaterialCloseIcon/></SimpleIconButton> }
   </Fragment>
 );
 
