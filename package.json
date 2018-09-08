@@ -40,7 +40,7 @@
     "enzyme-adapter-react-16": "^1.1.1",
     "husky": "^0.14.3",
     "jest-enzyme": "^6.0.0",
-    "jsdom": "^11.10.0",
+    "jsdom": "^12",
     "lint-staged": "^7.0.0",
     "prettier": "^1.11.1",
     "react-test-renderer": "^16.3.0",
