@@ -34,4 +34,9 @@ export const update = (collection, id, data, getFirestore) =>
 export const remove = (collection, id, getFirestore) =>
   getFirestore().delete(`${collection}/${id}`);
 
+export const getDocRef = (path, firestore) => firestore.doc(path);
+export const getDocData = async (path, firestore) => (await getDocRef(path, firestore).get()).data();
+export const updateDoc = (path, payload, firestore) => getDocRef(path, firestore).update(payload);
+
 export default firebase;
+

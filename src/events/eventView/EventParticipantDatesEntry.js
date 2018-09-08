@@ -21,7 +21,7 @@ const LabelledAvatar = ({displayName, photoUrl}) =>
   </div>;
 
 
-const EventParticipantDatesEntry = ({profile, participant, isMe, event}) => (
+const EventParticipantDatesEntry = ({profile = {}, participant, isMe, event}) => (
     <DatesEntryContainer>
       <LabelledAvatar displayName={profile.displayName} photoUrl={profile.photoURL} />
       { isMe &&  <AddDateHandler participant={participant} event={event} /> }

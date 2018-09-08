@@ -1,5 +1,5 @@
 import {EVENTS_COLLECTION} from "../firestoreQueries";
-import {update} from "../../clients/firebase";
+import {getDocData, update, updateDoc} from "../../clients/firebase";
 import {sendNotification} from "../../notifications/actions";
 
 export const FRIEND_ADD_FAILURE = 'could not add friend to event';
@@ -17,15 +17,18 @@ export const addFriend = (event, friendId) =>
     }
   };
 
-export const addPreferredDateRange = (range, event, participant) =>
+export const addPreferredDateRange = ({ from, to }, event, participant) =>
   async (dispatch, getState, {getFirestore}) => {
-    const from = range.from.format();
-    const to = range.to.format();
     try {
-      await update(EVENTS_COLLECTION, event.id,
-      {
-        [`participants.${participant.uid}.preferredDates`]: [{ from, to }]
-      }, getFirestore);
+      const firestore = getFirestore();
+      const eventData = await getDocData(`${EVENTS_COLLECTION}/${event.id}`, firestore);
+      const currentDates = eventData.participants[participant.uid].preferredDates || [];
+
+      await updateDoc(`${EVENTS_COLLECTION}/${event.id}`, {
+        [`participants.${participant.uid}.preferredDates`]: [
+              ...currentDates, {from: from.toDate(), to: to.toDate()}
+            ]
+      }, firestore);
 
     } catch (error) {
       dispatch(sendNotification(EVENT_SAVE_FAILURE));
