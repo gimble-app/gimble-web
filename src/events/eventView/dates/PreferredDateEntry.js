@@ -7,12 +7,12 @@ import MaterialCloseIcon from '@material-ui/icons/Close';
 import {connect} from "react-redux";
 import {removePreferredDate} from "./actions";
 
-const PreferredDateEntry = ({ event, from, to, removePreferredDate }) => (
+const PreferredDateEntry = ({ isMe, event, from, to, removePreferredDate }) => (
   <Fragment>
     <Chip>
       <LabelText>{moment(from).format('DD MMM')} - {moment(to).format('DD MMM')}</LabelText>
     </Chip>
-    <SimpleIconButton onClick={() => removePreferredDate(from, to, event)}><MaterialCloseIcon/></SimpleIconButton>
+    { isMe && <SimpleIconButton onClick={() => removePreferredDate(from, to, event)}><MaterialCloseIcon/></SimpleIconButton> }
   </Fragment>
 );
 

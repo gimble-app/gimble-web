@@ -37,7 +37,7 @@ const EventParticipantDatesEntry = ({profile = {}, participant, isMe, event}) =>
                   alignItems: "center",
                   height: '30px'
                 }} key={`${date.from} - ${date.to}`}>
-                  <PreferredDateEntry event={event} from={date.from} to={date.to} />
+                  <PreferredDateEntry isMe={isMe} event={event} from={date.from} to={date.to} />
                 </li>
               ))}
             </ul>
