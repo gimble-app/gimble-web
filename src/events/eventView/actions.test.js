@@ -35,15 +35,11 @@ describe('event actions', () => {
     [
       {
         given: undefined,
-        then: [
-          { from: new Date('2001-09-29T00:00:00+02:00'), to: new Date('2001-10-20T00:00:00+02:00')}
-        ]
+        then: [{ from: '2001-09-29', to: '2001-10-20'}]
       },
-      { given: [ { from: new Date('2001-09-28T00:00:00+02:00'), to: new Date('2001-10-19T00:00:00+02:00')} ],
-        then: [
-          { from: new Date('2001-09-28T00:00:00+02:00'), to: new Date('2001-10-19T00:00:00+02:00')},
-          { from: new Date('2001-09-29T00:00:00+02:00'), to: new Date('2001-10-20T00:00:00+02:00')}
-        ]
+      {
+        given: [{ from: '2001-09-28', to: '2001-10-19'}],
+        then: [{ from: '2001-09-28', to: '2001-10-19'}, { from: '2001-09-29', to: '2001-10-20'}]
       }
     ].forEach(({given, then}) => (
       it(`Given ${JSON.stringify(given)}\n it adds the date preference`, async () => {

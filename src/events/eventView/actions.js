@@ -26,7 +26,7 @@ export const addPreferredDateRange = ({ from, to }, event, participant) =>
 
       await updateDoc(`${EVENTS_COLLECTION}/${event.id}`, {
         [`participants.${participant.uid}.preferredDates`]: [
-              ...currentDates, {from: from.toDate(), to: to.toDate()}
+              ...currentDates, {from: from.format('YYYY-MM-DD'), to: to.format('YYYY-MM-DD')}
             ]
       }, firestore);
 
