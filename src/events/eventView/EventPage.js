@@ -5,12 +5,10 @@ import {firebaseConnect, firestoreConnect} from "react-redux-firebase";
 import DateRangeIcon from "@material-ui/icons/DateRange";
 import Page from "../../common/Page";
 import EventHeader from "./header/EventHeader";
-import PageContent from "../../common/PageContent";
 import Tabs from "../../common/Tabs";
-import SubheadingText from "../../common/typography/SubheadingText";
-import EventParticipantDateEntry from "./EventParticipantDatesEntry";
 import {selectEventFromId} from "../eventEdit/selectors";
 import {eventQuery} from "../firestoreQueries";
+import DatesTab from "./dates/DatesTab";
 
 export const EventPage = ({ event }) => (
   <Page>
@@ -19,14 +17,7 @@ export const EventPage = ({ event }) => (
       tabs={[{ label: 'Dates', icon: DateRangeIcon }]}
       value={0}
     />
-    <PageContent>
-      <SubheadingText>Availability</SubheadingText>
-      <div style={{display: "flex", justifyContent: "space-around", flexWrap: "wrap"}}>
-        { Object.values(event.participants).map(
-          participant => <EventParticipantDateEntry key={participant.uid} participant={participant} event={event} />
-        ) }
-      </div>
-    </PageContent>
+    <DatesTab event={event}/>
   </Page>
 );
 

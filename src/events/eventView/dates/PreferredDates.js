@@ -1,7 +1,7 @@
-import Chip from "../../common/Chip";
+import Chip from "../../../common/Chip";
 import React from "react";
 import moment from "moment";
-import LabelText from "../../common/typography/LabelText";
+import LabelText from "../../../common/typography/LabelText";
 
 const PreferredDates = ({preferredDates}) => (
   <ul style={{ listStyle: "none", padding: "0px" }}>

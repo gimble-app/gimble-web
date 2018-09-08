@@ -7,7 +7,7 @@ import {selectFriendProfiles} from "../../../friends/selectors";
 import CancelButton from "../../../common/buttons/HistoryAwareCancelButton";
 import TitleText from "../../../common/typography/TitleText";
 import Page from "../../../common/Page";
-import {addFriend} from "../actions";
+import {addFriend} from "./actions";
 import {selectEventFromId} from "../../eventEdit/selectors";
 import Participants from "./Participants";
 

@@ -2,10 +2,10 @@ import React from "react";
 import {connect} from "react-redux";
 import {Field, reduxForm} from 'redux-form'
 import Form from "../../../common/forms/Form";
-import {addPreferredDateRange} from "../actions";
+import {addPreferredDateRange} from "./actions";
 import SubmitButton from "../../../common/forms/SubmitButton";
 import DayPickerField from "./DayPickerField";
-import moment from "moment/moment";
+import moment from "moment";
 
 class AddDateForm extends React.Component {
 

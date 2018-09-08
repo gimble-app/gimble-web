@@ -1,12 +1,12 @@
-import {addPreferredDateRange, EVENT_SAVE_FAILURE,} from './actions';
-import {SEND_NOTIFICATION} from '../../notifications/actions'
-import setupStore from '../../__mocks__/mockStore';
-import {getDocData, updateDoc} from '../../clients/firebase';
-import {selectCurrentUserId} from '../../auth/selectors';
 import moment from "moment";
+import {addPreferredDateRange, EVENT_SAVE_FAILURE,} from './actions';
+import {SEND_NOTIFICATION} from '../../../notifications/actions'
+import setupStore from '../../../__mocks__/mockStore';
+import {getDocData, updateDoc} from '../../../clients/firebase';
+import {selectCurrentUserId} from '../../../auth/selectors';
 
-jest.mock('../../clients/firebase');
-jest.mock('../../auth/selectors');
+jest.mock('../../../clients/firebase');
+jest.mock('../../../auth/selectors');
 
 describe('event actions', () => {
 
