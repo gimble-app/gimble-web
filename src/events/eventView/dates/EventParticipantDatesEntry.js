@@ -33,6 +33,7 @@ const EventParticipantDatesEntry = ({profile = {}, participant, isMe, event}) =>
             <ul style={{ listStyle: "none", padding: "0px", margin: "0px" }}>
               { participant.preferredDates
                   .map(date => ({ ...date, from: moment(date.from), to: moment(date.to) }))
+                  .sort((a, b) => a.from - b.from)
                   .map(date => (
                     <li style={{
                       margin: "4px",
