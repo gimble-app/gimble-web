@@ -25,7 +25,7 @@ describe('event actions', () => {
   beforeEach(() => {
     getFirestore.mockReturnValue(stubFirestore);
     store = mockStore();
-    store.clearActions();
+
     uuid.mockReturnValue('generated-id');
     selectCurrentUserId.mockReturnValue('my-id');
     baseEventData = {
