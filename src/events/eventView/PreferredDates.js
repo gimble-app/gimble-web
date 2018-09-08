@@ -4,7 +4,7 @@ import moment from "moment";
 import LabelText from "../../common/typography/LabelText";
 
 const PreferredDates = ({preferredDates}) => (
-  <ul style={{ "list-style": "none", padding: "0px" }}>
+  <ul style={{ listStyle: "none", padding: "0px" }}>
     { preferredDates.map(date => (
       <li style={{ margin: "4px" }} key={`${date.to} - ${date.from}`}>
         <Chip>

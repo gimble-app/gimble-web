@@ -16,7 +16,7 @@ const DatesEntryContainer = styled.div`
 `;
 
 const LabelledAvatar = ({displayName, photoUrl}) =>
-  <div style={{display: 'flex', marginLeft: '4px', 'align-items': 'center'}}>
+  <div style={{display: 'flex', marginLeft: '4px', alignItems: 'center'}}>
     <AvatarOrPlaceholder key={displayName} photoUrl={photoUrl} />
     <span style={{paddingLeft: '4px'}}><LabelText colour="primary">{displayName}</LabelText></span>
   </div>;

@@ -1,13 +1,16 @@
 import React from "react";
 import {connect} from "react-redux";
+import {compose} from "redux";
+import {firebaseConnect, firestoreConnect} from "react-redux-firebase";
+import DateRangeIcon from "@material-ui/icons/DateRange";
 import Page from "../../common/Page";
 import EventHeader from "./header/EventHeader";
 import PageContent from "../../common/PageContent";
-import DateRangeIcon from "@material-ui/icons/DateRange";
 import Tabs from "../../common/Tabs";
 import SubheadingText from "../../common/typography/SubheadingText";
 import EventParticipantDateEntry from "./EventParticipantDatesEntry";
 import {selectEventFromId} from "../eventEdit/selectors";
+import {eventQuery} from "../firestoreQueries";
 
 export const EventPage = ({ event }) => (
   <Page>
@@ -31,6 +34,11 @@ const mapStateToProps = (state, { match }) => ({
   event: match.params.id ? selectEventFromId(state, match.params.id) : {},
 });
 
-export default connect(mapStateToProps)(EventPage);
+export default compose(
+  connect(mapStateToProps),
+  firebaseConnect(),
+  firestoreConnect(({event}) => [
+    eventQuery(event.id),
+  ]),
 
-
+)(EventPage);
