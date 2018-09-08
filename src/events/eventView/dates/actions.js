@@ -24,3 +24,21 @@ export const addPreferredDateRange = ({ from, to }, event) =>
       console.log(error);
     }
   };
+
+export const removePreferredDate = (from, to, event) =>
+  async (dispatch, getState, {getFirestore}) => {
+    const myUid = selectCurrentUserId(getState());
+    try {
+      const firestore = getFirestore();
+      const eventData = await getDocData(`${EVENTS_COLLECTION}/${event.id}`, firestore);
+      const currentDates = eventData.participants[myUid].preferredDates || [];
+      await updateDoc(`${EVENTS_COLLECTION}/${event.id}`, {
+        [`participants.${myUid}.preferredDates`]: currentDates.filter(range => range.to !== to || range.from !== from)
+      }, firestore);
+
+    } catch (error) {
+      dispatch(sendNotification(EVENT_SAVE_FAILURE));
+      console.log(error);
+    }
+  };
+

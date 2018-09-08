@@ -7,7 +7,7 @@ import BodyText from "../../../common/typography/BodyText";
 import {selectProfileFromUid} from "../../../profile/selectors";
 import {selectCurrentUserId} from "../../../auth/selectors";
 import AddDateHandler from "./AddDateHandler";
-import PreferredDates from "./PreferredDates";
+import PreferredDateEntry from "./PreferredDateEntry";
 
 const DatesEntryContainer = styled.div`
   flex: 1;
@@ -30,7 +30,18 @@ const EventParticipantDatesEntry = ({profile = {}, participant, isMe, event}) =>
       <div style={{marginTop: '12px'}}>
         {
           participant.preferredDates ?
-            <PreferredDates preferredDates={participant.preferredDates} />
+            <ul style={{ listStyle: "none", padding: "0px", margin: "0px" }}>
+              { participant.preferredDates.map(date => (
+                <li style={{
+                  margin: "4px",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  height: '30px'
+                }} key={`${date.from} - ${date.to}`}>
+                  <PreferredDateEntry event={event} from={date.from} to={date.to} />
+                </li>
+              ))}
+            </ul>
             : <BodyText>no dates added yet...</BodyText>
         }
         { isMe &&  <AddDateHandler event={event} /> }

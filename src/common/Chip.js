@@ -7,6 +7,7 @@ const Chip = styled.div`
   justify-content: center;
   height: 28px;
   border-radius: 8px;
+  width: 140px;
   background-color: ${({theme, colour}) => fromPalette(theme, colour, 'primaryLight')};
 `;
 

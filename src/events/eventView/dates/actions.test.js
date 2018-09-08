@@ -1,5 +1,9 @@
 import moment from "moment";
-import {addPreferredDateRange, EVENT_SAVE_FAILURE,} from './actions';
+import {
+  addPreferredDateRange,
+  EVENT_SAVE_FAILURE,
+  removePreferredDate,
+} from './actions';
 import {SEND_NOTIFICATION} from '../../../notifications/actions'
 import setupStore from '../../../__mocks__/mockStore';
 import {getDocData, updateDoc} from '../../../clients/firebase';
@@ -28,6 +32,36 @@ describe('event actions', () => {
         }
       }
     };
+  });
+
+  describe('removePreferredDate', () => {
+
+    it('Deletes the date preference', async () => {
+      baseEventData.participants['my-id'].preferredDates = [{ from: '2001-09-28', to: '2001-10-19'}, { from: '2001-09-29', to: '2001-10-20'}];
+      getDocData.mockReturnValue(Promise.resolve(baseEventData));
+
+      await store.dispatch(removePreferredDate('2001-09-29', '2001-10-20', { id: 'event-id'}));
+
+      expect(updateDoc).toBeCalledWith(
+        'events/event-id',
+        {["participants.my-id.preferredDates"]: [{ from: '2001-09-28', to: '2001-10-19'}]},
+        stubFirestore
+      );
+    })
+
+    it('notifies when an update fails', async () => {
+      getDocData.mockReturnValue(Promise.resolve(baseEventData));
+      updateDoc.mockReturnValue(Promise.reject());
+
+      await store.dispatch(removePreferredDate('2001-09-29', '2001-10-20', { id: 'event-id'}));
+
+      expect(store.getActions()).toEqual([
+        {
+          data: { message: EVENT_SAVE_FAILURE },
+          type: SEND_NOTIFICATION
+        }
+      ]);
+    });
   });
 
   describe('addPreferredDateRange', () => {
@@ -59,7 +93,7 @@ describe('event actions', () => {
           'events/event-id',
           {["participants.my-id.preferredDates"]: then},
           stubFirestore
-      );
+       );
       })
     ));
 
