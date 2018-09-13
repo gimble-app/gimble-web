@@ -17,3 +17,4 @@ require('./Forms');
 require('./Typography');
 require('./Tabs');
 require('./Screens');
+require('./Collaboration');
