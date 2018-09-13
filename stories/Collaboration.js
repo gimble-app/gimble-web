@@ -4,6 +4,11 @@ import styled from "styled-components";
 import {fromPalette} from "../src/theme/theme";
 import LabelText from "../src/common/typography/LabelText";
 import moment from "moment";
+import Grid from "../src/events/eventView/dates/grid/Grid";
+import HeaderCell from "../src/events/eventView/dates/grid/HeaderCell";
+import LeftHeaderCell from "../src/events/eventView/dates/grid/LeftHeaderCell";
+import GridCell from "../src/events/eventView/dates/grid/GridCell";
+import AvailabilityIndicator from "../src/events/eventView/dates/grid/AvailabilityIndicator";
 
 const CELL_WIDTH = "28px";
 const ROW_CELL_HEADER_WIDTH = "32px";
@@ -66,50 +71,6 @@ const Table = styled.table`
     flex: 1;
 `;
 
-const AvailableIndicator = styled.div`
-  position: relative;
-  height: 8px;
-  margin-top: ${({entry}) => entry * 4}px;
-  background-color: ${({theme}) => fromPalette(theme, 'primaryLight')};
-  border-radius: 24px;
-`;
-
-const Grid = styled.div`
-  display: grid;
-  grid-template-columns: 
-    [person-header-column] ${ROW_CELL_HEADER_WIDTH} 
-    ${({columns}) => columns.map(entry => `[${entry}] ${CELL_WIDTH} [${entry}-end] 0px`).join(' ')}
-  grid-template-rows: 
-    [date-header-row] ${COLUMN_CELL_HEADER_HEIGHT} 
-    ${({rows}) => rows.map(entry => `[${entry}] ${CELL_HEIGHT} [${entry}-end] 0px`).join(' ')}     
-`;
-
-const GridCell = styled.div`
-  grid-column:  ${({startCol}) => startCol} / ${({endCol, spanCol}) => endCol || `span ${spanCol || 1}`};
-  grid-row:  ${({startRow}) => startRow} / ${({endRow, spanRow}) => endRow || `span ${spanRow || 1}`};
-  background-color: ${({theme}) => fromPalette(theme, 'secondaryContrast')};
-  padding: 0px 8px;
-`;
-
-const HeaderCell = styled(GridCell)`
-  background-color: ${({theme}) => fromPalette(theme, 'secondaryLight')};
-  z-index: 1000;
-  padding: 2px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-`;
-
-const StickyCell = styled(HeaderCell)`
-  position: sticky;
-  left: 0;
-  :empty {
-    background-color: ${({theme}) => fromPalette(theme, 'secondaryContrast')};
-  }
-    z-index: 1001;
-`;
-
 const data = {
   dates: [
     '2018-08-23', '2018-08-24', '2018-08-25', '2018-08-26', '2018-08-27', '2018-08-28', '2018-08-29', '2018-08-30', '2018-08-31',
@@ -133,7 +94,7 @@ storiesOf('Collaboration', module)
     columns={data.dates.map(date => `date-col-${date}`)}
     rows={Object.keys(data.people).map(person => `person-row-${person}`)}
   >
-    <StickyCell startCol={"person-header-column"} startRow={"date-header-row"}/>
+    <LeftHeaderCell startCol={"person-header-column"} startRow={"date-header-row"}/>
     {
       data.dates.map(date => <HeaderCell startCol={`date-col-${date}`} startRow={"date-header-row"}><LabelText>{moment(date).format("MMM D")}</LabelText></HeaderCell>)
     }
@@ -141,10 +102,10 @@ storiesOf('Collaboration', module)
     {
       Object.keys(data.people).map(person =>
         <Fragment>
-          <StickyCell startCol={"person-header-column"} startRow={`person-row-${person}`}><LabelText>{person}</LabelText></StickyCell>
+          <LeftHeaderCell startCol={"person-header-column"} startRow={`person-row-${person}`}><LabelText>{person}</LabelText></LeftHeaderCell>
           {
             data.people[person].map((range, i) => <GridCell startCol={`date-col-${range.from}`} endCol={`date-col-${range.to}`} startRow={`person-row-${person}`}>
-              <AvailableIndicator entry={i+1}/></GridCell>)
+              <AvailabilityIndicator entry={i+1}/></GridCell>)
           }
         </Fragment>
       )
@@ -170,25 +131,25 @@ storiesOf('Collaboration', module)
         <tr>
           <RowHeaderCell scope="row"><LabelText>Dan</LabelText></RowHeaderCell>
           { data.dates.map(
-            (v, i) => <Cell scope="col">{i % 3 ? <AvailableIndicator /> : ""}</Cell>
+            (v, i) => <Cell scope="col">{i % 3 ? <AvailabilityIndicator /> : ""}</Cell>
           )}
         </tr>
         <tr>
           <RowHeaderCell scope="row" />
           { data.dates.map(
-            (v, i) => <Cell scope="col">{i % 3 ? <AvailableIndicator /> : ""}</Cell>
+            (v, i) => <Cell scope="col">{i % 3 ? <AvailabilityIndicator /> : ""}</Cell>
           )}
         </tr>
         <tr>
           <RowHeaderCell scope="row"><LabelText>Joe</LabelText></RowHeaderCell>
           { data.dates.map(
-            (v, i) => <Cell scope="col">{i % 5 ? <AvailableIndicator /> : ""}</Cell>
+            (v, i) => <Cell scope="col">{i % 5 ? <AvailabilityIndicator /> : ""}</Cell>
           )}
         </tr>
         <tr>
           <RowHeaderCell scope="row"><LabelText>Min</LabelText></RowHeaderCell>
           { data.dates.map(
-            (v, i) => <Cell scope="col">{i % 7 ? <AvailableIndicator /> : ""}</Cell>
+            (v, i) => <Cell scope="col">{i % 7 ? <AvailabilityIndicator /> : ""}</Cell>
           )}
         </tr>
       </tbody>
