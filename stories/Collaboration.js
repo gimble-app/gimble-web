@@ -25,7 +25,6 @@ const RowHeaderCell = styled.th`
     height: ${CELL_HEIGHT};
     background-color: ${({theme}) => fromPalette(theme, 'secondaryLight')};
     position: absolute;
-    display: flex;
     align-items: center;
     left: 0;
     border-top: 4px solid ${({theme}) => fromPalette(theme, 'secondaryContrast')};
@@ -74,19 +73,78 @@ const AvailableIndicator = styled.div`
   background-color: ${({theme}) => fromPalette(theme, 'primaryLight')};
 `;
 
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: 
+    [person-header-column] ${CELL_WIDTH} 
+    repeat(${({dates}) => dates}, [date-column] ${CELL_WIDTH}); 
+  grid-template-rows: 
+    [date-header-row] ${CELL_HEIGHT}
+    [date-header-row] ${CELL_HEIGHT} 
+    repeat(10, [person-entry] ${CELL_HEIGHT});
+  grid-auto-rows: minmax(100px, auto);
+`;
+
+const GridCell = styled.div`
+  grid-column:  ${({startCol}) => startCol} / span ${({spanCol}) => spanCol || 1};
+  grid-row:  ${({startRow}) => startRow} / span ${({spanRow}) => spanRow || 1};
+  background-color: ${({theme}) => fromPalette(theme, 'secondaryContrast')};
+`;
+
+const HeaderCell = styled(GridCell)`
+  background-color: ${({theme}) => fromPalette(theme, 'secondaryLight')};
+`;
+
+const StickyCell = styled(HeaderCell)`
+  position: sticky;
+  left: 0;
+  :empty {
+    background-color: ${({theme}) => fromPalette(theme, 'secondaryContrast')};
+  }
+`;
+
 const dates = Array.apply(null, Array(30));
 
 storiesOf('Collaboration', module)
+.add('grid', () => (
+  <Grid dates={dates.length}>
+    <StickyCell spanRow="2" startCol={"person-header-column"} startRow={"date-header-row"}/>
+    <HeaderCell startCol={"date-column 1"} startRow={"date-header-row"} spanCol={dates.length}>September</HeaderCell>
+    { dates.map(
+      (v, i) => <HeaderCell startCol={`date-column ${i+1}`} startRow={"date-header-row 2"}><LabelText>{i+1}</LabelText></HeaderCell>
+    )}
+
+    <StickyCell spanRow="2" startCol={"person-header-column"} startRow={"person-entry 1"}><LabelText>Dan</LabelText></StickyCell>
+    { dates.map(
+      (v, i) => <GridCell startCol={`date-column ${i+1}`} startRow={`person-entry 1`}><AvailableIndicator /></GridCell>
+    )}
+    { dates.map(
+      (v, i) => <GridCell startCol={`date-column ${i+1}`} startRow={`person-entry 2`}><AvailableIndicator /></GridCell>
+    )}
+
+
+    <StickyCell startCol={"person-header-column"} startRow={"person-entry 3"}><LabelText>Min</LabelText></StickyCell>
+    { dates.map(
+      (v, i) => <GridCell startCol={`date-column ${i+1}`} startRow={`person-entry 3`}><AvailableIndicator /></GridCell>
+    )}
+
+    <StickyCell startCol={"person-header-column"} startRow={"person-entry 4"}><LabelText>Steve</LabelText></StickyCell>
+    { dates.map(
+      (v, i) => <GridCell startCol={`date-column ${i+1}`} startRow={`person-entry 4`}><AvailableIndicator /></GridCell>
+    )}
+
+  </Grid>
+))
 .add('table', () => [
   <div style={{position:"relative", display: 'flex'}} >
     <Table>
       <thead>
         <tr>
-          <CornerHeader scope="col"></CornerHeader>
+          <CornerHeader scope="col" />
           <ColumnHeaderCell colSpan={dates.length}>September</ColumnHeaderCell>
         </tr>
         <tr>
-          <CornerHeader scope="col"></CornerHeader>
+          <CornerHeader scope="col" />
           { dates.map(
             (v, i) => <ColumnHeaderCell scope="col"><LabelText>{i + 1}</LabelText></ColumnHeaderCell>
           )}
@@ -95,6 +153,12 @@ storiesOf('Collaboration', module)
       <tbody>
         <Row>
           <RowHeaderCell scope="row"><LabelText>Dan</LabelText></RowHeaderCell>
+          { dates.map(
+            (v, i) => <Cell scope="col">{i % 3 ? <AvailableIndicator /> : ""}</Cell>
+          )}
+        </Row>
+        <Row>
+          <RowHeaderCell scope="row" />
           { dates.map(
             (v, i) => <Cell scope="col">{i % 3 ? <AvailableIndicator /> : ""}</Cell>
           )}
