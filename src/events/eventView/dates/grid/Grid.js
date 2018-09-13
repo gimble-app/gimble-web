@@ -6,6 +6,12 @@ const COLUMN_CELL_HEADER_HEIGHT = "44px";
 const CELL_HEIGHT = "24px";
 
 const Grid = styled.div`
+    overflow-x: auto;
+    ::-webkit-scrollbar
+    {
+      display: none;
+    }
+    
   display: grid;
   grid-template-columns: 
     [person-header-column] ${ROW_CELL_HEADER_WIDTH} 
