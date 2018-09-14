@@ -1,19 +1,12 @@
 import PageContent from "../../../common/PageContent";
-import React, {Fragment} from "react";
+import React from "react";
 import SubheadingText from "../../../common/typography/SubheadingText";
 import EventParticipantDatesEntry from './EventParticipantDatesEntry';
-import moment from "moment/moment";
-import LeftHeaderCell from "./grid/LeftHeaderCell";
-import HeaderCell from "./grid/HeaderCell";
-import LabelText from "../../../common/typography/LabelText";
-import AvailabilityIndicator from "./grid/AvailabilityIndicator";
-import GridCell from "./grid/GridCell";
-import Grid from "./grid/Grid";
+import moment from "moment";
+import AvailabilityGrid from "./grid/AvailabilityGrid";
 
-const DatesTab = ({event}) => {
+const parseParticipantGridModel = (participants) => {
   let ranges = [];
-
-  const participants = Object.values(event.participants);
   const people = {};
 
   participants.forEach(p => {
@@ -39,42 +32,20 @@ const DatesTab = ({event}) => {
     dates.add(date.format("YYYY-MM-DD"));
   }
 
-  const data = {
+  return {
     dates: [...dates],
     people
   };
+};
 
-  console.log(data);
-
-
-  return (<PageContent>
+const DatesTab = ({event}) => (<PageContent>
     <SubheadingText>Availability</SubheadingText>
     <div style={{display: "flex", justifyContent: "space-around", flexWrap: "wrap"}}>
       { Object.values(event.participants).map(
         participant => <EventParticipantDatesEntry key={participant.uid} participant={participant} event={event} />
       ) }
     </div>
-    <Grid
-      columns={data.dates.map(date => `date-col-${date}`)}
-      rows={Object.keys(data.people).map(person => `person-row-${person}`)}
-    >
-      <LeftHeaderCell startCol={"person-header-column"} startRow={"date-header-row"}/>
-      {
-        data.dates.map(date => <HeaderCell startCol={`date-col-${date}`} startRow={"date-header-row"}><LabelText>{moment(date).format("MMM D")}</LabelText></HeaderCell>)
-      }
-
-      {
-        Object.keys(data.people).map(person =>
-          <Fragment>
-            <LeftHeaderCell startCol={"person-header-column"} startRow={`person-row-${person}`}><LabelText>{person}</LabelText></LeftHeaderCell>
-            {
-              data.people[person].map((range, i) => <GridCell startCol={`date-col-${range.from}`} endCol={`date-col-${range.to}`} startRow={`person-row-${person}`}>
-                <AvailabilityIndicator entry={i+1}/></GridCell>)
-            }
-          </Fragment>
-        )
-      }
-    </Grid>
-  </PageContent>)};
+   <AvailabilityGrid model={parseParticipantGridModel(Object.values(event.participants))}/>
+  </PageContent>);
 
 export default DatesTab;

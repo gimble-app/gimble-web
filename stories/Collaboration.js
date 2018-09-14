@@ -88,24 +88,56 @@ const data = {
   }
 };
 
+// Get dates list for min and max
+// const dates = Object.values(data.people)
+// .flatMap(a => a.flatMap(b => [b.to, b.from]))
+// .sort((a,b) => moment(a).isBefore(moment(b)));
+// Get people count
+// Object.keys(data.people).flatMap(person => data.people[person].map((v,i) => `person-row-${person}-${i+1}`))
+
+
 storiesOf('Collaboration', module)
 .add('grid', () => (
   <Grid
     columns={data.dates.map(date => `date-col-${date}`)}
-    rows={Object.keys(data.people).map(person => `person-row-${person}`)}
+    rows={Object.keys(data.people).flatMap(person => data.people[person].map((v,i) => `person-row-${person}-${i+1}`))
+    }
   >
-    <LeftHeaderCell startCol={"person-header-column"} startRow={"date-header-row"}/>
+    <LeftHeaderCell
+      startCol={"person-header-column"}
+      startRow={"date-header-row"}
+    />
     {
-      data.dates.map(date => <HeaderCell startCol={`date-col-${date}`} startRow={"date-header-row"}><LabelText>{moment(date).format("MMM D")}</LabelText></HeaderCell>)
+      data.dates.map(date =>
+        <HeaderCell
+          startCol={`date-col-${date}`}
+          startRow={"date-header-row"}
+        >
+          <LabelText>{moment(date).format("MMM D")}</LabelText>
+        </HeaderCell>
+      )
     }
 
     {
       Object.keys(data.people).map(person =>
         <Fragment>
-          <LeftHeaderCell startCol={"person-header-column"} startRow={`person-row-${person}`}><LabelText>{person}</LabelText></LeftHeaderCell>
+          <LeftHeaderCell
+            startCol={"person-header-column"}
+            startRow={`person-row-${person}-1`}
+            spanRow={person.length}
+          >
+            <LabelText>{person}</LabelText>
+          </LeftHeaderCell>
           {
-            data.people[person].map((range, i) => <GridCell startCol={`date-col-${range.from}`} endCol={`date-col-${range.to}`} startRow={`person-row-${person}`}>
-              <AvailabilityIndicator entry={i+1}/></GridCell>)
+            data.people[person].map((range, i) =>
+              <GridCell
+                startCol={`date-col-${range.from}`}
+                endCol={`date-col-${range.to}`}
+                startRow={`person-row-${person}-${i+1}`}
+              >
+                <AvailabilityIndicator entry={i+1}/>
+              </GridCell>
+            )
           }
         </Fragment>
       )
