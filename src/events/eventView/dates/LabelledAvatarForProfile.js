@@ -5,9 +5,9 @@ import {connect} from "react-redux";
 import LabelText from "../../../common/typography/LabelText";
 
 const LabelledAvatarForProfile = ({profile}) =>
-  <div style={{display: 'flex', marginLeft: '4px', alignItems: 'center', maxHeight: '40px'}}>
+  <div style={{display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center'}}>
     <AvatarOrPlaceholder key={profile.displayName} photoUrl={profile.photoURL} />
-    <span style={{paddingLeft: '4px'}}><LabelText>{profile.displayName}</LabelText></span>
+    <LabelText colour="primary">{profile.displayName}</LabelText>
   </div>;
 
 const mapStateToProps = (state, { uid }) => ({

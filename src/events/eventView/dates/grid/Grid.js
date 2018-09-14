@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const ROW_CELL_HEADER_WIDTH = "32px";
+const ROW_CELL_HEADER_WIDTH = "60px";
 const COLUMN_CELL_HEADER_HEIGHT = "44px";
 
 const Grid = styled.div`
@@ -11,6 +11,7 @@ const Grid = styled.div`
     }
     
   display: grid;
+  grid-column-gap: 4px;
   grid-template-columns: 
     [person-header-column] ${ROW_CELL_HEADER_WIDTH} 
     ${({columns}) => columns.map(entry => `[${entry}] auto [${entry}-end] 0px`).join(' ')}

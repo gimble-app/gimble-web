@@ -1,10 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import styled from 'styled-components';
-import AvatarOrPlaceholder from "../../../common/avatars/AvatarOrPlaceholder";
-import LabelText from "../../../common/typography/LabelText";
 import BodyText from "../../../common/typography/BodyText";
-import {selectProfileFromUid} from "../../../profile/selectors";
 import {selectCurrentUserId} from "../../../auth/selectors";
 import AddDateHandler from "./AddDateHandler";
 import PreferredDateEntry from "./PreferredDateEntry";
@@ -17,17 +14,15 @@ const DatesEntryContainer = styled.div`
   text-align: center;
 `;
 
-const LabelledAvatar = ({displayName, photoUrl}) =>
-  <div style={{display: 'flex', marginLeft: '4px', alignItems: 'center', maxHeight: '40px'}}>
-    <AvatarOrPlaceholder key={displayName} photoUrl={photoUrl} />
-    <span style={{paddingLeft: '4px'}}><LabelText colour="primary">{displayName}</LabelText></span>
-  </div>;
+const MyDatesEntry = ({event, myUid}) => {
 
+  const { participants } = event;
+  const participant = participants[myUid];
 
-const EventParticipantDatesEntry = ({profile = {}, participant, isMe, event}) => (
+  return (
     <DatesEntryContainer>
-      <LabelledAvatar displayName={profile.displayName} photoUrl={profile.photoURL} />
-      <div style={{marginTop: '12px'}}>
+      <div style={{display: 'flex'}}>
+        <AddDateHandler event={event} />
         {
           participant.preferredDates ?
             <ul style={{ listStyle: "none", padding: "0px", margin: "0px" }}>
@@ -42,7 +37,6 @@ const EventParticipantDatesEntry = ({profile = {}, participant, isMe, event}) =>
                       height: '30px'
                     }} key={`${date.uid}`}>
                       <PreferredDateEntry
-                        isMe={isMe}
                         event={event}
                         from={date.from.format('DD MMM')}
                         to={date.to.format('DD MMM')}
@@ -54,14 +48,12 @@ const EventParticipantDatesEntry = ({profile = {}, participant, isMe, event}) =>
             </ul>
             : <BodyText>no dates added yet...</BodyText>
         }
-        { isMe &&  <AddDateHandler event={event} /> }
       </div>
     </DatesEntryContainer>
-  );
+  )};
 
-const mapStateToProps = (state, { participant }) => ({
-  profile: selectProfileFromUid(state, participant.uid),
-  isMe: selectCurrentUserId(state) === participant.uid
+const mapStateToProps = (state) => ({
+  myUid: selectCurrentUserId(state)
 });
 
-export default connect(mapStateToProps)(EventParticipantDatesEntry);
+export default connect(mapStateToProps)(MyDatesEntry);

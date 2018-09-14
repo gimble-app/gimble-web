@@ -9,7 +9,7 @@ const GridCell = styled.div`
   grid-column:  ${({startCol}) => startCol} / ${({endCol, spanCol}) => endCol || `span ${spanCol || 1}`};
   grid-row:  ${({startRow}) => startRow} / ${({endRow, spanRow}) => endRow || `span ${spanRow || 1}`};
   background-color: ${({theme}) => fromPalette(theme, 'secondaryContrast')};
-  padding: 0px 8px;
+  padding: 0px 16px;
 `;
 
 export default GridCell;

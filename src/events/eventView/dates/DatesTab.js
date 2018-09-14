@@ -1,8 +1,8 @@
-import PageContent from "../../../common/PageContent";
 import React from "react";
-import SubheadingText from "../../../common/typography/SubheadingText";
-import EventParticipantDatesEntry from './EventParticipantDatesEntry';
 import moment from "moment";
+import PageContent from "../../../common/PageContent";
+import SubheadingText from "../../../common/typography/SubheadingText";
+import MyDatesEntry from './MyDatesEntry';
 import AvailabilityGrid from "./grid/AvailabilityGrid";
 
 const parseParticipantGridModel = (participants) => {
@@ -31,14 +31,16 @@ const parseParticipantGridModel = (participants) => {
   };
 };
 
-const DatesTab = ({event}) => (<PageContent>
-    <SubheadingText>Availability</SubheadingText>
+const DatesTab = ({event}) => (
+  <PageContent>
+    <SubheadingText>My dates</SubheadingText>
     <div style={{display: "flex", justifyContent: "space-around", flexWrap: "wrap"}}>
-      { Object.values(event.participants).map(
-        participant => <EventParticipantDatesEntry key={participant.uid} participant={participant} event={event} />
-      ) }
+        <MyDatesEntry event={event} />
     </div>
-   <AvailabilityGrid model={parseParticipantGridModel(Object.values(event.participants))}/>
+    <SubheadingText>Group dates</SubheadingText>
+    <div style={{marginTop: "8px"}}>
+      <AvailabilityGrid model={parseParticipantGridModel(Object.values(event.participants))}/>
+    </div>
   </PageContent>);
 
 export default DatesTab;

@@ -4,12 +4,11 @@ import HeaderCell from "./HeaderCell";
 
 const LeftHeaderCell = styled(HeaderCell)`
   position: sticky;
-  left: 0;
+  left: -1px;
+  padding-top: 8px;
   overflow: hidden;
-  :empty {
-    background-color: ${({theme}) => fromPalette(theme, 'secondaryContrast')};
-  }
-    z-index: 1001;
+  background-color: ${({theme}) => fromPalette(theme, 'secondaryContrast')};
+  z-index: 1001;
 `;
 
 export default LeftHeaderCell;
