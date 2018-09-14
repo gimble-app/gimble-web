@@ -6,34 +6,27 @@ import moment from "moment";
 import AvailabilityGrid from "./grid/AvailabilityGrid";
 
 const parseParticipantGridModel = (participants) => {
-  let ranges = [];
-  const people = {};
+  const people = participants
+                        .reduce((working, person) => ({
+                          ...working,
+                          [person.uid]: person.preferredDates.map(range => ({ from: range.from, to: range.to }))
+                        }), {});
 
-  participants.forEach(p => {
-    people[p.uid] = p.preferredDates.map(range => ({ from: range.from, to: range.to }))
-    ranges =  ranges.concat(people[p.uid])
-  });
+  const minMaxDates =  participants
+                        .flatMap(p => p.preferredDates.flatMap(range => ({ from: range.from, to: range.to })))
+                        .reduce(({min, max}, {from, to}) => ({
+                          min: !min || moment(from).isBefore(min) ? from : min,
+                          max: !max || moment(to).isAfter(max) ? to : max
+                        }), {});
 
-  let min;
-  let max;
+  const representedDates = new Set();
 
-  ranges.forEach(range => {
-    if(!min || moment(range.from).isBefore(min)) {
-      min = range.from;
-    }
-    if(!max || moment(range.to).isAfter(max)) {
-      max = range.to;
-    }
-  });
-
-  const dates = new Set();
-
-  for(let date = moment(min); !date.isAfter(max); date.add("days", 1)) {
-    dates.add(date.format("YYYY-MM-DD"));
+  for(const date = moment(minMaxDates.min); !date.isAfter(minMaxDates.max); date.add(1, "days")) {
+    representedDates.add(date.format("YYYY-MM-DD"));
   }
 
   return {
-    dates: [...dates],
+    dates: [...representedDates],
     people
   };
 };
