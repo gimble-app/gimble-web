@@ -2,7 +2,7 @@ import moment from "moment";
 import {
   addPreferredDateRange,
   EVENT_SAVE_FAILURE,
-  removePreferredDate,
+  removePreferredDate, setEventDates,
 } from './actions';
 import {SEND_NOTIFICATION} from '../../../notifications/actions';
 import setupStore from '../../../__mocks__/mockStore';
@@ -72,6 +72,40 @@ describe('event actions', () => {
       ]);
     });
   });
+
+  describe('setEventDates', () => {
+
+    it('Saves a date to the event', async () => {
+      baseEventData.participants['my-id'].preferredDates = [
+        { from: '2001-09-28', to: '2001-10-19', uid: 'id1'},
+        { from: '2001-09-29', to: '2001-10-20', uid: 'id2'}
+      ];
+      getDocData.mockReturnValue(Promise.resolve(baseEventData));
+
+      await store.dispatch(setEventDates({ from: '2001-09-28', to: '2001-10-19' }, { id: 'event-id'}));
+
+      expect(updateDoc).toBeCalledWith(
+        'events/event-id',
+        { from: '2001-09-28', to: '2001-10-19' },
+        stubFirestore
+      );
+    });
+
+    it('notifies when an update fails', async () => {
+      getDocData.mockReturnValue(Promise.resolve(baseEventData));
+      updateDoc.mockReturnValue(Promise.reject());
+
+      await store.dispatch(setEventDates({ from: '2001-09-28', to: '2001-10-19' }, { id: 'event-id'}));
+
+      expect(store.getActions()).toEqual([
+        {
+          data: { message: EVENT_SAVE_FAILURE },
+          type: SEND_NOTIFICATION
+        }
+      ]);
+    });
+  });
+
 
   describe('addPreferredDateRange', () => {
 

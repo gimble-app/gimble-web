@@ -47,3 +47,19 @@ export const removePreferredDate = (uid, event) =>
     }
   };
 
+export const setEventDates = ({from, to}, event) =>
+  async (dispatch, getState, {getFirestore}) => {
+    try {
+      const firestore = getFirestore();
+      await updateDoc(`${EVENTS_COLLECTION}/${event.id}`, {
+        dates: {
+          from,
+          to
+        }
+      }, firestore)
+
+    } catch (error) {
+      dispatch(sendNotification(EVENT_SAVE_FAILURE));
+      console.log(error);
+    }
+  };
