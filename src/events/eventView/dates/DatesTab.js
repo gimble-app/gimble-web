@@ -35,7 +35,6 @@ const parseParticipantGridModel = (participants) => {
 const DatesTab = ({event}) => (
   <PageContent>
     <SubheadingText>My dates</SubheadingText>
-    <FinaliseDatesHandler event={event} />
     <div style={{display: "flex", justifyContent: "space-around", flexWrap: "wrap"}}>
         <MyDatesEntry event={event} />
     </div>
@@ -43,6 +42,10 @@ const DatesTab = ({event}) => (
     <div style={{marginTop: "8px"}}>
       <AvailabilityGrid model={parseParticipantGridModel(Object.values(event.participants))}/>
     </div>
+    <div style={{marginTop: "8px"}}>
+      <FinaliseDatesHandler event={event} />
+    </div>
+
   </PageContent>);
 
 export default DatesTab;

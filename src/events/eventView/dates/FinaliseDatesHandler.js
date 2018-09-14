@@ -1,7 +1,7 @@
 import React, {Fragment} from "react";
 import Dialog from "@material-ui/core/Dialog";
-import Button from "@material-ui/core/Button";
 import FinaliseDateForm from "./FinaliseDatesForm";
+import SimpleButton from "../../../common/buttons/SimpleButton";
 
 class FinaliseDatesHandler extends React.Component {
 
@@ -27,7 +27,7 @@ class FinaliseDatesHandler extends React.Component {
 
     return (
       <Fragment>
-        <Button onClick={this.handleClickOpen}>Finalise dates</Button>
+        <SimpleButton onClick={this.handleClickOpen}>Finalise dates</SimpleButton>
         <Dialog
           fullScreen
           open={open}
