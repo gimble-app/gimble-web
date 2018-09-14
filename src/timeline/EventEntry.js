@@ -12,6 +12,8 @@ import TimelineEventDescription from "./TimelineEventDescription";
 import LongPressAware from "../common/LongPressAware";
 import {deleteEvent} from "../events/eventEdit/actions";
 import ChangeParticipantsMenuItem from "./ChangeParticipantsMenuItem";
+import LabelText from "../common/typography/LabelText";
+import moment from "moment";
 
 export class EventEntry extends Component {
   state = {
@@ -46,6 +48,16 @@ export class EventEntry extends Component {
       <LongPressAware onPress={this.triggerMenu}>
         <InternalLink to={`/event/${event.id}`}>
           <TimelineEventSummary image={event.image}>
+            <div style={{
+              position: "absolute",
+              right: 0,
+              bottom: '100%',
+              marginBottom: '4px'
+            }}>
+              <LabelText colour={"primary"}>
+                { event.dates ? `${moment(event.dates.from).format('DD MMM')} - ${moment(event.dates.to).format('DD MMM')}` : ''}
+              </LabelText>
+            </div>
             <TimelineEventDescription>
               <TitleText>{event.title}</TitleText>
             </TimelineEventDescription>

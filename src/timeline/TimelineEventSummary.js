@@ -3,6 +3,7 @@ import {fromPalette} from "../theme/theme";
 
 export default styled.section`
   box-sizing: border-box;
+  position: relative;
   display: flex;
   height: 160px;
   width: 240px;
