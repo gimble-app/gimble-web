@@ -53,8 +53,8 @@ export const setEventDates = ({from, to}, event) =>
       const firestore = getFirestore();
       await updateDoc(`${EVENTS_COLLECTION}/${event.id}`, {
         dates: {
-          from,
-          to
+          from: from.format('YYYY-MM-DD'),
+          to: to.format('YYYY-MM-DD'),
         }
       }, firestore)
 

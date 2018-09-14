@@ -76,17 +76,18 @@ describe('event actions', () => {
   describe('setEventDates', () => {
 
     it('Saves a date to the event', async () => {
-      baseEventData.participants['my-id'].preferredDates = [
-        { from: '2001-09-28', to: '2001-10-19', uid: 'id1'},
-        { from: '2001-09-29', to: '2001-10-20', uid: 'id2'}
-      ];
-      getDocData.mockReturnValue(Promise.resolve(baseEventData));
+      const range = {
+        from: moment('2001-09-29T12:00:00+02:00'),
+        to: moment('2001-10-20T12:00:00+02:00')
+      };
 
-      await store.dispatch(setEventDates({ from: '2001-09-28', to: '2001-10-19' }, { id: 'event-id'}));
+      await store.dispatch(setEventDates(range, { id: 'event-id'}));
 
       expect(updateDoc).toBeCalledWith(
         'events/event-id',
-        { from: '2001-09-28', to: '2001-10-19' },
+        {
+          dates: {from: '2001-09-29', to: '2001-10-20'}
+        },
         stubFirestore
       );
     });
