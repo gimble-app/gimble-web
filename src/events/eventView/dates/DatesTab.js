@@ -6,14 +6,14 @@ import moment from "moment";
 import AvailabilityGrid from "./grid/AvailabilityGrid";
 
 const parseParticipantGridModel = (participants) => {
-  const people = participants
+  const peopleRanges = participants
                         .reduce((working, person) => ({
                           ...working,
-                          [person.uid]: person.preferredDates.map(range => ({ from: range.from, to: range.to }))
+                          [person.uid]: !person.preferredDates ? [] : person.preferredDates.map(range => ({ from: range.from, to: range.to }))
                         }), {});
 
-  const minMaxDates =  participants
-                        .flatMap(p => p.preferredDates.flatMap(range => ({ from: range.from, to: range.to })))
+  const minMaxDates =  Object.values(peopleRanges)
+                        .flatMap(personRange => personRange)
                         .reduce(({min, max}, {from, to}) => ({
                           min: !min || moment(from).isBefore(min) ? from : min,
                           max: !max || moment(to).isAfter(max) ? to : max
@@ -27,7 +27,7 @@ const parseParticipantGridModel = (participants) => {
 
   return {
     dates: [...representedDates],
-    people
+    peopleRanges
   };
 };
 

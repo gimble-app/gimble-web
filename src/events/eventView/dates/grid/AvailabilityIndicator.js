@@ -7,4 +7,5 @@ const AvailabilityIndicator = styled.div`
   border-radius: 24px;
 `;
 
+
 export default AvailabilityIndicator
