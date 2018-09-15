@@ -53,6 +53,7 @@ export default function register() {
 }
 
 function registerValidSW(swUrl) {
+  window.isUpdateAvailable = false;
   navigator.serviceWorker
     .register(swUrl)
     .then(registration => {
@@ -61,11 +62,8 @@ function registerValidSW(swUrl) {
         installingWorker.onstatechange = () => {
           if (installingWorker.state === 'installed') {
             if (navigator.serviceWorker.controller) {
-              // At this point, the old content will have been purged and
-              // the fresh content will have been added to the cache.
-              // It's the perfect time to display a "New content is
-              // available; please refresh." message in your web app.
               console.log('New content is available; please refresh.');
+              window.isUpdateAvailable = true;
             } else {
               // At this point, everything has been precached.
               // It's the perfect time to display a

@@ -8,6 +8,7 @@ import Navigation from './navigation/Navigation';
 import {selectIsLoggedIn} from './auth/selectors';
 import Notifier from './notifications/Notifier';
 import ProfileActionsDialog from "./welcome/WelcomeActionsDialog";
+import CaptionText from "./common/typography/CaptionText";
 
 const FullScreen = styled.article`
   min-height: 100vh;
@@ -22,6 +23,7 @@ export const App = ({ isLoggedIn }) => (
     </BrowserRouter>
     <Notifier />
     { isLoggedIn && <ProfileActionsDialog /> }
+    { window.isUpdateAvailable && <CaptionText>Update available. Refresh for latest.</CaptionText>}
   </FullScreen>
 );
 
