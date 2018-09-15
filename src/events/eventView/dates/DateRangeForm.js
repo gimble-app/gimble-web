@@ -1,13 +1,12 @@
 import React from "react";
-import {connect} from "react-redux";
 import {Field, reduxForm} from 'redux-form'
 import Form from "../../../common/forms/Form";
-import {setEventDates} from "./actions";
 import SubmitButton from "../../../common/forms/SubmitButton";
 import DayPickerField from "./DayPickerField";
 import moment from "moment";
+import PropTypes from 'prop-types';
 
-class FinaliseDatesForm extends React.Component {
+class UnconnectedDateForm extends React.Component {
 
   state = {
     focusedInput: 'endDate'
@@ -26,13 +25,13 @@ class FinaliseDatesForm extends React.Component {
       pristine,
       invalid,
       handleSubmit,
-      setEventDates
+      submitFn
     } = this.props;
 
     const { focusedInput } = this.state;
 
     return (
-      <Form onSubmit={handleSubmit(setEventDates)}>
+      <Form onSubmit={handleSubmit(submitFn)}>
         <Field
           name="range"
           component={DayPickerField}
@@ -47,18 +46,20 @@ class FinaliseDatesForm extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch, { event }) => ({
-  setEventDates: ({range}) => dispatch(setEventDates(range, event))
-});
-
-const NewEventReduxForm = reduxForm({
-  form: 'finaliseDates',
+const DateRangeForm = reduxForm({
+  form: 'dateRangeSelection',
   initialValues: {
     range: {
       from: moment.now(),
       to: moment.now()
     }
   }
-})(FinaliseDatesForm);
+})(UnconnectedDateForm);
 
-export default connect(() => ({}), mapDispatchToProps)(NewEventReduxForm);
+
+DateRangeForm.propTypes = {
+  submitFn: PropTypes.func.isRequired ,
+  onSubmitSuccess: PropTypes.func.isRequired
+};
+
+export default DateRangeForm;

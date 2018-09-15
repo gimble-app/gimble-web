@@ -1,7 +1,9 @@
 import React, {Fragment} from "react";
 import Dialog from "@material-ui/core/Dialog";
 import AddButton from "./AddButton";
-import AddDateForm from "./AddDateForm";
+import DateRangeForm from "./DateRangeForm";
+import {addPreferredDateRange} from "./actions";
+import {connect} from "react-redux";
 
 class AddDateHandler extends React.Component {
 
@@ -17,13 +19,9 @@ class AddDateHandler extends React.Component {
     this.setState({ open: false });
   };
 
-  handleListItemClick = value => {
-    this.props.onClose(value);
-  };
-
   render() {
     const { open } = this.state;
-    const { event } = this.props;
+    const { onFormSubmit } = this.props;
 
     return (
       <Fragment>
@@ -33,8 +31,8 @@ class AddDateHandler extends React.Component {
           open={open}
           onClose={this.handleClose}
         >
-          <AddDateForm
-            event={event}
+          <DateRangeForm
+            submitFn={onFormSubmit}
             onSubmitSuccess={this.handleClose}
           />
         </Dialog>
@@ -43,4 +41,8 @@ class AddDateHandler extends React.Component {
   }
 }
 
-export default AddDateHandler;
+const mapDispatchToProps = (dispatch, { event }) => ({
+  onFormSubmit: (prop) => dispatch(addPreferredDateRange(prop, event))
+});
+
+export default connect(() => ({}), mapDispatchToProps)(AddDateHandler);

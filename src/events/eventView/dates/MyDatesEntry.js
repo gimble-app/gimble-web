@@ -22,7 +22,6 @@ const MyDatesEntry = ({event, myUid}) => {
   return (
     <DatesEntryContainer>
       <div style={{display: 'flex'}}>
-        <AddDateHandler event={event} />
         {
           participant.preferredDates ?
             <ul style={{ listStyle: "none", padding: "0px", margin: "0px" }}>

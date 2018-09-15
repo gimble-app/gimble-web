@@ -5,6 +5,7 @@ import SubheadingText from "../../../common/typography/SubheadingText";
 import MyDatesEntry from './MyDatesEntry';
 import AvailabilityGrid from "./grid/AvailabilityGrid";
 import FinaliseDatesHandler from "./FinaliseDatesHandler";
+import AddDateHandler from "./AddDateHandler";
 
 const parseParticipantGridModel = (participants) => {
   const peopleRanges = participants
@@ -38,9 +39,11 @@ const DatesTab = ({event}) => (
     <div style={{display: "flex", justifyContent: "space-around", flexWrap: "wrap"}}>
         <MyDatesEntry event={event} />
     </div>
-    <SubheadingText>Group dates</SubheadingText>
+    <SubheadingText>Group dates
+      <AddDateHandler event={event} />
+    </SubheadingText>
     <div style={{marginTop: "8px"}}>
-      <AvailabilityGrid model={parseParticipantGridModel(Object.values(event.participants))}/>
+      <AvailabilityGrid event={event} model={parseParticipantGridModel(Object.values(event.participants))}/>
     </div>
     <div style={{marginTop: "8px"}}>
       <FinaliseDatesHandler event={event} />

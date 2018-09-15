@@ -1,7 +1,9 @@
 import React, {Fragment} from "react";
 import Dialog from "@material-ui/core/Dialog";
-import FinaliseDateForm from "./FinaliseDatesForm";
+import DateRangeForm from "./DateRangeForm";
 import SimpleButton from "../../../common/buttons/SimpleButton";
+import {setEventDates} from "./actions";
+import {connect} from "react-redux";
 
 class FinaliseDatesHandler extends React.Component {
 
@@ -23,7 +25,7 @@ class FinaliseDatesHandler extends React.Component {
 
   render() {
     const { open } = this.state;
-    const { event } = this.props;
+    const { event, onFormSubmit } = this.props;
 
     return (
       <Fragment>
@@ -33,9 +35,10 @@ class FinaliseDatesHandler extends React.Component {
           open={open}
           onClose={this.handleClose}
         >
-          <FinaliseDateForm
+          <DateRangeForm
             event={event}
             onSubmitSuccess={this.handleClose}
+            submitFn={onFormSubmit}
           />
         </Dialog>
       </Fragment>
@@ -43,4 +46,8 @@ class FinaliseDatesHandler extends React.Component {
   }
 }
 
-export default FinaliseDatesHandler;
+const mapDispatchToProps = (dispatch, { event }) => ({
+  onFormSubmit: (prop) => dispatch(setEventDates(prop, event))
+});
+
+export default connect(() => ({}), mapDispatchToProps)(FinaliseDatesHandler);
