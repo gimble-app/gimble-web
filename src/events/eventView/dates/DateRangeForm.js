@@ -33,8 +33,7 @@ class UnconnectedDateForm extends React.Component {
       pristine,
       invalid,
       handleSubmit,
-      onDatesCanceled,
-      initialValues
+      onDatesCanceled
     } = this.props;
 
     const { focusedInput } = this.state;

@@ -14,7 +14,10 @@ export const updateDateRange = ({range, uid}, event) =>
 
       const firestore = getFirestore();
       const eventData = await getDocData(`${EVENTS_COLLECTION}/${event.id}`, firestore);
-      const currentDates = eventData.participants[myUid].preferredDates || [];
+      const currentDates = eventData.participants[myUid]
+        .preferredDates
+        .filter(date => date.uid !== uid) || [];
+
       const { from, to } = range;
       await updateDoc(`${EVENTS_COLLECTION}/${event.id}`, {
         [`participants.${myUid}.preferredDates`]: [
