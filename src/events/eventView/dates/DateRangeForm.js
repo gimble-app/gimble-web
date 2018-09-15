@@ -4,6 +4,7 @@ import {Field, reduxForm} from 'redux-form'
 import moment from "moment";
 import PropTypes from 'prop-types';
 import styled from "styled-components";
+import CancelIcon from '@material-ui/icons/Close';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import SimpleIconButton from "../../../common/buttons/SimpleIconButton";
 import SubmitButton from "../../../common/forms/SubmitButton";
@@ -33,7 +34,8 @@ class UnconnectedDateForm extends React.Component {
       pristine,
       invalid,
       handleSubmit,
-      onDatesCanceled
+      onCanceled,
+      onDeleted
     } = this.props;
 
     const { focusedInput } = this.state;
@@ -45,10 +47,11 @@ class UnconnectedDateForm extends React.Component {
           focusedInput={focusedInput}
           onFocusChange={this.onFocusChange}
         />
-        <SimpleIconButton
-          onClick={onDatesCanceled}
-        ><DeleteForeverIcon /></SimpleIconButton>
+        <div style={{display:'flex', justifyContent: 'space-between'}}>
+          <SimpleIconButton onClick={onCanceled}><CancelIcon /></SimpleIconButton>
           <SubmitButton disabled={ submitting || pristine || invalid }/>
+          { onDeleted && <SimpleIconButton onClick={onDeleted}><DeleteForeverIcon /></SimpleIconButton> }
+        </div>
       </Form>
     )
   }
@@ -72,7 +75,8 @@ DateRangeForm.propTypes = {
   initialFrom: PropTypes.object,
   initialTo: PropTypes.object,
   onSubmit: PropTypes.func.isRequired,
-  onDatesCanceled: PropTypes.func.isRequired,
+  onDeleted: PropTypes.func,
+  onCanceled: PropTypes.func.isRequired,
   onSubmitSuccess: PropTypes.func.isRequired
 };
 

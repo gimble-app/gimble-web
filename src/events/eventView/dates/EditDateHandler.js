@@ -34,7 +34,8 @@ class AddDateHandler extends React.Component {
           <DateRangeForm
             onSubmit={onSubmit}
             onSubmitSuccess={this.handleClose}
-            onDatesCanceled={onDelete}
+            onCanceled={this.handleClose}
+            onDeleted={onDelete}
             initialDate={date}
           />
         </Dialog>

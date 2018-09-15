@@ -2,7 +2,6 @@ import React from "react";
 import moment from "moment";
 import PageContent from "../../../common/PageContent";
 import SubheadingText from "../../../common/typography/SubheadingText";
-import MyDatesEntry from './MyDatesEntry';
 import AvailabilityGrid from "./grid/AvailabilityGrid";
 import FinaliseDatesHandler from "./FinaliseDatesHandler";
 import AddDateHandler from "./AddDateHandler";
@@ -35,7 +34,7 @@ const parseParticipantGridModel = (participants) => {
 
 const DatesTab = ({event}) => (
   <PageContent>
-    <SubheadingText>When is everybody free?
+    <SubheadingText>When are we free?
       <AddDateHandler event={event} />
     </SubheadingText>
     <div style={{marginTop: "8px"}}>

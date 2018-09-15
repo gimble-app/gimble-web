@@ -34,7 +34,7 @@ class FinaliseDatesHandler extends React.Component {
           <DateRangeForm
             onSubmit={onSubmit}
             onSubmitSuccess={this.handleClose}
-            onDatesCanceled={this.handleClose}
+            onCanceled={this.handleClose}
           />
         </Dialog>
       </Fragment>
