@@ -3,7 +3,6 @@ import {connect} from "react-redux";
 import styled from 'styled-components';
 import BodyText from "../../../common/typography/BodyText";
 import {selectCurrentUserId} from "../../../auth/selectors";
-import AddDateHandler from "./AddDateHandler";
 import PreferredDateEntry from "./PreferredDateEntry";
 import moment from "moment";
 

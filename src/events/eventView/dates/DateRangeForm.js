@@ -1,10 +1,17 @@
 import React from "react";
 import {Field, reduxForm} from 'redux-form'
-import Form from "../../../common/forms/Form";
 import SubmitButton from "../../../common/forms/SubmitButton";
 import DayPickerField from "./DayPickerField";
 import moment from "moment";
 import PropTypes from 'prop-types';
+import styled from "styled-components";
+import SimpleIconButton from "../../../common/buttons/SimpleIconButton";
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+
+const Form = styled.form`
+  margin: 0px;
+  height: 100vh;
+`;
 
 class UnconnectedDateForm extends React.Component {
 
@@ -25,22 +32,24 @@ class UnconnectedDateForm extends React.Component {
       pristine,
       invalid,
       handleSubmit,
-      submitFn
+      onDatesSelected,
+      onDatesCanceled
     } = this.props;
 
     const { focusedInput } = this.state;
 
     return (
-      <Form onSubmit={handleSubmit(submitFn)}>
+      <Form onSubmit={handleSubmit(onDatesSelected)}>
         <Field
           name="range"
           component={DayPickerField}
           focusedInput={focusedInput}
           onFocusChange={this.onFocusChange}
         />
-        <div style={{padding: '16px'}}>
+        <SimpleIconButton
+          onClick={onDatesCanceled}
+        ><DeleteForeverIcon /></SimpleIconButton>
           <SubmitButton disabled={ submitting || pristine || invalid }/>
-        </div>
       </Form>
     )
   }
@@ -58,7 +67,8 @@ const DateRangeForm = reduxForm({
 
 
 DateRangeForm.propTypes = {
-  submitFn: PropTypes.func.isRequired ,
+  onDatesSelected: PropTypes.func.isRequired,
+  onDatesCanceled: PropTypes.func.isRequired,
   onSubmitSuccess: PropTypes.func.isRequired
 };
 

@@ -25,7 +25,7 @@ class FinaliseDatesHandler extends React.Component {
 
   render() {
     const { open } = this.state;
-    const { event, onFormSubmit } = this.props;
+    const { onFormSubmit } = this.props;
 
     return (
       <Fragment>
@@ -36,9 +36,8 @@ class FinaliseDatesHandler extends React.Component {
           onClose={this.handleClose}
         >
           <DateRangeForm
-            event={event}
             onSubmitSuccess={this.handleClose}
-            submitFn={onFormSubmit}
+            onDatesSelected={onFormSubmit}
           />
         </Dialog>
       </Fragment>
