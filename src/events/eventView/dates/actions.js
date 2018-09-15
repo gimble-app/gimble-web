@@ -67,9 +67,12 @@ export const removePreferredDate = (uid, event) =>
     try {
       const firestore = getFirestore();
       const eventData = await getDocData(`${EVENTS_COLLECTION}/${event.id}`, firestore);
-      const currentDates = eventData.participants[myUid].preferredDates || [];
+      const currentDates = eventData.participants[myUid]
+      .preferredDates
+      .filter(date => date.uid !== uid) || [];
+
       await updateDoc(`${EVENTS_COLLECTION}/${event.id}`, {
-        [`participants.${myUid}.preferredDates`]: currentDates.filter(date => date.uid !== uid)
+        [`participants.${myUid}.preferredDates`]: currentDates
       }, firestore);
 
     } catch (error) {

@@ -88,14 +88,6 @@ const data = {
   }
 };
 
-// Get dates list for min and max
-// const dates = Object.values(data.people)
-// .flatMap(a => a.flatMap(b => [b.to, b.from]))
-// .sort((a,b) => moment(a).isBefore(moment(b)));
-// Get people count
-// Object.keys(data.people).flatMap(person => data.people[person].map((v,i) => `person-row-${person}-${i+1}`))
-
-
 storiesOf('Collaboration', module)
 .add('grid', () => (
   <Grid

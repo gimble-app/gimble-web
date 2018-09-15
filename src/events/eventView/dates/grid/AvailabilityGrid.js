@@ -1,19 +1,22 @@
 import React, {Fragment} from "react";
 import HeaderCell from "./HeaderCell";
-import AvailabilityIndicator from "./AvailabilityIndicator";
 import moment from "moment";
 import LeftHeaderCell from "./LeftHeaderCell";
 import LabelText from "../../../../common/typography/LabelText";
 import GridCell from "./GridCell";
 import Grid from "./Grid";
 import LabelledAvatarForProfile from "../LabelledAvatarForProfile";
+import EditDateHandler from "../EditDateHandler";
+import AvailabilityIndicator from "./AvailabilityIndicator";
+import {selectCurrentUserId} from "../../../../auth/selectors";
+import {connect} from "react-redux";
 
 const PEOPLE_COLUMN = "person-header-column";
 const PERSON_ROW = `person-row`;
 const DATE_COLUMN = "date-column";
 const DATES_ROW = "date-header-row";
 
-const AvailabilityGrid = ({ model }) => {
+const AvailabilityGrid = ({ model, event, myUid }) => {
   const {dates, peopleRanges} = model;
   const peopleUids = Object.keys(peopleRanges);
 
@@ -56,7 +59,11 @@ const AvailabilityGrid = ({ model }) => {
                 endCol={`${DATE_COLUMN}-${range.to}`}
                 startRow={`${PERSON_ROW}-${personUid}-${i+1}`}
               >
-                <AvailabilityIndicator />
+                { myUid === personUid ?
+                  <EditDateHandler event={event} date={range} />
+                  : <AvailabilityIndicator/>
+                }
+
               </GridCell>
             )
           }
@@ -66,4 +73,8 @@ const AvailabilityGrid = ({ model }) => {
   </Grid>;
 };
 
-export default AvailabilityGrid;
+const mapStateToProps = (state) => ({
+  myUid: selectCurrentUserId(state)
+});
+
+export default connect(mapStateToProps)(AvailabilityGrid);

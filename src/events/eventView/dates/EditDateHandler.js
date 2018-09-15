@@ -2,8 +2,8 @@ import React, {Fragment} from "react";
 import {connect} from "react-redux";
 import Dialog from "@material-ui/core/Dialog";
 import DateRangeForm from "./DateRangeForm";
-import {updateDateRange} from "./actions";
-import PreferredDateEntry from "./PreferredDateEntry";
+import {removePreferredDate, updateDateRange} from "./actions";
+import AvailabilityIndicator from "./grid/AvailabilityIndicator";
 
 class AddDateHandler extends React.Component {
 
@@ -21,15 +21,11 @@ class AddDateHandler extends React.Component {
 
   render() {
     const { open } = this.state;
-    const { onSubmit, date } = this.props;
+    const { onSubmit, date, onDelete } = this.props;
 
     return (
       <Fragment>
-        <PreferredDateEntry
-          from={date.from.format('DD MMM')}
-          to={date.to.format('DD MMM')}
-          onClick={this.handleClickOpen}
-        />
+        <AvailabilityIndicator onClick={this.handleClickOpen} />
         <Dialog
           fullScreen
           open={open}
@@ -38,7 +34,7 @@ class AddDateHandler extends React.Component {
           <DateRangeForm
             onSubmit={onSubmit}
             onSubmitSuccess={this.handleClose}
-            onDatesCanceled={this.handleClose}
+            onDatesCanceled={onDelete}
             initialDate={date}
           />
         </Dialog>
@@ -47,8 +43,9 @@ class AddDateHandler extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch, { event }) => ({
-  onSubmit: (values) => dispatch(updateDateRange(values, event))
+const mapDispatchToProps = (dispatch, { date, event }) => ({
+  onSubmit: (values) => dispatch(updateDateRange(values, event)),
+  onDelete: () => dispatch(removePreferredDate(date.uid, event))
 });
 
 export default connect(() => ({}), mapDispatchToProps)(AddDateHandler);

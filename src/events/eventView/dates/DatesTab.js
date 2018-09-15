@@ -11,7 +11,7 @@ const parseParticipantGridModel = (participants) => {
   const peopleRanges = participants
                         .reduce((working, person) => ({
                           ...working,
-                          [person.uid]: !person.preferredDates ? [] : person.preferredDates.map(range => ({ from: range.from, to: range.to }))
+                          [person.uid]: person.preferredDates || []
                         }), {});
 
   const minMaxDates =  Object.values(peopleRanges)
@@ -35,11 +35,7 @@ const parseParticipantGridModel = (participants) => {
 
 const DatesTab = ({event}) => (
   <PageContent>
-    <SubheadingText>My dates</SubheadingText>
-    <div style={{display: "flex", justifyContent: "space-around", flexWrap: "wrap"}}>
-        <MyDatesEntry event={event} />
-    </div>
-    <SubheadingText>Group dates
+    <SubheadingText>When is everybody free?
       <AddDateHandler event={event} />
     </SubheadingText>
     <div style={{marginTop: "8px"}}>
