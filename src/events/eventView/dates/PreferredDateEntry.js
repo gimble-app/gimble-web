@@ -2,9 +2,9 @@ import Chip from "../../../common/Chip";
 import React, {Fragment} from "react";
 import LabelText from "../../../common/typography/LabelText";
 
-const PreferredDateEntry = ({ event, to, from }) => (
+const PreferredDateEntry = ({ to, from, onClick }) => (
   <Fragment>
-    <Chip>
+    <Chip onClick={onClick}>
       <LabelText>{from} - {to}</LabelText>
     </Chip>
   </Fragment>

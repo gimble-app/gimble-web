@@ -43,7 +43,7 @@ class AddDateHandler extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch, { event }) => ({
-  onSubmit: ({range}) => dispatch(addPreferredDateRange(range, event))
+  onSubmit: (values) => dispatch(addPreferredDateRange(values, event))
 });
 
 export default connect(() => ({}), mapDispatchToProps)(AddDateHandler);

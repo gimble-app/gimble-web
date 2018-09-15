@@ -1,12 +1,13 @@
 import React from "react";
+import {connect} from "react-redux";
 import {Field, reduxForm} from 'redux-form'
-import SubmitButton from "../../../common/forms/SubmitButton";
-import DayPickerField from "./DayPickerField";
 import moment from "moment";
 import PropTypes from 'prop-types';
 import styled from "styled-components";
-import SimpleIconButton from "../../../common/buttons/SimpleIconButton";
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import SimpleIconButton from "../../../common/buttons/SimpleIconButton";
+import SubmitButton from "../../../common/forms/SubmitButton";
+import DayPickerField from "./DayPickerField";
 
 const Form = styled.form`
   margin: 0px;
@@ -32,11 +33,11 @@ class UnconnectedDateForm extends React.Component {
       pristine,
       invalid,
       handleSubmit,
-      onDatesCanceled
+      onDatesCanceled,
+      initialValues
     } = this.props;
 
     const { focusedInput } = this.state;
-
     return (
       <Form onSubmit={handleSubmit}>
         <Field
@@ -54,20 +55,26 @@ class UnconnectedDateForm extends React.Component {
   }
 }
 
-const DateRangeForm = reduxForm({
-  form: 'dateRangeSelection',
+const mapStateToProps = (state, ownProps) => ({
   initialValues: {
     range: {
-      from: moment.now(),
-      to: moment.now()
-    }
+      from: (ownProps.initialDate && ownProps.initialDate.from) || moment.now(),
+      to: (ownProps.initialDate && ownProps.initialDate.to) || moment.now()
+    },
+    uid: ownProps.initialDate && ownProps.initialDate.uid
   }
-})(UnconnectedDateForm);
+});
+
+const DateRangeForm = reduxForm({
+  form: 'dateRangeSelection'
+}, mapStateToProps)(UnconnectedDateForm);
 
 DateRangeForm.propTypes = {
+  initialFrom: PropTypes.object,
+  initialTo: PropTypes.object,
   onSubmit: PropTypes.func.isRequired,
   onDatesCanceled: PropTypes.func.isRequired,
   onSubmitSuccess: PropTypes.func.isRequired
 };
 
-export default DateRangeForm;
+export default connect(mapStateToProps)(DateRangeForm);

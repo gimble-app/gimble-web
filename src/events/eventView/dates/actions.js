@@ -6,7 +6,33 @@ import uuid from "uuid/v4";
 
 export const EVENT_SAVE_FAILURE = 'event failed to save';
 
-export const addPreferredDateRange = ({to, from}, event) =>
+export const updateDateRange = ({range, uid}, event) =>
+  async (dispatch, getState, {getFirestore}) => {
+    const myUid = selectCurrentUserId(getState());
+
+    try {
+
+      const firestore = getFirestore();
+      const eventData = await getDocData(`${EVENTS_COLLECTION}/${event.id}`, firestore);
+      const currentDates = eventData.participants[myUid].preferredDates || [];
+      const { from, to } = range;
+      await updateDoc(`${EVENTS_COLLECTION}/${event.id}`, {
+        [`participants.${myUid}.preferredDates`]: [
+          ...currentDates, {
+            from: from.format('YYYY-MM-DD'),
+            to: to.format('YYYY-MM-DD'),
+            uid
+          }
+        ]
+      }, firestore);
+
+    } catch (error) {
+      dispatch(sendNotification(EVENT_SAVE_FAILURE));
+      console.log(error);
+    }
+  };
+
+export const addPreferredDateRange = ({range}, event) =>
   async (dispatch, getState, {getFirestore}) => {
   const myUid = selectCurrentUserId(getState());
     try {
@@ -14,6 +40,7 @@ export const addPreferredDateRange = ({to, from}, event) =>
       const firestore = getFirestore();
       const eventData = await getDocData(`${EVENTS_COLLECTION}/${event.id}`, firestore);
       const currentDates = eventData.participants[myUid].preferredDates || [];
+      const { from, to } = range;
 
       await updateDoc(`${EVENTS_COLLECTION}/${event.id}`, {
         [`participants.${myUid}.preferredDates`]: [
@@ -48,9 +75,10 @@ export const removePreferredDate = (uid, event) =>
     }
   };
 
-export const setEventDates = ({from, to}, event) =>
+export const setEventDates = ({range}, event) =>
   async (dispatch, getState, {getFirestore}) => {
     try {
+      const {from, to} = range;
       const firestore = getFirestore();
       await updateDoc(`${EVENTS_COLLECTION}/${event.id}`, {
         dates: {

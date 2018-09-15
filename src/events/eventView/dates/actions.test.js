@@ -75,13 +75,14 @@ describe('event actions', () => {
 
   describe('setEventDates', () => {
 
-    it('Saves a date to the event', async () => {
-      const range = {
-        from: moment('2001-09-29T12:00:00+02:00'),
-        to: moment('2001-10-20T12:00:00+02:00')
-      };
+    const range = {
+      from: moment('2001-09-29T12:00:00+02:00'),
+      to: moment('2001-10-20T12:00:00+02:00')
+    };
 
-      await store.dispatch(setEventDates(range, { id: 'event-id'}));
+
+    it('Saves a date to the event', async () => {
+      await store.dispatch(setEventDates({range}, { id: 'event-id'}));
 
       expect(updateDoc).toBeCalledWith(
         'events/event-id',
@@ -96,7 +97,7 @@ describe('event actions', () => {
       getDocData.mockReturnValue(Promise.resolve(baseEventData));
       updateDoc.mockReturnValue(Promise.reject());
 
-      await store.dispatch(setEventDates({ from: '2001-09-28', to: '2001-10-19' }, { id: 'event-id'}));
+      await store.dispatch(setEventDates({range}, { id: 'event-id'}));
 
       expect(store.getActions()).toEqual([
         {
@@ -107,8 +108,12 @@ describe('event actions', () => {
     });
   });
 
-
   describe('addPreferredDateRange', () => {
+
+    const range = {
+      from: moment('2001-09-29T12:00:00+02:00'),
+      to: moment('2001-10-20T12:00:00+02:00')
+    };
 
     it('It adds a first date preference', async () => {
 
@@ -116,12 +121,7 @@ describe('event actions', () => {
       getDocData.mockReturnValue(Promise.resolve(baseEventData));
       updateDoc.mockReturnValue(Promise.resolve());
 
-      const range = {
-        from: moment('2001-09-29T12:00:00+02:00'),
-        to: moment('2001-10-20T12:00:00+02:00')
-      };
-
-      await store.dispatch(addPreferredDateRange(range, { id: 'event-id'}));
+      await store.dispatch(addPreferredDateRange({ range }, { id: 'event-id'}));
 
       expect(updateDoc).toBeCalledWith(
         'events/event-id',
@@ -136,12 +136,7 @@ describe('event actions', () => {
       getDocData.mockReturnValue(Promise.resolve(baseEventData));
       updateDoc.mockReturnValue(Promise.resolve());
 
-      const range = {
-        from: moment('2001-09-29T12:00:00+02:00'),
-        to: moment('2001-10-20T12:00:00+02:00')
-      };
-
-      await store.dispatch(addPreferredDateRange(range, { id: 'event-id'}));
+      await store.dispatch(addPreferredDateRange({ range }, { id: 'event-id'}));
 
       expect(updateDoc).toBeCalledWith(
         'events/event-id',
@@ -154,12 +149,7 @@ describe('event actions', () => {
       getDocData.mockReturnValue(Promise.resolve(baseEventData));
       updateDoc.mockReturnValue(Promise.reject());
 
-      const range = {
-        from: moment('2001-09-29T12:00:00+02:00'),
-        to: moment('2001-10-20T12:00:00+02:00')
-      };
-
-      await store.dispatch(addPreferredDateRange(range, { id: 'event-id'}));
+      await store.dispatch(addPreferredDateRange({ range }, { id: 'event-id'}));
 
       expect(store.getActions()).toEqual([
         {

@@ -1,11 +1,11 @@
 import React, {Fragment} from "react";
+import {connect} from "react-redux";
 import Dialog from "@material-ui/core/Dialog";
 import DateRangeForm from "./DateRangeForm";
-import SimpleButton from "../../../common/buttons/SimpleButton";
-import {setEventDates} from "./actions";
-import {connect} from "react-redux";
+import {updateDateRange} from "./actions";
+import PreferredDateEntry from "./PreferredDateEntry";
 
-class FinaliseDatesHandler extends React.Component {
+class AddDateHandler extends React.Component {
 
   state = {
     open: false,
@@ -21,11 +21,15 @@ class FinaliseDatesHandler extends React.Component {
 
   render() {
     const { open } = this.state;
-    const { onSubmit } = this.props;
+    const { onSubmit, date } = this.props;
 
     return (
       <Fragment>
-        <SimpleButton onClick={this.handleClickOpen}>Finalise dates</SimpleButton>
+        <PreferredDateEntry
+          from={date.from.format('DD MMM')}
+          to={date.to.format('DD MMM')}
+          onClick={this.handleClickOpen}
+        />
         <Dialog
           fullScreen
           open={open}
@@ -35,6 +39,7 @@ class FinaliseDatesHandler extends React.Component {
             onSubmit={onSubmit}
             onSubmitSuccess={this.handleClose}
             onDatesCanceled={this.handleClose}
+            initialDate={date}
           />
         </Dialog>
       </Fragment>
@@ -43,7 +48,7 @@ class FinaliseDatesHandler extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch, { event }) => ({
-  onSubmit: (values) => dispatch(setEventDates(values, event))
+  onSubmit: (values) => dispatch(updateDateRange(values, event))
 });
 
-export default connect(() => ({}), mapDispatchToProps)(FinaliseDatesHandler);
+export default connect(() => ({}), mapDispatchToProps)(AddDateHandler);

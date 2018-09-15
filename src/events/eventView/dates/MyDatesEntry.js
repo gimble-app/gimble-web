@@ -3,8 +3,8 @@ import {connect} from "react-redux";
 import styled from 'styled-components';
 import BodyText from "../../../common/typography/BodyText";
 import {selectCurrentUserId} from "../../../auth/selectors";
-import PreferredDateEntry from "./PreferredDateEntry";
 import moment from "moment";
+import EditDateHandler from "./EditDateHandler";
 
 const DatesEntryContainer = styled.div`
   flex: 1;
@@ -34,12 +34,7 @@ const MyDatesEntry = ({event, myUid}) => {
                       alignItems: "center",
                       height: '30px'
                     }} key={`${date.uid}`}>
-                      <PreferredDateEntry
-                        event={event}
-                        from={date.from.format('DD MMM')}
-                        to={date.to.format('DD MMM')}
-                        uid={date.uid}
-                       />
+                      <EditDateHandler event={event} date={date} />
                     </li>
                   )
               )}
