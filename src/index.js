@@ -1,10 +1,11 @@
 import React from 'react';
+import './theme/globalStyle';
+import './polyfills';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components'
-import './theme/globalStyle'
-import registerServiceWorker from './registerServiceWorker';
 import { createGenerateClassName, jssPreset } from '@material-ui/core/styles';
+import registerServiceWorker from './registerServiceWorker';
 import JssProvider from 'react-jss/lib/JssProvider';
 import { create } from 'jss';
 import initStore from './store';
