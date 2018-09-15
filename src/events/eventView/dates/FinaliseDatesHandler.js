@@ -19,13 +19,9 @@ class FinaliseDatesHandler extends React.Component {
     this.setState({ open: false });
   };
 
-  handleListItemClick = value => {
-    this.props.onClose(value);
-  };
-
   render() {
     const { open } = this.state;
-    const { onFormSubmit } = this.props;
+    const { onSubmit } = this.props;
 
     return (
       <Fragment>
@@ -36,8 +32,9 @@ class FinaliseDatesHandler extends React.Component {
           onClose={this.handleClose}
         >
           <DateRangeForm
+            onSubmit={onSubmit}
             onSubmitSuccess={this.handleClose}
-            onDatesSelected={onFormSubmit}
+            onDatesCanceled={this.handleClose}
           />
         </Dialog>
       </Fragment>
@@ -46,7 +43,7 @@ class FinaliseDatesHandler extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch, { event }) => ({
-  onFormSubmit: (prop) => dispatch(setEventDates(prop, event))
+  onSubmit: ({range}) => dispatch(setEventDates(range, event))
 });
 
 export default connect(() => ({}), mapDispatchToProps)(FinaliseDatesHandler);

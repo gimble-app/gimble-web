@@ -6,10 +6,11 @@ import uuid from "uuid/v4";
 
 export const EVENT_SAVE_FAILURE = 'event failed to save';
 
-export const addPreferredDateRange = ({ from, to }, event) =>
+export const addPreferredDateRange = ({to, from}, event) =>
   async (dispatch, getState, {getFirestore}) => {
   const myUid = selectCurrentUserId(getState());
     try {
+
       const firestore = getFirestore();
       const eventData = await getDocData(`${EVENTS_COLLECTION}/${event.id}`, firestore);
       const currentDates = eventData.participants[myUid].preferredDates || [];

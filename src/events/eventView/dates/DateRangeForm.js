@@ -32,14 +32,13 @@ class UnconnectedDateForm extends React.Component {
       pristine,
       invalid,
       handleSubmit,
-      onDatesSelected,
       onDatesCanceled
     } = this.props;
 
     const { focusedInput } = this.state;
 
     return (
-      <Form onSubmit={handleSubmit(onDatesSelected)}>
+      <Form onSubmit={handleSubmit}>
         <Field
           name="range"
           component={DayPickerField}
@@ -65,9 +64,8 @@ const DateRangeForm = reduxForm({
   }
 })(UnconnectedDateForm);
 
-
 DateRangeForm.propTypes = {
-  onDatesSelected: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
   onDatesCanceled: PropTypes.func.isRequired,
   onSubmitSuccess: PropTypes.func.isRequired
 };

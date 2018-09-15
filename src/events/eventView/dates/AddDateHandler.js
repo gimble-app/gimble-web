@@ -21,7 +21,7 @@ class AddDateHandler extends React.Component {
 
   render() {
     const { open } = this.state;
-    const { onFormSubmit } = this.props;
+    const { onSubmit } = this.props;
 
     return (
       <Fragment>
@@ -32,7 +32,7 @@ class AddDateHandler extends React.Component {
           onClose={this.handleClose}
         >
           <DateRangeForm
-            onDatesSelected={onFormSubmit}
+            onSubmit={onSubmit}
             onSubmitSuccess={this.handleClose}
             onDatesCanceled={this.handleClose}
           />
@@ -43,7 +43,7 @@ class AddDateHandler extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch, { event }) => ({
-  onFormSubmit: (prop) => dispatch(addPreferredDateRange(prop, event))
+  onSubmit: ({range}) => dispatch(addPreferredDateRange(range, event))
 });
 
 export default connect(() => ({}), mapDispatchToProps)(AddDateHandler);
