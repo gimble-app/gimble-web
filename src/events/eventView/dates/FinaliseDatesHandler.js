@@ -25,7 +25,7 @@ class FinaliseDatesHandler extends React.Component {
 
     return (
       <Fragment>
-        <SimpleButton onClick={this.handleClickOpen}>Finalise dates</SimpleButton>
+        <SimpleButton onClick={this.handleClickOpen}>Settle dates</SimpleButton>
         <Dialog
           fullScreen
           open={open}

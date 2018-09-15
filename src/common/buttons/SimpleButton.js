@@ -4,8 +4,7 @@ import {fromPalette} from "../../theme/theme";
 
 const SimpleButton = styled(Button)`
   && {
-    width: 100px;
-    box-shadow: 0 6px 6px 0 #CCCCCC;
+    max-width: 200px;
     border: 2px ${({theme}) => fromPalette(theme, 'primary')} solid;
   }
 `;

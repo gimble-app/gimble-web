@@ -34,16 +34,14 @@ const parseParticipantGridModel = (participants) => {
 
 const DatesTab = ({event}) => (
   <PageContent>
-    <SubheadingText>When are we free?
-      <AddDateHandler event={event} />
-    </SubheadingText>
-    <div style={{marginTop: "8px"}}>
-      <AvailabilityGrid event={event} model={parseParticipantGridModel(Object.values(event.participants))}/>
-    </div>
-    <div style={{marginTop: "8px"}}>
+    <div style={{display: "flex", justifyContent: "space-between", alignItems: "flex-end"}}>
+      <SubheadingText>When are we free?</SubheadingText>
       <FinaliseDatesHandler event={event} />
     </div>
-
+    <div style={{marginTop: "16px"}}>
+      <AvailabilityGrid event={event} model={parseParticipantGridModel(Object.values(event.participants))}/>
+      <AddDateHandler event={event} />
+    </div>
   </PageContent>);
 
 export default DatesTab;
